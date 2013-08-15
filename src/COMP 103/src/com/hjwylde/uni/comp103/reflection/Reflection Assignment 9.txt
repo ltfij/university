@@ -1,0 +1,17 @@
+For your reflection:
+====================
+
+While attempting the different assignments, you've had the opportunity to write methods within class templates that were pre-designed for you (for e.g. writing the measureSample() method in the already existing MeasureBags class in the last assignment). In this assignment, you were given the opportunity to write your own program from scratch.
+
+Write about which of the two approaches you prefer and why? If you find that both approaches have their own advantages and disadvantages, please comment on what they are.
+
+--------------------------------------------------------------------
+
+Preferences:
+It is my preference to write my own program from scratch than work with templates. Even just using the comp100.DrawingCanvas class can annoy me at times at how it tries to make it all simpler for people. I have sometimes had people from Comp102 ask for assistance, and they have this new UI class that simplifies it even more, and it baffles me. It's just going to make it harder for the people when they need to make the transition when they are no longer allowed to use the UI or DrawingCanvas class and then you need to know how to do the basics. How this relates to writing from scratch and templates is that it is a similar concept, once we no longer are to work with templates and build from scratch more, some people will not have too much experience in it.
+Working from scratch helps to build up understanding about how Java is an object orientated programming language, while templates does still, being able to work from scratch gets you thinking about how to structure the program as there is always more than one way to do it, with none of them being the right way, nor the wrong way.
+
+Granted, the pros for working from templates does include that in the general work force you will most likely never be working just by yourself on a project, you will either be working with a team and building on existing code. This means that it is useful in the fact that you get practice at learning how to read code and understand other peoples logic behind writing it, but having 8/9 assignments using templates and only the last one making you write code from scratch is a bit lop-sided in my opinion. A good balance between the two is best, even though my preference leans towards writing from scratch.
+
+Each different approach means different things in terms of learning.
+For example, with working from scratch you can often find the gaps in your knowledge and it is easier to discover what you need to revise and relearn. And with working from templates, you can see how other people code, and this can show you different ways of doing various methods. Learning from others is important, it would be hard to become good at programming just by solely trying to code yourself, seeing examples and how others work helps a lot (or at least personally it does). It is my belief that you could neither learn fully by doing either one, each approach teaches you different aspects and are useful in their own way.

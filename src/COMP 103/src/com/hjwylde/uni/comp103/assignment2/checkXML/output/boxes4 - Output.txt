@@ -1,0 +1,44 @@
+Listing of File C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\boxes4.xml:
+-------------------
+<boxcollection>
+<box identifier="box21">
+   <lid>green metal </lid>
+   <sides number="2">blue varnished wood</sides>
+   <sides number="2">green varnished wood</sides>
+</box>
+<box identifier="box15">
+   <lid>clear glass </lid>
+   <sides number="4">blue glass</sides>
+</box>
+<box identifier="box35">
+   <lid>cardboard </lid>
+   <shape>hexagonal</sides>
+   <shape number="1">cardboard with printed label</sides>
+   <sides number="2">black cardboard</sides>
+   <sides number="3">silver cardboard</sides>
+</box>
+</boxcollection>
+
+Checking tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\boxes4.xml:
+-------------------
+Tag Error:
+Expected Tag: </shape>
+Received Tag: </sides>
+Tag Error:
+Expected Tag: </shape>
+Received Tag: </sides>
+
+Tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\boxes4.xml:
+-------------------
+Tag			Count
+lid			3
+boxcollection			1
+box			3
+shape			2
+sides			5
+
+Comments:
+------------------
+The xml file has 2 errors in it. It has 2 incorrect closing tags of </sides> when they should be </shape> tags.
+
+The program correctly identified these errors, and due to it's design with taking off an incorrect tag after it has been detected, there were no more flow-on errors.

@@ -1,0 +1,21 @@
+For your reflection:
+====================
+
+The "FightClub" part of this assignment has involved you building uponan existing program, which started off with some parts already done(the GUI, the basic simulation, and the quite complex Creatureclass). An alternative would have been to start "from scratch" andinvolve you building a simpler program from nothing.
+
+Firstly, what do you think the pros and cons of these two styles are? Secondly, which one do you think most suits your learning style,personally?
+
+--------------------------------------------------------------------
+
+The Styles
+==========
+Build from Scratch:
+I believe the pros in building from scratch include the satisfaction of knowing you completed it yourself, as this can also be good for keeping interest in the subject.
+Building from scratch also means that you will often have to do the basics yourself, especially if we do not use the comp100 DrawingCanvas class. This is good as it is key to learn the basics thoroughly.
+
+Build upon Existing:
+Some of the pros of building upon existing code is learning how to read through other peoples code, to understand it. Of course, you will often be working with other people, and may need to know how to read through the code to understand how it works in order to work with it, or to make changes to it.
+Another pro I believe is seeing how other people code, personally I find it beneficial as I will often pick up neat tricks or ways of doing things, that I may have gone about doing in a long round-about way. A con with this style is that you may not find out where your knowledge has gaps, eg. if you are coding from scratch, you will often find little bits that you may not know how to do, that aren't specifically to do with the assignment or job you are required of.
+
+For these two styles, the cons are more or less the opposites of the pros of the other style, eg. for Build upon Existing, a con is that you won't get much practice making GUI's yourself.
+Personally, I prefer building from scratch, but I like a mixture of both. I always like to build from scratch as it feels more satisfying knowing that you wrote the code all yourself and figuring out where you need to revise/learn how to do something is a lot easier when building from scratch.

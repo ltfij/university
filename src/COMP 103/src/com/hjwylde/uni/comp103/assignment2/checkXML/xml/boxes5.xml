@@ -1,0 +1,18 @@
+<boxcollection>
+<box identifier="box21">
+   <lid>green metal </lid>
+   <sides number="2">blue varnished wood</sides>
+   <sides number="2">green varnished wood</sides>
+</box>
+<box identifier="box15">
+   <lid>clear glass </lid>
+   <sides number="4">blue glass</sides>
+</box>
+<box identifier="box35">
+   <lid>cardboard </lid>
+   <shape>hexagonal</shape>
+   <sides number="1">cardboard with printed label
+   <sides number="2">black cardboard</sides>
+   <sides number="3">silver cardboard</sides>
+</box>
+</boxcollection>

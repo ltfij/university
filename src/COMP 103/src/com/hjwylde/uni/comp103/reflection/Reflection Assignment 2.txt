@@ -1,0 +1,16 @@
+For your reflection:
+====================
+
+In last week's assignment FightClub involved a second class,
+NN_Agent. This made sense because it was appropriate to think of an
+overall "world" in which "agents" did their own thing, to some
+extent. And ultimately, this split made programming the simulation easier.
+
+By contrast, this week the WordCloud program was a single class. Do
+you think it might have been a good idea to "refactor" WordClub, so
+that it used a second class? What would this second class be, and what
+sorts of methods would it have?
+
+--------------------------------------------------------------------
+
+I believe it would have been a good idea to "refactor" WordCloud into two different classes. A class should just be one object, and not mix up multiple objects. I believe there should be a general GUI class that handles the setting up of the GUI with the buttons, and what pressing the buttons does. The next class should be the actual WordCloud, which would hold the Maps for each text's words, the methods to modify what words to show, how to display them (could have different choices of how to use the vertical/horizontal axis and colour). To draw the word cloud there would be a method that you pass a panel object to, "public void draw(JPanel panel) {...}". So in a rough summary, the WordCloud would have any methods that are only to do with the actual WordCloud, and the implementation of the GUI would be handled seperately. It would also allow for easier re-use of code (of the GUI class), where-in you can just have a new class such as WordCloud that draws to a specific JPanel.

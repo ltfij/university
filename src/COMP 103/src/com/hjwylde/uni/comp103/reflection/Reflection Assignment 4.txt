@@ -1,0 +1,19 @@
+For your reflection:
+====================
+
+The first few weeks of the course involved learning how to use different 
+collections such as lists, sets, bags etc without worrying about the details 
+how of each of them were implemented. In this assignment, you have implemented
+ the collection SortedArrayBag yourself using an array as an underlying data 
+structure. 
+
+What do you think are the advantages of implementing different collections that
+ use an array as an underlying data structure (such as ArraySet, ArrayList)
+over simply using an array?
+
+
+--------------------------------------------------------------------
+
+I believe the main advantage is ease of use. Flexibility in the way of choosing how to search through the array (such as binary search, or linearly) can be implemented for any array. The fact that we have chosen to implement binary searching in a SortedArrayBag or in a different class does not affect whether we would have been able to use binary search to search through using a simple array.
+Part of the ease of use is that the Collections classes will take care of all of the little tedius bits of coding to do with ensuring the array is big enough, adding, removing, searching and sorting. Also, we are able to chose which Collection class is best suited to the job at hand, based on what type of data will be entered into the array. For example, the Collection classes all have different advantages and conditions, such as no duplicates or duplicates, fast addition to the Collection or fast searching. Whether or not an array is allowed duplicates or not is important information, as it can help with speeding up processes used to manipulate the underlying array data structure.
+Having all different types of Collections available for us to use, each with their own advantages, saves us a lot of tedius coding. We won't have to do the little bits of coding for each array we make and when we want to use a different type of array with different advantages, we can simply select a Collection that suits our needs rather than having to then add extra code for a basic array structure.

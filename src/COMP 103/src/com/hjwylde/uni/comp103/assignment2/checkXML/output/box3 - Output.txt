@@ -1,0 +1,20 @@
+Listing of File C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\box3 - Output.xml:
+-------------------
+<contents><box><lid>green</lid><sides>blue</sides></box>
+
+Checking tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\box3 - Output.xml:
+-------------------
+
+Tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\box3 - Output.xml:
+-------------------
+Tag			Count
+lid			1
+contents			1
+box			1
+sides			1
+
+Comments:
+------------------
+The xml file has 1 error in it, a missing closing tag for <contents>
+
+The program did not identify this missing tag correctly, and will need to be remedied by after having cycled through the text file, to view what items are left in the stack object to see if there are any left-over open tags that have not been closed.

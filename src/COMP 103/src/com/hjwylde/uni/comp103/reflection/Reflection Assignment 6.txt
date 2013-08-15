@@ -1,0 +1,39 @@
+﻿For your reflection:
+====================
+
+1. You're probably familiar with the saying "different strokes for different folks". Different people go about learning the same things in widely varying ways, so there is no "one true way" to learn.
+
+For example, some people learn by listening - there are some in COMP103 who can just sit in class and absorb the entire lecture. Others learn by writing - by taking notes and reformulating things in a way that suits them. Some people learn by reading. They sleep through all the classes, then go home, read the text book and ace the exam. Many people learn by talking: the act of discussing the topic leads them to clarify their thinking. Finally, there are students who can write great programs on a computer, but seem to only poorly follow what is going on in class. They learn by doing.
+
+These are just some thoughts and certainly aren't exhaustive. Some people can learn in multiple ways, but it is said that most people have one dominant mode of learning and other minor modes of learning.
+
+So what are your favourite modes of learning, especially learning things that seem very hard or confusing at first? Has your "dominant mode" always been what it is now?
+
+
+
+2. (a) Did you find this assignment easier, harder or about the same as the
+previous ones?
+
+(b) What did you find most interesting about it?
+
+(c) What was most difficult?
+
+(d) What was most confusing?
+
+Reflection:
+
+1.
+I believe I learn by multiple ways, the main way though would be by "doing". I tend to not listen completely in class, but that is because I have already covered the content in my own time by mostly having given myself my own little project to do at home, or by reading the textbook (I do the former more). Personally if I enjoy something a lot, that is what helps me to learn it, which with computer programming it has been a hobby for a few years, which is why much of the content I have already done such as recursion. I find I am able to follow through the logic of programs and understand concepts that some people might find dificult, so there isn't too many things that are very hard or confusing. When there is something dificult however, I like to find example code, try write it myself and modify it to my preferences, then use given classes by java. An example of this is when I was doing programing 3d objects, I wrote a vector class, transformation class and many other classes first before using the classes given by the javax.vecmath class.
+
+2.
+a.
+This assignment was harder, but more fun than the previous ones. The entire reason for this is because of the challenge of creating a Quadtree. This made it more enjoyable for me as I had to investigate an area that had not been covered in class or one that I had not covered myself completely yet. I would still like to find an example code for a Quadtree as it bugs me that mine didn't quite work for non powers of 2 areas (when testing it, I found often when adding FoodSources to it it would only have 39, not the intended 40, one FoodSource was cut off I believe at the top). I think I would also like to generalize it a bit more, for example to a point Quadtree where the Quadrants are split at where the node's / indexes inserted rather than in the center of the area.
+
+b.
+Definitely looking at the Quadtree and uses of it. I have looked at different ways of speeding up searching in games and this was an interesting way of doing it, it was also more efficient than my hardcoded areas I would make for inserting objects into. Another interesting aspect was to do with thread safety. I often had concurrent exceptions thrown as when iterating through the centipedes collection something else was trying modify the collection. In the future I would like to look further at fixing this with synchronization.
+
+c.
+The difficult part would be reversing the centipede. While there are many ways of doing it, I do not believe the way that I have done (actually altering the centipede object itself) is the best. If it was for me to re-write the code to improve the reversing, I would not have a Segment(Segment prevSegment) constructor. If I wanted to create a centipede from a previous segment, I would make a seperate method for that. The constructor taking a Segment as a parameter would set the segment to the values of that segment, not alter them. This would make it easier to clone the centipede and reverse it using various methods.
+
+d.
+Not much of it was confusing, probably just reading the brief of the assignment before understanding that it wasn't actually a game where you controlled the centipedes. The bits that tend to be confusing are just little errors that are made in code, such as when the centipede's segments are slightly offset and don't look at all like a centipede. But those types of errors are quickly found and fixed.

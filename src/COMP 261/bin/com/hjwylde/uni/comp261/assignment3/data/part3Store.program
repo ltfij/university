@@ -1,0 +1,52 @@
+$attempts = 0;
+$holding = 0;
+$isCollecting = 1;
+
+while (((getNumberOfThingsNotInBoxes() != 0) || ($holding != 0))) {
+  if (((getNumberOfThingsNotInBoxes() != 0) && ($holding < 9))) {
+    $isCollecting = 1;
+  } else {
+    $isCollecting = 0;
+  }
+  
+  if ((touchingWall() || touchingBox())) {
+    if (touchingBox()) {
+      drop();
+      $holding = 0;
+    }
+    
+    if (($attempts < 10)) {
+      move(-20);
+      turn(90);
+      
+      $attempts += 1;
+    } else {
+      move(-20);
+      turn(-90);
+      
+      move (30);
+    }
+    
+    move(30);
+  }
+  
+  if (($isCollecting == 1)) {
+    turnTowardsFirstThing();
+    move(getThingDistance());
+  
+    if (touchingThing()) {
+      pickup();
+      $holding += 1;
+      
+      $attempts = 0;
+    }
+  } else {
+    turnTowardsFirstBox();
+    move(getBoxDistance());
+    
+    if (touchingBox()) {
+      drop();
+      $holding = 0;
+    }
+  }
+}

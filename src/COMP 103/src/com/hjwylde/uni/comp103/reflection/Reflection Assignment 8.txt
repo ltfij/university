@@ -1,0 +1,20 @@
+For your reflection:
+====================
+
+1. Suppose you need to need to use a bag of strings in an interactive application where response time is important. What factors would you consider in deciding what bag implementation to use? What additional information would you gather?
+
+2. Suppose you knew that some strings were likely to be looked up much more often than others. How would that affect your choice of implementation? Can you design an implemenation that would be better suited to this situatiton than the ones we've considered so far?
+
+3. Suppose you knew that the bag would always contain strings from a finite set (e.g. names of cities or rivers in New Zealand). How would that affect your choice of implementation? Can you design an implemenation that would be better suited to this situatiton than the ones we've considered so far?
+
+
+--------------------------------------------------------------------
+
+1.
+I would be considering how many strings are wanting to be looked at, and what operations are wanting to be done on them and what they are for, for as to whether a Tree or Hashset would be best. Depending on what the strings were being used for, it might be best to use a 26 branch tree, so as to build the words as you go down the letter branches, as this would save memory space where a hashset would use a lot more.
+
+2.
+Yes. This could possibly involve indexed searches, having places that get searched first due to them being the most commonly accessed locations. Or it could involve sorting the tree in such a way that the more commonly searched for strings are closer to the top of the tree, allowing for a lesser cost of searching through the tree for them.
+
+3.
+A finite set implies a hashset would be a good choice of implementation. Having a fixed size makes a hashset very efficient due to the fast access times and them no longer needing lots of space to allow for hashing.

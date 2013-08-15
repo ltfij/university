@@ -1,0 +1,1008 @@
+﻿Current time: 0 {Anna is available} {Carl is available}
+Current time: 1 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 2 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 3 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Wadestown} was refused.
+Current time: 4 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 5 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Brooklyn} was refused.
+Current time: 6 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 7 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 8 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Newtown} was refused.
+Current time: 9 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 10 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 11 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 12 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Karori} was refused.
+Current time: 13 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 14 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 15 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Brooklyn} was refused.
+Current time: 16 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 17 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 18 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 19 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 20 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 21 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was offered.
+Checking {T: B; D: CBD}... Anna accepted it.
+Current time: 22 {Anna is unavailable} {Carl is available}
+Package for current time: {T: P; D: Johnsonville} was refused.
+Current time: 23 {Anna is unavailable} {Carl is available}
+Package for current time: {T: P; D: Newtown} was refused.
+Current time: 24 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 25 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 26 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 27 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 28 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 29 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Karori} was refused.
+Current time: 30 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 31 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 32 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 33 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 34 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 35 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Mt_Victoria} was refused.
+Current time: 36 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 37 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 38 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Wadestown} was refused.
+Current time: 39 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 40 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 41 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 42 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 43 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Johnsonville} was refused.
+Current time: 44 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 45 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 46 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Ngaio} was refused.
+Current time: 47 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 48 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 49 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 50 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Highbury} was refused.
+Current time: 51 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 52 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Karori} was refused.
+Current time: 53 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 54 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Ngaio} was refused.
+Current time: 55 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 56 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 57 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Ngaio} was refused.
+Current time: 58 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 59 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 60 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 61 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was offered.
+Checking {T: B; D: CBD}... Anna accepted it.
+Current time: 62 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 63 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 64 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 65 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Wadestown} was refused.
+Current time: 66 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 67 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 68 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was offered.
+Checking {T: B; D: CBD}... Anna accepted it.
+Current time: 69 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 70 {Anna is unavailable} {Carl is available}
+Package for current time: {T: S; D: Newtown} was refused.
+Current time: 71 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 72 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 73 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Miramar} was refused.
+Current time: 74 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 75 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 76 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 77 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 78 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 79 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Newlands} was refused.
+Current time: 80 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was offered.
+Checking {T: B; D: CBD}... Anna accepted it.
+Current time: 81 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 82 {Anna is unavailable} {Carl is available}
+Package for current time: {T: S; D: Island_Bay} was refused.
+Current time: 83 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: CBD} was offered.
+Checking {T: P; D: CBD}... Anna accepted it.
+Current time: 84 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 85 {Anna is unavailable} {Carl is available}
+Package for current time: {T: P; D: Karori} was refused.
+Current time: 86 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Johnsonville} was refused.
+Current time: 87 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Brooklyn} was refused.
+Current time: 88 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Miramar} was refused.
+Current time: 89 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Mt_Victoria} was refused.
+Current time: 90 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 91 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 92 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 93 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 94 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 95 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 96 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 97 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 98 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was offered.
+Checking {T: B; D: CBD}... Anna accepted it.
+Current time: 99 {Anna is unavailable} {Carl is available}
+Package for current time: {T: S; D: Te_Aro} was offered.
+Checking {T: S; D: Te_Aro}... Carl accepted it.
+Current time: 100 {Anna is unavailable} {Carl is unavailable}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 101 {Anna is available} {Carl is unavailable}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 102 {Anna is available} {Carl is unavailable}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 103 {Anna is available} {Carl is unavailable}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 104 {Anna is available} {Carl is unavailable}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 105 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Brooklyn} was refused.
+Current time: 106 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 107 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 108 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was offered.
+Checking {T: B; D: CBD}... Anna accepted it.
+Current time: 109 {Anna is unavailable} {Carl is available}
+Package for current time: {T: S; D: Island_Bay} was refused.
+Current time: 110 {Anna is unavailable} {Carl is available}
+Package for current time: {T: P; D: Brooklyn} was refused.
+Current time: 111 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Highbury} was refused.
+Current time: 112 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Wilton} was refused.
+Current time: 113 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 114 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 115 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 116 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 117 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: CBD} was offered.
+Checking {T: P; D: CBD}... Anna accepted it.
+Current time: 118 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 119 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 120 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 121 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 122 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 123 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 124 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 125 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 126 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Brooklyn} was refused.
+Current time: 127 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 128 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 129 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Newlands} was refused.
+Current time: 130 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Ngaio} was refused.
+Current time: 131 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 132 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 133 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 134 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 135 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 136 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Kilbernie} was refused.
+Current time: 137 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 138 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 139 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 140 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 141 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 142 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Wilton} was refused.
+Current time: 143 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 144 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 145 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 146 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 147 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Karori} was refused.
+Current time: 148 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 149 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 150 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 151 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 152 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 153 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 154 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 155 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kilbernie} was refused.
+Current time: 156 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 157 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kelburn} was refused.
+Current time: 158 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 159 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 160 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 161 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 162 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 163 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Mt_Victoria} was refused.
+Current time: 164 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 165 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 166 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 167 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Wilton} was refused.
+Current time: 168 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 169 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 170 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 171 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Johnsonville} was refused.
+Current time: 172 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Johnsonville} was refused.
+Current time: 173 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 174 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 175 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Mt_Victoria} was refused.
+Current time: 176 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 177 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 178 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: CBD} was offered.
+Checking {T: P; D: CBD}... Anna accepted it.
+Current time: 179 {Anna is unavailable} {Carl is available}
+Package for current time: {T: P; D: CBD} was offered.
+Checking {T: P; D: CBD}... Carl accepted it.
+Current time: 180 {Anna is unavailable} {Carl is unavailable}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 181 {Anna is available} {Carl is unavailable}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 182 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 183 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 184 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 185 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Island_Bay} was refused.
+Current time: 186 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 187 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Wadestown} was refused.
+Current time: 188 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 189 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Brooklyn} was refused.
+Current time: 190 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Ngaio} was refused.
+Current time: 191 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kandallah} was refused.
+Current time: 192 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 193 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 194 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 195 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Newlands} was refused.
+Current time: 196 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Newtown} was refused.
+Current time: 197 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Te_Aro} was offered.
+Checking {T: P; D: Te_Aro}... Anna accepted it.
+Current time: 198 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 199 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 200 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 201 {Anna is unavailable} {Carl is available}
+Package for current time: {T: P; D: Mt_Victoria} was refused.
+Current time: 202 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 203 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 204 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 205 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 206 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Highbury} was refused.
+Current time: 207 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 208 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 209 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 210 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 211 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 212 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 213 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 214 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 215 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Te_Aro} was offered.
+Checking {T: P; D: Te_Aro}... Anna accepted it.
+Current time: 216 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 217 {Anna is unavailable} {Carl is available}
+Package for current time: {T: S; D: Brooklyn} was refused.
+Current time: 218 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 219 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 220 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 221 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 222 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Te_Aro} was offered.
+Checking {T: P; D: Te_Aro}... Anna accepted it.
+Current time: 223 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 224 {Anna is unavailable} {Carl is available}
+Package for current time: {T: S; D: Miramar} was refused.
+Current time: 225 {Anna is unavailable} {Carl is available}
+Package for current time: {T: S; D: Wadestown} was refused.
+Current time: 226 {Anna is unavailable} {Carl is available}
+Package for current time: {T: P; D: Island_Bay} was refused.
+Current time: 227 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 228 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 229 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 230 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Island_Bay} was refused.
+Current time: 231 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 232 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Newtown} was refused.
+Current time: 233 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 234 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 235 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kandallah} was refused.
+Current time: 236 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 237 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 238 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kelburn} was refused.
+Current time: 239 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 240 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 241 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 242 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 243 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 244 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 245 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Newlands} was refused.
+Current time: 246 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Johnsonville} was refused.
+Current time: 247 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 248 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 249 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Miramar} was refused.
+Current time: 250 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Te_Aro} was offered.
+Checking {T: P; D: Te_Aro}... Anna accepted it.
+Current time: 251 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 252 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 253 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 254 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 255 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 256 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 257 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 258 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kilbernie} was refused.
+Current time: 259 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 260 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 261 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 262 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 263 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: CBD} was offered.
+Checking {T: S; D: CBD}... Anna accepted it.
+Current time: 264 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 265 {Anna is unavailable} {Carl is available}
+Package for current time: {T: S; D: Newlands} was refused.
+Current time: 266 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 267 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 268 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 269 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 270 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 271 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Mt_Victoria} was refused.
+Current time: 272 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 273 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 274 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 275 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 276 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 277 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Karori} was refused.
+Current time: 278 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 279 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Newtown} was refused.
+Current time: 280 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 281 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 282 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 283 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 284 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 285 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 286 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 287 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 288 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Brooklyn} was refused.
+Current time: 289 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 290 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Brooklyn} was refused.
+Current time: 291 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 292 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 293 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 294 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Johnsonville} was refused.
+Current time: 295 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Highbury} was refused.
+Current time: 296 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 297 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 298 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 299 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 300 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 301 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 302 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Kandallah} was refused.
+Current time: 303 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 304 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 305 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 306 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 307 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 308 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Brooklyn} was refused.
+Current time: 309 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 310 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: CBD} was refused.
+Current time: 311 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 312 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 313 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 314 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 315 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 316 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Miramar} was refused.
+Current time: 317 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 318 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 319 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 320 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 321 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 322 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 323 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Newlands} was refused.
+Current time: 324 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 325 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 326 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 327 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 328 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Johnsonville} was refused.
+Current time: 329 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Kelburn} was refused.
+Current time: 330 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 331 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kandallah} was refused.
+Current time: 332 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 333 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 334 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Miramar} was refused.
+Current time: 335 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 336 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Mt_Victoria} was refused.
+Current time: 337 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 338 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Johnsonville} was refused.
+Current time: 339 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 340 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 341 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Island_Bay} was refused.
+Current time: 342 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 343 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 344 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 345 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 346 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 347 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 348 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 349 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 350 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 351 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 352 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 353 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 354 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 355 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 356 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Ngaio} was refused.
+Current time: 357 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 358 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 359 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Wadestown} was refused.
+Current time: 360 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 361 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 362 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 363 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 364 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 365 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Island_Bay} was refused.
+Current time: 366 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 367 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 368 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 369 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 370 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 371 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Newlands} was refused.
+Current time: 372 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Brooklyn} was refused.
+Current time: 373 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Wadestown} was refused.
+Current time: 374 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 375 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 376 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 377 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 378 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 379 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Karori} was refused.
+Current time: 380 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Mt_Victoria} was refused.
+Current time: 381 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Wadestown} was refused.
+Current time: 382 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 383 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 384 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 385 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Miramar} was refused.
+Current time: 386 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 387 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 388 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 389 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Ngaio} was refused.
+Current time: 390 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 391 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 392 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 393 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 394 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 395 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 396 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Wadestown} was refused.
+Current time: 397 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 398 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Newtown} was refused.
+Current time: 399 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 400 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 401 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Kilbernie} was refused.
+Current time: 402 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Island_Bay} was refused.
+Current time: 403 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 404 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 405 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 406 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 407 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Newlands} was refused.
+Current time: 408 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: CBD} was offered.
+Checking {T: P; D: CBD}... Anna accepted it.
+Current time: 409 {Anna is unavailable} {Carl is available}
+Package for current time: {T: P; D: Miramar} was refused.
+Current time: 410 {Anna is unavailable} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 411 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 412 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 413 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 414 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 415 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 416 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 417 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 418 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 419 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 420 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 421 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 422 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Wilton} was refused.
+Current time: 423 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 424 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 425 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 426 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 427 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 428 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 429 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kandallah} was refused.
+Current time: 430 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 431 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 432 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 433 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kandallah} was refused.
+Current time: 434 {Anna is available} {Carl is available}
+Package for current time: {T: S; D: Wilton} was refused.
+Current time: 435 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 436 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 437 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 438 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 439 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Wadestown} was refused.
+Current time: 440 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 441 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 442 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 443 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 444 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wilton} was refused.
+Current time: 445 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 446 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 447 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 448 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Te_Aro} was refused.
+Current time: 449 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 450 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 451 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 452 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 453 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Wilton} was refused.
+Current time: 454 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 455 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 456 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 457 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 458 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 459 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 460 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 461 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Mt_Victoria} was refused.
+Current time: 462 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 463 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Wilton} was refused.
+Current time: 464 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 465 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Wadestown} was refused.
+Current time: 466 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 467 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Kilbernie} was refused.
+Current time: 468 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 469 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newlands} was refused.
+Current time: 470 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 471 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kandallah} was refused.
+Current time: 472 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Kilbernie} was refused.
+Current time: 473 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 474 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Island_Bay} was refused.
+Current time: 475 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Highbury} was refused.
+Current time: 476 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 477 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Brooklyn} was refused.
+Current time: 478 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Newtown} was refused.
+Current time: 479 {Anna is available} {Carl is available}
+Package for current time: {T: B; D: Johnsonville} was refused.
+Current time: 480 {Anna is available} {Carl is available}
+Package for current time: {T: P; D: Johnsonville} was refused.
+---
+Computing days income...
+---
+
+
+Deliverer: Anna
+
+Employee rate: 12.0
+
+Deliverer was on the road for 57.0 minutes.
+
+Deliverer delivered 15 package(s).
+{T: B; D: CBD}  {T: B; D: CBD}  {T: B; D: CBD}  {T: B; D: CBD}  {T: P; D: CBD}  {T: B; D: CBD}  {T: B; D: CBD}  {T: P; D: CBD}  {T: P; D: CBD}  {T: P; D: Te_Aro}  {T: P; D: Te_Aro}  {T: P; D: Te_Aro}  {T: P; D: Te_Aro}  {T: S; D: CBD}  {T: P; D: CBD}  
+
+Deliverer: Carl
+
+Employee rate: 12.0
+
+Deliverer was on the road for 9.0 minutes.
+
+Deliverer delivered 2 package(s).
+{T: S; D: Te_Aro}  {T: P; D: CBD}  
+0 package(s) went undelivered.
+
+Company refused 463 package(s).
+{T: B; D: Te_Aro}  {T: B; D: Wadestown}  {T: S; D: Wadestown}  {T: B; D: Highbury}  {T: P; D: Brooklyn}  {T: B; D: Ngaio}  {T: B; D: Miramar}  {T: P; D: Newtown}  {T: B; D: Kandallah}  {T: B; D: Highbury}  {T: B; D: Ngaio}  {T: S; D: Karori}  {T: B; D: Brooklyn}  {T: B; D: Kilbernie}  {T: S; D: Brooklyn}  {T: B; D: Wilton}  {T: B; D: Miramar}  {T: B; D: Miramar}  {T: B; D: Ngaio}  {T: B; D: Newtown}  {T: P; D: Johnsonville}  {T: P; D: Newtown}  {T: B; D: Island_Bay}  {T: B; D: Johnsonville}  {T: B; D: Kelburn}  {T: B; D: Wilton}  {T: B; D: Brooklyn}  {T: S; D: Karori}  {T: B; D: Karori}  {T: B; D: Wilton}  {T: B; D: Kelburn}  {T: B; D: Johnsonville}  {T: B; D: Highbury}  {T: S; D: Mt_Victoria}  {T: B; D: Johnsonville}  {T: B; D: Johnsonville}  {T: S; D: Wadestown}  {T: B; D: Ngaio}  {T: B; D: Mt_Victoria}  {T: B; D: Ngaio}  {T: B; D: Kelburn}  {T: P; D: Johnsonville}  {T: B; D: Ngaio}  {T: B; D: Te_Aro}  {T: P; D: Ngaio}  {T: B; D: Wadestown}  {T: B; D: Newlands}  {T: B; D: Wadestown}  {T: P; D: Highbury}  {T: B; D: Brooklyn}  {T: P; D: Karori}  {T: B; D: Newtown}  {T: P; D: Ngaio}  {T: B; D: Wilton}  {T: B; D: Island_Bay}  {T: P; D: Ngaio}  {T: B; D: Kelburn}  {T: B; D: Kelburn}  {T: B; D: Newtown}  {T: B; D: Kilbernie}  {T: B; D: Brooklyn}  {T: B; D: Miramar}  {T: P; D: Wadestown}  {T: B; D: Kilbernie}  {T: B; D: Ngaio}  {T: B; D: Johnsonville}  {T: S; D: Newtown}  {T: B; D: Wadestown}  {T: B; D: Miramar}  {T: S; D: Miramar}  {T: B; D: Highbury}  {T: B; D: Johnsonville}  {T: B; D: Wadestown}  {T: B; D: Kandallah}  {T: B; D: Highbury}  {T: P; D: Newlands}  {T: B; D: Kilbernie}  {T: S; D: Island_Bay}  {T: B; D: Johnsonville}  {T: P; D: Karori}  {T: S; D: Johnsonville}  {T: P; D: Brooklyn}  {T: S; D: Miramar}  {T: P; D: Mt_Victoria}  {T: B; D: Miramar}  {T: B; D: Highbury}  {T: B; D: Ngaio}  {T: B; D: Wilton}  {T: B; D: Kilbernie}  {T: B; D: Miramar}  {T: B; D: Mt_Victoria}  {T: B; D: Island_Bay}  {T: B; D: Highbury}  {T: B; D: Karori}  {T: B; D: Kilbernie}  {T: B; D: Miramar}  {T: B; D: Wilton}  {T: P; D: Brooklyn}  {T: B; D: Newlands}  {T: B; D: Newlands}  {T: S; D: Island_Bay}  {T: P; D: Brooklyn}  {T: P; D: Highbury}  {T: P; D: Wilton}  {T: B; D: Wilton}  {T: B; D: Brooklyn}  {T: B; D: Te_Aro}  {T: B; D: Kelburn}  {T: B; D: Kandallah}  {T: B; D: Newlands}  {T: B; D: Brooklyn}  {T: B; D: Kilbernie}  {T: B; D: Newtown}  {T: B; D: Johnsonville}  {T: B; D: Newtown}  {T: B; D: Miramar}  {T: P; D: Brooklyn}  {T: B; D: Newtown}  {T: B; D: Newlands}  {T: P; D: Newlands}  {T: P; D: Ngaio}  {T: B; D: Karori}  {T: B; D: Wadestown}  {T: B; D: Brooklyn}  {T: B; D: Island_Bay}  {T: B; D: Kilbernie}  {T: S; D: Kilbernie}  {T: B; D: Newtown}  {T: B; D: Highbury}  {T: B; D: Wadestown}  {T: B; D: Kelburn}  {T: B; D: Newtown}  {T: P; D: Wilton}  {T: B; D: Ngaio}  {T: B; D: Brooklyn}  {T: B; D: Wadestown}  {T: B; D: Mt_Victoria}  {T: P; D: Karori}  {T: B; D: Brooklyn}  {T: B; D: Wadestown}  {T: B; D: Brooklyn}  {T: B; D: Island_Bay}  {T: B; D: Wilton}  {T: B; D: Kelburn}  {T: B; D: Newlands}  {T: P; D: Kilbernie}  {T: B; D: Wadestown}  {T: P; D: Kelburn}  {T: B; D: Miramar}  {T: B; D: Kelburn}  {T: B; D: Island_Bay}  {T: B; D: Wilton}  {T: B; D: Johnsonville}  {T: P; D: Mt_Victoria}  {T: B; D: Miramar}  {T: B; D: Kandallah}  {T: B; D: Wadestown}  {T: S; D: Wilton}  {T: B; D: Highbury}  {T: B; D: Highbury}  {T: B; D: Wadestown}  {T: P; D: Johnsonville}  {T: S; D: Johnsonville}  {T: B; D: Kilbernie}  {T: B; D: Johnsonville}  {T: S; D: Mt_Victoria}  {T: B; D: Kandallah}  {T: B; D: Miramar}  {T: B; D: Miramar}  {T: B; D: Newtown}  {T: B; D: Island_Bay}  {T: B; D: Miramar}  {T: B; D: Kelburn}  {T: S; D: Island_Bay}  {T: B; D: CBD}  {T: P; D: Wadestown}  {T: B; D: Kilbernie}  {T: S; D: Brooklyn}  {T: P; D: Ngaio}  {T: P; D: Kandallah}  {T: B; D: Newlands}  {T: B; D: Newlands}  {T: B; D: Ngaio}  {T: P; D: Newlands}  {T: S; D: Newtown}  {T: B; D: Mt_Victoria}  {T: B; D: CBD}  {T: B; D: Wilton}  {T: P; D: Mt_Victoria}  {T: B; D: CBD}  {T: B; D: Newtown}  {T: B; D: Wilton}  {T: B; D: Wadestown}  {T: P; D: Highbury}  {T: B; D: CBD}  {T: B; D: Te_Aro}  {T: B; D: Newtown}  {T: B; D: Highbury}  {T: B; D: Ngaio}  {T: B; D: Wilton}  {T: B; D: Karori}  {T: B; D: Kandallah}  {T: B; D: Island_Bay}  {T: S; D: Brooklyn}  {T: B; D: Wadestown}  {T: B; D: Kelburn}  {T: B; D: Mt_Victoria}  {T: B; D: Kelburn}  {T: B; D: Newlands}  {T: S; D: Miramar}  {T: S; D: Wadestown}  {T: P; D: Island_Bay}  {T: B; D: Kelburn}  {T: B; D: Ngaio}  {T: B; D: Kilbernie}  {T: P; D: Island_Bay}  {T: B; D: Island_Bay}  {T: P; D: Newtown}  {T: B; D: Island_Bay}  {T: B; D: Karori}  {T: P; D: Kandallah}  {T: B; D: Kandallah}  {T: B; D: Highbury}  {T: P; D: Kelburn}  {T: B; D: Kilbernie}  {T: B; D: Kelburn}  {T: B; D: Island_Bay}  {T: B; D: Karori}  {T: B; D: Highbury}  {T: B; D: Island_Bay}  {T: S; D: Newlands}  {T: P; D: Johnsonville}  {T: B; D: Miramar}  {T: B; D: Wilton}  {T: P; D: Miramar}  {T: B; D: Te_Aro}  {T: B; D: Miramar}  {T: B; D: Brooklyn}  {T: B; D: Ngaio}  {T: B; D: Newtown}  {T: B; D: Wadestown}  {T: B; D: Karori}  {T: P; D: Kilbernie}  {T: B; D: Island_Bay}  {T: B; D: Island_Bay}  {T: B; D: Newtown}  {T: B; D: Newtown}  {T: B; D: Te_Aro}  {T: S; D: Newlands}  {T: B; D: Wilton}  {T: B; D: Miramar}  {T: B; D: CBD}  {T: B; D: Kilbernie}  {T: B; D: Newtown}  {T: P; D: Mt_Victoria}  {T: B; D: Mt_Victoria}  {T: B; D: Kelburn}  {T: B; D: Wilton}  {T: B; D: Wadestown}  {T: B; D: Kandallah}  {T: S; D: Karori}  {T: B; D: Wilton}  {T: S; D: Newtown}  {T: B; D: Karori}  {T: B; D: Newlands}  {T: B; D: Highbury}  {T: B; D: Kilbernie}  {T: B; D: Newlands}  {T: B; D: Kilbernie}  {T: B; D: Johnsonville}  {T: B; D: Brooklyn}  {T: S; D: Brooklyn}  {T: B; D: Newtown}  {T: S; D: Brooklyn}  {T: B; D: Miramar}  {T: B; D: Wilton}  {T: B; D: CBD}  {T: P; D: Johnsonville}  {T: P; D: Highbury}  {T: B; D: Brooklyn}  {T: B; D: Ngaio}  {T: B; D: Kelburn}  {T: B; D: Kelburn}  {T: B; D: Ngaio}  {T: B; D: Karori}  {T: S; D: Kandallah}  {T: B; D: Wilton}  {T: B; D: Island_Bay}  {T: B; D: Wilton}  {T: B; D: Wadestown}  {T: B; D: Te_Aro}  {T: P; D: Brooklyn}  {T: B; D: Wilton}  {T: S; D: CBD}  {T: B; D: Karori}  {T: B; D: Mt_Victoria}  {T: B; D: Island_Bay}  {T: B; D: Mt_Victoria}  {T: B; D: Island_Bay}  {T: P; D: Miramar}  {T: B; D: Te_Aro}  {T: B; D: Newtown}  {T: B; D: Newtown}  {T: B; D: Te_Aro}  {T: B; D: Kandallah}  {T: B; D: Newtown}  {T: S; D: Newlands}  {T: B; D: Newlands}  {T: B; D: CBD}  {T: B; D: Highbury}  {T: B; D: Karori}  {T: P; D: Johnsonville}  {T: S; D: Kelburn}  {T: B; D: Te_Aro}  {T: P; D: Kandallah}  {T: B; D: Newtown}  {T: B; D: Miramar}  {T: P; D: Miramar}  {T: B; D: Miramar}  {T: P; D: Mt_Victoria}  {T: B; D: Brooklyn}  {T: S; D: Johnsonville}  {T: B; D: CBD}  {T: B; D: Wilton}  {T: S; D: Island_Bay}  {T: B; D: Wilton}  {T: B; D: Johnsonville}  {T: B; D: Newlands}  {T: B; D: CBD}  {T: B; D: Te_Aro}  {T: B; D: Johnsonville}  {T: B; D: Brooklyn}  {T: B; D: Te_Aro}  {T: B; D: Newlands}  {T: B; D: Wilton}  {T: B; D: Karori}  {T: B; D: Newlands}  {T: B; D: Newtown}  {T: B; D: Te_Aro}  {T: S; D: Ngaio}  {T: B; D: Kilbernie}  {T: B; D: Wadestown}  {T: S; D: Wadestown}  {T: B; D: Brooklyn}  {T: B; D: Wadestown}  {T: B; D: Kilbernie}  {T: B; D: Kilbernie}  {T: B; D: Kelburn}  {T: P; D: Island_Bay}  {T: B; D: Newlands}  {T: B; D: Mt_Victoria}  {T: B; D: Johnsonville}  {T: B; D: Kilbernie}  {T: B; D: Ngaio}  {T: P; D: Newlands}  {T: S; D: Brooklyn}  {T: S; D: Wadestown}  {T: B; D: Karori}  {T: B; D: Johnsonville}  {T: B; D: Ngaio}  {T: B; D: Newlands}  {T: B; D: Brooklyn}  {T: P; D: Karori}  {T: P; D: Mt_Victoria}  {T: S; D: Wadestown}  {T: B; D: Highbury}  {T: B; D: Karori}  {T: B; D: CBD}  {T: S; D: Miramar}  {T: B; D: Mt_Victoria}  {T: B; D: Island_Bay}  {T: B; D: Kandallah}  {T: P; D: Ngaio}  {T: B; D: Kelburn}  {T: B; D: Newlands}  {T: B; D: Wilton}  {T: B; D: Kilbernie}  {T: B; D: Wilton}  {T: B; D: CBD}  {T: P; D: Wadestown}  {T: B; D: Kelburn}  {T: P; D: Newtown}  {T: B; D: Island_Bay}  {T: B; D: Newlands}  {T: S; D: Kilbernie}  {T: S; D: Island_Bay}  {T: B; D: Kelburn}  {T: B; D: Mt_Victoria}  {T: B; D: Kandallah}  {T: B; D: Johnsonville}  {T: S; D: Newlands}  {T: P; D: Miramar}  {T: B; D: Mt_Victoria}  {T: B; D: Newlands}  {T: B; D: CBD}  {T: B; D: Karori}  {T: B; D: Island_Bay}  {T: B; D: Karori}  {T: B; D: Miramar}  {T: B; D: Kilbernie}  {T: B; D: Johnsonville}  {T: B; D: Newtown}  {T: B; D: Newtown}  {T: B; D: Kilbernie}  {T: P; D: Wilton}  {T: B; D: Wilton}  {T: B; D: Island_Bay}  {T: B; D: Highbury}  {T: B; D: Island_Bay}  {T: B; D: Wadestown}  {T: B; D: Kelburn}  {T: P; D: Kandallah}  {T: B; D: Wadestown}  {T: B; D: Te_Aro}  {T: B; D: Te_Aro}  {T: P; D: Kandallah}  {T: S; D: Wilton}  {T: B; D: Karori}  {T: B; D: Te_Aro}  {T: B; D: Highbury}  {T: B; D: Kelburn}  {T: P; D: Wadestown}  {T: B; D: Wilton}  {T: B; D: Te_Aro}  {T: B; D: Johnsonville}  {T: B; D: Johnsonville}  {T: B; D: Wilton}  {T: B; D: Newtown}  {T: B; D: Kilbernie}  {T: B; D: Newlands}  {T: P; D: Te_Aro}  {T: B; D: Johnsonville}  {T: B; D: Ngaio}  {T: B; D: Brooklyn}  {T: B; D: Te_Aro}  {T: P; D: Wilton}  {T: B; D: Brooklyn}  {T: B; D: Wadestown}  {T: B; D: Highbury}  {T: B; D: Highbury}  {T: B; D: Island_Bay}  {T: B; D: Island_Bay}  {T: B; D: Te_Aro}  {T: B; D: Mt_Victoria}  {T: B; D: Highbury}  {T: P; D: Wilton}  {T: B; D: Miramar}  {T: B; D: Wadestown}  {T: B; D: Ngaio}  {T: P; D: Kilbernie}  {T: B; D: Te_Aro}  {T: B; D: Newlands}  {T: B; D: Te_Aro}  {T: B; D: Kandallah}  {T: B; D: Kilbernie}  {T: B; D: Karori}  {T: B; D: Island_Bay}  {T: B; D: Highbury}  {T: B; D: Miramar}  {T: B; D: Brooklyn}  {T: B; D: Newtown}  {T: B; D: Johnsonville}  {T: P; D: Johnsonville}  
+40 package(s) arrived after the end of the day.
+{T: P; D: Highbury}  {T: B; D: Kandallah}  {T: B; D: Wilton}  {T: B; D: Wadestown}  {T: B; D: Wilton}  {T: B; D: Karori}  {T: B; D: CBD}  {T: B; D: Miramar}  {T: B; D: Kandallah}  {T: S; D: Karori}  {T: S; D: Brooklyn}  {T: S; D: Karori}  {T: B; D: Kandallah}  {T: P; D: Wilton}  {T: P; D: Kelburn}  {T: B; D: Miramar}  {T: P; D: Wadestown}  {T: B; D: Ngaio}  {T: B; D: CBD}  {T: B; D: Johnsonville}  {T: B; D: Karori}  {T: B; D: Wadestown}  {T: S; D: Ngaio}  {T: B; D: Newtown}  {T: P; D: Wadestown}  {T: B; D: Miramar}  {T: B; D: CBD}  {T: B; D: Kilbernie}  {T: B; D: Wadestown}  {T: B; D: Johnsonville}  {T: B; D: Mt_Victoria}  {T: B; D: Island_Bay}  {T: B; D: Highbury}  {T: B; D: Island_Bay}  {T: B; D: Te_Aro}  {T: B; D: Wadestown}  {T: B; D: Miramar}  {T: B; D: Johnsonville}  {T: B; D: Karori}  {T: P; D: Wadestown}  
+
+Total of days income: 57.0

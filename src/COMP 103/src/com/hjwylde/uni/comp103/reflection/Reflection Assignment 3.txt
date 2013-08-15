@@ -1,0 +1,23 @@
+For your reflection:
+====================
+
+Learning about iterators and comparators is "bitsy" and can be quite
+tricky. These are inevitably quite technical concepts rather than "big
+picture" ones, but they're good to have in your repertoire.  Different
+people find them challenging in different ways.
+
+What aspect of this material do you think was the most difficult to
+grasp, for you personally? (Note that you can answer this regardless
+of *how* difficult it was). Do you imagine other people found the same
+things challenging, or is this specific to your background?  Comment
+on whether you understood this challenging aspect better as you did
+the assignment, or not, and why.
+
+--------------------------------------------------------------------
+
+I did not feel that this material was too dificult. If I had to pick an aspect that I thought was the hardest, I would say probably knowing how the Collections class chooses to sort the objects in a collection and understanding how they classify the different methods sorting performances/speeds. Actual implementation of the Comparable and Comparator interfaces was straightforward.
+ - Specific to my background?
+ I don't quite understand what this means, but personally I have enjoyed programming for some years now, if that is what it is refering to.
+I don't quite know how other people would have found it, I would guess that it wouldn't be too dificult for them, possibly just simply remembering the difference between the Comparable and Comparator interfaces and what returning -1 in the method means in terms of the order (as in, does -1 mean the first object is before the second, personally I forgot this a number of times and had to check).
+
+It was more a bit of reading/searching I did that helped me to understand the aspect I found challenging. Namely, the course textbook is useful for helping to understand it a lot. The assignment didn't specifically involve different sorting methods that allowed me to experiment with them.

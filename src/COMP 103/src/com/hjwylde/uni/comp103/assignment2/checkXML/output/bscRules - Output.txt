@@ -1,0 +1,663 @@
+Listing of File C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\bscRules.xml:
+-------------------
+<XML>
+
+<Rule>
+  <Type>Qualification</Type>
+  <Name>Bachelor of Science</Name>
+  <Code> BSc </Code>
+  <Faculty> SCNE </Faculty>
+  <Category>degree, firstDegree</Category>
+  <Year> 2001 </Year>
+  <CrossCredit>
+    <MaxCrossCrPoints>160p</MaxCrossCrPoints>
+    <MinPoints>360p</MinPoints>
+    <Schedules>(BSC, BSCHON)</Schedules>
+    <MinSchedPoints>270p</MinSchedPoints>
+    <Min200Points>180p</Min200Points>
+    <Min300Points>72p</Min300Points>
+  </CrossCredit>
+  <Constraints>
+    <Majors> (1: BIOL, CBIO, CHEM, CTEC, COMP, EBIO, ELCM, ENVI, GEOG, GEOL, GPHS, INTD, MGSC,
+		 BMAR, MATH, MXED, OPRE, PHSI, PHYS, PSYC, STAT)
+    </Majors>
+    <Computation>bscMajorDoubleDip() </Computation>     
+    <Computation>BScNonScienceInMajors() </Computation> 
+    <Points> (360p: 100+, (firstdegree, BSCHON))</Points>
+    <Points>(270p - min(48p, %nonScienceMajorPoints): 100+, (bsc, bschon))</Points>
+    <Points>(180p: 200+, (firstdegree, BSCHON))</Points>
+    <Points>(120p: 200+, (BSC, BSCHON))</Points>
+    <Points>(72p:  300+, (BSC, BSCHON))</Points>
+  </Constraints>
+</Rule>
+
+
+<RECOMMENDATION>
+Up to 48pts of non-science courses required by the major(s) can be counted as
+science for the "at most 90pts non-science" rule. Can they also be counted for
+the "at least 120 points of science at 200+" or the "at least 72 points of
+science at 300"?  I have assumed not.
+
+After discussion with Helen, we felt that up to 24pt of the 300 level
+non-science courses required by a major should be counted as science for the "at
+least 72 points of science at 300" rule.
+
+This would change the last points requirement above to:
+        (72p - min(24p, %nonScienceMajor300Points): 300, (BSC, BSCHON))
+</RECOMMENDATION>
+
+<RECOMMENDATION>
+non-science points should not have an upper limit, but the number of science
+points should have a lower limit - want to encourage students to take courses
+rather than discourage them.
+</RECOMMENDATION>
+
+<RECOMMENDATION>
+Should the 30 pt double limit should be per pair of majors? rather than overall
+</RECOMMENDATION>
+
+<PROBLEM> ????? Do the 200 level papers specified in the major have to be part
+of the degree, or could they be done for another degree?  I assume the latter.
+
+Is this only an issue for cross crediting, or is it more general.  I think that
+if they are not cross crediting the papers (in which case everything would work
+out fine) then they would need a special exemption.  Therefore, this would be
+hand checked.
+</PROBLEM>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Biology </Name>
+  <Code> BIOL </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (all: BIOL111, BIOL113, BIOL114) </Papers>
+    <Papers> (60p: BIOL300..399) </Papers>
+  </Constraints>
+  <Text>
+      BIOL 111, 113, 114, 
+      and 60 pts chosen from BIOL papers numbered 300-399
+  </Text>
+</Rule>
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Cell and Molecular Bioscience </Name>
+  <Code> CBIO </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (all: BIOL111, BIOL113, BIOL114, CHEM104)</Papers>
+    <Papers> (all: BIOL239, BIOL240, BIOL241, BIOL252, BIOL261, BIOL262)</Papers>
+    <Papers> (all: BIOL309, BIOL310) </Papers>
+    <Papers> (15p: BIOL303, BIOL304, BIOL305, BIOL311)</Papers>
+  </Constraints>
+  <Text>
+    (a)	BIOL 111, 113, 114; CHEM 104;
+    (b)	BIOL 239, 240, 241,252, 261, 262;
+    (c)	BIOL 309 and 310
+	    and at least 15 points from BIOL 303, 304, 305 and 311.
+  </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Chemistry </Name>
+  <Code> CHEM </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers>(all: CHEM201, CHEM202, CHEM203, CHEM204, CHEM205, CHEM206)</Papers>
+    <Papers>(4: CHEM301, CHEM302, CHEM303, CHEM305, CHEM306)</Papers>
+  </Constraints>
+  <Text>
+    (a)	Any four of CHEM 301, 302, 303, 305 and 306
+    (b)	CHEM 201, 202, 203, 204, 205 and 206
+  </Text>
+</Rule>
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Chemistry and Technology </Name>
+  <Code> CTEC </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (all: CHEM201, CHEM202, CHEM203, CHEM204, CHEM205, CHEM206) </Papers>
+    <Papers> (all: CHEM303, CHEM306)</Papers>
+    <Papers> (2:  CHEM301, CHEM302, CHEM305)    </Papers>
+  </Constraints>
+  <Text>
+    (a)	CHEM 303, CHEM 306 and any two of CHEM 301, 302, 305;
+    (b)	CHEM 201, 202, 203, 204, 205 and 206.
+  </Text>
+</Rule>
+
+ 
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Computer Science </Name>
+  <Code> COMP </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (all: COMP201, COMP202, COMP203) </Papers>
+    <Papers> (58p: MATH105..399, STAT100..399, OPRE200..399, QUAN101, QUAN102, QUAN104..399) </Papers>
+    <Papers> (all: MATH214)
+           <Text>advanced mathematics requirement</Text>
+	   <IfFail>With approval, MATH214 can be replaced by 22pts of other mathematics above 100 level</IfFail>
+    </Papers>
+    <Papers> (60p: COMP301..350)
+	   <IfFail>Note, OPRE352 was equivalent to COMP349 for in 1997-2001 for the 300 level COMP major requirement</IfFail>
+    </Papers>
+  </Constraints>
+  <Text>
+    (a)	60 300-level pts from COMP 301-350
+    (b)	COMP 201, 202, 203
+    (c)	58 pts of MATH, STAT, OPRE or QUAN papers, 
+	    (other than MATH 103, MATH 104, and QUAN 103), including either MATH
+	    214 or 22 pts above  100 level approved by the Head of the School of
+	    Mathematical and Computing Sciences 
+  </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Ecology and Biodiversity </Name>
+  <Code> EBIO </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (all: BIOL227, BIOL228) </Papers>
+    <Papers> (all: BIOL327, BIOL328, BIOL329) </Papers>
+  </Constraints>
+  <Text>
+    BIOL 227, 228, 327, 328, and 329
+  </Text>
+</Rule>
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Electronic and Computer Systems </Name>
+  <Code> ELCM </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (60p: PHYS300..399 ,COMP300..399)</Papers>
+    <Papers> (all: PHYS340, PHYS341)</Papers>
+    <Papers> (30p: COMP301, COMP305, COMP306) </Papers>
+  </Constraints>
+  <Text>
+     (a) PHYS 340, PHYS 341
+     (b) 30 pts from COMP 301, COMP 305, COMP 306
+     (c) 12 further approved pts from PHYS 300 or COMP  300 papers
+ </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Environmental Studies </Name>
+  <Code> ENVI </Code>
+  <Degree> BSc, BA </Degree>
+  <Constraints>
+    <Papers> (all: ECON130) 
+          <Record>%nonScience[ENVI]</Record>
+    </Papers>
+    <Papers> (all: STAT193)
+	  <Text>BSc: Environmental Studies major: Statistics requirement </Text>
+	  <IfFail>Alternative background in stats may be approved for STAT193 requirement for Env Studies</IfFail>
+    </Papers>
+    <Papers> (1: BIOL132, CHEM100..199, ESCI131, ESCI132, PHYS131) </Papers>
+    <Papers> (1: MAOR214, MAOR215, PUBL207)
+          <Record>%nonScience[ENVI]</Record>
+          <Text>BSc: Environmental Studies Major: law or politics</Text>
+	  <IfFail>Alternative paper in environmental law or politics may be approved</IfFail>
+    </Papers>
+    <Papers> (1: BIOL214, GEOL214) </Papers>
+    <Papers> (1: ENVI314, GEOG314)   </Papers>
+    <Papers> (2: BIOL313, BIOL317, BIOL318, BIOL321) </Papers>
+  </Constraints>
+  <Text>
+     (a) ECON 130; STAT 193 or an equivalent 
+         background in Statistics; one of BIOL 132, 18 pts 
+	 from CHEM 100-199, ESCI 131, ESCI 132, PHYS 131
+     (b) One course from MAOR 214, MAOR 215, PUBL 207, or an approved paper in
+	 environmental law  or politics
+     (c) (i)	ENVI 314/GEOG 314; BIOL 214/GEOL 214
+         (ii)	2 of BIOL 313, BIOL 317, BIOL 318, or BIOL 321
+ </Text>
+</Rule>
+
+ <RECOMMEND>
+ The Environmental Studies major , part (a) does not look right - it looks as though some courses are missing
+ after BIOL 132.  I have assumed it means one paper from that list, but it is ambiguous.
+ </RECOMMENDATION>
+
+<PROBLEM>
+   Note that the recording of the nonscience papers only matters for the BSc, not for the BA.
+   In fact, it must NOT record them if the major is for the BA!!!
+</PROBLEM>
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Geography </Name>
+  <Code> GEOG </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (92p: GEOG200..399) </Papers>
+    <Papers> (48p: GEOG200..399) </Papers>
+  </Constraints>
+  <Text>
+     At least 92 pts in GEOG papers numbered 200-399, 
+     and a minimum of 48 pts in GEOG papers numbered 300-399
+ </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Geology </Name>
+  <Code> GEOL </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (84p: GEOL300..399) </Papers>
+  </Constraints>
+  <Text>
+    84 pts in GEOL at the 300 level
+  </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Geophysics </Name>
+  <Code> GPHS </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (all: GPHS323, MATH323)</Papers>
+    <Papers> (all: MATH207, (1: MATH209, (all: MATH210, MATH222)), PHYS209, PHYS215)</Papers>
+    <Papers>
+       (or: (all: MATH322),
+            (all: (1: GPHS311, GEOL311), (1: GPHS344, GEOL344), GEOL111, GEOL112))
+    </Papers>
+    <Papers> (60p: GPHS323, MATH323, MATH322, GPHS311, GEOL311, GPHS344, GEOL344, MATH301, MATH307, OPRE352,
+                       GEOL331, GEOL341, PHYS304, PHYS305, STAT331)
+   </Papers>
+  </Constraints>
+  <Text>
+     (a) GPHS/MATH 323, MATH 207, and either MATH 209 or (210 and 222), PHYS 209, 215
+     (b) Either	(i) GPHS/GEOL 311, 344, GEOL 111, 112
+	    or	(ii) MATH 322
+     (c) At least 60 300-level points taken from the 300level courses in (a) and (b) above and from
+         MATH  301, 307, OPRE 352, GEOL 331, 341, PHYS 304, 305, STAT 331 
+ </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Interdisciplinary </Name>
+  <Code> INTD </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+   <Approval>BSc Interdisciplinary major: 48 300-level points from the BSc
+             schedule approved by  the Associate Dean (Students)
+   </Approval>
+   <Approval>BSc Interdisciplinary major: Double dipping of 300 level courses
+             and non-science points required for the major must be checked by hand
+   </Approval>
+  </Constraints>
+  <Text>
+    48 300-level points from the BSc schedule approved by the Associate Dean (Students)
+  </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Management Science </Name>
+  <Code> MGSC </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers> (1: MGMT204, OPRE251)
+          <Record>%nonScience[MGSC]</Record>
+    </Papers>
+    <Papers> (1: MGMT303 MGMT304)
+        <Record>%nonScience[MGSC]</Record>
+    </Papers>
+    <Papers> (all: OPRE351, OPRE352 ) </Papers>
+    <Papers> (116p: OPRE251, OPRE351, OPRE352, MGMT200..399)
+        <Record>%nonScience[MGSC]</Record>
+    </Papers>
+  </Constraints>
+  <Text>
+     (a) OPRE 351, OPRE 352, (MGMT 204 or OPRE 251),  (MGMT 303 or MGMT 304)
+     (b) 22 further pts from MGMT 200-399 
+  </Text>
+</Rule>
+
+
+
+<RECOMMENDATION>
+The BSc Management Science major is different from the BCA management science
+major. Why? Should they be made consistent?  (They are pretty similar)
+</RECOMMENDATION>
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Marine Biology </Name>
+  <Code> BMAR </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers>(all: BIOL329, BIOL371, BIOL372) </Papers>
+  </Constraints>
+  <Text>
+     BIOL 329, 371, and 372
+  </Text>
+</Rule>
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Mathematics </Name>
+  <Code> MATH </Code>
+  <Degree> BSc, BA </Degree>
+  <Constraints>
+    <Papers> (92p: MATH200..270, MATH272..299,MATH300..370, MATH372..399)     </Papers>
+    <Papers> (48p: MATH300..370, MATH372..399) </Papers>
+    <Papers> (1: MATH113, MATH115, MATH206) </Papers>
+    <Papers> (1: MATH114, MATH116, MATH207, MATH214) </Papers>
+  </Constraints>
+  <Text>
+    (a)	92 points from MATH 200-399, excluding MATH 271 and MATH 371,
+	of which at least 48 points must be from MATH 300-399
+    (b)	One of MATH 113, 115, 206
+    (c)	One of MATH 114, 116, 207, 214
+ </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Mathematics Education </Name>
+  <Code> MXED </Code>
+  <Degree> BA </Degree>
+  <Constraints>
+    <Papers> (all: MATH371))) </Papers>
+    <Papers> (92p: MATH200..399, OPRE200..399, STAT200..399) </Papers>
+    <Papers> (48p: MATH300..399, OPRE300..399, STAT300..399) </Papers>
+    <Papers> (1: MATH113, MATH115, MATH206) </Papers>
+    <Papers> (1: MATH114, MATH116, MATH207, MATH214) </Papers>
+  </Constraints>
+  <Text>
+    (a)	MATH 371 and a further 68 points from MATH, OPRE or STAT 200-399
+        of which at least 24 points must be from MATH, OPRE or STAT 300-399
+    (b)	One of MATH 113, 115, 206
+    (c)	One of MATH 114, 116, 207, 214
+ </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Operations Research </Name>
+  <Code> OPRE </Code>
+  <Degree> BSc, BA </Degree>
+  <Constraints>
+    <Papers> (all: OPRE251, MATH214) </Papers>
+    <Papers> (48p: OPRE300..399) </Papers>
+  </Constraints>
+  <Text>
+    (a)	OPRE 251, MATH 214;
+    (b)	at least 48 points from OPRE 300-399
+  </Text>
+</Rule>
+
+<PROBLEM>There are two codes for the Operations Research major. Why is there an ISOR major? </PROBLEM>
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Physiology </Name>
+  <Code> PHSI </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers>(all: BIOL111, BIOL113, BIOL114, (1: CHEM103, CHEM104)) </Papers>
+    <Papers>(all: BIOL241, BIOL252) </Papers>
+    <Papers>(2: BIOL303, BIOL304, BIOL305) </Papers>
+    <Papers>(3: BIOL303, BIOL304, BIOL305, BIOL309, BIOL310, BIOL311) </Papers>
+  </Constraints>
+  <Text>
+    BIOL 111, 113, 114, 241, 252, 303, 304, 305, CHEM 103 (or 104). 
+    Any one of BIOL 309 or BIOL 310 or BIOL 311 may be substituted for one of BIOL
+    303 or 304. 
+  </Text>
+</Rule>
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Physics </Name>
+  <Code> PHYS </Code>
+  <Degree> BSc </Degree>
+  <Constraints>
+    <Papers>(36p: CHEM100..299, TECH101) </Papers>
+    <Papers>(all: PHYS214, PHYS215) </Papers>
+    <Papers>(66p: PHYS200..299) </Papers>
+    <Papers>(all: PHYS304, PHYS305, PHYS307, PHYS309) </Papers>
+    <Papers>(1: PHYS339, PHYS340, PHYS341)
+       <IfFail>MATH301 or MATH322 may be approved</IfFail>
+    </Papers>
+  </Constraints>
+  <Text>
+    (a)	PHYS 304, 305, 307 and 309 
+    (b)	Either one of PHYS 339, 340, 341, 
+        or with the  approval of the Head of the School of Chemical 
+        and Physical Sciences, one of MATH 301, 322
+    (c)	PHYS 214, 215 and a further 22 pts from PHYS 200-299
+    (d)	36 pts from CHEM 100-299, TECH 101
+ </Text>
+</Rule>
+
+
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Psychology </Name>
+  <Code> PSYC </Code>
+  <Degree> BSc, BA </Degree>
+  <Constraints>
+    <Papers> (66p: PSYC200..299) </Papers>
+    <Papers> (72p: PSYC300..399) </Papers>
+  </Constraints>
+  <Text>
+    66 200-level PSYC points and
+    72 300-level PSYC points
+ </Text>
+</Rule>
+
+
+
+
+
+
+<Rule>
+  <Type> major </Type>
+  <Name> Statistics </Name>
+  <Code> STAT </Code>
+  <Degree> BSc, BA </Degree>
+  <Constraints>
+    <Papers> (all: STAT231, STAT331)  </Papers>
+    <Papers> (48p: STAT300..399)
+    </Constraints>
+  </Papers>
+  <Text>
+    (a)	STAT 231
+    (b)	STAT 331 and at least 24 further points from papers labelled STAT 300-399
+ </Text>
+</Rule>
+
+
+<Clause>
+2. Subject to this statute, and except as otherwise specifically provided, the
+ personal course of study of each candidate shall consist of papers (the
+ prescriptions for which shall be defined in the Calendar of Victoria
+ University of Wellington) selected from the schedule to this statute, provided
+ that
+ -  not more than 90 pts may be included from papers for any first degree of
+     Victoria University of Wellington other than BSc. 
+
+ -  ****** Up to a further 48 pts of papers not listed in the schedule to this statute,
+    but specified in a subject requirement in Section 5 of the statute, and
+    taken in order to satisfy Section 5 of the statute, may also be included. 
+
+ - The course of study shall have a total point value of not less than 360, 
+
+ - of which at least 180 shall be from papers numbered 200-399
+
+ - and of these at least 120 shall be from papers in the schedule to this
+    statute 
+
+ - including at least 72 from papers numbered 300-399 in that schedule.  
+
+ With the approval of the Associate Dean (Students) on the
+ recommendation of the Head of School concerned, a candidate may include in
+ their personal course of study papers from the Schedule to the degree of
+ BSc(Hons). For the purposes of this statute, such papers shall be regarded as
+ if they were numbered in the range 300-399 and listed in the schedule to the
+ Statute, except that they may not be used to satisfy any requirement that
+ specifies a particular paper at 300-level or papers numbered within a range
+ narrower than 300-399.
+</Clause>
+
+
+<Clause> Cross-Credits and Exemptions
+6. At the discretion of the Associate Dean (Students), up to 160 pts in papers
+   common to the BSc degree and any other course of study may be credited to
+   both courses of study.  In any such case a candidate's course of study for
+   the BSc degree shall satisfy the requirements of Section 2 hereof and
+   include 180 pts in papers numbered 200399 not credited to any other course
+   of study as part of the prescribed minimum of advanced work for that
+   course. At least 120 of these shall be from papers in the schedule to this
+   statute including at least 72 from papers numbered 300-399 in that
+   schedule.
+
+ Note: 	Candidates whose other course of study is a first degree will be
+        granted up to 160 pts. Candidates whose other course of study is not a
+        first degree (e.g. a diploma) will be granted a smaller number of
+        pts. Enquiries regarding eligibility under this section should be
+        addressed to the Manager, Student Administration Office. 
+</Clause>
+
+<Clause> Direct Entry to Papers Numbered 200-299
+7. In Chemistry, Mathematics and Physics, notwithstanding anything contained in
+ this statute, a candidate who has attained a sufficiently high standard before
+ matriculating may, with the permission of the Head of School, enrol in a paper
+ of level 200-299 without having passed the prerequisite at level 100-199 in
+ the same subject. If the paper is passed at the higher level, the candidate
+ shall not be credited with the paper at the lower level. If the examiner
+ certifies that the candidate, although failing in the higher-level paper,
+ attained the standard of a pass in the lower-level paper then such a pass will
+ be credited.  
+</Clause>
+
+<Clause> Transition from Earlier Regulations
+ 8. When an amendment to the BSc statute results in a change of requirements
+ for candidates who have not yet completed the degree, they may complete it
+ according to previous regulations as specified by Section 25 of the Personal
+ Courses of Study Statute provided they do so within five years of the date on
+ which the earlier regulations ceased to be in force.  Schedule to the BSc
+ Statute See Papers and Prescriptions section of this Calendar and the
+ appropriate School Prospectus for detailed information on the content and
+ current availability of the papers listed.  
+</Clause>
+
+
+</XML>
+
+Checking tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\bscRules.xml:
+-------------------
+Tag Error:
+Expected Tag: </RECOMMEND>
+Received Tag: </RECOMMENDATION>
+Tag Error:
+Expected Tag: </Papers>
+Received Tag: </Constraints>
+Tag Error:
+Expected Tag: </Constraints>
+Received Tag: </Papers>
+
+Tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\bscRules.xml:
+-------------------
+Tag			Count
+MinSchedPoints			1
+Type			22
+Majors			1
+Code			22
+PROBLEM			3
+Schedules			1
+Year			1
+Computation			2
+IfFail			5
+Constraints			22
+Papers			63
+Faculty			1
+Min200Points			1
+Clause			4
+Rule			22
+Points			5
+Name			22
+Text			24
+Category			1
+CrossCredit			1
+RECOMMEND			1
+Record			5
+MinPoints			1
+Min300Points			1
+RECOMMENDATION			4
+Degree			21
+Approval			2
+XML			1
+MaxCrossCrPoints			1
+
+Comments:
+------------------
+The xml file had 2 errors in it. One being a misspelt recomendation tag, and the other being two tags the wrong way around: </papers> & </constraints>.
+
+The program detected these errors, and did not throw any more errors after they were detected. This is because of the way it handles incorrect tags, if it finds an incorrect tag, it will remove that tag from the stack. So with a misspelt tag, the misspelt tag will still be removed as if it was a correct tag, meaning that no more flow-on errors will occur from misspelt tags. This is the same with tags the wrong way around, it will remove one incorrect tag first for the <paper>, then the second incorrect tag for the <constraints>, thus again preventing flow-on errors as the correct number of tags were present.

@@ -1,0 +1,28 @@
+Listing of File C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\box2.xml:
+-------------------
+<box><lid>green<sides></lid>blue</box></sides>
+
+Checking tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\box2.xml:
+-------------------
+Tag Error:
+Expected Tag: </sides>
+Received Tag: </lid>
+Tag Error:
+Expected Tag: </lid>
+Received Tag: </box>
+Tag Error:
+Expected Tag: </box>
+Received Tag: </sides>
+
+Tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\box2.xml:
+-------------------
+Tag			Count
+lid			1
+box			1
+sides			1
+
+Comments:
+------------------
+The xml file has 2 errors in the tags, the <sides> and </lid> tag are the wrong way around, and the </box> and </sides> tag are the wrong way around.
+
+The program detected that there were errors in the tags, that it expected a different tag than to that which was received. However, it reported the tag errors roughly, it was not able to accurately tell what the problem was exactly with the tags.

@@ -1,0 +1,21 @@
+CANVAS ::= COMMAND*
+
+COMMAND ::= "draw" EXPRESSION COLOR 
+          | "fill" EXPRESSION COLOR 
+          | VARIABLE "=" EXPRESSION
+
+EXPRESSION ::= SHAPE [(+|-|&) SHAPE]*
+
+SHAPE ::= "(" EXPRESSION ")" 
+        | VARIABLE 
+        | RECTANGLE
+
+RECTANGLE ::= "[" INT "," INT "," POSITIVE_INT "," POSITIVE_INT "]"
+
+VARIABLE ::= ^[a-zA-Z_][\w]*$
+
+COLOR ::= "#" [0-9a-fA-F]{6}
+
+INT ::= [-] POSITIVE_INT
+
+POSITIVE_INT ::= [0-9]+

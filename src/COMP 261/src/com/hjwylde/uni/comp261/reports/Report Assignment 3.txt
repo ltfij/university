@@ -1,0 +1,89 @@
+Comp261, Assignment 3 - Henry Wylde (300224283)
+
+Grammar
+--
+PROGRAM               ::= INSTRUCTION*
+
+INSTRUCTION           ::= VARIABLE [+|-|*|/]= VALUE;
+                        | do {INSTRUCTION*} while (BOOLEAN);
+                        | drop();
+                        | if (BOOLEAN") {INSTRUCTION*}[ else {INSTRUCTION*}]
+                        | move(VALUE);
+                        | pickup();
+                        | turn(VALUE);
+                        | turnTowardsFirstINSTRUCTION_METHOD;
+                        | while (BOOLEAN) {INSTRUCTION*}
+
+INSTRUCTION_METHOD    ::= Box()
+                        | Thing()
+
+BOOLEAN               ::= (BOOLEAN_CONDITION)
+                        | !BOOLEAN
+                        | false
+                        | touchingBOOLEAN_METHOD
+                        | true
+
+BOOLEAN_CONDITION     ::= BOOLEAN (|||&&) BOOLEAN
+                        | VALUE (==|!=|>|<) VALUE
+
+BOOLEAN_METHOD        ::= Box()
+                        | Robot()
+                        | Thing()
+                        | Wall()
+
+VALUE                 ::= VARIABLE
+                        | [-][0-9]+
+                        | getVALUE_METHOD
+
+VALUE_METHOD          ::= BoxDistance()
+                        | NumberOfThingsNotInBoxes()
+                        | ThingDistance()
+
+VARIABLE              ::= $[a-z][A-Za-z0-9_]*
+
+Basic description of classes:
+--
+
+Parser
+  (All Nodes and Types)
+ParserScanner
+ParseException
+
+ParseException is just an exception type that will be thrown if the Parser encounters an error in parsing some input using a specific grammar. It can take an error message like any other exception to help debug the problem / be informative.
+
+ParserScanner is a helper class that provides useful methods when parsing some input. The methods include: expect(...) (which will expect some String, either clearing whitespace before and / or after expecting the String and advancing the index), expectToken() (which says that the grammar expects at least one more token available, this method does not advance the index and will throw an error if there isn't another token), next() and hasNext() (which gets the next char from the ParserScanner) and hasNextInt() and nextInt() (which get the next int from the scanner).
+
+Parser provides methods to parse some input into a parse tree based on the above grammar (this grammar is repeated inside the Parser class as a comment). It only has one public method which is parseProgram(ParserScanner s) as that is the only non-terminal that an input may start with at the very beginning for this particular grammar. It will then continue to parse the entire input using node classes to represent each of the non-terminal nodes (each non-terminal node class also has a corresponding type class, which is just a detail about what type of node it is). It will throw a ParseException if the input does not match the grammar, with details about what kind of error occured if possible.
+
+Each of the node classes have a type, which represent say for example for VALUE: the type is either VARIABLE, INTEGER or GET, which correspond to the possible values the non-terminal may take. Each node also has a method for executing it (or evaluating) that takes any required parameters. It is then possible to run through the entire input code just by calling ProgramNode.run(...) as it will recursively call each InstructionNode.execute(...) and so forth. Execute runs through an Instruction, while evaluate evaluates either an integer value or a boolean value.
+
+Note: Variables in this have been stored by value.
+This prevents errors when a variable is attempted to be set to itself, as this causes an infinite loop in trying to retrieve it's value. It also made it easier to allow for these operations: += -= /= and *=. I have re-written the grammar, including a $ in front of any variable as to help define it more clearly.
+
+I have included the part2.world and part2Store.program files for completeness, but they do not work with the code any more as it has been modified for this new grammar. The grammar is also now case-sensitive.
+part3.world is a world with walls included in it.
+part3Store.program is a program that makes the robot go around collecting all of the Things before placing them inside the Box. The reason I made it collect only 9 Things maximum is because when it collects 10 the graphics doesn't properly render and becomes slightly ugly when it doesn't clear everything that it drew. This program is not complete as the robot is still able to get stuck in walls, however many times I tried to modify it so that it may work, it still seemed to get stuck often in walls. The problem here is more with the World code in allowing the robot to get stuck and sometimes move through a wall, so I haven't tried to perfect this .program code.
+
+
+Parse Tree:
+--
+The parse tree decisions were to allow for easier readability / familiarity with other programming languages for the most part.
+
+First fix: Infix notation:
+For infix notation, I split everything up into using brackets: (VALUE (==|!=|>|<) VALUE) as it defines what operations are being done to what non-terminals very distinctly and makes it similar to java notation.
+
+Second fix: Left factoring:
+Under BOOLEAN originally it had ::= (BOOLEAN (|||&&) BOOLEAN)
+                                    (VALUE (==|!=|>|<) VALUE)
+but this meant that it had a recursion problem in not knowing what to call when it encounters "((", so I factored it down to (BOOLEAN_CONDITION) to fix this. Also other factoring decisions with INSTRUCTION and VALUE were done to simplify the tree more clearly and make it closer to an LL1 grammar (although it currently is not, as INSTRUCTION still has "turn(VALUE)" and "turnTowardsFirstINSTRUCTION_METHOD").
+
+Additions:
+I changed the VARIABLE name regular expression to include a $ at the front similar to PHP. This meant that it was a lot easier to only look ahead one character when parsing the grammar to see what method to call next as a variable would have to start with a $. Note that it was not needed completely as I also changed methods to include brackets at the end (), which a variable may not contain so it would still have been possible to decipher whether something was a variable or not.
+
+I added in a != operator check for VALUEs, just for simpler writing .program code and making it cleaner.
+
+I added in variable operations for adding, subtracting, multiplying and dividing values to them so as to allow for counters in .program code. This made it easier to make the robot more efficient by keeping track of how many Things it was holding at a time, and to know when it had to go back and drop them off at the box.
+
+I added in a do {} while (); loop, as at the time I thought I would use it, and it could be useful to include.
+
+I renamed the VALUE_METHODs to have "get" at the start to prevent the first() sets of BOOLEAN and VALUE of colliding. Originally both a BOOLEAN and a VALUE had something that started with "t", so I changed it to allow for looking ahead only 1 character to determine what parse method to call next.

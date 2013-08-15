@@ -1,0 +1,21 @@
+For your reflection:
+====================
+
+In our OrganisationTree, the nodes are representing two quite different things: the item/value is a person, and the links determine a role.
+
+Suppose you are writing code to represent an organisation in which, when a person leaves the organisation, the vacant role is immediately filled by the first child. There are two ways one might do this: we could move the person from the first child to the vacant node, or we could replace the current node itself by the first child node.
+
+What do you think of these two alternatives? Can you see advantages to one over another? Do you think that one alternative is definitely better in all respects, or are there both pros and cons?
+
+Answer:
+In my opinion, it makes a lot more sense to promote the person from the first child to the vacant node, and then continue promoting up children into vacant nodes until one doesn't need to be filled immediately. This is because the OrganisationTree represents the different roles, the nodes are the different roles in the business, the roles don't move with the person (value of the node), the person gets promoted to different roles (this is more consistant in making it representative of the object).
+This more accurately represents the different ways a person may end up not working at a firm any more, such as simply leaving, and having their role filled. Or having their role made redundant, in which case this is when the node would actually be removed as the role is no longer available.
+
+Advantages:
+One advantage is that, when a person gets promoted that the role they left does not suddenly "disappear". As an example of a school, if a computing teacher got promoted to head of networking, someone is still needed to teach computing, they can't just make the role disappear.
+Another advantage is that it is easier to check whether a role is available to hire someone for it, or whether it is already filled. As if you did not have empty roles in the tree, then you would have to make one, and somehow remember which roles are requiring a new person to be hired for.
+
+Disadvantages:
+The disadvantage that links in with the first advantage is that when there is just a vacant role and no person occupying it, that means the value of the node will be "null", now with how tree structures work, normally there is no way that a node can have a null value and this will mess with the various methods of it. The code would need to be altered to account for this, or have a dummy person fill vacant roles until the role is filled. This is a large con, although it can again be worked around by instead having the value of the nodes as the Job, and a Job has a person working in it, this way the value of a node would never be null.
+
+It is hard to say one alternative is definitely better, as there will always be pros and cons to each, however I believe that moving the person and not the entire node is the better alternative due to it providing better representation of an organisation.

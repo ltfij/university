@@ -1,0 +1,17 @@
+Jim blue 100 150
+Jan yellow 400 150
+Jim frown
+Jim talk hello there,
+Jan left
+Jan talk hello
+Jim smile
+Jan move 10
+Jan move 20
+Jim left
+Jan move 10
+Jim frown
+Jan move 20
+Jan move 20
+Jan right
+Jim move 40
+Jan move 20

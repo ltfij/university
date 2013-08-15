@@ -1,0 +1,45 @@
+Listing of File C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\boxes5.xml:
+-------------------
+<boxcollection>
+<box identifier="box21">
+   <lid>green metal </lid>
+   <sides number="2">blue varnished wood</sides>
+   <sides number="2">green varnished wood</sides>
+</box>
+<box identifier="box15">
+   <lid>clear glass </lid>
+   <sides number="4">blue glass</sides>
+</box>
+<box identifier="box35">
+   <lid>cardboard </lid>
+   <shape>hexagonal</shape>
+   <sides number="1">cardboard with printed label
+   <sides number="2">black cardboard</sides>
+   <sides number="3">silver cardboard</sides>
+</box>
+</boxcollection>
+
+Checking tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\boxes5.xml:
+-------------------
+Tag Error:
+Expected Tag: </sides>
+Received Tag: </box>
+Tag Error:
+Expected Tag: </box>
+Received Tag: </boxcollection>
+
+Tags in C:\Users\Henry Wylde\Workspace\Comp103\src\checkXML\boxes5.xml:
+-------------------
+Tag			Count
+lid			3
+boxcollection			1
+box			3
+shape			1
+sides			6
+
+Comments:
+------------------
+The xml file has 1 error in it, a missing </sides> tag.
+
+The program detected this error, however there were flow-on errors when the rest of the tags were infact correct. It then thought that there was an error with the </box> tag as it was still looking for a </sides> tag. When it found the error with the </box>, it would then remove the </box> tag, meaning that the <box> tag would have no closing partner. Thus meaning the next closing tag, </boxcollection> would throw an error as it was still looking for a </box> tag.
+Also note, after the correction to the program for finding left-over open tags that were not closed (made after box3 results were incorrect, see comments on the box3 - Output.txt) a new error was thrown, one that said <boxcollection> was not closed properly, which is due to the same reason as above, where the closing tag for <boxcollection> was used and taken off the stack for a different open tag.

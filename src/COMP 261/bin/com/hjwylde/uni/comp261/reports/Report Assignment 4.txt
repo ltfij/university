@@ -1,0 +1,119 @@
+Comp261, Assignment 4 - Henry Wylde (300224283)
+
+Basic description of classes:
+--
+
+Core
+  MainFrame (Extemds JFrame)
+    World2d (Extends JPanel)
+      World3d
+        ScanConverter
+        ViewPlane
+        ZBuffer
+        Polytope
+          Polytope2d
+          Polytop3d
+          PolytopeGroup
+        PointLight3d
+        Parser
+          ParseException
+          ParserScanner
+          Node
+            LightSourceNode
+            Polytope2dNode
+            Polytope3dNode
+
+Core:
+The core just provides a few static methods that are useful throughout the assignment, and initiates the MainFrame.
+
+MainFrame:
+The main frame is the Swing GUI that allows user interaction with the program -> It has a menu bar with a few buttons / settings available and it has a World2d (panel) displayed maximized in the center which is constantly refreshing and redrawing the World3d image.
+Menu options:
+  File
+    Exit -> Exits.
+  World
+    Load Polytope -> Shows a file selector box where the user may select a ".poly" file to load (Note: I renamed the files provided to have .poly extensions, please use the ones provided or rename your ones to include .poly extensions).
+    --
+    Set Camera View Angle -> Sets the camera view angle, please read below about the "How everything is modelled" description for what a camera view angle is specifically.
+    Set Ambient Light -> Sets the ambient light for the World3d, this is used in calculating the shade of colors of each polygons surface.
+    --
+    Wireframe Mode -> This makes the program only render the edges of the polygons, like a wireframe. For best views, make sure Hidden Removal Mode is off and Render Lights Mode is off too.
+    Hidden Removal Mode -> Selects whether to remove polygons that aren't facing towards the camera (at (0, 0, 0)). This is included mainly for the Wireframe Mode as with ZBuffering polygons that are behind others are generally the ones not facing the camera and consequently get overwritten because of a lower depth value.
+    Render Lights Mode -> Selects whether to render polygons in the lights that have been loaded from .poly files. They will still be rendered with the ambient light taken into account.
+
+World2d:
+The World2d class is just a JPanel that is used to overwrite the paint(Graphics g) method so that it may constantly be rendering an image of the 3d world. It also includes a constant loop with update(long elapsedTime) method so that updates may be accurate.
+
+World3d:
+The World3d class is the 'gateway' to the 3d modeller / world. It holds all the polytope and light data in it, as well as a ViewPlane (which holds information about width / height / camera view angle). It also controls the update methods for adding in rotations / translations to polytopes based on user input or time, and has the render method which will create a clone of all the polytopes then get them ready for display to render onto a 2d image.
+
+Other classes:
+Other classes all have java documentation that may be read for descriptions on them. Most will be covered in a description, on how I have layed out this modeller below, in how they work together. See the Java doc for details on each though.
+
+
+How Everything Is Modelled
+--
+
+// SIDE NOTE
+Word use of polytope:
+Polytope: Some object, a 3d polytope is a 3d object defined by multiple 2d polytopes. A 2d polytope is a polygon (polygon is a special word for a 2d polytope), also I refer to a polygon or 2d polytope as a "face" often. This is because it is a face of a 3d polytope.
+// END SIDE NOTE
+
+For this 3d world, a right hand coordinate system has been used.
+The y-axis is defined as: Up -> +, Down -> -. X-axis: Left -> -, Right -> +. Z-axis: Out of screen (to viewer) -> +, Into screen -> -.
+Note: the x-axis and z-axis are opposite to how the assignment mentioned how they could be laid out. The reason for this is this is the way I did it the last time I did a similar project to this one (Code has been reused a little, but not much, and the only code that was referenced from somewhere is the ScanConverter which has a reference comment at the top of the file).
+
+The camera is defined to be at (0, 0, 0) looking down the z-axis, into the screen. So only polytopes that have a z value (or depth value) in the negatives are visible / seen by the camera (positive value zs are behind the camera).
+I did not understand what was meant by "input viewing direction as two angles". I assumed this meant as just some way of rotating the camera around. From previous experience, it is a lot easier just to define the camera at the Origin and have a separate Matrix4d or transform for the camera, that is subtracted (applied inversly) from polytopes to simulate camera movement.
+For the "fit all polytopes within the screen bounds so they are visible", I simply applied an initial camera transform so as to move it back 500 pixels, so that they were visible, but I also included a zoom functionality. By pressing the up and down keys, you may zoom in and out of the world to move closer / futher away from the polytopes (consequently, increasing / decreasing their size).
+Also the left and right arrow keys will rotate all polytopes around the Y-axis so as to provide a way of turning them around and seeing how the sides differ based on lighting etc.
+
+For displaying a 3d world, there is a camera at Origin and the world in front of it. Now to display it in 2 dimensions, there will be some plane that is normal to (0, 0, -1) that all polytopes must be "projected" onto, which also applies a perspective view. I have called this plane the "ViewWindow". A view window has a width, height and a distance away from the camera. This distance is defined by the "view angle". If you look at "assignment4/data/Camera and World Diagram.jpg" (Reference: Developing Games in Java by David Brackeen, Bret Barker, Laurence Vanhelsuwe) (note: they called it a "View Window", I am calling it a "View Plane") you can see lines from the camera stretching out to a house. The angle that these lines make with the edges of the view window (not the house) is called the view angle. By changing this view angle the distance the view plane is from the camera changes. The smaller the view angle is, the more wider a look the camera will see of the world, and the larger it is the smaller "cone" look it will have of the world. This view angle can be changed under World in the menu bar on the program.
+
+For .obj files, when defining faces they can be grouped together under a named group. I took this into account when defining my polytope classes by including a PolytopeGroup class. The PolytopeGroup class contains either Polytope3ds or other PolytopeGroups, so that in the future I may be able to extend the implementation to allow naming of the PolytopeGroups. Advantages of this includes allowing searching for a certain group of Polytope2ds or Polytope3ds or PolytopeGroups and then applying a transform only to that group. One example of where this can be useful is a helicopter and its rotors, you may wish to apply a constant rotation matrix to the rotors to simulate it flying. This is also the reason why every PolytopeGroup, Polytope3d has its own transform matrix: to allow for this. It also allowed for easy recursive calls in applying world transformations to all polytopes and projecting / clipping etc. By having all of the polytopes in a single PolytopeGroup that is held by the World3d class, I can easily just call methods once to that PolytopeGroup and allow it to recursively apply / do whatever I want to all sub polytopes too. This can be seen in the render() method of the World3d class. There, I create a clone of the PolytopeGroup, then apply their own / self transforms, then subtract the camera position etc. These calls will apply to all polytopes loaded. You may see this occur by loading more than one polytope with the "Load Polytope" button in the menu bar.
+
+The ScanConverter and ZBuffer work together to linearly interpolate the polytopes into a 2d image. Please read the comments inside those classes for details on what they do.
+
+
+What the program does and doesn't do
+--
+
+1. <Input the viewing direction (eg, as two angles), and the level of the ambient light. [and the intensity of the light source, or else just assume that the light source is 1.0 for all three colours]>
+  The program does this. Although the viewing direction has been implemented in my own method by using key inputs with Up, Down, Left and Right.
+
+2. <Read the lightsource direction and all the polygons from the file>
+  The program does this with the parser classes created.
+  
+3. <Rotate all the polygons so that the view direction is along the z-axis. Rotate the lightsource direction by the same amount.>
+  Irrelavent. The camera is always defined to be looking down the z-axis.
+  
+4. <Compute the bounding box of the collection of polygons then translate and scale all the polygons so that they all fit within the image (ie, <=x<windowWidth and 0 <=y< windowHeight).>
+  The program does this in a different method. It already zooms out by 500 pixels to allow all of them to be displayed, but it also includes a zoom in / zoom out with the Up and Down keys so that a polytope may be looked at closer or futher away.
+
+5. <Mark all the polygons that are facing away from the viewer (ie, the z component of their normal vector is +ve) as hidden.>
+  The program does this in the "Polytope.project(...)" method in the Polytope3d class. In this method, it checks if the face isFacing((0, 0, 0)) (ie. the camera) and will remove it if it isn't.
+
+6. <Compute the normal and the reflected light intensity (as a Color) of every non-hidden polygon. The reflected light should be the sum of the reflected ambient light (independent of the normal of the polygon) and the diffuse reflected light, which depends on the angle between the polygon normal and the direction of the light source.>
+  The program does this.
+
+7. <Use a Z-buffer to render the image>
+  The program does this.
+
+8. <Extend your code to allow multiple light sources in different directions, with different colours and intensities. (The computation of the reflected light will become a bit more complicated).>
+  The program semi does this. I have tried to include taking into account multiple light sources, but I am not sure if the math used was correct. You can see 2 light sources being used if you load 2 ball .poly files (eg. ball.poly and solidBall.poly), but I have not tested it well enough to know if it is rendering the multiple lights correctly.
+  
+9. <Remove the assumption that the faces represent a shape with flat faces. The polygons should be viewed as an approximation to a curved surface, so that the reflected light ("shading") should not be uniform across each polygon, and should change smoothly at the edges. Accomplish this by implementing Gouraud shading>
+  The program does this. The Gouraud shading has been implemented and can best be seen with solidBall.poly (I created this poly from ball.poly, but made it use just a solid color so you can see the shading a lot better).
+  
+10. <Extend your program to have a GUI that allows you to select the model, and to change the viewing angle with sliders. Even better, allow the user to change the direction of the light sources also.>
+  There is a GUI, you may select the polytopes to load, and change rotations with keys. The user may not change the direction of the light sources, only rotate them with the polytopes when applying rotations from key inputs.
+  
+Note: Not all rotations are possible, and for this reason the monkey head looks slightly odd as it is lying down.
+  
+  
+Testing Methods
+--
+
+Throughout the process of developing the modeller, testing was done by doing it step by step and ensuring each step was implemented correctly. Initially it began with loading polytopes from files and checking that the loaded data matched the file data. It then grew to setting up the World classes and checking that they can draw at least a black image. The first method for testing whether the polytopes could be drawn correctly was by using the GeneralPath class and simply creating a path between vertices of faces and filling in that path with a solid color onto a passed graphics object. After this had been done, it was possible to work on scan converting / interpolating just the x / y values to render to a graphics object, and then afterwards to a ZBuffer. Adding in depth and shade functionality would come after setting up the scan converting / zbuffer to display at least an image even if the polytopes do overlap incorrectly. Adding in light / shade functionality began with just doing flat shading, with applying a simple shade to each face without trying to implement Gouraud shading. Gouraud shading provided a large bug where if I didn't account for the scan in which the left and right values are equal, then it would muck up the rendering and either draw a very bright spot at each vertex or a black spot. This took awhile to debug as I was not sure at all why it occured - and still am not.
+
+Between each steps backups were made in case reverts were required (they were, a few times while implementing shading + projecting).

@@ -1,0 +1,17 @@
+Kelburn 10
+Karori 16
+CBD 1
+Miramar 20
+Brooklyn 18
+Newtown 10
+Mt_Victoria 8
+Wilton  12
+Ngaio 17
+Highbury 14
+Te_Aro 2
+Island_Bay 10
+Kilbernie 15
+Wadestown 20
+Johnsonville 30
+Kandallah 25
+Newlands 35

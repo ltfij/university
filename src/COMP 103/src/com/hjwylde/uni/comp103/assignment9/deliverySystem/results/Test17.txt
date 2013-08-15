@@ -1,0 +1,563 @@
+﻿Current time: 0 {Carl is available}
+Current time: 1 {Carl is available}
+Current time: 2 {Carl is available}
+Package for current time: {T: P; D: CBD} was offered.
+Checking {T: P; D: CBD}... Carl accepted it.
+Current time: 3 {Carl is unavailable}
+Current time: 4 {Carl is unavailable}
+Current time: 5 {Carl is available}
+Current time: 6 {Carl is available}
+Current time: 7 {Carl is available}
+Current time: 8 {Carl is available}
+Current time: 9 {Carl is available}
+Current time: 10 {Carl is available}
+Current time: 11 {Carl is available}
+Current time: 12 {Carl is available}
+Current time: 13 {Carl is available}
+Current time: 14 {Carl is available}
+Package for current time: {T: B; D: Highbury} was offered.
+Checking {T: B; D: Highbury}... Carl accepted it.
+Current time: 15 {Carl is unavailable}
+Current time: 16 {Carl is unavailable}
+Current time: 17 {Carl is unavailable}
+Current time: 18 {Carl is unavailable}
+Current time: 19 {Carl is unavailable}
+Current time: 20 {Carl is unavailable}
+Current time: 21 {Carl is unavailable}
+Current time: 22 {Carl is unavailable}
+Current time: 23 {Carl is unavailable}
+Current time: 24 {Carl is unavailable}
+Current time: 25 {Carl is unavailable}
+Current time: 26 {Carl is unavailable}
+Current time: 27 {Carl is unavailable}
+Current time: 28 {Carl is unavailable}
+Current time: 29 {Carl is unavailable}
+Current time: 30 {Carl is unavailable}
+Current time: 31 {Carl is unavailable}
+Current time: 32 {Carl is unavailable}
+Current time: 33 {Carl is unavailable}
+Current time: 34 {Carl is unavailable}
+Current time: 35 {Carl is unavailable}
+Current time: 36 {Carl is unavailable}
+Current time: 37 {Carl is unavailable}
+Current time: 38 {Carl is unavailable}
+Current time: 39 {Carl is unavailable}
+Current time: 40 {Carl is unavailable}
+Current time: 41 {Carl is unavailable}
+Current time: 42 {Carl is unavailable}
+Current time: 43 {Carl is unavailable}
+Current time: 44 {Carl is unavailable}
+Current time: 45 {Carl is unavailable}
+Current time: 46 {Carl is unavailable}
+Current time: 47 {Carl is unavailable}
+Current time: 48 {Carl is unavailable}
+Current time: 49 {Carl is unavailable}
+Current time: 50 {Carl is unavailable}
+Current time: 51 {Carl is unavailable}
+Current time: 52 {Carl is unavailable}
+Current time: 53 {Carl is unavailable}
+Current time: 54 {Carl is unavailable}
+Current time: 55 {Carl is unavailable}
+Current time: 56 {Carl is available}
+Current time: 57 {Carl is available}
+Current time: 58 {Carl is available}
+Current time: 59 {Carl is available}
+Current time: 60 {Carl is available}
+Current time: 61 {Carl is available}
+Current time: 62 {Carl is available}
+Current time: 63 {Carl is available}
+Current time: 64 {Carl is available}
+Current time: 65 {Carl is available}
+Current time: 66 {Carl is available}
+Current time: 67 {Carl is available}
+Current time: 68 {Carl is available}
+Current time: 69 {Carl is available}
+Current time: 70 {Carl is available}
+Current time: 71 {Carl is available}
+Current time: 72 {Carl is available}
+Current time: 73 {Carl is available}
+Current time: 74 {Carl is available}
+Current time: 75 {Carl is available}
+Current time: 76 {Carl is available}
+Current time: 77 {Carl is available}
+Current time: 78 {Carl is available}
+Current time: 79 {Carl is available}
+Current time: 80 {Carl is available}
+Package for current time: {T: S; D: Karori} was offered.
+Checking {T: S; D: Karori}... Carl accepted it.
+Current time: 81 {Carl is unavailable}
+Current time: 82 {Carl is unavailable}
+Current time: 83 {Carl is unavailable}
+Current time: 84 {Carl is unavailable}
+Current time: 85 {Carl is unavailable}
+Package for current time: {T: B; D: Kandallah} was offered.
+Current time: 86 {Carl is unavailable}
+Current time: 87 {Carl is unavailable}
+Current time: 88 {Carl is unavailable}
+Current time: 89 {Carl is unavailable}
+Current time: 90 {Carl is unavailable}
+Current time: 91 {Carl is unavailable}
+Current time: 92 {Carl is unavailable}
+Current time: 93 {Carl is unavailable}
+Current time: 94 {Carl is unavailable}
+Current time: 95 {Carl is unavailable}
+Current time: 96 {Carl is unavailable}
+Current time: 97 {Carl is unavailable}
+Current time: 98 {Carl is unavailable}
+Current time: 99 {Carl is unavailable}
+Current time: 100 {Carl is unavailable}
+Current time: 101 {Carl is unavailable}
+Package for current time: {T: S; D: Wilton} was offered.
+Current time: 102 {Carl is unavailable}
+Current time: 103 {Carl is unavailable}
+Current time: 104 {Carl is unavailable}
+Current time: 105 {Carl is unavailable}
+Current time: 106 {Carl is unavailable}
+Current time: 107 {Carl is unavailable}
+Current time: 108 {Carl is unavailable}
+Current time: 109 {Carl is unavailable}
+Current time: 110 {Carl is unavailable}
+Current time: 111 {Carl is unavailable}
+Current time: 112 {Carl is unavailable}
+Package for current time: {T: B; D: Karori} was offered.
+Current time: 113 {Carl is unavailable}
+Current time: 114 {Carl is unavailable}
+Current time: 115 {Carl is unavailable}
+Current time: 116 {Carl is unavailable}
+Current time: 117 {Carl is unavailable}
+Current time: 118 {Carl is unavailable}
+Current time: 119 {Carl is unavailable}
+Current time: 120 {Carl is unavailable}
+Current time: 121 {Carl is unavailable}
+Current time: 122 {Carl is unavailable}
+Current time: 123 {Carl is unavailable}
+Current time: 124 {Carl is unavailable}
+Current time: 125 {Carl is unavailable}
+Current time: 126 {Carl is unavailable}
+Current time: 127 {Carl is unavailable}
+Current time: 128 {Carl is available}
+Checking {T: B; D: Kandallah}... Carl accepted it.
+Current time: 129 {Carl is unavailable}
+Current time: 130 {Carl is unavailable}
+Current time: 131 {Carl is unavailable}
+Current time: 132 {Carl is unavailable}
+Current time: 133 {Carl is unavailable}
+Current time: 134 {Carl is unavailable}
+Current time: 135 {Carl is unavailable}
+Current time: 136 {Carl is unavailable}
+Current time: 137 {Carl is unavailable}
+Current time: 138 {Carl is unavailable}
+Current time: 139 {Carl is unavailable}
+Current time: 140 {Carl is unavailable}
+Current time: 141 {Carl is unavailable}
+Current time: 142 {Carl is unavailable}
+Current time: 143 {Carl is unavailable}
+Current time: 144 {Carl is unavailable}
+Package for current time: {T: S; D: Brooklyn} was offered.
+Current time: 145 {Carl is unavailable}
+Current time: 146 {Carl is unavailable}
+Current time: 147 {Carl is unavailable}
+Current time: 148 {Carl is unavailable}
+Current time: 149 {Carl is unavailable}
+Package for current time: {T: S; D: Te_Aro} was offered.
+Current time: 150 {Carl is unavailable}
+Current time: 151 {Carl is unavailable}
+Current time: 152 {Carl is unavailable}
+Current time: 153 {Carl is unavailable}
+Current time: 154 {Carl is unavailable}
+Current time: 155 {Carl is unavailable}
+Current time: 156 {Carl is unavailable}
+Current time: 157 {Carl is unavailable}
+Current time: 158 {Carl is unavailable}
+Current time: 159 {Carl is unavailable}
+Package for current time: {T: B; D: Te_Aro} was offered.
+Current time: 160 {Carl is unavailable}
+Current time: 161 {Carl is unavailable}
+Package for current time: {T: B; D: Ngaio} was offered.
+Current time: 162 {Carl is unavailable}
+Package for current time: {T: B; D: Johnsonville} was offered.
+Current time: 163 {Carl is unavailable}
+Current time: 164 {Carl is unavailable}
+Current time: 165 {Carl is unavailable}
+Current time: 166 {Carl is unavailable}
+Current time: 167 {Carl is unavailable}
+Current time: 168 {Carl is unavailable}
+Package for current time: {T: P; D: Mt_Victoria} was offered.
+Current time: 169 {Carl is unavailable}
+Current time: 170 {Carl is unavailable}
+Package for current time: {T: S; D: Kandallah} was offered.
+Current time: 171 {Carl is unavailable}
+Current time: 172 {Carl is unavailable}
+Current time: 173 {Carl is unavailable}
+Current time: 174 {Carl is unavailable}
+Current time: 175 {Carl is unavailable}
+Current time: 176 {Carl is unavailable}
+Current time: 177 {Carl is unavailable}
+Current time: 178 {Carl is unavailable}
+Current time: 179 {Carl is unavailable}
+Current time: 180 {Carl is unavailable}
+Current time: 181 {Carl is unavailable}
+Current time: 182 {Carl is unavailable}
+Current time: 183 {Carl is unavailable}
+Current time: 184 {Carl is unavailable}
+Current time: 185 {Carl is unavailable}
+Current time: 186 {Carl is unavailable}
+Current time: 187 {Carl is unavailable}
+Current time: 188 {Carl is unavailable}
+Current time: 189 {Carl is unavailable}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 190 {Carl is unavailable}
+Current time: 191 {Carl is unavailable}
+Current time: 192 {Carl is unavailable}
+Current time: 193 {Carl is unavailable}
+Current time: 194 {Carl is unavailable}
+Current time: 195 {Carl is unavailable}
+Current time: 196 {Carl is unavailable}
+Current time: 197 {Carl is unavailable}
+Current time: 198 {Carl is unavailable}
+Package for current time: {T: B; D: Ngaio} was refused.
+Current time: 199 {Carl is unavailable}
+Current time: 200 {Carl is unavailable}
+Current time: 201 {Carl is unavailable}
+Current time: 202 {Carl is unavailable}
+Current time: 203 {Carl is available}
+Checking {T: S; D: Wilton}... Carl accepted it.
+Current time: 204 {Carl is unavailable}
+Current time: 205 {Carl is unavailable}
+Current time: 206 {Carl is unavailable}
+Current time: 207 {Carl is unavailable}
+Current time: 208 {Carl is unavailable}
+Current time: 209 {Carl is unavailable}
+Current time: 210 {Carl is unavailable}
+Current time: 211 {Carl is unavailable}
+Current time: 212 {Carl is unavailable}
+Current time: 213 {Carl is unavailable}
+Current time: 214 {Carl is unavailable}
+Current time: 215 {Carl is unavailable}
+Current time: 216 {Carl is unavailable}
+Current time: 217 {Carl is unavailable}
+Current time: 218 {Carl is unavailable}
+Current time: 219 {Carl is unavailable}
+Current time: 220 {Carl is unavailable}
+Current time: 221 {Carl is unavailable}
+Current time: 222 {Carl is unavailable}
+Current time: 223 {Carl is unavailable}
+Current time: 224 {Carl is unavailable}
+Current time: 225 {Carl is unavailable}
+Current time: 226 {Carl is unavailable}
+Current time: 227 {Carl is unavailable}
+Current time: 228 {Carl is unavailable}
+Current time: 229 {Carl is unavailable}
+Current time: 230 {Carl is unavailable}
+Current time: 231 {Carl is unavailable}
+Current time: 232 {Carl is unavailable}
+Current time: 233 {Carl is unavailable}
+Current time: 234 {Carl is unavailable}
+Current time: 235 {Carl is unavailable}
+Current time: 236 {Carl is unavailable}
+Current time: 237 {Carl is unavailable}
+Current time: 238 {Carl is unavailable}
+Current time: 239 {Carl is available}
+Checking {T: B; D: Karori}... Carl accepted it.
+Current time: 240 {Carl is unavailable}
+Current time: 241 {Carl is unavailable}
+Current time: 242 {Carl is unavailable}
+Current time: 243 {Carl is unavailable}
+Current time: 244 {Carl is unavailable}
+Current time: 245 {Carl is unavailable}
+Current time: 246 {Carl is unavailable}
+Current time: 247 {Carl is unavailable}
+Current time: 248 {Carl is unavailable}
+Current time: 249 {Carl is unavailable}
+Current time: 250 {Carl is unavailable}
+Package for current time: {T: S; D: Ngaio} was offered.
+Current time: 251 {Carl is unavailable}
+Current time: 252 {Carl is unavailable}
+Current time: 253 {Carl is unavailable}
+Current time: 254 {Carl is unavailable}
+Current time: 255 {Carl is unavailable}
+Package for current time: {T: S; D: Kandallah} was offered.
+Current time: 256 {Carl is unavailable}
+Current time: 257 {Carl is unavailable}
+Package for current time: {T: S; D: Karori} was offered.
+Current time: 258 {Carl is unavailable}
+Package for current time: {T: B; D: CBD} was refused.
+Current time: 259 {Carl is unavailable}
+Current time: 260 {Carl is unavailable}
+Current time: 261 {Carl is unavailable}
+Current time: 262 {Carl is unavailable}
+Current time: 263 {Carl is unavailable}
+Current time: 264 {Carl is unavailable}
+Current time: 265 {Carl is unavailable}
+Current time: 266 {Carl is unavailable}
+Current time: 267 {Carl is unavailable}
+Current time: 268 {Carl is unavailable}
+Current time: 269 {Carl is unavailable}
+Current time: 270 {Carl is unavailable}
+Current time: 271 {Carl is unavailable}
+Current time: 272 {Carl is unavailable}
+Current time: 273 {Carl is unavailable}
+Current time: 274 {Carl is unavailable}
+Current time: 275 {Carl is unavailable}
+Current time: 276 {Carl is unavailable}
+Current time: 277 {Carl is unavailable}
+Current time: 278 {Carl is unavailable}
+Current time: 279 {Carl is unavailable}
+Package for current time: {T: P; D: Johnsonville} was offered.
+Current time: 280 {Carl is unavailable}
+Current time: 281 {Carl is unavailable}
+Current time: 282 {Carl is unavailable}
+Current time: 283 {Carl is unavailable}
+Current time: 284 {Carl is unavailable}
+Current time: 285 {Carl is unavailable}
+Current time: 286 {Carl is unavailable}
+Current time: 287 {Carl is available}
+Checking {T: S; D: Brooklyn}... Carl accepted it.
+Current time: 288 {Carl is unavailable}
+Current time: 289 {Carl is unavailable}
+Current time: 290 {Carl is unavailable}
+Current time: 291 {Carl is unavailable}
+Current time: 292 {Carl is unavailable}
+Current time: 293 {Carl is unavailable}
+Current time: 294 {Carl is unavailable}
+Current time: 295 {Carl is unavailable}
+Current time: 296 {Carl is unavailable}
+Current time: 297 {Carl is unavailable}
+Current time: 298 {Carl is unavailable}
+Current time: 299 {Carl is unavailable}
+Current time: 300 {Carl is unavailable}
+Current time: 301 {Carl is unavailable}
+Current time: 302 {Carl is unavailable}
+Current time: 303 {Carl is unavailable}
+Current time: 304 {Carl is unavailable}
+Current time: 305 {Carl is unavailable}
+Current time: 306 {Carl is unavailable}
+Current time: 307 {Carl is unavailable}
+Current time: 308 {Carl is unavailable}
+Current time: 309 {Carl is unavailable}
+Current time: 310 {Carl is unavailable}
+Package for current time: {T: B; D: Karori} was refused.
+Current time: 311 {Carl is unavailable}
+Current time: 312 {Carl is unavailable}
+Current time: 313 {Carl is unavailable}
+Current time: 314 {Carl is unavailable}
+Current time: 315 {Carl is unavailable}
+Current time: 316 {Carl is unavailable}
+Current time: 317 {Carl is unavailable}
+Current time: 318 {Carl is unavailable}
+Package for current time: {T: S; D: Johnsonville} was refused.
+Current time: 319 {Carl is unavailable}
+Current time: 320 {Carl is unavailable}
+Current time: 321 {Carl is unavailable}
+Current time: 322 {Carl is unavailable}
+Current time: 323 {Carl is unavailable}
+Current time: 324 {Carl is unavailable}
+Current time: 325 {Carl is unavailable}
+Current time: 326 {Carl is unavailable}
+Current time: 327 {Carl is unavailable}
+Current time: 328 {Carl is unavailable}
+Current time: 329 {Carl is unavailable}
+Current time: 330 {Carl is unavailable}
+Current time: 331 {Carl is unavailable}
+Current time: 332 {Carl is unavailable}
+Current time: 333 {Carl is unavailable}
+Current time: 334 {Carl is unavailable}
+Current time: 335 {Carl is unavailable}
+Current time: 336 {Carl is unavailable}
+Current time: 337 {Carl is unavailable}
+Package for current time: {T: B; D: Kelburn} was refused.
+Current time: 338 {Carl is unavailable}
+Current time: 339 {Carl is unavailable}
+Current time: 340 {Carl is unavailable}
+Current time: 341 {Carl is available}
+Checking {T: S; D: Te_Aro}... Carl accepted it.
+Current time: 342 {Carl is unavailable}
+Current time: 343 {Carl is unavailable}
+Current time: 344 {Carl is unavailable}
+Current time: 345 {Carl is unavailable}
+Current time: 346 {Carl is unavailable}
+Current time: 347 {Carl is available}
+Checking {T: B; D: Te_Aro}... Carl accepted it.
+Current time: 348 {Carl is unavailable}
+Current time: 349 {Carl is unavailable}
+Current time: 350 {Carl is unavailable}
+Current time: 351 {Carl is unavailable}
+Current time: 352 {Carl is unavailable}
+Current time: 353 {Carl is available}
+Checking {T: B; D: Ngaio}... Carl accepted it.
+Current time: 354 {Carl is unavailable}
+Package for current time: {T: S; D: Wilton} was refused.
+Current time: 355 {Carl is unavailable}
+Current time: 356 {Carl is unavailable}
+Current time: 357 {Carl is unavailable}
+Current time: 358 {Carl is unavailable}
+Current time: 359 {Carl is unavailable}
+Current time: 360 {Carl is unavailable}
+Current time: 361 {Carl is unavailable}
+Current time: 362 {Carl is unavailable}
+Current time: 363 {Carl is unavailable}
+Current time: 364 {Carl is unavailable}
+Current time: 365 {Carl is unavailable}
+Current time: 366 {Carl is unavailable}
+Package for current time: {T: S; D: Ngaio} was refused.
+Current time: 367 {Carl is unavailable}
+Package for current time: {T: P; D: Wadestown} was offered.
+Current time: 368 {Carl is unavailable}
+Current time: 369 {Carl is unavailable}
+Current time: 370 {Carl is unavailable}
+Current time: 371 {Carl is unavailable}
+Current time: 372 {Carl is unavailable}
+Package for current time: {T: S; D: Highbury} was refused.
+Current time: 373 {Carl is unavailable}
+Current time: 374 {Carl is unavailable}
+Current time: 375 {Carl is unavailable}
+Current time: 376 {Carl is unavailable}
+Current time: 377 {Carl is unavailable}
+Current time: 378 {Carl is unavailable}
+Current time: 379 {Carl is unavailable}
+Current time: 380 {Carl is unavailable}
+Current time: 381 {Carl is unavailable}
+Current time: 382 {Carl is unavailable}
+Current time: 383 {Carl is unavailable}
+Current time: 384 {Carl is unavailable}
+Package for current time: {T: S; D: Karori} was refused.
+Current time: 385 {Carl is unavailable}
+Current time: 386 {Carl is unavailable}
+Current time: 387 {Carl is unavailable}
+Current time: 388 {Carl is unavailable}
+Current time: 389 {Carl is unavailable}
+Current time: 390 {Carl is unavailable}
+Current time: 391 {Carl is unavailable}
+Current time: 392 {Carl is unavailable}
+Current time: 393 {Carl is unavailable}
+Current time: 394 {Carl is unavailable}
+Current time: 395 {Carl is unavailable}
+Current time: 396 {Carl is unavailable}
+Current time: 397 {Carl is unavailable}
+Current time: 398 {Carl is unavailable}
+Current time: 399 {Carl is unavailable}
+Current time: 400 {Carl is unavailable}
+Current time: 401 {Carl is unavailable}
+Current time: 402 {Carl is unavailable}
+Current time: 403 {Carl is unavailable}
+Current time: 404 {Carl is available}
+Checking {T: B; D: Johnsonville}... Carl refused it.
+Checking {T: P; D: Mt_Victoria}... Carl accepted it.
+Current time: 405 {Carl is unavailable}
+Current time: 406 {Carl is unavailable}
+Current time: 407 {Carl is unavailable}
+Current time: 408 {Carl is unavailable}
+Current time: 409 {Carl is unavailable}
+Current time: 410 {Carl is unavailable}
+Current time: 411 {Carl is unavailable}
+Current time: 412 {Carl is unavailable}
+Current time: 413 {Carl is unavailable}
+Current time: 414 {Carl is unavailable}
+Current time: 415 {Carl is unavailable}
+Current time: 416 {Carl is unavailable}
+Package for current time: {T: S; D: Island_Bay} was refused.
+Current time: 417 {Carl is unavailable}
+Package for current time: {T: S; D: Highbury} was refused.
+Current time: 418 {Carl is unavailable}
+Current time: 419 {Carl is unavailable}
+Current time: 420 {Carl is unavailable}
+Current time: 421 {Carl is unavailable}
+Current time: 422 {Carl is unavailable}
+Current time: 423 {Carl is unavailable}
+Current time: 424 {Carl is unavailable}
+Current time: 425 {Carl is unavailable}
+Package for current time: {T: S; D: Newlands} was refused.
+Current time: 426 {Carl is unavailable}
+Current time: 427 {Carl is unavailable}
+Current time: 428 {Carl is available}
+Checking {T: B; D: Johnsonville}... Carl refused it.
+Checking {T: S; D: Kandallah}... Carl refused it.
+Checking {T: S; D: Ngaio}... Carl accepted it.
+Current time: 429 {Carl is unavailable}
+Current time: 430 {Carl is unavailable}
+Current time: 431 {Carl is unavailable}
+Current time: 432 {Carl is unavailable}
+Current time: 433 {Carl is unavailable}
+Current time: 434 {Carl is unavailable}
+Current time: 435 {Carl is unavailable}
+Current time: 436 {Carl is unavailable}
+Current time: 437 {Carl is unavailable}
+Current time: 438 {Carl is unavailable}
+Current time: 439 {Carl is unavailable}
+Current time: 440 {Carl is unavailable}
+Current time: 441 {Carl is unavailable}
+Package for current time: {T: B; D: Miramar} was refused.
+Current time: 442 {Carl is unavailable}
+Current time: 443 {Carl is unavailable}
+Current time: 444 {Carl is unavailable}
+Current time: 445 {Carl is unavailable}
+Package for current time: {T: B; D: Te_Aro} was refused.
+Current time: 446 {Carl is unavailable}
+Current time: 447 {Carl is unavailable}
+Current time: 448 {Carl is unavailable}
+Current time: 449 {Carl is unavailable}
+Current time: 450 {Carl is unavailable}
+Current time: 451 {Carl is unavailable}
+Current time: 452 {Carl is unavailable}
+Current time: 453 {Carl is unavailable}
+Current time: 454 {Carl is unavailable}
+Current time: 455 {Carl is unavailable}
+Current time: 456 {Carl is unavailable}
+Current time: 457 {Carl is unavailable}
+Current time: 458 {Carl is unavailable}
+Current time: 459 {Carl is unavailable}
+Current time: 460 {Carl is unavailable}
+Current time: 461 {Carl is unavailable}
+Current time: 462 {Carl is unavailable}
+Current time: 463 {Carl is unavailable}
+Current time: 464 {Carl is unavailable}
+Current time: 465 {Carl is unavailable}
+Current time: 466 {Carl is unavailable}
+Current time: 467 {Carl is unavailable}
+Current time: 468 {Carl is unavailable}
+Current time: 469 {Carl is unavailable}
+Current time: 470 {Carl is unavailable}
+Package for current time: {T: S; D: Mt_Victoria} was refused.
+Current time: 471 {Carl is unavailable}
+Current time: 472 {Carl is unavailable}
+Package for current time: {T: P; D: Newtown} was refused.
+Current time: 473 {Carl is unavailable}
+Current time: 474 {Carl is unavailable}
+Current time: 475 {Carl is unavailable}
+Current time: 476 {Carl is unavailable}
+Current time: 477 {Carl is unavailable}
+Current time: 478 {Carl is unavailable}
+Package for current time: {T: S; D: Kandallah} was refused.
+Current time: 479 {Carl is available}
+Checking {T: B; D: Johnsonville}... Carl refused it.
+Checking {T: S; D: Kandallah}... Carl refused it.
+Checking {T: S; D: Kandallah}... Carl refused it.
+Checking {T: S; D: Karori}... Carl refused it.
+Checking {T: P; D: Johnsonville}... Carl refused it.
+Checking {T: P; D: Wadestown}... Carl refused it.
+Current time: 480 {Carl is available}
+Checking {T: B; D: Johnsonville}... Carl refused it.
+Checking {T: S; D: Kandallah}... Carl refused it.
+Checking {T: S; D: Kandallah}... Carl refused it.
+Checking {T: S; D: Karori}... Carl refused it.
+Checking {T: P; D: Johnsonville}... Carl refused it.
+Checking {T: P; D: Wadestown}... Carl refused it.
+---
+Computing days income...
+---
+
+
+Deliverer: Carl
+
+Deliverer was on the road for 444.0 minutes.
+
+Deliverer delivered 12 package(s).
+{T: P; D: CBD}  {T: B; D: Highbury}  {T: S; D: Karori}  {T: B; D: Kandallah}  {T: S; D: Wilton}  {T: B; D: Karori}  {T: S; D: Brooklyn}  {T: S; D: Te_Aro}  {T: B; D: Te_Aro}  {T: B; D: Ngaio}  {T: P; D: Mt_Victoria}  {T: S; D: Ngaio}  
+6 package(s) went undelivered.
+{T: B; D: Johnsonville}  {T: S; D: Kandallah}  {T: S; D: Kandallah}  {T: S; D: Karori}  {T: P; D: Johnsonville}  {T: P; D: Wadestown}  
+Company refused 18 package(s).
+{T: B; D: Miramar}  {T: B; D: Ngaio}  {T: B; D: CBD}  {T: B; D: Karori}  {T: S; D: Johnsonville}  {T: B; D: Kelburn}  {T: S; D: Wilton}  {T: S; D: Ngaio}  {T: S; D: Highbury}  {T: S; D: Karori}  {T: S; D: Island_Bay}  {T: S; D: Highbury}  {T: S; D: Newlands}  {T: B; D: Miramar}  {T: B; D: Te_Aro}  {T: S; D: Mt_Victoria}  {T: P; D: Newtown}  {T: S; D: Kandallah}  
+1 package(s) arrived after the end of the day.
+{T: S; D: Johnsonville}  
+
+Total of days income: -338.0
