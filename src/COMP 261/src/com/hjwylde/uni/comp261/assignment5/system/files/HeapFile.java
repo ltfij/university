@@ -263,7 +263,6 @@ public class HeapFile {
      * @param id
      * @return
      */
-    @SuppressWarnings("null")
     private int indexOf(int id) {
         char[] buffer = null;
         

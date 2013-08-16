@@ -83,7 +83,7 @@ public class Interpreter {
         globals.put(name, e);
     }
     
-    public void typeCheck(String fn, LispExpr[] es, Class... cs) {
+    public void typeCheck(String fn, LispExpr[] es, Class<?>... cs) {
         for (int i = 0; i != cs.length; ++i) {
             if (es.length <= i)
                 throw new Error("insufficient parameters!");

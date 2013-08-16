@@ -58,7 +58,7 @@ public class LispList implements LispSequence, Iterable<LispExpr> {
         // sanity check!
         if (head instanceof LispFunction) {
             LispFunction fn = (LispFunction) head;
-            LinkedList<LispExpr> l = new LinkedList();
+            LinkedList<LispExpr> l = new LinkedList<>();
             for (LispExpr e : this)
                 l.add(e);
             return fn.invoke(l, locals, globals);
@@ -100,7 +100,7 @@ public class LispList implements LispSequence, Iterable<LispExpr> {
     
     @Override
     public LispSequence reverse() {
-        LinkedList<LispExpr> l = new LinkedList(exprs);
+        LinkedList<LispExpr> l = new LinkedList<>(exprs);
         Collections.reverse(l);
         return new LispList(l);
     }

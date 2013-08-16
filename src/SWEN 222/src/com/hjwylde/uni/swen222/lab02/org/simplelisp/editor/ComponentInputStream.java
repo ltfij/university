@@ -67,7 +67,11 @@ public class ComponentInputStream extends InputStream implements KeyListener {
 		}
 	}
 	
-	public synchronized int available() throws IOException {			
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+    public synchronized int available() throws IOException {			
 		if(_packet != null) {
 			return (_packet.length - _pos) + _in.size();
 		} else { return _in.size(); }

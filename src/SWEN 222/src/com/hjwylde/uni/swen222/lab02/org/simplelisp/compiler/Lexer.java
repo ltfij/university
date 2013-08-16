@@ -35,7 +35,7 @@ public class Lexer {
 		int linestart=0;
 		int line=0;
 		
-		ArrayList<Token> r = new ArrayList<Token>();
+		ArrayList<Token> r = new ArrayList<>();
 		
 		while(pos < text.length()) {			
 			if (text.charAt(pos) == '(') {
