@@ -1,4 +1,4 @@
-package com.hjwylde.uni.swen222.lab03.moon_lander.ui;
+package com.hjwylde.uni.swen222.lab04.moon_lander.ui;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

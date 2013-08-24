@@ -1,10 +1,10 @@
-package com.hjwylde.uni.swen222.lab03.moon_lander.ui;
+package com.hjwylde.uni.swen222.lab04.moon_lander.ui;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-import com.hjwylde.uni.swen222.lab03.moon_lander.concurrency.ClockThread;
+import com.hjwylde.uni.swen222.lab04.moon_lander.concurrency.ClockThread;
 
 public class LanderFrame extends JFrame {
     
@@ -13,7 +13,7 @@ public class LanderFrame extends JFrame {
     public LanderFrame() {
         super("Moon Lander");
         
-        this.canvas = new LanderCanvas();
+        canvas = new LanderCanvas();
         addKeyListener(canvas);
         setLayout(new BorderLayout());
         add(canvas, BorderLayout.CENTER);
