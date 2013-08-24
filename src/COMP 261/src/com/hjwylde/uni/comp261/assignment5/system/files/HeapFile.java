@@ -267,12 +267,9 @@ public class HeapFile {
         char[] buffer = null;
         
         for (int i = 0; i < (numBlocks * HeapFile.BLOCKING_FACTOR); i++) { // Go through every block
-                                                                           // in
-                                                                           // this
-            // file.
+                                                                           // in this file.
             if ((i % HeapFile.BLOCKING_FACTOR) == 0) // Check if we need to update the current block
-                                                     // in
-                                                     // buffer.
+                                                     // in buffer.
                 buffer = getBlock(i).get();
             
             if (buffer[HeapFile.RECORD_SIZE * (i % HeapFile.BLOCKING_FACTOR)] == Character.UNASSIGNED) // If
@@ -608,8 +605,8 @@ public class HeapFile {
         
         private int index;
         
-        private int blockIndex;
-        private int runSize;
+        private final int blockIndex;
+        private final int runSize;
         
         public PeekIterator(final int blockIndex, final int runSize) {
             buffer = disk.getBlock(blockIndex).get();
