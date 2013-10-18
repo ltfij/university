@@ -30,7 +30,8 @@ import com.hjwylde.uni.swen304.project2.db.util.Tables.Customers;
  */
 public final class LibraryModel {
     
-    private static final String URI = "jdbc:postgresql://192.168.1.57:5432/";
+    // private static final String URI = "jdbc:postgresql://192.168.1.57:5432/";
+    private static final String URI = "jdbc:postgresql://db.ecs.vuw.ac.nz/";
     
     // For use in creating dialogs and making them modal
     private final JFrame dialogParent;
@@ -100,7 +101,7 @@ public final class LibraryModel {
             sb.append(Customers.tableName());
             sb.append(" WHERE ");
             sb.append(Customers.ID).append("=?");
-            sb.append(" FOR UPDATE;");
+            sb.append(" FOR SHARE;");
             
             try (PreparedStatement stmt = con.prepareStatement(sb.toString())) {
                 
@@ -157,7 +158,7 @@ public final class LibraryModel {
                 stmt.setInt(2, customerID);
                 stmt.setDate(3, new Date(year, month, day));
                 
-                stmt.execute();
+                stmt.executeUpdate();
             } catch (PSQLException e) {
                 con.rollback();
                 return "Customer with id: " + customerID + " is already borrowing book with ISBN: " + isbn;
@@ -190,9 +191,7 @@ public final class LibraryModel {
                 stmt.setInt(1, book.getNumberLeft() - 1);
                 stmt.setInt(2, isbn);
                 
-                stmt.execute();
-                
-                if (stmt.getUpdateCount() == 0) {
+                if (stmt.executeUpdate() == 0) {
                     con.rollback();
                     return "Failed to udpate book in database";
                 }
@@ -235,7 +234,7 @@ public final class LibraryModel {
             stmt.setInt(1, authorID);
             
             try {
-                stmt.execute();
+                stmt.executeUpdate();
                 
                 return stmt.getUpdateCount() + " authors deleted with id: " + authorID;
             } catch (PSQLException e) {
@@ -289,7 +288,7 @@ public final class LibraryModel {
             try {
                 stmt.execute();
                 
-                return stmt.getUpdateCount() + " custoemrs deleted with id: " + customerID;
+                return stmt.getUpdateCount() + " customers deleted with id: " + customerID;
             } catch (PSQLException e) {
                 return "Unable to delete (due to constraints) customer with id: " + customerID;
             }
@@ -329,7 +328,7 @@ public final class LibraryModel {
             sb.append(Customers.tableName());
             sb.append(" WHERE ");
             sb.append(Customers.ID).append("=?");
-            sb.append(" FOR UPDATE;");
+            sb.append(" FOR SHARE;");
             
             try (PreparedStatement stmt = con.prepareStatement(sb.toString())) {
                 
@@ -384,9 +383,7 @@ public final class LibraryModel {
                 stmt.setInt(1, isbn);
                 stmt.setInt(2, customerid);
                 
-                stmt.execute();
-                
-                if (stmt.getUpdateCount() == 0) {
+                if (stmt.executeUpdate() == 0) {
                     con.rollback();
                     return "Customer with id: " + customerid + " was not borrowing book with ISBN: " + isbn;
                 }
@@ -419,9 +416,7 @@ public final class LibraryModel {
                 stmt.setInt(1, book.getNumberLeft() + 1);
                 stmt.setInt(2, isbn);
                 
-                stmt.execute();
-                
-                if (stmt.getUpdateCount() == 0) {
+                if (stmt.executeUpdate() == 0) {
                     con.rollback();
                     return "Failed to udpate book in database";
                 }
