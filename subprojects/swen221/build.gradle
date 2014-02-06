@@ -1,0 +1,6 @@
+dependencies {
+    compile 'junit:junit:4.11'
+
+    compile fileTree(dir: 'lib/', include: '*.jar')
+}
+

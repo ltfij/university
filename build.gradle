@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        maven { url 'https://github.com/ben-manes/gradle-versions-plugin/raw/mvnrepo' }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-1'
+    }
+}
+
+allprojects {
+    apply plugin: 'versions'
+}
+
+subprojects {
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'checkstyle'
+
+    defaultTasks 'build'
+
+    checkstyle {
+        configFile new File(rootDir, 'config/checkstyle/checkstyle.xml')
+        showViolations false
+    }
+}
+

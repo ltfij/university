@@ -1,0 +1,10 @@
+def subprojectsDir = 'subprojects'
+
+// Add all of the subprojects as direct children of the root project
+file(subprojectsDir).listFiles().each {
+    def name = it.name
+
+    include name
+    project(":$name").projectDir = file("$subprojectsDir/$name")
+}
+
