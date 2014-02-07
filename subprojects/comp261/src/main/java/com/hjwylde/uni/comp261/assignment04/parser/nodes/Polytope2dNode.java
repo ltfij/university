@@ -9,10 +9,7 @@ import javax.vecmath.Vector3d;
 import com.hjwylde.uni.comp261.assignment04.graphics.polytopes.Polytope2d;
 
 /*
- * Code for Assignment 4, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -21,18 +18,18 @@ import com.hjwylde.uni.comp261.assignment04.graphics.polytopes.Polytope2d;
  * @author Henry J. Wylde
  */
 public class Polytope2dNode implements Node {
-    
+
     private List<Vector3d> vertices;
-    
+
     private Color color;
-    
+
     /**
      * Constructs a new blank <code>Polytope2dNode</code>.
      */
     public Polytope2dNode() {
         vertices = new ArrayList<>();
     }
-    
+
     /**
      * Add a vertex to this <code>Polytope2dNode</code>.
      * 
@@ -41,7 +38,7 @@ public class Polytope2dNode implements Node {
     public void addVector3d(Vector3d vertex) {
         vertices.add(vertex);
     }
-    
+
     /**
      * Creates a new instance of this <code>Polytope2dNode</code>, returning a new
      * <code>Polytope2d</code>.
@@ -53,7 +50,7 @@ public class Polytope2dNode implements Node {
     public Polytope2d createInstance() {
         return new Polytope2d(color, vertices);
     }
-    
+
     /**
      * Set the color of this <code>Polytope2dNode</code>.
      * 
@@ -62,7 +59,7 @@ public class Polytope2dNode implements Node {
     public void setColor(Color color) {
         this.color = color;
     }
-    
+
     /*
      * @see java.lang.Object#toString()
      */
@@ -71,7 +68,7 @@ public class Polytope2dNode implements Node {
         String str = "{{";
         for (int i = 0; i < vertices.size(); i++)
             str += vertices.get(i);
-        
+
         return str + "}, {" + color + "}}";
     }
 }

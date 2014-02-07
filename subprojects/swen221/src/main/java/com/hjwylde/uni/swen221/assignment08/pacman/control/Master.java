@@ -23,10 +23,7 @@ import java.net.Socket;
 import com.hjwylde.uni.swen221.assignment08.pacman.game.Board;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -35,61 +32,61 @@ import com.hjwylde.uni.swen221.assignment08.pacman.game.Board;
  * to the slave about the current board state.
  */
 public final class Master extends Thread {
-    
+
     private final Board board;
     private final int broadcastClock;
     private final int uid;
     private final Socket socket;
-    
+
     public Master(Socket socket, int uid, int broadcastClock, Board board) {
         this.board = board;
         this.broadcastClock = broadcastClock;
         this.socket = socket;
         this.uid = uid;
     }
-    
+
     @Override
     public void run() {
         try {
             DataInputStream input = new DataInputStream(socket.getInputStream());
-            DataOutputStream output = new DataOutputStream(
-                socket.getOutputStream());
+            DataOutputStream output = new DataOutputStream(socket.getOutputStream());
             // First, write the period to the stream
             output.writeInt(uid);
             output.writeInt(board.width());
             output.writeInt(board.height());
             output.write(board.wallsToByteArray());
-            
+
             while (true)
                 try {
-                    
+
                     if (input.available() != 0) {
-                        
+
                         // read direction event from client.
                         int dir = input.readInt();
                         switch (dir) {
-                        case 1:
-                            board.player(uid).moveUp();
-                            break;
-                        case 2:
-                            board.player(uid).moveDown();
-                            break;
-                        case 3:
-                            board.player(uid).moveRight();
-                            break;
-                        case 4:
-                            board.player(uid).moveLeft();
-                            break;
+                            case 1:
+                                board.player(uid).moveUp();
+                                break;
+                            case 2:
+                                board.player(uid).moveDown();
+                                break;
+                            case 3:
+                                board.player(uid).moveRight();
+                                break;
+                            case 4:
+                                board.player(uid).moveLeft();
+                                break;
                         }
                     }
-                    
+
                     // Now, broadcast the state of the board to client
                     byte[] state = board.toByteArray();
                     output.writeInt(state.length);
                     output.write(state);
                     output.flush();
                     Thread.sleep(broadcastClock);
-                } catch (InterruptedException e) {}
+                } catch (InterruptedException e) {
+                }
         } catch (IOException e) {
             System.err.println("PLAYER " + uid + " DISCONNECTED");
             board.disconnectPlayer(uid);

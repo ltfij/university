@@ -15,15 +15,15 @@ import com.hjwylde.uni.swen304.project02.db.util.Tables;
  * @since 1.0.0, 12/10/2013
  */
 public final class Book {
-    
+
     private Integer isbn;
-    
+
     private String title;
     private Integer editionNumber;
-    
+
     private Integer numberOfCopies;
     private Integer numberLeft;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -31,12 +31,12 @@ public final class Book {
     public boolean equals(Object obj) {
         if ((obj == null) || (getClass() != obj.getClass()))
             return false;
-        
+
         Book book = (Book) obj;
-        
+
         return Objects.equal(isbn, book.isbn);
     }
-    
+
     /**
      * Gets the editionNumber.
      * 
@@ -45,7 +45,7 @@ public final class Book {
     public Integer getEditionNumber() {
         return editionNumber;
     }
-    
+
     /**
      * Gets the isbn.
      * 
@@ -54,7 +54,7 @@ public final class Book {
     public Integer getIsbn() {
         return isbn;
     }
-    
+
     /**
      * Gets the numberLeft.
      * 
@@ -63,7 +63,7 @@ public final class Book {
     public Integer getNumberLeft() {
         return numberLeft;
     }
-    
+
     /**
      * Gets the numberOfCopies.
      * 
@@ -72,7 +72,7 @@ public final class Book {
     public Integer getNumberOfCopies() {
         return numberOfCopies;
     }
-    
+
     /**
      * Gets the title.
      * 
@@ -81,7 +81,7 @@ public final class Book {
     public String getTitle() {
         return title;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -89,7 +89,7 @@ public final class Book {
     public int hashCode() {
         return Objects.hashCode(isbn);
     }
-    
+
     /**
      * Sets the editionNumber.
      * 
@@ -98,7 +98,7 @@ public final class Book {
     public void setEditionNumber(Integer editionNumber) {
         this.editionNumber = editionNumber;
     }
-    
+
     /**
      * Sets the isbn.
      * 
@@ -107,7 +107,7 @@ public final class Book {
     public void setIsbn(Integer isbn) {
         this.isbn = isbn;
     }
-    
+
     /**
      * Sets the numberLeft.
      * 
@@ -116,7 +116,7 @@ public final class Book {
     public void setNumberLeft(Integer numberLeft) {
         this.numberLeft = numberLeft;
     }
-    
+
     /**
      * Sets the numberOfCopies.
      * 
@@ -125,7 +125,7 @@ public final class Book {
     public void setNumberOfCopies(Integer numberOfCopies) {
         this.numberOfCopies = numberOfCopies;
     }
-    
+
     /**
      * Sets the title.
      * 
@@ -134,21 +134,21 @@ public final class Book {
     public void setTitle(String title) {
         this.title = title;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
         // return new Gson().toJson(this);
-        
-        return title == null ? null : title.trim() + ", ed " + editionNumber + " (ISBN: " + isbn + ") (copies: "
-            + numberOfCopies + ", left: " + numberLeft + ")";
+
+        return title == null ? null : title.trim() + ", ed " + editionNumber + " (ISBN: " + isbn
+                + ") (copies: " + numberOfCopies + ", left: " + numberLeft + ")";
     }
-    
+
     public static Book fromResultSet(ResultSet rs) {
         Book book = new Book();
-        
+
         try {
             book.setIsbn(rs.getInt(Tables.Books.ISBN));
             book.setTitle(rs.getString(Tables.Books.TITLE));
@@ -160,7 +160,7 @@ public final class Book {
             e.printStackTrace();
             throw new InternalError(e.getMessage());
         }
-        
+
         return book;
     }
 }

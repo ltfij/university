@@ -24,27 +24,26 @@ package com.hjwylde.uni.swen222.lab02.org.simplelisp.lang;
 import java.util.HashMap;
 
 public final class LispChar implements LispExpr {
-    
+
     private final char c;
-    
+
     public LispChar(char c) {
         this.c = c;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof LispChar))
             return false;
-        
+
         return c == ((LispChar) o).c;
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         return this;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -52,7 +51,7 @@ public final class LispChar implements LispExpr {
     public int hashCode() {
         return c;
     }
-    
+
     @Override
     public String toString() {
         return c + "";

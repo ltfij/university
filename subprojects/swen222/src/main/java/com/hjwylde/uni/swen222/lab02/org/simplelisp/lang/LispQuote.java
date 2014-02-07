@@ -25,31 +25,30 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public final class LispQuote implements LispExpr {
-    
+
     private final LispExpr expr;
-    
+
     public LispQuote(LispExpr e) {
         expr = e;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof LispQuote))
             return false;
-        
+
         return Objects.equals(expr, ((LispQuote) o).expr);
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         return expr;
     }
-    
+
     public LispExpr getExpr() {
         return expr;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -57,7 +56,7 @@ public final class LispQuote implements LispExpr {
     public int hashCode() {
         return expr.hashCode();
     }
-    
+
     @Override
     public String toString() {
         return expr.toString();

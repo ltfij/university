@@ -32,17 +32,17 @@ import com.google.common.base.Optional;
  * @since 2/09/2013
  */
 public final class OptionDialogBuilder<T> implements ActionListener {
-    
+
     private final Component parent;
-    
+
     private String title = null;
     private String query = null;
-    
+
     private List<T> options;
     private JButton[] buttons;
-    
+
     private int res = JOptionPane.CLOSED_OPTION;
-    
+
     /**
      * Creates a new <code>OptionDialogBuilder</code> with the given component parent for the
      * dialog. This will help for ensuring the parent cannot be interacted with while the dialog is
@@ -53,7 +53,7 @@ public final class OptionDialogBuilder<T> implements ActionListener {
     public OptionDialogBuilder(Component parent) {
         this.parent = checkNotNull(parent, "Parent cannot be null");
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -66,14 +66,13 @@ public final class OptionDialogBuilder<T> implements ActionListener {
             System.err.println(nfe);
             return;
         }
-        
+
         res = ac;
-        
-        Window window = SwingUtilities.getWindowAncestor((Component) e
-            .getSource());
+
+        Window window = SwingUtilities.getWindowAncestor((Component) e.getSource());
         window.dispose();
     }
-    
+
     /**
      * Gets the option selected by the user from the dialog, or absent if it they cancelled.
      * 
@@ -82,10 +81,10 @@ public final class OptionDialogBuilder<T> implements ActionListener {
     public Optional<T> getOption() {
         if ((res < 0) || (res >= options.size()))
             return Optional.absent();
-        
+
         return Optional.of(options.get(res));
     }
-    
+
     /**
      * Sets the options in this dialog builder.
      * 
@@ -94,17 +93,17 @@ public final class OptionDialogBuilder<T> implements ActionListener {
      */
     public OptionDialogBuilder<T> options(List<T> options) {
         this.options = options;
-        
+
         buttons = new JButton[options.size()];
         for (int i = 0; i < options.size(); i++) {
             buttons[i] = new JButton(options.get(i).toString());
             buttons[i].setActionCommand(String.valueOf(i));
             buttons[i].addActionListener(this);
         }
-        
+
         return this;
     }
-    
+
     /**
      * Sets the options and images for the options in this dialog builder.
      * 
@@ -114,17 +113,17 @@ public final class OptionDialogBuilder<T> implements ActionListener {
      */
     public OptionDialogBuilder<T> options(List<T> options, List<Image> images) {
         this.options = options;
-        
+
         buttons = new JButton[options.size()];
         for (int i = 0; i < options.size(); i++) {
             buttons[i] = new JButton(new ImageIcon(images.get(i)));
             buttons[i].setActionCommand(String.valueOf(i));
             buttons[i].addActionListener(this);
         }
-        
+
         return this;
     }
-    
+
     /**
      * Sets the query or message string in the dialog.
      * 
@@ -135,7 +134,7 @@ public final class OptionDialogBuilder<T> implements ActionListener {
         this.query = query;
         return this;
     }
-    
+
     /**
      * Shows this dialog. None of the required parameters may be null or an exception will be
      * thrown. This method is blocking until the user selects an option.
@@ -143,14 +142,12 @@ public final class OptionDialogBuilder<T> implements ActionListener {
     public void show() {
         checkState(title != null, "Title cannot be null!");
         checkState(query != null, "Query cannot be null!");
-        checkState(!Arrays.asList(options).contains(null),
-            "Options cannot contain null!");
-        
-        JOptionPane.showOptionDialog(parent, query, title,
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-            buttons, buttons[0]);
+        checkState(!Arrays.asList(options).contains(null), "Options cannot contain null!");
+
+        JOptionPane.showOptionDialog(parent, query, title, JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, buttons, buttons[0]);
     }
-    
+
     /**
      * Sets the title for this dialog.
      * 

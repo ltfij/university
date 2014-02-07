@@ -16,10 +16,7 @@
 package com.hjwylde.uni.swen221.assignment08.pacman.game;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -29,50 +26,50 @@ package com.hjwylde.uni.swen221.assignment08.pacman.game;
  * @author djp
  */
 public abstract class MovingCharacter extends Character {
-    
+
     // Direction constants
     public static final int STOPPED = 0;
     public static final int UP = 1;
     public static final int DOWN = 2;
     public static final int RIGHT = 3;
     public static final int LEFT = 4;
-    
+
     protected int direction;
     protected int queued; // queued direction change
-    
+
     public MovingCharacter(int realX, int realY, int direction) {
         super(realX, realY);
         this.direction = direction;
     }
-    
+
     /**
      * Determine the direction in which this character is moving.
      */
     public int direction() {
         return direction;
     }
-    
+
     public void moveDown() {
         queued = MovingCharacter.DOWN;
     }
-    
+
     public void moveLeft() {
         queued = MovingCharacter.LEFT;
     }
-    
+
     public void moveRight() {
         queued = MovingCharacter.RIGHT;
     }
-    
+
     public void moveUp() {
         queued = MovingCharacter.UP;
     }
-    
+
     /**
      * Determine the speed at which this character moves
      */
     abstract public int speed();
-    
+
     /**
      * The tick method is provided to enable computer control characters to make decisions.
      */
@@ -83,11 +80,11 @@ public abstract class MovingCharacter extends Character {
         // change is queued).
         boolean xready = (realX % 30) == 0;
         boolean yready = (realY % 30) == 0;
-        
+
         if (xready && yready)
             // yes, can accept direction change
             direction = queued;
-        
+
         // Attempt to update the character's position. This is done by speculating at the new board
         // position and then deciding if this should be allowed or not.
         int nRealX = realX;
@@ -95,7 +92,7 @@ public abstract class MovingCharacter extends Character {
         int nx, ny;
         int speed = speed();
         int width = game.width();
-        
+
         if (direction == MovingCharacter.UP) {
             nRealY -= speed;
             ny = nRealY / 30;
@@ -118,7 +115,7 @@ public abstract class MovingCharacter extends Character {
             ny = (nRealY + 15) / 30;
         } else
             return;
-        
+
         if (nx < 0) {
             nx += width;
             nRealX += 30 * width;
@@ -126,7 +123,7 @@ public abstract class MovingCharacter extends Character {
             nRealX -= 30 * width;
             nx -= width;
         }
-        
+
         if (game.isWall(nx, ny))
             // we've bumped into a wall ... so we have to stop!!
             direction = MovingCharacter.STOPPED;

@@ -13,7 +13,7 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.util.Util;
  * @since 2/08/2013
  */
 public enum Character {
-    
+
     /**
      * Kasandra Scarlett.
      */
@@ -38,7 +38,7 @@ public enum Character {
      * Victor Plum.
      */
     VICTOR_PLUM;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -48,10 +48,10 @@ public enum Character {
         for (String part : name().split("_")) {
             if (sb.length() != 0)
                 sb.append(" ");
-            
+
             sb.append(Util.toTitleCase(part, Locale.ENGLISH));
         }
-        
+
         return sb.toString();
     }
 }

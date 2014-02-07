@@ -6,10 +6,7 @@ import com.hjwylde.uni.comp261.assignment03.robotSimulator.World;
 import com.hjwylde.uni.comp261.assignment03.robotSimulator.parser.types.InstructionMethodType;
 
 /*
- * Code for Assignment 3, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 3, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -18,9 +15,9 @@ import com.hjwylde.uni.comp261.assignment03.robotSimulator.parser.types.Instruct
  * @author Henry J. Wylde
  */
 public class InstructionMethodNode implements Node {
-    
+
     private final InstructionMethodType type;
-    
+
     /**
      * Constructs a <code>InstructionMethodNode</code> of the specified type.
      * 
@@ -29,7 +26,7 @@ public class InstructionMethodNode implements Node {
     public InstructionMethodNode(InstructionMethodType type) {
         this.type = type;
     }
-    
+
     /**
      * Executes this <code>InstructionMethodNode</code>.
      * 
@@ -39,15 +36,15 @@ public class InstructionMethodNode implements Node {
      */
     public void execute(int robotID, World world, Graphics g) {
         switch (type) {
-        case BOX:
-            world.turnTowardsFirstBox(robotID, g);
-            
-            break;
-        default: // THING
-            world.turnTowardsFirstThing(robotID, g);
+            case BOX:
+                world.turnTowardsFirstBox(robotID, g);
+
+                break;
+            default: // THING
+                world.turnTowardsFirstThing(robotID, g);
         }
     }
-    
+
     /*
      * @see java.lang.Object#toString()
      */

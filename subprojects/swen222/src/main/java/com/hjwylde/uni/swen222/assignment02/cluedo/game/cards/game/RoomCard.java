@@ -15,9 +15,9 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.game.items.Room;
  * @since 25/07/2013
  */
 public final class RoomCard implements Card {
-    
+
     private final Room room;
-    
+
     /**
      * Creates a new <code>RoomCard</code> with the given room.
      * 
@@ -26,7 +26,7 @@ public final class RoomCard implements Card {
     public RoomCard(Room room) {
         this.room = Objects.requireNonNull(room);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -34,10 +34,10 @@ public final class RoomCard implements Card {
     public boolean equals(Object obj) {
         if (!(obj instanceof RoomCard))
             return false;
-        
+
         return room == ((RoomCard) obj).room;
     }
-    
+
     /**
      * Gets the room of this card.
      * 
@@ -46,7 +46,7 @@ public final class RoomCard implements Card {
     public Room getRoom() {
         return room;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -54,7 +54,7 @@ public final class RoomCard implements Card {
     public int hashCode() {
         return room.hashCode();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -62,7 +62,7 @@ public final class RoomCard implements Card {
     public String toString() {
         return room.toString();
     }
-    
+
     /**
      * Gets an array of all possible values for this class. The array is generated using the enum of
      * rooms.
@@ -73,7 +73,7 @@ public final class RoomCard implements Card {
         List<RoomCard> builder = new ArrayList<>();
         for (Room room : Room.murderRoomValues())
             builder.add(new RoomCard(room));
-        
+
         return builder.toArray(new RoomCard[0]);
     }
 }

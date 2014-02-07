@@ -26,37 +26,35 @@ import java.util.List;
 import java.util.Objects;
 
 public final class LispExternal extends LispFunction {
-    
+
     private final List<String> params;
     private final List<LispExpr> body;
-    
+
     public LispExternal(List<String> p, List<LispExpr> b) {
         super(p.size(), b.size());
         params = p;
         body = b;
     }
-    
+
     public List<LispExpr> body() {
         return body;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof LispExternal) || !super.equals(o))
             return false;
-        
+
         LispExternal external = (LispExternal) o;
-        
-        return Objects.equals(params, external.params)
-            && Objects.equals(body, external.body);
+
+        return Objects.equals(params, external.params) && Objects.equals(body, external.body);
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         return this;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -64,29 +62,29 @@ public final class LispExternal extends LispFunction {
     public int hashCode() {
         return Objects.hash(params, body);
     }
-    
+
     @Override
-    public LispExpr internalInvoke(LispExpr[] vals,
-        HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
+    public LispExpr internalInvoke(LispExpr[] vals, HashMap<String, LispExpr> locals,
+            HashMap<String, LispExpr> globals) {
         int i = 0;
         locals = (HashMap<String, LispExpr>) locals.clone();
         // apply the parameters
         for (String p : params)
             locals.put(p, vals[i++]);
-        
+
         LispExpr r = null;
         // execute bodies now, taking last result
         // as result of this expression
         for (LispExpr b : body)
             r = b.evaluate(locals, globals);
-        
+
         return r;
     }
-    
+
     public List<String> parameters() {
         return params;
     }
-    
+
     @Override
     public String toString() {
         return "? => ?";

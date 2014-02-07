@@ -6,10 +6,7 @@ import javax.vecmath.Tuple3d;
 import javax.vecmath.Vector3d;
 
 /*
- * Code for Assignment 4, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -19,71 +16,65 @@ import javax.vecmath.Vector3d;
  * @author Henry J. Wylde
  */
 public class PointLight3d extends Vector3d {
-    
+
     private static final long serialVersionUID = 8665187782821492901L;
-    
+
     public static final double NO_FALLOFF_DISTANCE = -1.0;
-    
+
     private double intensity;
-    
+
     private double falloffDistance;
-    
+
     /**
      * Create a new <code>PointLight3d</code> at (0, 0, 0) with an intensity value of 1.0 and
-     * infinite
-     * distance.
+     * infinite distance.
      */
     public PointLight3d() {
         this(0, 0, 0, 1.0, PointLight3d.NO_FALLOFF_DISTANCE);
     }
-    
+
     /**
      * Create a new <code>PointLight3d</code> at (x, y, z) with an intensity value of 1.0 and
-     * infinite
-     * distance.
+     * infinite distance.
      */
     public PointLight3d(double x, double y, double z) {
         this(x, y, z, 1.0, PointLight3d.NO_FALLOFF_DISTANCE);
     }
-    
+
     /**
      * Create a new <code>PointLight3d</code> at (x, y, x) with the specified intensity value and
-     * infinite
-     * distance.
+     * infinite distance.
      */
     public PointLight3d(double x, double y, double z, double intensity) {
         this(x, y, z, intensity, PointLight3d.NO_FALLOFF_DISTANCE);
     }
-    
+
     /**
      * Create a new <code>PointLight3d</code> at (x, y, x) with the specified intensity value and
-     * the
-     * specified falloff distance.
+     * the specified falloff distance.
      */
-    public PointLight3d(double x, double y, double z, double intensity,
-        double falloffDistance) {
+    public PointLight3d(double x, double y, double z, double intensity, double falloffDistance) {
         set(x, y, z);
-        
+
         this.intensity = intensity;
         this.falloffDistance = falloffDistance;
-        
+
         normalize();
     }
-    
+
     /**
      * Create a new <code>PointLight3d</code> at (t.x, t.y, t.z) with an intensity value of 1.0 and
-     * infinite
-     * distance.
+     * infinite distance.
      */
     public PointLight3d(Tuple3d t) {
         super(t);
-        
+
         intensity = 1.0;
         falloffDistance = PointLight3d.NO_FALLOFF_DISTANCE;
-        
+
         normalize();
     }
-    
+
     /**
      * Add and apply the rotation and translation matrix.
      * 
@@ -93,12 +84,12 @@ public class PointLight3d extends Vector3d {
         Matrix3d rotation = new Matrix3d();
         m.get(rotation);
         rotation.transform(this);
-        
+
         Vector3d translation = new Vector3d();
         m.get(translation);
         add(translation);
     }
-    
+
     /*
      * @see javax.vecmath.Tuple3d#clone()
      */
@@ -106,7 +97,7 @@ public class PointLight3d extends Vector3d {
     public Object clone() {
         return (new PointLight3d(x, y, z, intensity, falloffDistance));
     }
-    
+
     /**
      * Gets the intensity of this light. Same as calling <code>getIntensity(...)</code> if this
      * <code>PointLight3d</code> is an infinite distance one.
@@ -116,7 +107,7 @@ public class PointLight3d extends Vector3d {
     public double getIntensity() {
         return intensity;
     }
-    
+
     /**
      * Calculates and returns the intensity of this <code>PointLight3d</code> at the given distance
      * away from it. If this <code>PointLight3d</code> has an infinite distance, then it will return
@@ -129,14 +120,13 @@ public class PointLight3d extends Vector3d {
         if (falloffDistance == PointLight3d.NO_FALLOFF_DISTANCE) // If distance is irrelevant to
                                                                  // intensity...
             return intensity;
-        
+
         if (distance >= falloffDistance) // Too far away! No light!
             return 0;
-        
-        return (intensity * (falloffDistance - distance))
-            / (falloffDistance + distance);
+
+        return (intensity * (falloffDistance - distance)) / (falloffDistance + distance);
     }
-    
+
     /**
      * Set the falloff distance of this <code>PointLight3d</code>.
      * 
@@ -145,7 +135,7 @@ public class PointLight3d extends Vector3d {
     public void setFalloffDistance(double falloffDistance) {
         this.falloffDistance = falloffDistance;
     }
-    
+
     /**
      * Set the intensity of this <code>PointLight3d</code>.
      * 
@@ -154,7 +144,7 @@ public class PointLight3d extends Vector3d {
     public void setIntensity(double intensity) {
         this.intensity = intensity;
     }
-    
+
     /**
      * Subtract and apply the given rotation and translation matrix. Subtracting a matrix involves
      * transposing / inverting it and applying the inverted translation before the transposed
@@ -166,19 +156,19 @@ public class PointLight3d extends Vector3d {
         Vector3d translation = new Vector3d();
         m.get(translation);
         sub(translation);
-        
+
         Matrix3d rotation = new Matrix3d();
         m.get(rotation);
         rotation.transpose();
         rotation.transform(this);
     }
-    
+
     /*
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "{{" + super.toString() + "}, {intensity: " + intensity
-            + "}, {falloffDistance: " + falloffDistance + "}}";
+        return "{{" + super.toString() + "}, {intensity: " + intensity + "}, {falloffDistance: "
+                + falloffDistance + "}}";
     }
 }

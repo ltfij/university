@@ -11,10 +11,7 @@ import com.hjwylde.uni.swen221.lab02.shapes.math.BoundingBox;
 import com.hjwylde.uni.swen221.lab02.shapes.math.Vec2D;
 
 /*
- * Code for Laboratory 2, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 2, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -23,13 +20,12 @@ import com.hjwylde.uni.swen221.lab02.shapes.math.Vec2D;
  * @author Henry J. Wylde
  */
 public class Polytope extends AbstractShape {
-    
+
     List<Vec2D> points;
-    
+
     /**
      * Creates a new Polytope with the specified parameters. The polytope points list must contain
-     * at
-     * least 3 points or else it will throw an exception.
+     * at least 3 points or else it will throw an exception.
      * 
      * @param pos the position of the polytope.
      * @param points the list of points of the polytope.
@@ -38,13 +34,13 @@ public class Polytope extends AbstractShape {
      */
     public Polytope(Vec2D pos, List<Vec2D> points, Vec2D velocity, Color color) {
         super(pos, velocity, color);
-        
+
         if (points.size() < 3)
             throw new IllegalArgumentException();
-        
+
         this.points = points;
     }
-    
+
     /*
      * @see lab2.shapes.core.AbstractShape#getBoundingBox()
      */
@@ -54,7 +50,7 @@ public class Polytope extends AbstractShape {
         int y1 = Integer.MAX_VALUE;
         int x2 = Integer.MIN_VALUE;
         int y2 = Integer.MIN_VALUE;
-        
+
         for (Vec2D point : points) {
             if (point.getX() < x1)
                 x1 = (int) point.getX();
@@ -65,11 +61,11 @@ public class Polytope extends AbstractShape {
             if (point.getY() > y2)
                 y2 = (int) point.getY();
         }
-        
-        return new BoundingBox((int) getPosition().getX(), (int) getPosition()
-            .getY(), x2 - x1, y2 - y1);
+
+        return new BoundingBox((int) getPosition().getX(), (int) getPosition().getY(), x2 - x1, y2
+                - y1);
     }
-    
+
     /*
      * @see lab2.shapes.core.Shape#paint(java.awt.Graphics)
      */
@@ -77,23 +73,25 @@ public class Polytope extends AbstractShape {
     public void paint(Graphics g) {
         g.setColor(getColor());
         GeneralPath p = new GeneralPath();
-        
+
         Iterator<Vec2D> it = points.iterator();
-        
+
         Vec2D point;
         point = it.next();
-        
-        p.moveTo(point.getX() + getPosition().getX(), point.getY()
-            + getPosition().getY()); // Start point of the polytope.
-        
+
+        p.moveTo(point.getX() + getPosition().getX(), point.getY() + getPosition().getY()); // Start
+                                                                                            // point
+                                                                                            // of
+                                                                                            // the
+                                                                                            // polytope.
+
         while (it.hasNext()) { // Create the outline of the polytope.
             point = it.next();
-            p.lineTo(point.getX() + getPosition().getX(), point.getY()
-                + getPosition().getY());
+            p.lineTo(point.getX() + getPosition().getX(), point.getY() + getPosition().getY());
         }
-        
+
         p.closePath(); // Close the polytope so it can be filled.
-        
+
         Graphics2D g2d = (Graphics2D) g;
         g2d.fill(p); // Fill the polytope with it's color.
     }

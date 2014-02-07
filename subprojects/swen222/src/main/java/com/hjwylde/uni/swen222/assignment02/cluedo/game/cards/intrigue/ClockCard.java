@@ -15,17 +15,16 @@ package com.hjwylde.uni.swen222.assignment02.cluedo.game.cards.intrigue;
  * @since 25/07/2013
  */
 public final class ClockCard implements IntrigueCard {
-    
-    private static ClockCard[] VALUES = new ClockCard[] {
-        new ClockCard(), new ClockCard(), new ClockCard(), new ClockCard(),
-        new ClockCard(), new ClockCard(), new ClockCard(), new ClockCard()
-    };
-    
+
+    private static ClockCard[] VALUES = new ClockCard[] {new ClockCard(), new ClockCard(),
+            new ClockCard(), new ClockCard(), new ClockCard(), new ClockCard(), new ClockCard(),
+            new ClockCard()};
+
     /**
      * This class may only be instantiated locally.
      */
     private ClockCard() {}
-    
+
     /**
      * Gets an array of eight different clock cards.
      * 

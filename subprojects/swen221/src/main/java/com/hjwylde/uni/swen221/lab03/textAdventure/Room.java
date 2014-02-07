@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * Code for Laboratory 3, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 3, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -17,17 +14,17 @@ import java.util.List;
  * 
  */
 public class Room {
-    
+
     private String name;
     private String description;
     private ArrayList<Item> items;
-    
+
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
         items = new ArrayList<>();
     }
-    
+
     /**
      * Get access to the items in this room
      * 
@@ -36,14 +33,14 @@ public class Room {
     public List<Item> getItems() {
         return items;
     }
-    
+
     /**
      * Get the description of this room
      */
     String getDescription() {
         return description;
     }
-    
+
     /**
      * Get the name of this room
      */

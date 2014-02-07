@@ -30,7 +30,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 public class JConsoleArea extends JTextArea implements DocumentListener {
-    
+
     // A JConsoleArea is a text area which provides several
     // pieces of functionality:
     //
@@ -41,50 +41,49 @@ public class JConsoleArea extends JTextArea implements DocumentListener {
     // 3) the cursor (a.k.a. the caret) is fixed to be
     // at the bottom of the text area after any text
     // insertion.
-    
+
     // needed for serialization
     private static final long serialVersionUID = 202L;
-    
+
     // create the input and output streams
-    private PrintStream out = new PrintStream(new DocumentOutputStream(
-        getDocument()));
+    private PrintStream out = new PrintStream(new DocumentOutputStream(getDocument()));
     private InputStream in = new ComponentInputStream(this);
-    
+
     public JConsoleArea() {
         super();
         getDocument().addDocumentListener(this);
     }
-    
+
     public JConsoleArea(int width, int height) {
         super(width, height);
         getDocument().addDocumentListener(this);
     }
-    
+
     @Override
     public void changedUpdate(DocumentEvent e) {}
-    
+
     public InputStream getInputStream() {
         return in;
     }
-    
+
     public PrintStream getOutputStream() {
         return out;
     }
-    
+
     // ------------------------
     // DocumentListener Methods
     // ------------------------
-    
+
     @Override
     public void insertUpdate(DocumentEvent e) {
         // text inserted to automatically move
         // cursor to end
         setCaretPosition(getDocument().getLength());
     }
-    
+
     @Override
     public void removeUpdate(DocumentEvent e) {}
-    
+
     @Override
     public void setEditable(boolean flag) {
         super.setEditable(flag);
@@ -93,7 +92,8 @@ public class JConsoleArea extends JTextArea implements DocumentListener {
         else if (!flag && (in != null)) {
             try {
                 in.close();
-            } catch (IOException e) {}
+            } catch (IOException e) {
+            }
             in = null;
         }
     }

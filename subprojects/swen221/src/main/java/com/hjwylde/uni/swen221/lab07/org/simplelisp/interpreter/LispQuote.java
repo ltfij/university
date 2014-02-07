@@ -19,20 +19,17 @@ package com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter;
 import java.util.HashMap;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public final class LispQuote implements LispExpr {
-    
+
     public final LispExpr expr;
-    
+
     public LispQuote(LispExpr e) {
         expr = e;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof LispQuote))
@@ -40,22 +37,21 @@ public final class LispQuote implements LispExpr {
         LispQuote q = (LispQuote) o;
         return expr.equals(q.expr);
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         return expr;
     }
-    
+
     public LispExpr getExpr() {
         return expr;
     }
-    
+
     @Override
     public int hashCode() {
         return expr.hashCode();
     }
-    
+
     @Override
     public String toString() {
         return "'" + expr.toString();

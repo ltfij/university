@@ -10,10 +10,7 @@ import com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter.LispNil;
 import com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter.LispTrue;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -23,20 +20,19 @@ import com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter.LispTrue;
  * 
  */
 public class LispNilTests {
-    
+
     @Test
     public void testEquals() {
         Assert.assertTrue(new LispNil().equals(new LispNil()));
         Assert.assertFalse(new LispNil().equals(new LispTrue()));
     }
-    
+
     @Test
     public void testEvaluate() {
-        Assert.assertEquals(new LispNil().evaluate(
-            new HashMap<String, LispExpr>(), new HashMap<String, LispExpr>()),
-            new LispNil());
+        Assert.assertEquals(new LispNil().evaluate(new HashMap<String, LispExpr>(),
+                new HashMap<String, LispExpr>()), new LispNil());
     }
-    
+
     @Test
     public void testToString() {
         Assert.assertEquals("nil", new LispNil().toString());

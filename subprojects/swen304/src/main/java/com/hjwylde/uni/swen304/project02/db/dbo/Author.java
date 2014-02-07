@@ -15,12 +15,12 @@ import com.hjwylde.uni.swen304.project02.db.util.Tables;
  * @since 1.0.0, 12/10/2013
  */
 public final class Author {
-    
+
     private Integer id;
-    
+
     private String firstName;
     private String lastName;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -28,12 +28,12 @@ public final class Author {
     public boolean equals(Object obj) {
         if ((obj == null) || (getClass() != obj.getClass()))
             return false;
-        
+
         Author author = (Author) obj;
-        
+
         return Objects.equal(id, author.id);
     }
-    
+
     /**
      * Gets the firstName.
      * 
@@ -42,7 +42,7 @@ public final class Author {
     public String getFirstName() {
         return firstName;
     }
-    
+
     /**
      * Gets the id.
      * 
@@ -51,7 +51,7 @@ public final class Author {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Gets the lastName.
      * 
@@ -60,12 +60,12 @@ public final class Author {
     public String getLastName() {
         return lastName;
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
     }
-    
+
     /**
      * Sets the firstName.
      * 
@@ -74,7 +74,7 @@ public final class Author {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    
+
     /**
      * Sets the id.
      * 
@@ -83,7 +83,7 @@ public final class Author {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Sets the lastName.
      * 
@@ -92,21 +92,21 @@ public final class Author {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
         // return new Gson().toJson(this);
-        
-        return (lastName == null ? null : lastName.trim()) + ", " + (firstName == null ? null : firstName.trim())
-            + " (id: " + id + ")";
+
+        return (lastName == null ? null : lastName.trim()) + ", "
+                + (firstName == null ? null : firstName.trim()) + " (id: " + id + ")";
     }
-    
+
     public static Author fromResultSet(ResultSet rs) {
         Author author = new Author();
-        
+
         try {
             author.setId(rs.getInt(Tables.Authors.ID));
             author.setFirstName(rs.getString(Tables.Authors.FIRST_NAME));
@@ -116,7 +116,7 @@ public final class Author {
             e.printStackTrace();
             throw new InternalError(e.getMessage());
         }
-        
+
         return author;
     }
 }

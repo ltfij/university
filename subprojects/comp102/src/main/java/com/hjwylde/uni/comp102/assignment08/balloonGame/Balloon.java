@@ -5,23 +5,20 @@ import java.awt.Color;
 import com.hjwylde.uni.comp102.util.DrawingCanvas;
 
 /*
- * Code for Assignment 8, COMP 102
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, COMP 102 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class Balloon {
-    
+
     // Fields
     private final DrawingCanvas canvas;
-    
+
     private int radius = 10;
     private final int centerX, centerY;
     private final Color color;
-    
+
     private boolean popped = false;
-    
+
     // Constructors
     /**
      * Construct a new Balloon object. Parameters are the DrawingCanvas and the
@@ -37,26 +34,24 @@ public class Balloon {
         color = Balloon.randomBrightColor();
         draw();
     }
-    
+
     public void draw() {
         canvas.setColor(color);
-        canvas.fillOval(centerX - radius, centerY - radius, radius * 2,
-            radius * 2);
+        canvas.fillOval(centerX - radius, centerY - radius, radius * 2, radius * 2);
         canvas.setColor(Color.black);
-        canvas.drawOval(centerX - radius, centerY - radius, radius * 2,
-            radius * 2);
+        canvas.drawOval(centerX - radius, centerY - radius, radius * 2, radius * 2);
     }
-    
+
     /** Make the balloon larger by a random amount between 4 and 10, and redraw it */
     public void expand() {
         radius = radius + (int) (4 + (Math.random() * 6));
         draw();
     }
-    
+
     public boolean isPopped() {
         return popped;
     }
-    
+
     /**
      * Returns true if the point (x,y) is on the balloon, and false otherwise
      * 
@@ -69,19 +64,19 @@ public class Balloon {
         int dy = centerY - y;
         return (((dx * dx) + (dy * dy)) < (radius * radius));
     }
-    
+
     /** pop the balloon (draws it in gray, and pauses briefly) */
     public void pop() {
         canvas.setColor(Color.lightGray);
-        canvas.fillOval(centerX - radius, centerY - radius, radius * 2,
-            radius * 2);
-        
+        canvas.fillOval(centerX - radius, centerY - radius, radius * 2, radius * 2);
+
         popped = true;
         try {
             Thread.sleep(20);
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+        }
     }
-    
+
     /**
      * Calculates and returns the area of the balloon
      * 
@@ -90,10 +85,9 @@ public class Balloon {
     public double size() {
         return radius * radius * Math.PI;
     }
-    
+
     /**
-     * Returns true if this Balloon is touching the other balloon, and false
-     * otherwise
+     * Returns true if this Balloon is touching the other balloon, and false otherwise
      * 
      * @param other the other balloon.
      * @return true if this balloon touches other.
@@ -101,16 +95,15 @@ public class Balloon {
     public boolean touches(Balloon other) {
         double xDistance = centerX - other.centerX;
         double yDistance = centerY - other.centerY;
-        double distanceSquared = Math.pow(xDistance, 2)
-            + Math.pow(yDistance, 2);
-        
+        double distanceSquared = Math.pow(xDistance, 2) + Math.pow(yDistance, 2);
+
         return distanceSquared < Math.pow((radius + other.radius), 2);
     }
-    
+
     /**
-     * Bright colours have one of components at 1.0, another at 0.0, and the third
-     * colour anwhere between 0.0 and 1.0. This assigns 1.0, a random value, and
-     * 0.0 to red, green, blue, then randomly switches them around.
+     * Bright colours have one of components at 1.0, another at 0.0, and the third colour anwhere
+     * between 0.0 and 1.0. This assigns 1.0, a random value, and 0.0 to red, green, blue, then
+     * randomly switches them around.
      * 
      * @return a random color.
      */
@@ -132,5 +125,5 @@ public class Balloon {
             }
         return new Color(red, green, blue);
     }
-    
+
 }

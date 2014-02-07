@@ -30,30 +30,28 @@ import com.hjwylde.uni.swen221.assignment08.pacman.game.Board;
 import com.hjwylde.uni.swen221.assignment08.pacman.game.BoardFrame;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class Main {
-    
+
     private static final int DEFAULT_CLK_PERIOD = 20;
     private static final int DEFAULT_BROADCAST_CLK_PERIOD = 5;
-    
+
     // The following two bits of code are a bit sneaky, but they help make the problems more
     // visible.
     static {
         System.setProperty("sun.awt.exception.handler", "pacman.Main");
     }
-    
+
     public void handle(Throwable ex) {
         try {
             ex.printStackTrace();
             System.exit(1);
-        } catch (Throwable t) {}
+        } catch (Throwable t) {
+        }
     }
-    
+
     public static void main(String[] args) {
         // ======================================================
         // ======== First, parse command-line arguments ========
@@ -67,7 +65,7 @@ public class Main {
         int port = 32768; // default
         int nHomerGhosts = 2;
         int nRandomGhosts = 2;
-        
+
         for (int i = 0; i != args.length; ++i)
             if (args[i].startsWith("-")) {
                 String arg = args[i];
@@ -89,35 +87,30 @@ public class Main {
                     nRandomGhosts = Integer.parseInt(args[++i]);
             } else
                 filename = args[i];
-        
+
         // Sanity checks
         if ((url != null) && server) {
-            System.out
-                .println("Cannot be a server and connect to another server!");
+            System.out.println("Cannot be a server and connect to another server!");
             System.exit(1);
         } else if ((url != null) && (gameClock != Main.DEFAULT_CLK_PERIOD)) {
-            System.out
-                .println("Cannot overide clock period when connecting to server.");
+            System.out.println("Cannot overide clock period when connecting to server.");
             System.exit(1);
         } else if ((url == null) && (filename == null)) {
-            System.out
-                .println("Board file must be provided for single user, or server mode.");
+            System.out.println("Board file must be provided for single user, or server mode.");
             System.exit(1);
         }
-        
+
         try {
             if (server) {
                 // Run in Server mode
-                Board board = Main.createBoardFromFile(filename, nHomerGhosts,
-                    nRandomGhosts);
+                Board board = Main.createBoardFromFile(filename, nHomerGhosts, nRandomGhosts);
                 Main.runServer(port, nclients, gameClock, broadcastClock, board);
             } else if (url != null)
                 // Run in client mode
                 Main.runClient(url, port);
             else {
                 // single user game
-                Board board = Main.createBoardFromFile(filename, nHomerGhosts,
-                    nRandomGhosts);
+                Board board = Main.createBoardFromFile(filename, nHomerGhosts, nRandomGhosts);
                 Main.singleUserGame(gameClock, board);
             }
         } catch (IOException ioe) {
@@ -125,11 +118,11 @@ public class Main {
             ioe.printStackTrace();
             System.exit(1);
         }
-        
+
         // Edited.
         // System.exit(0);
     }
-    
+
     /**
      * Check whether or not there is at least one connection alive.
      */
@@ -139,71 +132,68 @@ public class Main {
                 return true;
         return false;
     }
-    
-    private static Board createBoardFromFile(String filename, int nHomerGhosts,
-        int nRandomGhosts) throws IOException {
+
+    private static Board createBoardFromFile(String filename, int nHomerGhosts, int nRandomGhosts)
+            throws IOException {
         ArrayList<String> lines = new ArrayList<>();
         int width = -1;
         String line;
-        
-        try (FileReader fr = new FileReader(filename);
-            BufferedReader br = new BufferedReader(fr)) {
+
+        try (FileReader fr = new FileReader(filename); BufferedReader br = new BufferedReader(fr)) {
             while ((line = br.readLine()) != null) {
                 lines.add(line);
-                
+
                 // now sanity check
                 if (width == -1)
                     width = line.length();
                 else if (width != line.length())
-                    throw new IllegalArgumentException("Input file \""
-                        + filename + "\" is malformed; line " + lines.size()
-                        + " incorrect width.");
+                    throw new IllegalArgumentException("Input file \"" + filename
+                            + "\" is malformed; line " + lines.size() + " incorrect width.");
             }
         }
-        
+
         Board board = new Board(width, lines.size());
         for (int y = 0; y != lines.size(); ++y) {
             line = lines.get(y);
             for (int x = 0; x != width; ++x) {
                 char c = line.charAt(x);
                 switch (c) {
-                case 'W':
-                    board.addWall(x, y);
-                    break;
-                case 'P':
-                    board.addPill(x, y);
-                    break;
-                case 'X':
-                    board.registerPacPortal(x, y);
-                    break;
-                case 'G':
-                    board.registerGhostPortal(x, y);
-                    break;
+                    case 'W':
+                        board.addWall(x, y);
+                        break;
+                    case 'P':
+                        board.addPill(x, y);
+                        break;
+                    case 'X':
+                        board.registerPacPortal(x, y);
+                        break;
+                    case 'G':
+                        board.registerGhostPortal(x, y);
+                        break;
                 }
             }
         }
-        
+
         for (int i = 0; i != nHomerGhosts; ++i)
             board.registerGhost(true);
         for (int i = 0; i != nRandomGhosts; ++i)
             board.registerGhost(false);
-        
+
         return board;
     }
-    
+
     /**
      * The following method controls a multi-user game. When a given game is over, it will simply
      * restart the game with whatever players are remaining. However, if all players have
-     * disconnected
-     * then it will stop.
+     * disconnected then it will stop.
      */
-    private static void multiUserGame(ClockThread clk, Board game,
-        Master... connections) throws IOException {
+    private static void multiUserGame(ClockThread clk, Board game, Master... connections)
+            throws IOException {
         // save initial state of board, so we can reset it.
         byte[] state = game.toByteArray();
-        
+
         clk.start(); // start the clock ticking!!!
-        
+
         // loop forever
         while (Main.atleastOneConnection(connections)) {
             game.setState(Board.READY);
@@ -219,49 +209,45 @@ public class Main {
             game.fromByteArray(state);
         }
     }
-    
+
     private static void pause(int delay) {
         try {
             Thread.sleep(delay);
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+        }
     }
-    
+
     private static void runClient(String addr, int port) throws IOException {
         try (Socket s = new Socket(addr, port)) {
-            System.out.println("PACMAN CLIENT CONNECTED TO " + addr + ":"
-                + port);
+            System.out.println("PACMAN CLIENT CONNECTED TO " + addr + ":" + port);
             // EDITED: from .run();
             new Slave(s).start();
         }
     }
-    
-    private static void runServer(int port, int nclients, int gameClock,
-        int broadcastClock, Board game) {
+
+    private static void runServer(int port, int nclients, int gameClock, int broadcastClock,
+            Board game) {
         ClockThread clk = new ClockThread(gameClock, game, null);
-        
+
         // Listen for connections
         System.out.println("PACMAN SERVER LISTENING ON PORT " + port);
         System.out.println("PACMAN SERVER AWAITING " + nclients + " CLIENTS");
-        
+
         try (ServerSocket ss = new ServerSocket(port)) {
             Master[] connections = new Master[nclients];
             // Now, we await connections.
             while (true)
                 // Wait for a socket
                 try (Socket s = ss.accept()) {
-                    System.out.println("ACCEPTED CONNECTION FROM: "
-                        + s.getInetAddress());
+                    System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());
                     int uid = game.registerPacman();
-                    connections[--nclients] = new Master(s, uid,
-                        broadcastClock, game);
+                    connections[--nclients] = new Master(s, uid, broadcastClock, game);
                     connections[nclients].start();
                     if (nclients == 0) {
-                        System.out
-                            .println("ALL CLIENTS ACCEPTED --- GAME BEGINS");
+                        System.out.println("ALL CLIENTS ACCEPTED --- GAME BEGINS");
                         Main.multiUserGame(clk, game, connections);
-                        System.out
-                            .println("ALL CLIENTS DISCONNECTED --- GAME OVER");
-                        
+                        System.out.println("ALL CLIENTS DISCONNECTED --- GAME OVER");
+
                         return; // done
                     }
                 }
@@ -269,18 +255,17 @@ public class Main {
             System.err.println("I/O error: " + e.getMessage());
         }
     }
-    
-    private static void singleUserGame(int gameClock, Board game)
-        throws IOException {
+
+    private static void singleUserGame(int gameClock, Board game) throws IOException {
         int playerID = game.registerPacman();
-        BoardFrame display = new BoardFrame("Pacman (single-user)", game,
-            playerID, new Player(playerID, game));
+        BoardFrame display =
+                new BoardFrame("Pacman (single-user)", game, playerID, new Player(playerID, game));
         ClockThread clk = new ClockThread(gameClock, game, display);
         // save initial state of board, so we can reset it.
         byte[] state = game.toByteArray();
-        
+
         clk.start(); // start the clock ticking!!!
-        
+
         while (display.isVisible()) {
             // keep going until the frame becomes invisible
             game.setState(Board.READY);
@@ -295,35 +280,25 @@ public class Main {
             game.fromByteArray(state);
         }
     }
-    
+
     private static void usage() {
-        String[][] info = {
-            {
-                "server <n>",
-                "Run in server mode, awaiting n client connections"
-            }, {
-                "connect <url>", "Connect to server at <url>"
-            }, {
-                "clock", "Set clock period (default 20ms)"
-            }, {
-                "bclock", "Set broadcast clock period (default 5ms)"
-            }, {
-                "port", "Set port for use for connection (default 32768)"
-            }, {
-                "nhoming <n>", "Set the number of \"homing\" ghosts"
-            }, {
-                "nrandom <n>", "Set the number of \"random walking\" ghosts"
-            }
-        };
+        String[][] info =
+                { {"server <n>", "Run in server mode, awaiting n client connections"},
+                        {"connect <url>", "Connect to server at <url>"},
+                        {"clock", "Set clock period (default 20ms)"},
+                        {"bclock", "Set broadcast clock period (default 5ms)"},
+                        {"port", "Set port for use for connection (default 32768)"},
+                        {"nhoming <n>", "Set the number of \"homing\" ghosts"},
+                        {"nrandom <n>", "Set the number of \"random walking\" ghosts"}};
         System.out.println("Usage: java com.pacman.Main <options> ");
         System.out.println("Options:");
-        
+
         // first, work out gap information
         int gap = 0;
-        
+
         for (String[] p : info)
             gap = Math.max(gap, p[0].length() + 5);
-        
+
         // now, print the information
         for (String[] p : info) {
             System.out.print("  -" + p[0]);

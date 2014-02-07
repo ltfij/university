@@ -1,10 +1,7 @@
 package com.hjwylde.uni.swen221.assignment04.shapes.geometry;
 
 /*
- * Code for Assignment 4, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -13,7 +10,7 @@ package com.hjwylde.uni.swen221.assignment04.shapes.geometry;
  * @author Henry J. Wylde
  */
 public enum ShapeOperationType {
-    
+
     /**
      * The difference is written as "A - B" or "A \ B" and represents all parts of A that aren't in
      * B.
@@ -27,12 +24,12 @@ public enum ShapeOperationType {
      * The union is written as "A + B" and represents all parts that are in either A or B.
      */
     UNION('+');
-    
+
     /**
      * The operator character.
      */
     private char op;
-    
+
     /**
      * Specifies the character that represents this ShapeOperationType.
      * 
@@ -41,7 +38,7 @@ public enum ShapeOperationType {
     private ShapeOperationType(char op) {
         this.op = op;
     }
-    
+
     /*
      * @see java.lang.Enum#toString()
      */
@@ -49,7 +46,7 @@ public enum ShapeOperationType {
     public String toString() {
         return op + "";
     }
-    
+
     /**
      * Tries to return the ShapeOperationType based on the input character. Returns null if the
      * operator does not correspond to a ShapeOperationType.
@@ -59,15 +56,15 @@ public enum ShapeOperationType {
      */
     public static ShapeOperationType getFromOperator(char op) {
         switch (op) {
-        case '-':
-            return DIFFERENCE;
-        case '&':
-            return INTERSECTION;
-        case '+':
-            return UNION;
+            case '-':
+                return DIFFERENCE;
+            case '&':
+                return INTERSECTION;
+            case '+':
+                return UNION;
         }
-        
+
         return null;
     }
-    
+
 }

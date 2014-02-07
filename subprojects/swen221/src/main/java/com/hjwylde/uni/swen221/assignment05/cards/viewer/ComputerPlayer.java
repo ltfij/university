@@ -8,20 +8,17 @@ import com.hjwylde.uni.swen221.assignment05.cards.game.Suit;
 import com.hjwylde.uni.swen221.assignment05.cards.game.Trick;
 
 /*
- * Code for Assignment 5, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 5, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class ComputerPlayer {
-    
+
     private final Player player;
-    
+
     public ComputerPlayer(Player player) {
         this.player = player;
     }
-    
+
     /**
      * Determine the next card to play.
      */

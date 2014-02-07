@@ -3,10 +3,7 @@ package com.hjwylde.uni.swen221.assignment06.com.bytebach.model;
 import java.util.Arrays;
 
 /*
- * Code for Assignment 6, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 6, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -19,14 +16,14 @@ import java.util.Arrays;
  * @author djp
  */
 public class ReferenceValue implements Value {
-    
+
     private final String table;
     private final Value[] keys;
-    
+
     /**
      * Create a reference to a table entry. This is specified as a table name, and a list of keys
-     * for
-     * that table. Obviously, the number and type of keys must match the table field declarations.
+     * for that table. Obviously, the number and type of keys must match the table field
+     * declarations.
      * 
      * @param table the table name.
      * @param keys as objects, which are automatically converted to Values.
@@ -45,15 +42,14 @@ public class ReferenceValue implements Value {
             else if (k instanceof ReferenceValue)
                 this.keys[i] = (ReferenceValue) k;
             else
-                throw new IllegalArgumentException("Invalid key parameters: "
-                    + k);
+                throw new IllegalArgumentException("Invalid key parameters: " + k);
         }
     }
-    
+
     /**
      * Create a reference to a table entry. This is specified as a table name, and a list of keys
-     * for
-     * that table. Obviously, the number and type of keys must match the table field declarations.
+     * for that table. Obviously, the number and type of keys must match the table field
+     * declarations.
      * 
      * @param table the table name.
      * @param keys the keys.
@@ -62,7 +58,7 @@ public class ReferenceValue implements Value {
         this.table = table;
         this.keys = keys;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof ReferenceValue) {
@@ -71,26 +67,26 @@ public class ReferenceValue implements Value {
         }
         return false;
     }
-    
+
     @Override
     public int hashCode() {
         return table.hashCode() + Arrays.hashCode(keys);
     }
-    
+
     /**
      * Get the keys associated with this reference.
      */
     public Value[] keys() {
         return keys;
     }
-    
+
     /**
      * Get the table name.
      */
     public String table() {
         return table;
     }
-    
+
     @Override
     public String toString() {
         String r = "[" + table;
@@ -98,7 +94,7 @@ public class ReferenceValue implements Value {
             r += ":" + k;
         return r + "]";
     }
-    
+
     public static Object getRawValueObject(Value v) {
         if (v instanceof IntegerValue)
             return (((IntegerValue) v).value());
@@ -108,7 +104,7 @@ public class ReferenceValue implements Value {
             return (((StringValue) v).value());
         else if (v instanceof ReferenceValue)
             return (v);
-        
+
         throw new InvalidOperation();
     }
 }

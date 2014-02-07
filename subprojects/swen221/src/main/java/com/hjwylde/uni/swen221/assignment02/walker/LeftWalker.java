@@ -9,10 +9,7 @@ import maze.Walker;
 import com.hjwylde.uni.swen221.assignment02.helper.DirectionHelper;
 
 /*
- * Code for Assignment 2, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 2, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -25,24 +22,24 @@ import com.hjwylde.uni.swen221.assignment02.helper.DirectionHelper;
  * @author Henry J. Wylde
  */
 public class LeftWalker extends Walker {
-    
+
     private static final Point INITIAL_POINT = new Point(0, 0);
-    
+
     /**
      * Keeps track of where the walker has been.
      */
     private BallOfString path = new BallOfString();
     private boolean oppositeMode = false;
-    
+
     private boolean beginning = true;
-    
+
     /**
      * Creates a new LeftWalker with the class as its name.
      */
     public LeftWalker() {
         this(LeftWalker.class.getName());
     }
-    
+
     /**
      * Creates a new LeftWalker with the specified name.
      * 
@@ -51,25 +48,25 @@ public class LeftWalker extends Walker {
     public LeftWalker(String name) {
         super(name);
     }
-    
+
     /*
      * @see maze.Walker#move(maze.View)
      */
     @Override
     protected Direction move(View view) {
         Direction dir = path.getDirection(); // Get the current direction.
-        
+
         // Check if we're encountering a point that we've come across before
         if (path.numberOfPasses(path.getEnd(1), path.getEnd()) > 1)
             oppositeMode = true;
         else if (oppositeMode) { // Only turn oppositeMode off if we were already in it...
             oppositeMode = false;
-            
+
             // ...because of this:
             dir = DirectionHelper.clockwise(dir); // A correction to ensure that after leaving
                                                   // oppositeMode we follow the correct left wall.
         }
-        
+
         // Initialisation of the walker (these if statements occur when we're still trying to find
         // the
         // first wall)
@@ -80,7 +77,7 @@ public class LeftWalker extends Walker {
             for (Direction d : Direction.values())
                 if (!view.mayMove(d))
                     wall = d;
-            
+
             if (wall == null) // Head North, but don't change "beginning": we need to keep going
                               // through
                               // this condition until we find a start wall.
@@ -91,7 +88,7 @@ public class LeftWalker extends Walker {
                                                        // left.
                 beginning = false;
             }
-            
+
             // Check for setting up the initial values of the path ball of string variable.
             // This adds in a INITIAL_POINT to the path, and also a point just before it so as to
             // allow
@@ -104,15 +101,15 @@ public class LeftWalker extends Walker {
                 // get the
                 // point that is "opposite(dir)".
                 path.lineTo(BallOfString.getNextPoint(LeftWalker.INITIAL_POINT,
-                    DirectionHelper.opposite(dir)));
-                
+                        DirectionHelper.opposite(dir)));
+
                 path.lineTo(LeftWalker.INITIAL_POINT);
             }
         } else if (!oppositeMode) { // Hug left wall mode!
             while (!view.mayMove(DirectionHelper.antiClockwise(dir)))
                 // While we can't move in an anti-clockwise direction...
                 dir = DirectionHelper.clockwise(dir); // Turn clockwise.
-                
+
             dir = DirectionHelper.antiClockwise(dir); // Correct the direction, when we get out of
                                                       // the
                                                       // loop it means we can move in direction
@@ -121,12 +118,12 @@ public class LeftWalker extends Walker {
             while (!view.mayMove(DirectionHelper.clockwise(dir)))
                 // While we can't move in a clockwise direction...
                 dir = DirectionHelper.antiClockwise(dir); // Turn anti-clockwise.
-                
+
             dir = DirectionHelper.clockwise(dir); // Correct the direction, when we get out of the
                                                   // loop it
                                                   // means we can move in direction clockwise(dir).
         }
-        
+
         path.lineIn(dir); // Record / move to the direction found.
         try {
             Thread.sleep(750);

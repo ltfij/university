@@ -13,7 +13,7 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.util.Util;
  * @since 2/08/2013
  */
 public enum Weapon {
-    
+
     /**
      * The rope weapon.
      */
@@ -50,7 +50,7 @@ public enum Weapon {
      * The axe weapon.
      */
     AXE;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -60,10 +60,10 @@ public enum Weapon {
         for (String part : name().split("_")) {
             if (sb.length() != 0)
                 sb.append(" ");
-            
+
             sb.append(Util.toTitleCase(part, Locale.ENGLISH));
         }
-        
+
         return sb.toString();
     }
 }

@@ -1,10 +1,7 @@
 package com.hjwylde.uni.comp103.assignment02.checkXML;
 
 /*
- * Code for Assignment 2, COMP 103
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 2, COMP 103 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 import java.awt.BorderLayout;
@@ -29,47 +26,46 @@ import com.hjwylde.uni.comp103.util.FileChooser;
  */
 
 public class ListXMLTags implements ActionListener {
-    
+
     // Fields
     private final JFrame frame;
     private final JTextArea textArea;
     private final JTextArea messageArea;
-    
+
     private String fileName;
-    
+
     // Constructors
     /**
      * Construct a new CheckXML object and set up the GUI
      */
     public ListXMLTags() {
-        
+
         frame = new JFrame("ListXMLTags");
         frame.setSize(700, 700);
-        
+
         // The message area, mainly for debugging.
         messageArea = new JTextArea(1, 80); // one line text area for messages.
         frame.getContentPane().add(messageArea, BorderLayout.SOUTH);
-        
+
         // The text area
         textArea = new JTextArea(30, 30);
-        frame.getContentPane().add(new JScrollPane(textArea),
-            BorderLayout.CENTER);
-        
+        frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
+
         // The buttons
         JPanel buttonPanel = new JPanel();
         frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
-        
+
         addButton(buttonPanel, "Choose File");
         addButton(buttonPanel, "List File");
         addButton(buttonPanel, "Show Tokens");
         addButton(buttonPanel, "List Tags");
         addButton(buttonPanel, "Quit");
-        
+
         frame.setVisible(true);
     }
-    
+
     // GUI Methods
-    
+
     /** Respond to button presses */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -89,44 +85,44 @@ public class ListXMLTags implements ActionListener {
         else if (button.equals("Quit"))
             frame.dispose();
     }
-    
+
     /** List the current file */
     public void listFile() {
         try (Scanner s = new Scanner(new File(fileName))) {
-            textArea.setText("Listing of File " + fileName
-                + ":\n-------------------\n");
-            
+            textArea.setText("Listing of File " + fileName + ":\n-------------------\n");
+
             while (s.hasNext()) {
                 textArea.append(s.nextLine());
                 textArea.append("\n");
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
-    
+
     // Other Methods
-    
+
 /** Read a file and list the types of all the tags
        * Uses a Scanner to read the tokens from the file.
        * It simply ignores any token that doesn't start with "<"
        */
     public void listTags() {
         try (Scanner s = new Scanner(new File(fileName))) {
-            textArea
-                .setText("Tags in " + fileName + ":\n-------------------\n");
-            
+            textArea.setText("Tags in " + fileName + ":\n-------------------\n");
+
             s.useDelimiter("\\s+|(?=[<>=])|(?<=[>])"); // magic to make the scanner
                                                        // break up the tokens
                                                        // right.
-            
+
             // Print out all the tokens, one on each line
             while (s.hasNext()) {
                 String token = s.next();
                 if (token.startsWith("<"))
                     textArea.append(token.substring(1) + "\n");
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
-    
+
 /** List all the tokens in the current file
      * Uses a Scanner to read the tokens from the file.
      * and prints them out, one token per line.
@@ -137,21 +133,21 @@ public class ListXMLTags implements ActionListener {
      */
     public void showTokens() {
         try (Scanner s = new Scanner(new File(fileName))) {
-            textArea.setText("Tokens in " + fileName
-                + ":\n-------------------\n");
-            
+            textArea.setText("Tokens in " + fileName + ":\n-------------------\n");
+
             s.useDelimiter("\\s+|(?=[<>=])|(?<=[>])"); // magic to make the scanner
                                                        // break up the tokens
                                                        // right.
-            
+
             // Print out all the tokens, one on each line
             while (s.hasNext()) {
                 textArea.append(s.next());
                 textArea.append("\n");
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
-    
+
     /** Helper method for adding buttons */
     private JButton addButton(JPanel panel, String name) {
         JButton button = new JButton(name);
@@ -159,10 +155,10 @@ public class ListXMLTags implements ActionListener {
         panel.add(button);
         return button;
     }
-    
+
     // Main
     public static void main(String[] arguments) {
         new ListXMLTags();
     }
-    
+
 }

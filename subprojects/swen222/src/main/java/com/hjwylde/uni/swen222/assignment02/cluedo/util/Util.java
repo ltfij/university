@@ -11,12 +11,12 @@ import java.util.Locale;
  * @since 25/07/2013
  */
 public final class Util {
-    
+
     /**
      * This class cannot be instantiated.
      */
     private Util() {}
-    
+
     /**
      * Converts the given string to title case using the given locale.
      * 
@@ -27,8 +27,7 @@ public final class Util {
     public static String toTitleCase(String str, Locale locale) {
         if (str.length() <= 1)
             return str.toUpperCase(locale);
-        
-        return str.substring(0, 1).toUpperCase(locale)
-            + str.substring(1).toLowerCase(locale);
+
+        return str.substring(0, 1).toUpperCase(locale) + str.substring(1).toLowerCase(locale);
     }
 }

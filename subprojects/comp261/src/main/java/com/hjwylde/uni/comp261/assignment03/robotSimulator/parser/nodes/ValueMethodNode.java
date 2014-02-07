@@ -4,10 +4,7 @@ import com.hjwylde.uni.comp261.assignment03.robotSimulator.World;
 import com.hjwylde.uni.comp261.assignment03.robotSimulator.parser.types.ValueMethodType;
 
 /*
- * Code for Assignment 3, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 3, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -16,9 +13,9 @@ import com.hjwylde.uni.comp261.assignment03.robotSimulator.parser.types.ValueMet
  * @author Henry J. Wylde
  */
 public class ValueMethodNode implements Node {
-    
+
     private final ValueMethodType type;
-    
+
     /**
      * Constructs a <code>ValueMethodNode</code> of the specified type.
      * 
@@ -27,7 +24,7 @@ public class ValueMethodNode implements Node {
     public ValueMethodNode(ValueMethodType type) {
         this.type = type;
     }
-    
+
     /**
      * Evaluates this <code>ValueMethodNode</code> and returns its integer value.
      * 
@@ -37,15 +34,15 @@ public class ValueMethodNode implements Node {
      */
     public int evaluate(int robotID, World world) {
         switch (type) {
-        case BOX_DISTANCE:
-            return world.distanceToFirstBox(robotID);
-        case THING_DISTANCE:
-            return world.distanceToFirstThing(robotID);
-        default: // NUMBER_OF_THINGS_NOT_IN_BOXES
-            return world.numberOfThingsNotInBoxes();
+            case BOX_DISTANCE:
+                return world.distanceToFirstBox(robotID);
+            case THING_DISTANCE:
+                return world.distanceToFirstThing(robotID);
+            default: // NUMBER_OF_THINGS_NOT_IN_BOXES
+                return world.numberOfThingsNotInBoxes();
         }
     }
-    
+
     /*
      * @see java.lang.Object#toString()
      */

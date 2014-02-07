@@ -27,17 +27,17 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 public class DocumentOutputStream extends OutputStream {
-    
+
     private Document doc;
     private StringBuffer sb = new StringBuffer(" ");
-    
+
     DocumentOutputStream(Document d) {
         if (d == null)
             throw new NullPointerException("Document cannot be null");
-        
+
         doc = d;
     }
-    
+
     @Override
     public void write(int b) {
         try {

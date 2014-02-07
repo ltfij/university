@@ -10,18 +10,15 @@ import com.hjwylde.uni.swen221.assignment06.com.bytebach.model.*;
 import com.hjwylde.uni.swen221.assignment06.com.bytebach.server.WebServer;
 
 /*
- * Code for Assignment 6, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 6, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class Main {
-    
+
     // This determines the address of the style sheet to use. You're welcome to use your own if you
     // like. If you don't know what a stylesheet is, don't worry --- you can safely ignore it.
     private static final String stylesheet = "http://www.ecs.vuw.ac.nz/~djp/bernies.css";
-    
+
     /**
      * Simply start the server and run.
      */
@@ -29,23 +26,23 @@ public class Main {
         // Create master database of all orders and parts.
         Database bachDB = new MyDatabase();
         Main.initBachDB(bachDB);
-        
+
         if (args.length > 0)
             Main.populateDBfromFile(args[0], bachDB);
-        
+
         // Finally, create server and run!
         new WebServer(bachDB, Main.stylesheet).run();
     }
-    
+
     public static void validateParameters(Object... parameters) {
         if (parameters == null)
             throw new InvalidOperation("Null parameter.");
-        
+
         for (Object o : parameters)
             if (o == null)
                 throw new InvalidOperation("Null parameter.");
     }
-    
+
     private static void initBachDB(Database bachDB) {
         // First, create customer table
         ArrayList<Field> customerFields = new ArrayList<>();
@@ -55,7 +52,7 @@ public class Main {
         customerFields.add(new Field("Business", Field.Type.BOOLEAN, false));
         customerFields.add(new Field("Notes", Field.Type.TEXTAREA, false));
         bachDB.createTable("Customers", customerFields);
-        
+
         // Second, create order table
         ArrayList<Field> orderFields = new ArrayList<>();
         orderFields.add(new Field("Order ID", Field.Type.INTEGER, true));
@@ -63,7 +60,7 @@ public class Main {
         orderFields.add(new Field("Item", "Items", false));
         orderFields.add(new Field("Quantity", Field.Type.INTEGER, false));
         bachDB.createTable("Orders", orderFields);
-        
+
         // Third, create items table
         ArrayList<Field> itemsFields = new ArrayList<>();
         itemsFields.add(new Field("Item ID", Field.Type.INTEGER, true));
@@ -74,17 +71,16 @@ public class Main {
         itemsFields.add(new Field("Price", Field.Type.INTEGER, false));
         itemsFields.add(new Field("Quantity", Field.Type.INTEGER, false));
         bachDB.createTable("Items", itemsFields);
-        
+
         // Finally, create categories table
         ArrayList<Field> catFields = new ArrayList<>();
         catFields.add(new Field("Category ID", Field.Type.INTEGER, true));
         catFields.add(new Field("Name", Field.Type.TEXT, false));
         bachDB.createTable("Categories", catFields);
     }
-    
+
     private static void populateDBfromFile(String filename, Database bachDB) {
-        try (BufferedReader reader = new BufferedReader(
-            new FileReader(filename))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] split = line.split(",");
@@ -110,16 +106,14 @@ public class Main {
                         keys[0] = Integer.parseInt(s[1]);
                         row.add(new ReferenceValue(table, keys));
                     } else
-                        throw new RuntimeException(
-                            "Invalid table item in row: " + line + "(" + item
-                                + ")");
+                        throw new RuntimeException("Invalid table item in row: " + line + "("
+                                + item + ")");
                 }
                 Table table = bachDB.table(split[0]);
                 table.rows().add(row);
             }
         } catch (IOException e) {
-            System.err.println("Error loading file: " + filename + " ("
-                + e.getMessage() + ")");
+            System.err.println("Error loading file: " + filename + " (" + e.getMessage() + ")");
         }
     }
 }

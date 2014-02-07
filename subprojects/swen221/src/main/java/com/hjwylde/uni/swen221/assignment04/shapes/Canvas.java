@@ -6,26 +6,22 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 /*
- * Code for Assignment 4, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
- * A canvas represents a place on which one can draw points. A canvas will
- * automatically resize to ensure that it is big enough for any point to be
- * drawn.
+ * A canvas represents a place on which one can draw points. A canvas will automatically resize to
+ * ensure that it is big enough for any point to be drawn.
  * 
  * @author djp
  * 
  */
 public class Canvas {
-    
+
     private int width;
     private int height;
     private Color[][] grid;
-    
+
     /**
      * Construct an empty Canvas.
      */
@@ -34,7 +30,7 @@ public class Canvas {
         width = 0;
         height = 0;
     }
-    
+
     /**
      * Construct a canvas from an existing canvas.
      */
@@ -46,11 +42,10 @@ public class Canvas {
             for (int y = 0; y != height; ++y)
                 grid[x][y] = c.grid[x][y];
     }
-    
+
     /**
-     * Return the color at the given x and y co-ordinate. Observe that this
-     * co-ordinate must be within the bounds of the canvas, otherwise an
-     * exception will occur.
+     * Return the color at the given x and y co-ordinate. Observe that this co-ordinate must be
+     * within the bounds of the canvas, otherwise an exception will occur.
      */
     public Color colorAt(int x, int y) {
         if (x < 0)
@@ -58,14 +53,12 @@ public class Canvas {
         if (y < 0)
             throw new IllegalArgumentException("y position cannot be negative!");
         if (x >= width)
-            throw new IllegalArgumentException(
-                "x position exceeds canvas width!");
+            throw new IllegalArgumentException("x position exceeds canvas width!");
         if (y >= height)
-            throw new IllegalArgumentException(
-                "y position exceeds canvas height!");
+            throw new IllegalArgumentException("y position exceeds canvas height!");
         return grid[x][y];
     }
-    
+
     /**
      * Draw a point of the specific color within the canvas.
      */
@@ -74,10 +67,10 @@ public class Canvas {
             throw new IllegalArgumentException("x position cannot be negative!");
         if (y < 0)
             throw new IllegalArgumentException("y position cannot be negative!");
-        
+
         int nwidth = Math.max(width, x + 1);
         int nheight = Math.max(height, y + 1);
-        
+
         if ((nwidth != width) || (nheight != height)) {
             // In this case, the canvas is not big enough.
             // Therefore, we must automatically resize it.
@@ -90,37 +83,36 @@ public class Canvas {
                     else
                         // put in default color in.
                         ngrid[i][j] = Color.WHITE;
-            
+
             grid = ngrid;
             width = nwidth;
             height = nheight;
         }
         grid[x][y] = color;
     }
-    
+
     /**
      * Return the current height of this canvas
      */
     public int height() {
         return height;
     }
-    
+
     /**
-     * Show the contents of the canvas using a simple GUI Window. This method is
-     * for debugging purposes only.
+     * Show the contents of the canvas using a simple GUI Window. This method is for debugging
+     * purposes only.
      */
     public void show() {
-        final BufferedImage img = new BufferedImage(width, height,
-            BufferedImage.TYPE_INT_RGB);
+        final BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int x = 0; x != width; ++x)
             for (int y = 0; y != height; ++y)
                 img.setRGB(x, y, grid[x][y].toRGB());
-        
+
         JFrame window = new JFrame("Assignment 3, Canvas Viewer");
         java.awt.Canvas c = new java.awt.Canvas() {
-            
+
             private static final long serialVersionUID = 1L;
-            
+
             @Override
             public void paint(Graphics g) {
                 g.drawImage(img, 10, 10, null);
@@ -132,10 +124,10 @@ public class Canvas {
         window.pack();
         window.setVisible(true);
     }
-    
+
     /**
-     * Convert the contents of the canvas into a string format, where each point
-     * is given using as a 6 digit hexadecimal string.
+     * Convert the contents of the canvas into a string format, where each point is given using as a
+     * 6 digit hexadecimal string.
      */
     @Override
     public String toString() {
@@ -148,7 +140,7 @@ public class Canvas {
         }
         return r.toString();
     }
-    
+
     /**
      * Return the current width of this canvas.
      */

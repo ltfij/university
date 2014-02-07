@@ -23,10 +23,7 @@ import java.io.IOException;
 import java.util.Random;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -36,68 +33,61 @@ import java.util.Random;
  * @author djp
  */
 public final class RandomGhost extends MovingCharacter implements Ghost {
-    
-    protected static final Random random = new Random(
-        System.currentTimeMillis());
-    
-    private static final Image RGHOST_RIGHT = BoardCanvas
-        .loadImage("rghostright.png");
-    
-    private static final Image RGHOST_LEFT = BoardCanvas
-        .loadImage("rghostleft.png");
-    
-    private static final Image RGHOST_UP = BoardCanvas
-        .loadImage("rghostup.png");
-    
-    private static final Image RGHOST_DOWN = BoardCanvas
-        .loadImage("rghostdown.png");
-    
+
+    protected static final Random random = new Random(System.currentTimeMillis());
+
+    private static final Image RGHOST_RIGHT = BoardCanvas.loadImage("rghostright.png");
+
+    private static final Image RGHOST_LEFT = BoardCanvas.loadImage("rghostleft.png");
+
+    private static final Image RGHOST_UP = BoardCanvas.loadImage("rghostup.png");
+
+    private static final Image RGHOST_DOWN = BoardCanvas.loadImage("rghostdown.png");
+
     public RandomGhost(int realX, int realY) {
         super(realX, realY, MovingCharacter.STOPPED);
     }
-    
+
     @Override
     public void draw(Graphics g) {
         switch (direction) {
-        case MovingCharacter.RIGHT:
-            g.drawImage(RandomGhost.RGHOST_RIGHT, realX, realY, null, null);
-            break;
-        case MovingCharacter.UP:
-            g.drawImage(RandomGhost.RGHOST_UP, realX, realY, null, null);
-            break;
-        case MovingCharacter.DOWN:
-            g.drawImage(RandomGhost.RGHOST_DOWN, realX, realY, null, null);
-            break;
-        case MovingCharacter.LEFT:
-            g.drawImage(RandomGhost.RGHOST_LEFT, realX, realY, null, null);
-            break;
+            case MovingCharacter.RIGHT:
+                g.drawImage(RandomGhost.RGHOST_RIGHT, realX, realY, null, null);
+                break;
+            case MovingCharacter.UP:
+                g.drawImage(RandomGhost.RGHOST_UP, realX, realY, null, null);
+                break;
+            case MovingCharacter.DOWN:
+                g.drawImage(RandomGhost.RGHOST_DOWN, realX, realY, null, null);
+                break;
+            case MovingCharacter.LEFT:
+                g.drawImage(RandomGhost.RGHOST_LEFT, realX, realY, null, null);
+                break;
         }
     }
-    
+
     @Override
     public int speed() {
         return 3;
     }
-    
+
     @Override
     public void tick(Board game) {
         super.tick(game);
-        
+
         // check whether we are at an intersection.
-        if ((direction == MovingCharacter.DOWN)
-            || (direction == MovingCharacter.UP)) {
+        if ((direction == MovingCharacter.DOWN) || (direction == MovingCharacter.UP)) {
             // ok, moving in up/down direction
             if (!game.canMoveLeft(this) && !game.canMoveRight(this))
                 return; // no horizontal movement possible
-        } else if ((direction == MovingCharacter.RIGHT)
-            || (direction == MovingCharacter.LEFT))
+        } else if ((direction == MovingCharacter.RIGHT) || (direction == MovingCharacter.LEFT))
             // ok, moving in left/right direction
             if (!game.canMoveUp(this) && !game.canMoveDown(this))
                 return; // no horizontal movement possible
-                
+
         queued = RandomGhost.random.nextInt(4) + 1; // don't stop
     }
-    
+
     @Override
     public void toOutputStream(DataOutputStream dout) throws IOException {
         dout.writeByte(Character.RANDOMGHOST);
@@ -105,9 +95,9 @@ public final class RandomGhost extends MovingCharacter implements Ghost {
         dout.writeShort(realY);
         dout.writeByte(direction);
     }
-    
-    public static RandomGhost fromInputStream(int rx, int ry,
-        DataInputStream din) throws IOException {
+
+    public static RandomGhost fromInputStream(int rx, int ry, DataInputStream din)
+            throws IOException {
         int dir = din.readByte();
         RandomGhost r = new RandomGhost(rx, ry);
         r.direction = dir;

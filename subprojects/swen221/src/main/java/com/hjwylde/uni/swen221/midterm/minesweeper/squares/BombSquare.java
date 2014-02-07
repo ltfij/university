@@ -1,10 +1,7 @@
 package com.hjwylde.uni.swen221.midterm.minesweeper.squares;
 
 /*
- * Code for Mid-term Test, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Mid-term Test, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -14,5 +11,5 @@ package com.hjwylde.uni.swen221.midterm.minesweeper.squares;
  * 
  */
 public class BombSquare extends Square {
-    
+
 }

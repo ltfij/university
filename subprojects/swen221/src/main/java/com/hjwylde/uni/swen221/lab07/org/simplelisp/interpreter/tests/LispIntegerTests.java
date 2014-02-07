@@ -10,10 +10,7 @@ import com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter.LispInteger;
 import com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter.LispString;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -23,26 +20,25 @@ import com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter.LispString;
  * 
  */
 public class LispIntegerTests {
-    
+
     @Test
     public void testEquals() {
         Assert.assertFalse(new LispInteger(1).equals(new LispInteger(2)));
         Assert.assertTrue(new LispInteger(2).equals(new LispInteger(2)));
         Assert.assertFalse(new LispInteger(1).equals(new LispString("2")));
     }
-    
+
     @Test
     public void testEvaluate() {
-        Assert.assertEquals(new LispInteger(2).evaluate(
-            new HashMap<String, LispExpr>(), new HashMap<String, LispExpr>()),
-            new LispInteger(2));
+        Assert.assertEquals(new LispInteger(2).evaluate(new HashMap<String, LispExpr>(),
+                new HashMap<String, LispExpr>()), new LispInteger(2));
     }
-    
+
     @Test
     public void testToString() {
         Assert.assertTrue(new LispInteger(2).toString().equals("2"));
     }
-    
+
     @Test
     public void testValue() {
         Assert.assertTrue(new LispInteger(2).value() == 2);

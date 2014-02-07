@@ -5,19 +5,16 @@ import javax.swing.UIManager;
 import javax.vecmath.Matrix4d;
 
 /*
- * Code for Assignment 4, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class Main {
-    
+
     public static final Matrix4d MATRIX4D_IDENTITY = Main.initIdentityMatrix();
-    
-    public static String ROOT_PATH = Main.class.getProtectionDomain()
-        .getCodeSource().getLocation().getPath().replaceAll("%20", " ");
-    
+
+    public static String ROOT_PATH = Main.class.getProtectionDomain().getCodeSource().getLocation()
+            .getPath().replaceAll("%20", " ");
+
     /**
      * Constrain <code>val</code> between <code>min</code> and <code>max</code> ie.
      * 
@@ -33,7 +30,7 @@ public class Main {
     public static double constrain(double val, double min, double max) {
         return Math.min(Math.max(val, min), max);
     }
-    
+
     /**
      * Constrain <code>val</code> between <code>min</code> and <code>max</code> ie.
      * 
@@ -49,33 +46,31 @@ public class Main {
     public static int constrain(int val, int min, int max) {
         return Math.min(Math.max(val, min), max);
     }
-    
+
     /**
      * Display a Swing error message box with the specified <code>String</code> error message.
      * 
      * @param err The error message to display.
      */
     public static void displayError(String err) {
-        JOptionPane.showMessageDialog(null, err, "Error",
-            JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, err, "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         if (Main.ROOT_PATH.substring(0, 1).equals("/"))
             Main.ROOT_PATH = Main.ROOT_PATH.substring(1);
         if (!Main.ROOT_PATH.endsWith("/"))
-            Main.ROOT_PATH = Main.ROOT_PATH.substring(0,
-                Main.ROOT_PATH.lastIndexOf("/"));
-        
+            Main.ROOT_PATH = Main.ROOT_PATH.substring(0, Main.ROOT_PATH.lastIndexOf("/"));
+
         new MainFrame();
     }
-    
+
     /**
      * Creates an identity Matrix4d.
      * 
@@ -84,7 +79,7 @@ public class Main {
     private static Matrix4d initIdentityMatrix() {
         Matrix4d m = new Matrix4d();
         m.setIdentity();
-        
+
         return m;
     }
 }

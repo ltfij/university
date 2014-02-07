@@ -8,6 +8,6 @@ package com.hjwylde.uni.swen222.lab03.battleships;
  * 
  */
 public class EmptySquare extends GridSquare {
-    
+
     public EmptySquare() {}
 }

@@ -16,10 +16,7 @@
 package com.hjwylde.uni.swen221.assignment08.pacman.game;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public interface Ghost {}

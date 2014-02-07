@@ -21,33 +21,30 @@ import com.hjwylde.uni.comp261.assignment04.parser.Parser;
 import com.hjwylde.uni.comp261.assignment04.parser.nodes.Polytope3dNode;
 
 /*
- * Code for Assignment 4, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
- * Coordinate system used: Right-handed coordinate system. X-axis and y-axis
- * are right and up from screen, with z coming out of screen. Camera is looking
- * down z-axis (into negatives) at the view plane (the screen).
+ * Coordinate system used: Right-handed coordinate system. X-axis and y-axis are right and up from
+ * screen, with z coming out of screen. Camera is looking down z-axis (into negatives) at the view
+ * plane (the screen).
  * 
  * @author Henry J. Wylde
  */
 public class World3d implements KeyListener {
-    
+
     public static double ambientLight = 0.8;
-    
+
     public static boolean wireframeMode = false;
     public static boolean hiddenRemovalMode = true;
     public static boolean renderLightsMode = true;
-    
+
     private ViewPlane view;
     private Matrix4d camera;
-    
+
     private PolytopeGroup polyGroups;
     private List<PointLight3d> lights;
-    
+
     /*
      * For registering key events with rotations / zooms.
      */
@@ -55,7 +52,7 @@ public class World3d implements KeyListener {
     private boolean zoomOut;
     private boolean turnLeft;
     private boolean turnRight;
-    
+
     /**
      * Creates a new <code>World3d</code> and initializes the camera to be 500 pixels away from
      * <code>(0, 0, 0)</code>.
@@ -65,11 +62,11 @@ public class World3d implements KeyListener {
         camera = new Matrix4d();
         camera.setIdentity();
         camera.setTranslation(new Vector3d(0.0, 0.0, 500.0));
-        
+
         polyGroups = new PolytopeGroup();
         lights = new ArrayList<>();
     }
-    
+
     /*
      * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
      */
@@ -83,10 +80,10 @@ public class World3d implements KeyListener {
             turnLeft = true;
         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
             turnRight = true;
-        
+
         e.consume();
     }
-    
+
     /*
      * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
      */
@@ -100,10 +97,10 @@ public class World3d implements KeyListener {
             turnLeft = false;
         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
             turnRight = false;
-        
+
         e.consume();
     }
-    
+
     /*
      * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
      */
@@ -111,7 +108,7 @@ public class World3d implements KeyListener {
     public void keyTyped(KeyEvent e) {
         e.consume();
     }
-    
+
     /**
      * Loads a <code>Polytope</code> from the given <code>File</code> and adds it to
      * <code>polyGroups</code>. Also adds the light loaded by the object file to the list of current
@@ -125,14 +122,14 @@ public class World3d implements KeyListener {
         Polytope3dNode polyNode = Parser.parse(f); // Try to parse the given file to a polytope.
         Polytope3d poly = polyNode.createInstance(); // Create a new Polytope3d from the parsed
                                                      // file.
-        
+
         poly.sub(findCenter(poly)); // Center the polytope for smoother rotations.
-        
+
         polyGroups.addPolytope(poly); // Add the polytope to the list of polytopes.
         lights.add(polyNode.getLight().createInstance()); // Add a new light source to the list of
                                                           // lights.
     }
-    
+
     /**
      * Renders this <code>World3d</code> to the graphics object passed. This method will create
      * scratch clones of all the <code>Polytope</code>s before transforming them, clipping, backface
@@ -143,9 +140,9 @@ public class World3d implements KeyListener {
     public void render(Graphics2D g) {
         if ((view.getWidth() == 0) || (view.getHeight() == 0))
             return;
-        
+
         ZBuffer z = new ZBuffer((int) view.getWidth(), (int) view.getHeight());
-        
+
         PolytopeGroup scratch;
         scratch = (PolytopeGroup) polyGroups.clone(); // Create a clone of all polytopes so that
                                                       // transforming operations won't be applied
@@ -153,23 +150,25 @@ public class World3d implements KeyListener {
         List<PointLight3d> scratchLights = new ArrayList<>();
         for (PointLight3d light : lights) {
             scratchLights.add((PointLight3d) light.clone()); // Scratch lights are needed too!
-            polyGroups.getTransform().transform(
-                scratchLights.get(scratchLights.size() - 1)); // Transform the lights too.
+            polyGroups.getTransform().transform(scratchLights.get(scratchLights.size() - 1)); // Transform
+                                                                                              // the
+                                                                                              // lights
+                                                                                              // too.
         }
-        
+
         scratch.transform(); // Apply polytope self transformations.
         scratch.sub(camera); // Subtract the camera transform / position.
         if (!scratch.clip(-1.0)) // Clip the polytopes to the z = -1.0 plane (so we don't display
                                  // any
                                  // that are behind the camera).
             return; // If clipping it resulted in no polytopes being shown... return.
-            
+
         scratch.project(view); // Perspective projection to the ViewPlane.
-        
+
         scratch.render(z, new ScanConverter(view, scratchLights));
         g.drawImage(z.getImage(), 0, 0, null);
     }
-    
+
     /**
      * Set the height of the <code>ViewPlane</code>.
      * 
@@ -178,7 +177,7 @@ public class World3d implements KeyListener {
     public void setHeight(int height) {
         view.setHeight(height);
     }
-    
+
     /**
      * Set the viewing angle of the <code>ViewPlane</code>
      * 
@@ -187,7 +186,7 @@ public class World3d implements KeyListener {
     public void setViewAngle(double angle) {
         view.setAngle(angle);
     }
-    
+
     /**
      * Set the width of the <code>ViewPlane</code>
      * 
@@ -196,7 +195,7 @@ public class World3d implements KeyListener {
     public void setWidth(int width) {
         view.setWidth(width);
     }
-    
+
     /**
      * Update this world by applying any rotations / zooms based on key events.
      * 
@@ -205,29 +204,29 @@ public class World3d implements KeyListener {
     public void update(long elapsedTime) {
         Matrix4d translation = new Matrix4d();
         translation.setIdentity();
-        
+
         if (zoomIn && !zoomOut)
             translation.m23 -= 1.0 * elapsedTime; // Zoom in!
         if (zoomOut && !zoomIn)
             translation.m23 += 1.0 * elapsedTime; // Zoom out!
-            
+
         translation.mul(camera); // Must apply in correct order.
         camera = new Matrix4d(translation);
-        
+
         Matrix4d rotation = new Matrix4d();
         rotation.setIdentity();
-        
+
         if (turnLeft && !turnRight) {
             rotation.rotY(elapsedTime * 0.002); // Turn left!
-            
+
             polyGroups.getTransform().mul(rotation);
         } else if (turnRight && !turnLeft) {
             rotation.rotY(elapsedTime * -0.002); // Turn right!
-            
+
             polyGroups.getTransform().mul(rotation);
         }
     }
-    
+
     /**
      * Finds the center of the given <code>Polytope</code> and returns it as a vector. This can then
      * be used with <code>Polytope.sub(center);</code> to center a <code>Polytope</code>
@@ -240,7 +239,7 @@ public class World3d implements KeyListener {
     private Vector3d findCenter(Polytope poly) {
         int vertexCount = 0;
         Vector3d center = new Vector3d();
-        
+
         if (poly instanceof Polytope2d)
             for (Vector3d v : ((Polytope2d) poly).getVertices()) {
                 center.add(v);
@@ -256,7 +255,7 @@ public class World3d implements KeyListener {
                 center.add(findCenter(p));
                 vertexCount++;
             }
-        
+
         center.scale(1.0 / vertexCount);
         return center;
     }

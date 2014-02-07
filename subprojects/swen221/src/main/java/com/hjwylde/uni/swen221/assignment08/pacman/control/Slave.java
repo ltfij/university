@@ -26,10 +26,7 @@ import com.hjwylde.uni.swen221.assignment08.pacman.game.Board;
 import com.hjwylde.uni.swen221.assignment08.pacman.game.BoardFrame;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -38,34 +35,32 @@ import com.hjwylde.uni.swen221.assignment08.pacman.game.BoardFrame;
  * presses by the player.
  */
 public final class Slave extends Thread implements KeyListener {
-    
+
     private final Socket socket;
     private Board game;
     private DataOutputStream output;
     private DataInputStream input;
     private int uid;
     private int totalSent;
-    
+
     private int rateTotal = 0; // total accumulated this second
-    
+
     private int currentRate = 0; // rate of reception last second
-    
+
     private long rateStart = System.currentTimeMillis(); // start of this accumulation period
-    
+
     /**
      * Construct a slave connection from a socket. A slave connection does no local computation,
-     * other
-     * than to display the current state of the board; instead, board logic is controlled entirely
-     * by
-     * the server, and the slave display is only refreshed when data is received from the master
-     * connection.
+     * other than to display the current state of the board; instead, board logic is controlled
+     * entirely by the server, and the slave display is only refreshed when data is received from
+     * the master connection.
      * 
      * @param socket the socket for this slave.
      */
     public Slave(Socket socket) {
         this.socket = socket;
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         try {
@@ -73,8 +68,7 @@ public final class Slave extends Thread implements KeyListener {
             if ((code == KeyEvent.VK_RIGHT) || (code == KeyEvent.VK_KP_RIGHT)) {
                 output.writeInt(3);
                 totalSent += 4;
-            } else if ((code == KeyEvent.VK_LEFT)
-                || (code == KeyEvent.VK_KP_LEFT)) {
+            } else if ((code == KeyEvent.VK_LEFT) || (code == KeyEvent.VK_KP_LEFT)) {
                 output.writeInt(4);
                 totalSent += 4;
             } else if (code == KeyEvent.VK_UP) {
@@ -90,19 +84,19 @@ public final class Slave extends Thread implements KeyListener {
             // server. So, we just ignore it.
         }
     }
-    
+
     @Override
     public void keyReleased(KeyEvent e) {}
-    
+
     @Override
     public void keyTyped(KeyEvent e) {}
-    
+
     @Override
     public void run() {
         try {
             output = new DataOutputStream(socket.getOutputStream());
             input = new DataInputStream(socket.getInputStream());
-            
+
             // First job, is to read the period so we can create the clock
             uid = input.readInt();
             int width = input.readInt();
@@ -112,14 +106,14 @@ public final class Slave extends Thread implements KeyListener {
             byte[] wallBytes = new byte[bitsize];
             input.read(wallBytes);
             System.out.println("PACMAN CLIENT UID: " + uid);
-            System.out.println("PACMAN CLIENT BOARD DIMENSIONS: " + width
-                + " x " + height);
+            System.out.println("PACMAN CLIENT BOARD DIMENSIONS: " + width + " x " + height);
             game = new Board(width, height);
             game.wallsFromByteArray(wallBytes);
-            BoardFrame display = new BoardFrame("Pacman (client@"
-                + socket.getInetAddress() + ")", game, uid, this);
+            BoardFrame display =
+                    new BoardFrame("Pacman (client@" + socket.getInetAddress() + ")", game, uid,
+                            this);
             long totalRec = 0;
-            
+
             while (true) {
                 // read event
                 int amount = input.readInt();
@@ -130,9 +124,8 @@ public final class Slave extends Thread implements KeyListener {
                 totalRec += amount;
                 // print out some useful information about the amount of data
                 // sent and received
-                System.out.print("\rREC: " + (totalRec / 1024) + "KB ("
-                    + (rate(amount) / 1024) + "KB/s) TX: " + totalSent
-                    + " Bytes");
+                System.out.print("\rREC: " + (totalRec / 1024) + "KB (" + (rate(amount) / 1024)
+                        + "KB/s) TX: " + totalSent + " Bytes");
             }
         } catch (IOException e) {
             System.err.println("I/O Error: " + e.getMessage());
@@ -146,11 +139,10 @@ public final class Slave extends Thread implements KeyListener {
             }
         }
     }
-    
+
     /**
      * The following method calculates the rate of data received in bytes/s, albeit in a rather
-     * coarse
-     * manner.
+     * coarse manner.
      */
     private int rate(int amount) {
         rateTotal += amount;
@@ -162,7 +154,7 @@ public final class Slave extends Thread implements KeyListener {
             rateStart = time;
             rateTotal = 0;
         }
-        
+
         return currentRate;
     }
 }

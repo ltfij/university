@@ -8,14 +8,11 @@ import org.junit.Test;
 import com.hjwylde.uni.swen221.lab01.calculator.Calculator;
 
 /*
- * Code for Laboratory 1, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 1, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class CalculatorTests {
-    
+
     @Test
     public void addTests() {
         CalculatorTests.test("1+1", "2");
@@ -28,7 +25,7 @@ public class CalculatorTests {
         CalculatorTests.test("0.0 + 12387", "12387.0");
         CalculatorTests.test("0.00123+ 1", "1.00123");
     }
-    
+
     @Test
     public void divTests() {
         CalculatorTests.test("1/1", "1");
@@ -38,7 +35,7 @@ public class CalculatorTests {
         CalculatorTests.test("0.5/4783", "0.0001045369");
         CalculatorTests.test("0.00923/1", "0.00923");
     }
-    
+
     @Test
     public void mulTests() {
         CalculatorTests.test("3*3", "9");
@@ -49,20 +46,20 @@ public class CalculatorTests {
         CalculatorTests.test("0.0 * 12387", "0.0");
         CalculatorTests.test("0.00123*1", "0.00123");
     }
-    
+
     @Test
     public void numberTests() {
         CalculatorTests.test("3");
         CalculatorTests.test("    12387", "12387");
     }
-    
+
     @Test
     public void realNumberTests() {
         CalculatorTests.test("0.00137");
         CalculatorTests.test("0.6789723");
         CalculatorTests.test("1.22345");
     }
-    
+
     @Test
     public void subTests() {
         CalculatorTests.test("1-1", "0");
@@ -73,11 +70,11 @@ public class CalculatorTests {
         CalculatorTests.test("0.0 - 12387", "-12387.0");
         CalculatorTests.test("0.00123- 1", "-0.99877");
     }
-    
+
     private static void test(String input) {
         CalculatorTests.test(input, input);
     }
-    
+
     private static void test(String input, String output) {
         BigDecimal out = new Calculator(input).evaluate();
         BigDecimal num = new BigDecimal(output);

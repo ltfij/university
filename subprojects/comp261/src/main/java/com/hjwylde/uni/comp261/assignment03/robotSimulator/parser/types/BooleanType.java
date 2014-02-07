@@ -1,10 +1,7 @@
 package com.hjwylde.uni.comp261.assignment03.robotSimulator.parser.types;
 
 /*
- * Code for Assignment 3, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 3, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -13,19 +10,15 @@ package com.hjwylde.uni.comp261.assignment03.robotSimulator.parser.types;
  * @author Henry J. Wylde
  */
 public enum BooleanType {
-    
-    TRUE("true"),
-    FALSE("false"),
-    CONDITION("condition"),
-    NOT("!"),
-    TOUCHING("touching");
-    
+
+    TRUE("true"), FALSE("false"), CONDITION("condition"), NOT("!"), TOUCHING("touching");
+
     private final String name;
-    
+
     private BooleanType(String name) {
         this.name = name;
     }
-    
+
     public String getName() {
         return name;
     }

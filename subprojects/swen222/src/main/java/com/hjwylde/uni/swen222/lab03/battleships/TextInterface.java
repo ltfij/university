@@ -10,14 +10,14 @@ import java.util.Scanner;
  * 
  */
 public class TextInterface {
-    
+
     private static Random random = new Random();
-    
+
     public static void main(String[] args) {
         printWelcomeMessage();
         playGame(new BattleShipsGame(16, 16));
     }
-    
+
     /**
      * Play the game!
      * 
@@ -34,27 +34,26 @@ public class TextInterface {
                 xpos = inputInteger("Enter x coordinate for target:", scanner);
                 ypos = inputInteger("Enter y coordinate for target:", scanner);
                 if ((xpos < 0) || (ypos < 0) || (xpos >= game.getWidth())
-                    || (ypos >= game.getHeight())) {
-                    System.out
-                        .println("\n *** INVALID TARGET --- TRY AGAIN ***\n");
+                        || (ypos >= game.getHeight())) {
+                    System.out.println("\n *** INVALID TARGET --- TRY AGAIN ***\n");
                     continue;
                 }
                 break;
             }
-            
+
             game.bombSquare(xpos, ypos, false);
             int c_xpos = randomInteger(game.getWidth());
             int c_ypos = randomInteger(game.getHeight());
             game.bombSquare(c_xpos, c_ypos, true);
         }
         System.out.println("*** GAME OVER ***\n");
-        
+
         if (game.didPlayerWin())
             System.out.println("*** WELL DONE! ***");
         else
             System.out.println("*** BAD LUCK! ***");
     }
-    
+
     /**
      * Print the current state of the game board to the standard output.
      * 
@@ -67,9 +66,9 @@ public class TextInterface {
             System.out.print(y);
             for (int x = 0; x < game.getWidth(); x++)
                 printSquare(game.getLeftSquare(x, y), true);
-            
+
             System.out.print("||");
-            
+
             for (int x = 0; x < game.getWidth(); x++)
                 printSquare(game.getRightSquare(x, y), false);
             if (y < 10)
@@ -81,10 +80,10 @@ public class TextInterface {
             System.out.print(x % 10);
         System.out.println("\n");
     }
-    
+
     /**
-     * Print a grid square to the standard output. If the visible flag is set,
-     * then ShipSquares are visible.
+     * Print a grid square to the standard output. If the visible flag is set, then ShipSquares are
+     * visible.
      * 
      * @param square
      * @param visible
@@ -116,17 +115,17 @@ public class TextInterface {
             } else
                 System.out.print(" ");
     }
-    
+
     /**
      * Generate a random integer between 0 and n
      */
     public static int randomInteger(int n) {
         return random.nextInt(n);
     }
-    
+
     /**
-     * Input an integer from the scanner. If an invalid input is given, then
-     * keep trying until a valid input is given.
+     * Input an integer from the scanner. If an invalid input is given, then keep trying until a
+     * valid input is given.
      * 
      * @param msg The message to print before reading the input
      * @param in The scanner from which to read the input
@@ -143,7 +142,7 @@ public class TextInterface {
             }
         }
     }
-    
+
     /**
      * Print a simple welcome message for when the game starts.
      */

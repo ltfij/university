@@ -8,34 +8,26 @@ import org.junit.Test;
 import com.hjwylde.uni.swen221.assignment01.BasicMatcher;
 
 /*
- * Code for Assignment 1, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 1, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
- * A very incomplete set of tests for the methods of BasicMatcher.
- * You should improve test coverage by writing 50-100% more tests.
- * You should also write tests for the match method (there are none here).
- * Remember to test edge cases!
+ * A very incomplete set of tests for the methods of BasicMatcher. You should improve test coverage
+ * by writing 50-100% more tests. You should also write tests for the match method (there are none
+ * here). Remember to test edge cases!
  */
 public class BasicMatcherTests extends BasicMatcher {
-    
+
     /**
      * Some strings of length 1 that do not start with 'x'.
      */
-    static final String[] SHORT_STRINGS = {
-        "a", "y", "6", " ", "."
-    };
-    
+    static final String[] SHORT_STRINGS = {"a", "y", "6", " ", "."};
+
     /**
      * Some strings of length greater than 1 that do not start with 'c'.
      */
-    static final String[] LONG_STRINGS = {
-        "yertyerty", "6ertyerty", " ertyety"
-    };
-    
+    static final String[] LONG_STRINGS = {"yertyerty", "6ertyerty", " ertyety"};
+
     @Test
     public void matchCharDot() {
         for (String s : BasicMatcherTests.SHORT_STRINGS) {
@@ -44,7 +36,7 @@ public class BasicMatcherTests extends BasicMatcher {
             testMatchChar(false, s, "x");
         }
     }
-    
+
     @Test
     public void matchCharFalseLong() {
         for (String s : BasicMatcherTests.LONG_STRINGS) {
@@ -56,80 +48,32 @@ public class BasicMatcherTests extends BasicMatcher {
             testMatchChar(false, s, "Y*");
         }
     }
-    
+
     @Test
     public void matchDotStarManyDot() {
         Assert.assertTrue(matchStar("bbbb", ".*..bb"));
         Assert.assertTrue(matchStar("bbbb", ".*.*.*bb"));
     }
-    
+
     @Test
     public void matchError() {
-        String[][] errorTests = new String[][] {
-            {
-                "", "fsa+++"
-            }, {
-                "", "fsa++*"
-            }, {
-                "", "fsa++?"
-            }, {
-                "", "fsa+*+"
-            }, {
-                "", "fsa+**"
-            }, {
-                "", "fsa+*?"
-            }, {
-                "", "fsa+?+"
-            }, {
-                "", "fsa+?*"
-            }, {
-                "", "fsa+??"
-            }, {
-                "", "fsa*++"
-            }, {
-                "", "fsa*+*"
-            }, {
-                "", "fsa*+?"
-            }, {
-                "", "fsa**+"
-            }, {
-                "", "fsa***"
-            }, {
-                "", "fsa**?"
-            }, {
-                "", "fsa*?+"
-            }, {
-                "", "fsa*?*"
-            }, {
-                "", "fsa*??"
-            }, {
-                "", "fsa?++"
-            }, {
-                "", "fsa?+*"
-            }, {
-                "", "fsa?+?"
-            }, {
-                "", "fsa?*+"
-            }, {
-                "", "fsa?**"
-            }, {
-                "", "fsa?*?"
-            }, {
-                "", "fsa??+"
-            }, {
-                "", "fsa??*"
-            }, {
-                "", "fsa???"
-            }
-        };
-        
+        String[][] errorTests =
+                new String[][] { {"", "fsa+++"}, {"", "fsa++*"}, {"", "fsa++?"}, {"", "fsa+*+"},
+                        {"", "fsa+**"}, {"", "fsa+*?"}, {"", "fsa+?+"}, {"", "fsa+?*"},
+                        {"", "fsa+??"}, {"", "fsa*++"}, {"", "fsa*+*"}, {"", "fsa*+?"},
+                        {"", "fsa**+"}, {"", "fsa***"}, {"", "fsa**?"}, {"", "fsa*?+"},
+                        {"", "fsa*?*"}, {"", "fsa*??"}, {"", "fsa?++"}, {"", "fsa?+*"},
+                        {"", "fsa?+?"}, {"", "fsa?*+"}, {"", "fsa?**"}, {"", "fsa?*?"},
+                        {"", "fsa??+"}, {"", "fsa??*"}, {"", "fsa???"}};
+
         for (String errorTest[] : errorTests)
             try {
                 match(errorTest[0], errorTest[1]);
                 Assert.fail();
-            } catch (PatternSyntaxException e) {}
+            } catch (PatternSyntaxException e) {
+            }
     }
-    
+
     @Test
     public void matchFalse() {
         Assert.assertFalse(match("T", "T+p"));
@@ -140,29 +84,29 @@ public class BasicMatcherTests extends BasicMatcher {
         Assert.assertFalse(match("gdfsa", "^$++"));
         Assert.assertFalse(match("q4$", "4$?$"));
     }
-    
+
     @Test
     public void matchHereFalse() {
         for (String s : BasicMatcherTests.SHORT_STRINGS)
             Assert.assertFalse(matchHere("", s));
-        
+
         Assert.assertFalse(matchHere("abc", "abb"));
         Assert.assertFalse(matchHere("aaa", "a++a$"));
         Assert.assertFalse(matchHere("aaa", "a*+a$"));
     }
-    
+
     @Test
     public void matchHereManyDot() {
         Assert.assertTrue(matchHere("afgsd", "a.g"));
         Assert.assertTrue(matchHere("bwerqsdf", "..er."));
     }
-    
+
     @Test
     public void matchHereOneLit() {
         for (String s : BasicMatcherTests.LONG_STRINGS)
             testMatchHere(true, s, s.substring(0, 1));
     }
-    
+
     @Test
     public void matchStar() {
         for (String s : BasicMatcherTests.LONG_STRINGS) {
@@ -170,13 +114,13 @@ public class BasicMatcherTests extends BasicMatcher {
             testMatchStar(true, s, s.substring(0, 1) + "*");
         }
     }
-    
+
     @Test
     public void matchStarEmptyText() {
         Assert.assertTrue(matchStar("", "x*"));
         Assert.assertTrue(match("", "^x*"));
     }
-    
+
     @Test
     public void matchStarEnd() {
         Assert.assertTrue(matchStar("a", "a*$"));
@@ -184,7 +128,7 @@ public class BasicMatcherTests extends BasicMatcher {
         Assert.assertTrue(match("a", "b*$"));
         Assert.assertFalse(match("a", "^c*$"));
     }
-    
+
     @Test
     public void matchTrue() {
         Assert.assertTrue(match("a", "^.$"));
@@ -205,22 +149,19 @@ public class BasicMatcherTests extends BasicMatcher {
         Assert.assertTrue(match("fffw", "f+$?w+"));
         Assert.assertTrue(match("oGgMq", "$w*"));
     }
-    
+
     private void testMatchChar(boolean expected, String text, String regexp) {
-        final String msg = "matchChar(\"" + text + "\", \"" + regexp
-            + "\") should be " + expected;
+        final String msg = "matchChar(\"" + text + "\", \"" + regexp + "\") should be " + expected;
         Assert.assertEquals(msg, expected, matchChar(text, regexp));
     }
-    
+
     private void testMatchHere(boolean expected, String text, String regexp) {
-        final String msg = "matchHere(\"" + text + "\", \"" + regexp
-            + "\") should be " + expected;
+        final String msg = "matchHere(\"" + text + "\", \"" + regexp + "\") should be " + expected;
         Assert.assertEquals(msg, expected, matchHere(text, regexp));
     }
-    
+
     private void testMatchStar(boolean expected, String text, String regexp) {
-        final String msg = "matchStar(\"" + text + "\", \"" + regexp
-            + "\") should be " + expected;
+        final String msg = "matchStar(\"" + text + "\", \"" + regexp + "\") should be " + expected;
         Assert.assertEquals(msg, expected, matchStar(text, regexp));
     }
 }

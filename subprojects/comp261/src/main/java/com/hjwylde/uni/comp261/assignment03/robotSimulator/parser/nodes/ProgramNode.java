@@ -9,10 +9,7 @@ import java.util.Map;
 import com.hjwylde.uni.comp261.assignment03.robotSimulator.World;
 
 /*
- * Code for Assignment 3, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 3, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -21,16 +18,16 @@ import com.hjwylde.uni.comp261.assignment03.robotSimulator.World;
  * @author Henry J. Wylde
  */
 public class ProgramNode implements Node {
-    
+
     private final List<InstructionNode> instrs;
-    
+
     /**
      * Constructs a <code>ProgramNode</code> of the specified type.
      */
     public ProgramNode() {
         instrs = new LinkedList<>();
     }
-    
+
     /**
      * Add an instruction to this <code>ProgramNode</code>.
      * 
@@ -40,7 +37,7 @@ public class ProgramNode implements Node {
     public void addInstr(InstructionNode instrNode) {
         instrs.add(instrNode);
     }
-    
+
     /**
      * Runs through this <code>ProgramNode</code>'s instructions.
      * 
@@ -53,11 +50,11 @@ public class ProgramNode implements Node {
         // prevent recursion problems with using the "[+|-|*|/]=" operators or
         // setting a variable equal to itself.
         Map<VariableNode, Integer> variables = new HashMap<>();
-        
+
         for (InstructionNode instr : instrs)
             instr.execute(variables, robotID, world, g);
     }
-    
+
     /*
      * @see java.lang.Object#toString()
      */
@@ -66,9 +63,9 @@ public class ProgramNode implements Node {
         String str = new String();
         for (InstructionNode instrNode : instrs)
             str += "\n" + instrNode;
-        
+
         str = str.replaceAll("\n", "\n  "); // Indent the code.
-        
+
         return "run {" + str + "\n}";
     }
 }

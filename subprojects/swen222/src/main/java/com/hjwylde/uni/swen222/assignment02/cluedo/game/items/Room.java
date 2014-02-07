@@ -15,7 +15,7 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.util.Util;
  * @since 2/08/2013
  */
 public enum Room {
-    
+
     /**
      * The kitchen room.
      */
@@ -56,7 +56,7 @@ public enum Room {
      * The spa room.
      */
     SPA;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -66,13 +66,13 @@ public enum Room {
         for (String part : name().split("_")) {
             if (sb.length() != 0)
                 sb.append(" ");
-            
+
             sb.append(Util.toTitleCase(part, Locale.ENGLISH));
         }
-        
+
         return sb.toString();
     }
-    
+
     /**
      * Gets an array of all possible murder rooms. This list is all of the rooms except for the
      * pool.
@@ -84,7 +84,7 @@ public enum Room {
         for (Room room : values())
             if (room != Room.POOL) // The pool is not a valid murder room card
                 builder.add(room);
-        
+
         return builder.toArray(new Room[0]);
     }
 }

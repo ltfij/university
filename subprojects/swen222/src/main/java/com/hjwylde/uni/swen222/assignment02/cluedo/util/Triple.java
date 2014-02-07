@@ -14,12 +14,12 @@ import java.util.Objects;
  * @since 7/05/2013
  */
 public class Triple<F, S, T> extends Pair<F, S> {
-    
+
     /**
      * The third element.
      */
     protected final T third;
-    
+
     /**
      * @param first the first element.
      * @param second the second element.
@@ -27,10 +27,10 @@ public class Triple<F, S, T> extends Pair<F, S> {
      */
     public Triple(F first, S second, T third) {
         super(first, second);
-        
+
         this.third = Objects.requireNonNull(third);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -38,12 +38,12 @@ public class Triple<F, S, T> extends Pair<F, S> {
     public boolean equals(Object obj) {
         if (!super.equals(obj))
             return false;
-        
+
         Triple<?, ?, ?> triple = (Triple<?, ?, ?>) obj;
-        
+
         return Objects.equals(third, triple.third);
     }
-    
+
     /**
      * Gets the third element.
      * 
@@ -52,7 +52,7 @@ public class Triple<F, S, T> extends Pair<F, S> {
     public T getThird() {
         return third;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -60,7 +60,7 @@ public class Triple<F, S, T> extends Pair<F, S> {
     public int hashCode() {
         return Objects.hash(super.hashCode(), third);
     }
-    
+
     /**
      * {@inheritDoc}
      */

@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BattleShipsGame {
-    
+
     private final GridSquare[][] leftSquares;
     private final GridSquare[][] rightSquares;
     private final ArrayList<BattleShip> leftShips;
     private final ArrayList<BattleShip> rightShips;
     private final int width;
     private final int height;
-    
+
     /**
-     * Create an instance of the battle ships game where each side has width x
-     * height squares.
+     * Create an instance of the battle ships game where each side has width x height squares.
      * 
      * @param width
      * @param height
@@ -27,24 +26,23 @@ public class BattleShipsGame {
         this.width = width;
         this.height = height;
     }
-    
+
     /**
      * Bomb a square at a particular location.
      * 
      * @param xpos
      * @param ypos
-     * @param leftSide
-     *            Indicate whether its on the left (i.e. player's) side, or on
-     *            the right (i.e. computer's) side.
+     * @param leftSide Indicate whether its on the left (i.e. player's) side, or on the right (i.e.
+     *        computer's) side.
      * @return
      */
     public boolean bombSquare(int xpos, int ypos, boolean leftSide) {
         if (isOver())
             return true;
-        
+
         GridSquare[][] squares = leftSide ? leftSquares : rightSquares;
         GridSquare square = squares[xpos][ypos];
-        
+
         if (square instanceof EmptySquare)
             squares[xpos][ypos] = new MissSquare();
         else if (square instanceof ShipSquare) {
@@ -52,22 +50,22 @@ public class BattleShipsGame {
             squares[xpos][ypos] = new HitSquare();
             ss.getShip().isHit();
         }
-        
+
         if (!leftSide) {
             int x = (int) (Math.random() * width);
             int y = (int) (Math.random() * height);
             while ((leftSquares[x][y] instanceof HitSquare)
-                || (leftSquares[x][y] instanceof MissSquare)) {
+                    || (leftSquares[x][y] instanceof MissSquare)) {
                 x = (int) (Math.random() * width);
                 y = (int) (Math.random() * height);
             }
-            
+
             bombSquare(x, y, true);
         }
-        
+
         return isOver();
     }
-    
+
     /**
      * Construct a randomly generate board
      * 
@@ -80,15 +78,15 @@ public class BattleShipsGame {
                 leftSquares[x][y] = new EmptySquare();
                 rightSquares[x][y] = new EmptySquare();
             }
-        
+
         // Now add ships to left side
-        
+
         addRandomShip(new BattleShip("Submarine", 3), true, random);
         addRandomShip(new BattleShip("Submarine", 3), true, random);
         addRandomShip(new BattleShip("Submarine", 3), true, random);
         addRandomShip(new BattleShip("Corvette", 4), true, random);
         addRandomShip(new BattleShip("Carrier", 5), true, random);
-        
+
         // Now add ships to right side
         addRandomShip(new BattleShip("Submarine", 3), false, random);
         addRandomShip(new BattleShip("Submarine", 3), false, random);
@@ -96,7 +94,7 @@ public class BattleShipsGame {
         addRandomShip(new BattleShip("Corvette", 4), false, random);
         addRandomShip(new BattleShip("Carrier", 5), false, random);
     }
-    
+
     /**
      * Check whether computer won or not.
      * 
@@ -108,7 +106,7 @@ public class BattleShipsGame {
                 return false;
         return true;
     }
-    
+
     /**
      * Check whether player won or not.
      * 
@@ -120,7 +118,7 @@ public class BattleShipsGame {
                 return false;
         return true;
     }
-    
+
     /**
      * Get height of one side of the board.
      * 
@@ -129,7 +127,7 @@ public class BattleShipsGame {
     public int getHeight() {
         return height;
     }
-    
+
     /**
      * Get a grid square at a given position on the left side of the board.
      * 
@@ -140,7 +138,7 @@ public class BattleShipsGame {
     public GridSquare getLeftSquare(int xpos, int ypos) {
         return leftSquares[xpos][ypos];
     }
-    
+
     /**
      * Get a grid square at a given position on the right side of the board.
      * 
@@ -151,7 +149,7 @@ public class BattleShipsGame {
     public GridSquare getRightSquare(int xpos, int ypos) {
         return rightSquares[xpos][ypos];
     }
-    
+
     /**
      * Get width of one side of the board.
      * 
@@ -160,7 +158,7 @@ public class BattleShipsGame {
     public int getWidth() {
         return width;
     }
-    
+
     /**
      * Check whether or not this game is finished!
      * 
@@ -169,10 +167,10 @@ public class BattleShipsGame {
     public boolean isOver() {
         return didPlayerWin() || didComputerWin();
     }
-    
+
     /**
-     * Add a random ship of a given length to one side of the board. The new
-     * ship cannot intersect any existing ships.
+     * Add a random ship of a given length to one side of the board. The new ship cannot intersect
+     * any existing ships.
      * 
      * @param length
      * @param squares
@@ -186,7 +184,7 @@ public class BattleShipsGame {
             leftShips.add(ship);
         else
             rightShips.add(ship);
-        
+
         while (true) {
             int xpos = random.nextInt(vertical ? width : width - length);
             int ypos = random.nextInt(vertical ? height - length : height);
@@ -195,40 +193,40 @@ public class BattleShipsGame {
                 for (int i = 0; i != length; ++i)
                     if (!(squares[xpos][ypos + i] instanceof EmptySquare))
                         continue;
-                
+
                 // if we get here, then there is no intersection.
-                
+
                 for (int i = 0; i != length; ++i)
                     if (i == 0)
-                        squares[xpos][ypos + i] = new ShipSquare(
-                            ShipSquare.Type.VERTICAL_TOP_END, ship);
+                        squares[xpos][ypos + i] =
+                                new ShipSquare(ShipSquare.Type.VERTICAL_TOP_END, ship);
                     else if (i == (length - 1))
-                        squares[xpos][ypos + i] = new ShipSquare(
-                            ShipSquare.Type.VERTICAL_BOTTOM_END, ship);
+                        squares[xpos][ypos + i] =
+                                new ShipSquare(ShipSquare.Type.VERTICAL_BOTTOM_END, ship);
                     else
-                        squares[xpos][ypos + i] = new ShipSquare(
-                            ShipSquare.Type.VERTICAL_MIDDLE, ship);
-                
+                        squares[xpos][ypos + i] =
+                                new ShipSquare(ShipSquare.Type.VERTICAL_MIDDLE, ship);
+
                 // done
                 return;
             } else {
                 for (int i = 0; i != length; ++i)
                     if (!(squares[xpos + i][ypos] instanceof EmptySquare))
                         continue;
-                
+
                 // if we get here, then there is no intersection.
-                
+
                 for (int i = 0; i != length; ++i)
                     if (i == 0)
-                        squares[xpos + i][ypos] = new ShipSquare(
-                            ShipSquare.Type.HORIZONTAL_LEFT_END, ship);
+                        squares[xpos + i][ypos] =
+                                new ShipSquare(ShipSquare.Type.HORIZONTAL_LEFT_END, ship);
                     else if (i == (length - 1))
-                        squares[xpos + i][ypos] = new ShipSquare(
-                            ShipSquare.Type.HORIZONTAL_RIGHT_END, ship);
+                        squares[xpos + i][ypos] =
+                                new ShipSquare(ShipSquare.Type.HORIZONTAL_RIGHT_END, ship);
                     else
-                        squares[xpos + i][ypos] = new ShipSquare(
-                            ShipSquare.Type.HORIZONTAL_MIDDLE, ship);
-                
+                        squares[xpos + i][ypos] =
+                                new ShipSquare(ShipSquare.Type.HORIZONTAL_MIDDLE, ship);
+
                 // done
                 return;
             }

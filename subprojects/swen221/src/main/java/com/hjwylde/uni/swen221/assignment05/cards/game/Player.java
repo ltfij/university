@@ -3,10 +3,7 @@ package com.hjwylde.uni.swen221.assignment05.cards.game;
 import java.util.Random;
 
 /*
- * Code for Assignment 5, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 5, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -32,10 +29,10 @@ public enum Player {
      * The WEST player orders their cards with the picture cards grouped together as the highest.
      */
     WEST(new Hand(Card.COMP_PICTURE_HIGHEST));
-    
+
     private static Random randomGenerator = new Random();
     private Hand hand = new Hand();
-    
+
     /**
      * Private constructer. There are only 4 static players available.
      * 
@@ -44,7 +41,7 @@ public enum Player {
     private Player(Hand hand) {
         this.hand = hand;
     }
-    
+
     /**
      * Gets the hand of this player.
      * 
@@ -53,11 +50,10 @@ public enum Player {
     public Hand getHand() {
         return hand;
     }
-    
+
     /**
      * Gets the next player after this one. The order is as follows: NORTH -> EAST -> SOUTH -> WEST
-     * ->
-     * NORTH.
+     * -> NORTH.
      * 
      * @return the next player.
      */
@@ -70,7 +66,7 @@ public enum Player {
             return WEST;
         return NORTH;
     }
-    
+
     /**
      * Gets a random player.
      * 
@@ -78,14 +74,14 @@ public enum Player {
      */
     public static Player getRandom() {
         switch (Player.randomGenerator.nextInt(4)) {
-        case 0:
-            return NORTH;
-        case 1:
-            return EAST;
-        case 2:
-            return SOUTH;
-        default:
-            return WEST;
+            case 0:
+                return NORTH;
+            case 1:
+                return EAST;
+            case 2:
+                return SOUTH;
+            default:
+                return WEST;
         }
     }
 }

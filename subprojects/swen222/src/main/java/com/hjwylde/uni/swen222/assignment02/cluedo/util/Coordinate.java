@@ -10,10 +10,10 @@ import java.util.Objects;
  * @since 10/08/2013
  */
 public final class Coordinate {
-    
+
     private final int x;
     private final int y;
-    
+
     /**
      * Creates a new <code>Coordinate</code> with the given x and y values.
      * 
@@ -24,7 +24,7 @@ public final class Coordinate {
         this.x = x;
         this.y = y;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -32,12 +32,12 @@ public final class Coordinate {
     public boolean equals(Object obj) {
         if (!(obj instanceof Coordinate))
             return false;
-        
+
         Coordinate coord = (Coordinate) obj;
-        
+
         return (x == coord.x) && (y == coord.y);
     }
-    
+
     /**
      * Gets the x co-ordinate.
      * 
@@ -46,7 +46,7 @@ public final class Coordinate {
     public int getX() {
         return x;
     }
-    
+
     /**
      * Gets the y co-ordinate.
      * 
@@ -55,7 +55,7 @@ public final class Coordinate {
     public int getY() {
         return y;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -63,7 +63,7 @@ public final class Coordinate {
     public int hashCode() {
         return Objects.hash(x, y);
     }
-    
+
     /**
      * {@inheritDoc}
      */

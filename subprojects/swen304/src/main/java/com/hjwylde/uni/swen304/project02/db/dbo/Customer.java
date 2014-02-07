@@ -15,14 +15,14 @@ import com.hjwylde.uni.swen304.project02.db.util.Tables;
  * @since 1.0.0, 12/10/2013
  */
 public final class Customer {
-    
+
     private Integer id;
-    
+
     private String firstName;
     private String lastName;
-    
+
     private String city;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -30,12 +30,12 @@ public final class Customer {
     public boolean equals(Object obj) {
         if ((obj == null) || (getClass() != obj.getClass()))
             return false;
-        
+
         Customer customer = (Customer) obj;
-        
+
         return Objects.equal(id, customer.id);
     }
-    
+
     /**
      * Gets the city.
      * 
@@ -44,7 +44,7 @@ public final class Customer {
     public String getCity() {
         return city;
     }
-    
+
     /**
      * Gets the firstName.
      * 
@@ -53,7 +53,7 @@ public final class Customer {
     public String getFirstName() {
         return firstName;
     }
-    
+
     /**
      * Gets the id.
      * 
@@ -62,7 +62,7 @@ public final class Customer {
     public Integer getId() {
         return id;
     }
-    
+
     /**
      * Gets the lastName.
      * 
@@ -71,7 +71,7 @@ public final class Customer {
     public String getLastName() {
         return lastName;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -79,7 +79,7 @@ public final class Customer {
     public int hashCode() {
         return Objects.hashCode(id);
     }
-    
+
     /**
      * Sets the city.
      * 
@@ -88,7 +88,7 @@ public final class Customer {
     public void setCity(String city) {
         this.city = city;
     }
-    
+
     /**
      * Sets the firstName.
      * 
@@ -97,7 +97,7 @@ public final class Customer {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    
+
     /**
      * Sets the id.
      * 
@@ -106,7 +106,7 @@ public final class Customer {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Sets the lastName.
      * 
@@ -115,21 +115,22 @@ public final class Customer {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
         // return new Gson().toJson(this);
-        
-        return (lastName == null ? null : lastName.trim()) + ", " + (firstName == null ? null : firstName.trim())
-            + " (id: " + id + ") (city: " + (city == null ? null : city.trim()) + ")";
+
+        return (lastName == null ? null : lastName.trim()) + ", "
+                + (firstName == null ? null : firstName.trim()) + " (id: " + id + ") (city: "
+                + (city == null ? null : city.trim()) + ")";
     }
-    
+
     public static Customer fromResultSet(ResultSet rs) {
         Customer customer = new Customer();
-        
+
         try {
             customer.setId(rs.getInt(Tables.Customers.ID));
             customer.setFirstName(rs.getString(Tables.Customers.FIRST_NAME));
@@ -140,7 +141,7 @@ public final class Customer {
             e.printStackTrace();
             throw new InternalError(e.getMessage());
         }
-        
+
         return customer;
     }
 }

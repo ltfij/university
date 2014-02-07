@@ -5,10 +5,7 @@ import com.hjwylde.uni.swen221.assignment03.chessview.pieces.Pawn;
 import com.hjwylde.uni.swen221.assignment03.chessview.pieces.Piece;
 
 /*
- * Code for Assignment 3, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 3, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -17,10 +14,10 @@ import com.hjwylde.uni.swen221.assignment03.chessview.pieces.Piece;
  * @author djp
  */
 public class PawnPromotion implements MultiPieceMove {
-    
+
     private SinglePieceMove move;
     private Piece promotion;
-    
+
     /**
      * Represents a Pawn move in which it is promoted.
      * 
@@ -31,7 +28,7 @@ public class PawnPromotion implements MultiPieceMove {
         this.move = move;
         this.promotion = promotion;
     }
-    
+
     /*
      * @see assignment3.chessview.moves.Move#apply(assignment3.chessview.Board)
      */
@@ -40,7 +37,7 @@ public class PawnPromotion implements MultiPieceMove {
         board.setPieceAt(move.oldPosition(), null); // Remove the pawn from the board.
         board.setPieceAt(move.newPosition(), promotion); // Add the promoted piece to the board.
     }
-    
+
     /*
      * @see assignment3.chessview.moves.Move#isValid(assignment3.chessview.Board)
      */
@@ -48,17 +45,17 @@ public class PawnPromotion implements MultiPieceMove {
     public boolean isValid(Board board) {
         if (!(move.piece() instanceof Pawn)) // If we're not actually a pawn...
             return false;
-        
+
         // If we're not actually moving to the end row for our color...
         if ((move.isWhite() && (move.newPosition().row() != 8))
-            || (!move.isWhite() && (move.newPosition().row() != 1)))
+                || (!move.isWhite() && (move.newPosition().row() != 1)))
             return false;
-        
+
         // Return true if the move is normally a valid move, this checks for the case of takes and
         // normal moves of the pawn.
         return move.isValid(board);
     }
-    
+
     /*
      * @see assignment3.chessview.moves.Move#isWhite()
      */
@@ -66,7 +63,7 @@ public class PawnPromotion implements MultiPieceMove {
     public boolean isWhite() {
         return move.isWhite();
     }
-    
+
     /*
      * @see java.lang.Object#toString()
      */

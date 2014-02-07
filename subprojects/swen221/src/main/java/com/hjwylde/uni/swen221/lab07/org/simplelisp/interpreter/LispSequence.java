@@ -17,19 +17,16 @@
 package com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public interface LispSequence extends LispExpr {
-    
+
     public LispExpr elt(int i);
-    
+
     public LispInteger length();
-    
+
     public LispSequence reverse();
-    
+
     public LispSequence subseq(int l, int u);
 }

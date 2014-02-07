@@ -9,14 +9,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /*
- * Code for Laboratory 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class BiHashMapTests {
-    
+
     @Test
     public void testClear() {
         BiHashMap<String, String> map = new BiHashMap<>();
@@ -27,22 +24,14 @@ public class BiHashMapTests {
         Assert.assertFalse(map.containsKey("Hello"));
         Assert.assertFalse(map.containsValue("World"));
     }
-    
+
     @Test
     public void testEntrySet() {
-        String[][] data = {
-            {
-                "Hello", "World"
-            }, {
-                "Dave", "World"
-            }, {
-                "Something", "Else"
-            }
-        };
-        
+        String[][] data = { {"Hello", "World"}, {"Dave", "World"}, {"Something", "Else"}};
+
         HashMap<String, String> omap = new HashMap<>();
         HashMap<String, Set<String>> rmap = new HashMap<>();
-        
+
         for (String[] p : data) {
             omap.put(p[0], p[1]);
             Set<String> r = rmap.get(p[1]);
@@ -52,7 +41,7 @@ public class BiHashMapTests {
             }
             r.add(p[0]);
         }
-        
+
         BiHashMap<String, String> map = new BiHashMap<>();
         map.putAll(omap);
         for (Map.Entry<String, String> e : map.entrySet()) {
@@ -63,7 +52,7 @@ public class BiHashMapTests {
             Assert.assertTrue(rmap.get(e.getValue()).equals(keys));
         }
     }
-    
+
     @Test
     public void testPut() {
         BiHashMap<String, String> map = new BiHashMap<>();
@@ -74,27 +63,27 @@ public class BiHashMapTests {
         Assert.assertTrue(map.containsKey("Hello"));
         Assert.assertTrue(map.containsValue("World"));
     }
-    
+
     @Test
     public void testPutAll() {
         HashMap<String, String> omap = new HashMap<>();
         omap.put("Hello", "World");
         omap.put("Dave", "World");
         omap.put("Something", "Else");
-        
+
         BiHashMap<String, String> map = new BiHashMap<>();
         map.putAll(omap);
-        
+
         for (Map.Entry<String, String> e : omap.entrySet())
             Assert.assertTrue(map.get(e.getKey()).equals(e.getValue()));
-        
+
         Assert.assertTrue(map.getKeys("World").size() == 2);
         Assert.assertTrue(map.getKeys("World").contains("Hello"));
         Assert.assertTrue(map.getKeys("World").contains("Dave"));
         Assert.assertTrue(map.getKeys("Else").size() == 1);
         Assert.assertTrue(map.getKeys("Else").contains("Something"));
     }
-    
+
     @Test
     public void testRemove() {
         BiHashMap<String, String> map = new BiHashMap<>();

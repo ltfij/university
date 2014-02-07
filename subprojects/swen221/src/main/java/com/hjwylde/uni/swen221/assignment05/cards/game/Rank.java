@@ -1,10 +1,7 @@
 package com.hjwylde.uni.swen221.assignment05.cards.game;
 
 /*
- * Code for Assignment 5, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 5, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -13,7 +10,7 @@ package com.hjwylde.uni.swen221.assignment05.cards.game;
  * @author Henry J. Wylde, djp
  */
 public enum Rank {
-    
+
     /**
      * Two.
      */
@@ -66,18 +63,18 @@ public enum Rank {
      * Ace.
      */
     ACE("A");
-    
+
     private final String name;
-    
+
     private Rank(String name) {
         this.name = name;
     }
-    
+
     @Override
     public String toString() {
         return name;
     }
-    
+
     /**
      * Checks whether the rank is a picture rank. A picture rank is either ACE, KING, QUEEN or JACK.
      * 
@@ -86,13 +83,13 @@ public enum Rank {
      */
     public static boolean isPicture(Rank r) {
         switch (r) {
-        case ACE:
-        case KING:
-        case QUEEN:
-        case JACK:
-            return true;
-        default:
-            return false;
+            case ACE:
+            case KING:
+            case QUEEN:
+            case JACK:
+                return true;
+            default:
+                return false;
         }
     }
 }

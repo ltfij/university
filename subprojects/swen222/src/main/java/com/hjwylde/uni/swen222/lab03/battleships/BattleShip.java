@@ -7,11 +7,11 @@ package com.hjwylde.uni.swen222.lab03.battleships;
  * 
  */
 public class BattleShip {
-    
+
     private final String name;
     private final int length;
     private int nhits; // number of hits so far
-    
+
     /**
      * Construct new battle ship.
      * 
@@ -23,7 +23,7 @@ public class BattleShip {
         this.length = length;
         nhits = 0; // no hits so far
     }
-    
+
     /**
      * Check the length of this ship
      * 
@@ -32,14 +32,14 @@ public class BattleShip {
     public int getLength() {
         return length;
     }
-    
+
     /**
      * Check whether or not this battle ship has been destroyed
      */
     public boolean isDestroyed() {
         return nhits == length;
     }
-    
+
     /**
      * Signal that this battle ship has been hit.
      */

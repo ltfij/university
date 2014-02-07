@@ -9,10 +9,7 @@ import maze.View;
 import maze.Walker;
 
 /*
- * Code for Assignment 2, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 2, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -35,28 +32,28 @@ import maze.Walker;
  * @see "http://www.astrolog.org/labyrnth/algrithm.htm"
  */
 public class TremauxWalker extends Walker {
-    
+
     private static final Point INITIAL_POINT = new Point(0, 0);
-    
+
     /**
      * Keeps track of where the walker has been.
      */
     private BallOfString path = new BallOfString();
-    
+
     /**
      * Keeps track of the direct path the walker is taking to the target.
      */
     private Stack<Point> solutionPath = new Stack<>();
-    
+
     private boolean backtrackMode = false;
-    
+
     /**
      * Creates a new TremauxWalker with the class as its name.
      */
     public TremauxWalker() {
         this(TremauxWalker.class.getName());
     }
-    
+
     /**
      * Creates a new TremauxWalker with the specified name.
      * 
@@ -64,24 +61,23 @@ public class TremauxWalker extends Walker {
      */
     public TremauxWalker(String name) {
         super(name);
-        
+
         path.lineTo(TremauxWalker.INITIAL_POINT); // Record the starting point!
         solutionPath.push(path.getEnd()); // Got to record it in the stack too!
     }
-    
+
     /*
      * Overwritten to print out solutionPath stack.
-     * 
      * @see maze.Walker#solve(maze.Board)
      */
     @Override
     public void solve(Board board) {
         super.solve(board); // Solve the maze using the parents method.
-        
+
         // Print out a path solution (not shortest path) that was found (not the path taken).
-        
+
         System.out.print("Direct-ish path from goal to target:\n(");
-        
+
         Point p;
         while (!solutionPath.isEmpty()) {
             p = solutionPath.remove(0);
@@ -89,10 +85,10 @@ public class TremauxWalker extends Walker {
             if (!solutionPath.isEmpty())
                 System.out.print(", ");
         }
-        
+
         System.out.println(")");
     }
-    
+
     /*
      * @see maze.Walker#move(maze.View)
      */
@@ -100,15 +96,15 @@ public class TremauxWalker extends Walker {
     protected Direction move(View view) {
         if (solutionPath.isEmpty()) // No solution.
             return null; // Remain at the start.
-            
+
         if (!backtrackMode) {
             Direction dir = findAlley(view); // Find a clear alley we can take.
-            
+
             if (dir != null) { // If there exists a clear alley...
                 // Move in that alley's direction.
                 path.lineIn(dir);
                 solutionPath.push(path.getEnd());
-                
+
                 return dir;
             }
         } else if (findAlley(view) == null) { // (We are in backtrack mode) If there still isn't a
@@ -118,21 +114,21 @@ public class TremauxWalker extends Walker {
             if (solutionPath.isEmpty()) // Check if we're at the start of the maze (ie. no
                                         // solution).
                 return null;
-            
+
             path.lineTo(solutionPath.peek()); // Move the path history to the current position.
-            
+
             return path.getDirection();
         }
-        
+
         // We get here only if we're alternating the backtrack mode.
-        
+
         backtrackMode = !backtrackMode;
-        
+
         return null; // Don't move, just get the solve(Board) method to call move(View) again with
                      // the
                      // changed backtrack variable.
     }
-    
+
     /**
      * Finds a clear alley for the walker to go through. A clear alley is one that it is possible to
      * move to (ie. no wall blocking it) and one that the walker has not already been to. It is
@@ -146,10 +142,9 @@ public class TremauxWalker extends Walker {
         for (Direction dir : Direction.values())
             // Check for each direction if we can move, and if we haven't been there before.
             if (view.mayMove(dir)
-                && !path.hasPassedPoint(BallOfString.getNextPoint(
-                    path.getEnd(), dir)))
+                    && !path.hasPassedPoint(BallOfString.getNextPoint(path.getEnd(), dir)))
                 return dir;
-        
+
         return null; // No clear alley...
     }
 }

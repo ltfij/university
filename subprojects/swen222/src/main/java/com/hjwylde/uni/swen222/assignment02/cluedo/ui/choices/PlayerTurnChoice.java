@@ -9,12 +9,12 @@ package com.hjwylde.uni.swen222.assignment02.cluedo.ui.choices;
  * @since 9/08/2013
  */
 public enum PlayerTurnChoice {
-    
+
     /**
      * Move player.
      */
     MOVE {
-        
+
         @Override
         public String toString() {
             return "Move";
@@ -24,7 +24,7 @@ public enum PlayerTurnChoice {
      * Start a rumour.
      */
     START_RUMOUR {
-        
+
         @Override
         public String toString() {
             return "Start a rumour";
@@ -34,7 +34,7 @@ public enum PlayerTurnChoice {
      * Make an accusation.
      */
     MAKE_ACCUSATION {
-        
+
         @Override
         public String toString() {
             return "Make an accusation";
@@ -44,7 +44,7 @@ public enum PlayerTurnChoice {
      * View cards.
      */
     VIEW_CARDS {
-        
+
         @Override
         public String toString() {
             return "View cards";
@@ -54,7 +54,7 @@ public enum PlayerTurnChoice {
      * View keeper cards.
      */
     VIEW_KEEPER_CARDS {
-        
+
         @Override
         public String toString() {
             return "View keeper cards";
@@ -64,7 +64,7 @@ public enum PlayerTurnChoice {
      * View notebook.
      */
     VIEW_NOTEBOOK {
-        
+
         @Override
         public String toString() {
             return "View notebook";
@@ -74,7 +74,7 @@ public enum PlayerTurnChoice {
      * End the player's turn.
      */
     END {
-        
+
         @Override
         public String toString() {
             return "End your turn";

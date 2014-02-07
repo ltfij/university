@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * Code for Laboratory 3, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 3, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -21,17 +18,17 @@ import java.util.List;
  * 
  */
 public class PolyTest {
-    
+
     /**
      * Source code for the test.
      */
     private String source;
-    
+
     /**
      * Possible answers for the test. First one is always the right answer.
      */
     private ArrayList<String> answers;
-    
+
     /**
      * Create a PolyTest
      * 
@@ -47,8 +44,7 @@ public class PolyTest {
             throw new FileNotFoundException(filename);
         // Read the source file line by line, and attempt to strip out the
         // answers provided.
-        BufferedReader f = new BufferedReader(new InputStreamReader(
-            file.openStream()));
+        BufferedReader f = new BufferedReader(new InputStreamReader(file.openStream()));
         String line;
         while ((line = f.readLine()) != null)
             // check if this line is an answer line or not.
@@ -58,11 +54,11 @@ public class PolyTest {
             } else
                 source += line + "\n";
     }
-    
+
     public List<String> answers() {
         return answers;
     }
-    
+
     public String getSource() {
         return source;
     }

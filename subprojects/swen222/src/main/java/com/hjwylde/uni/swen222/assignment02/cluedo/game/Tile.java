@@ -12,7 +12,7 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.game.items.Room;
  * @since 5/08/2013
  */
 public enum Tile {
-    
+
     /**
      * An intrigue card tile. This tile is for the player to step on and pick up an intrigue card.
      */
@@ -94,12 +94,12 @@ public enum Tile {
      * A character start position for Eleanor Peacock.
      */
     CHARACTER_ELEANOR_PEACOCK('P');
-    
+
     /**
      * The character that represents this tile on a textual board.
      */
     private char tile;
-    
+
     /**
      * Creates a new <code>Tile</code> with the given tile character.
      * 
@@ -108,7 +108,7 @@ public enum Tile {
     private Tile(char tile) {
         this.tile = tile;
     }
-    
+
     /**
      * Attempts to get the room this tile represents if it is one, or <code>Optional.absent()</code>
      * if it is not.
@@ -117,31 +117,31 @@ public enum Tile {
      */
     public Optional<Room> getRoom() {
         switch (this) {
-        case ROOM_DINING_ROOM:
-            return Optional.of(Room.DINING_ROOM);
-        case ROOM_GUEST_HOUSE:
-            return Optional.of(Room.GUEST_HOUSE);
-        case ROOM_HALL:
-            return Optional.of(Room.HALL);
-        case ROOM_KITCHEN:
-            return Optional.of(Room.KITCHEN);
-        case ROOM_LIVING_ROOM:
-            return Optional.of(Room.LIVING_ROOM);
-        case ROOM_OBSERVATORY:
-            return Optional.of(Room.OBSERVATORY);
-        case ROOM_PATIO:
-            return Optional.of(Room.PATIO);
-        case ROOM_POOL:
-            return Optional.of(Room.POOL);
-        case ROOM_SPA:
-            return Optional.of(Room.SPA);
-        case ROOM_THEATRE:
-            return Optional.of(Room.THEATRE);
-        default:
-            return Optional.absent();
+            case ROOM_DINING_ROOM:
+                return Optional.of(Room.DINING_ROOM);
+            case ROOM_GUEST_HOUSE:
+                return Optional.of(Room.GUEST_HOUSE);
+            case ROOM_HALL:
+                return Optional.of(Room.HALL);
+            case ROOM_KITCHEN:
+                return Optional.of(Room.KITCHEN);
+            case ROOM_LIVING_ROOM:
+                return Optional.of(Room.LIVING_ROOM);
+            case ROOM_OBSERVATORY:
+                return Optional.of(Room.OBSERVATORY);
+            case ROOM_PATIO:
+                return Optional.of(Room.PATIO);
+            case ROOM_POOL:
+                return Optional.of(Room.POOL);
+            case ROOM_SPA:
+                return Optional.of(Room.SPA);
+            case ROOM_THEATRE:
+                return Optional.of(Room.THEATRE);
+            default:
+                return Optional.absent();
         }
     }
-    
+
     /**
      * Gets the tile character for a textual board.
      * 
@@ -150,7 +150,7 @@ public enum Tile {
     public char getTile() {
         return tile;
     }
-    
+
     /**
      * Checks whether this tile is a room tile or not.
      * 
@@ -158,19 +158,19 @@ public enum Tile {
      */
     public boolean isRoom() {
         switch (this) {
-        case ROOM_DINING_ROOM:
-        case ROOM_GUEST_HOUSE:
-        case ROOM_HALL:
-        case ROOM_KITCHEN:
-        case ROOM_LIVING_ROOM:
-        case ROOM_OBSERVATORY:
-        case ROOM_PATIO:
-        case ROOM_POOL:
-        case ROOM_SPA:
-        case ROOM_THEATRE:
-            return true;
-        default:
-            return false;
+            case ROOM_DINING_ROOM:
+            case ROOM_GUEST_HOUSE:
+            case ROOM_HALL:
+            case ROOM_KITCHEN:
+            case ROOM_LIVING_ROOM:
+            case ROOM_OBSERVATORY:
+            case ROOM_PATIO:
+            case ROOM_POOL:
+            case ROOM_SPA:
+            case ROOM_THEATRE:
+                return true;
+            default:
+                return false;
         }
     }
 }

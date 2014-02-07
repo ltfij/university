@@ -25,33 +25,32 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public final class LispSymbol implements LispExpr {
-    
+
     private final String symbol;
-    
+
     public LispSymbol(String symbol) {
         this.symbol = symbol;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof LispSymbol))
             return false;
-        
+
         return Objects.equals(symbol, ((LispSymbol) o).symbol);
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         LispExpr r = locals.get(symbol);
         if (r == null)
             r = globals.get(symbol);
         if (r == null)
             throw new Error("void variable \"" + symbol + "\"");
-        
+
         return r;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -59,11 +58,11 @@ public final class LispSymbol implements LispExpr {
     public int hashCode() {
         return symbol.hashCode();
     }
-    
+
     public String name() {
         return symbol;
     }
-    
+
     @Override
     public String toString() {
         return symbol;

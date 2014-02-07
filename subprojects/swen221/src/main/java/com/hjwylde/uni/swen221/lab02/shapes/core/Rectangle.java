@@ -7,10 +7,7 @@ import com.hjwylde.uni.swen221.lab02.shapes.math.BoundingBox;
 import com.hjwylde.uni.swen221.lab02.shapes.math.Vec2D;
 
 /*
- * Code for Laboratory 2, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 2, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -19,10 +16,10 @@ import com.hjwylde.uni.swen221.lab02.shapes.math.Vec2D;
  * @author Henry J. Wylde
  */
 public class Rectangle extends AbstractShape {
-    
+
     private int width;
     private int height;
-    
+
     /**
      * Creates a new Rectangle witht he specified parameters.
      * 
@@ -32,31 +29,29 @@ public class Rectangle extends AbstractShape {
      * @param velocity the initial velocity of the rectangle.
      * @param color the color of the rectangle.
      */
-    public Rectangle(Vec2D pos, int width, int height, Vec2D velocity,
-        Color color) {
+    public Rectangle(Vec2D pos, int width, int height, Vec2D velocity, Color color) {
         super(pos, velocity, color);
-        
+
         this.width = width;
         this.height = height;
     }
-    
+
     /*
      * @see lab2.shapes.core.AbstractShape#getBoundingBox()
      */
     @Override
     public BoundingBox getBoundingBox() {
-        return new BoundingBox((int) getPosition().getX(), (int) getPosition()
-            .getY(), width, height);
+        return new BoundingBox((int) getPosition().getX(), (int) getPosition().getY(), width,
+                height);
     }
-    
+
     /*
      * @see lab2.shapes.core.Shape#paint(java.awt.Graphics)
      */
     @Override
     public void paint(Graphics g) {
         g.setColor(getColor());
-        g.fillRect((int) getPosition().getX(), (int) getPosition().getY(),
-            width, height);
+        g.fillRect((int) getPosition().getX(), (int) getPosition().getY(), width, height);
     }
-    
+
 }

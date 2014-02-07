@@ -16,10 +16,7 @@ import com.hjwylde.uni.swen221.assignment05.cards.game.IllegalMoveException;
 import com.hjwylde.uni.swen221.assignment05.cards.game.Player;
 
 /*
- * Code for Assignment 5, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 5, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -28,14 +25,14 @@ import com.hjwylde.uni.swen221.assignment05.cards.game.Player;
  * @author djp
  */
 public final class TableFrame extends JFrame {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private final TableCanvas canvas;
     private final Map<Player, ComputerPlayer> computerPlayers = new HashMap<>();
     private CardGame game;
     private final JLabel statusBar;
-    
+
     /**
      * Construct a table frame from a given game. The list of players determines who is, and who is
      * not a computer player. That is, an entry which is null indicates a human player in that
@@ -58,21 +55,20 @@ public final class TableFrame extends JFrame {
         // Center window in screen
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension scrnsize = toolkit.getScreenSize();
-        setBounds((scrnsize.width - getWidth()) / 2,
-            (scrnsize.height - getHeight()) / 2, getWidth(), getHeight());
+        setBounds((scrnsize.width - getWidth()) / 2, (scrnsize.height - getHeight()) / 2,
+                getWidth(), getHeight());
         // Display window
         setVisible(true);
         new PlayerDialog(this, computerPlayers);
         // Finally, start the game off ...
         startEvent();
     }
-    
+
     public boolean isComputerPlayer(Player player) {
         return computerPlayers.containsKey(player);
     }
-    
-    public void playedEvent(Player player, Card card)
-        throws IllegalMoveException {
+
+    public void playedEvent(Player player, Card card) throws IllegalMoveException {
         game.getTrick().play(player, card);
         statusBar.setText(game + " (" + player + " played " + card + ")");
         canvas.repaint();
@@ -84,10 +80,10 @@ public final class TableFrame extends JFrame {
             // Computer player next to play
             requestTimerEvent(1);
     }
-    
+
     public void requestTimerEvent(final int delay) {
         Thread timer = new Thread() {
-            
+
             @Override
             public void run() {
                 try {
@@ -100,38 +96,35 @@ public final class TableFrame extends JFrame {
         };
         timer.start();
     }
-    
+
     public void startEvent() {
-        statusBar.setText(game + " " + game.getTrick().nextPlayer()
-            + " to start");
+        statusBar.setText(game + " " + game.getTrick().nextPlayer() + " to start");
         if (isComputerPlayer(game.getTrick().nextPlayer()))
             // Computer player to start
             requestTimerEvent(1);
     }
-    
+
     public void statusEvent(String msg) {
         statusBar.setText(game + " (" + msg + ")");
     }
-    
+
     public void timerEvent() {
         if (game.getTrick().nextPlayer() == null) {
             game.nextRound();
             if (game.isFinished()) {
-                int r = JOptionPane.showConfirmDialog(this,
-                    new JLabel(game.getWinner()
-                        + " is the winner!!   Play Again?"), "Yes",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int r =
+                        JOptionPane.showConfirmDialog(this, new JLabel(game.getWinner()
+                                + " is the winner!!   Play Again?"), "Yes",
+                                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (r == JOptionPane.YES_OPTION) {
                     game = new CardGame();
-                    statusBar.setText(game.getTrick().nextPlayer()
-                        + " to start.");
+                    statusBar.setText(game.getTrick().nextPlayer() + " to start.");
                     canvas.newGame(game);
                     canvas.repaint();
                 } else
                     System.exit(0);
             } else {
-                statusBar.setText(game + " (" + game.getTrick().nextPlayer()
-                    + " to play)");
+                statusBar.setText(game + " (" + game.getTrick().nextPlayer() + " to play)");
                 canvas.repaint();
             }
             startEvent();
@@ -141,14 +134,13 @@ public final class TableFrame extends JFrame {
             try {
                 ComputerPlayer computerPlayer = computerPlayers.get(nextPlayer);
                 if (computerPlayer != null)
-                    playedEvent(nextPlayer,
-                        computerPlayer.nextCard(game.getTrick()));
+                    playedEvent(nextPlayer, computerPlayer.nextCard(game.getTrick()));
             } catch (IllegalMoveException e) {
                 throw new RuntimeException("Computer player is cheating!", e);
             }
         }
     }
-    
+
     public static void main(String[] args) {
         CardGame game = new CardGame();
         new TableFrame(game);

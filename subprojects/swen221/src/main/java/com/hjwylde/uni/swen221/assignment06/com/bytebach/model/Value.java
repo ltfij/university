@@ -1,10 +1,7 @@
 package com.hjwylde.uni.swen221.assignment06.com.bytebach.model;
 
 /*
- * Code for Assignment 6, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 6, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**

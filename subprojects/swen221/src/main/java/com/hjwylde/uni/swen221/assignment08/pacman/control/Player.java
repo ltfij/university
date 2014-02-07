@@ -21,10 +21,7 @@ import java.awt.event.KeyListener;
 import com.hjwylde.uni.swen221.assignment08.pacman.game.Board;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -34,15 +31,15 @@ import com.hjwylde.uni.swen221.assignment08.pacman.game.Board;
  * @author djp
  */
 public class Player implements KeyListener {
-    
+
     private final Board game;
     private final int uid;
-    
+
     public Player(int uid, Board game) {
         this.game = game;
         this.uid = uid;
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -55,10 +52,10 @@ public class Player implements KeyListener {
         else if (code == KeyEvent.VK_DOWN)
             game.player(uid).moveDown();
     }
-    
+
     @Override
     public void keyReleased(KeyEvent e) {}
-    
+
     @Override
     public void keyTyped(KeyEvent e) {}
 }

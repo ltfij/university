@@ -20,54 +20,49 @@ import java.util.HashMap;
 import java.util.List;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public abstract class LispFunction implements LispExpr {
-    
+
     private final int minParams; // minimal number of parameters
     private final int numEval; // number of parameters to evaluate
-    
+
     public LispFunction(int mp) {
         minParams = mp;
         numEval = mp;
     }
-    
+
     public LispFunction(int mp, int ne) {
         minParams = mp;
         numEval = ne;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         return this == o;
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         return this;
     }
-    
+
     @Override
     public int hashCode() {
         return minParams + (31 * numEval);
     }
-    
-    public LispExpr invoke(List<LispExpr> es,
-        HashMap<java.lang.String, LispExpr> locals,
-        HashMap<java.lang.String, LispExpr> globals) {
-        
+
+    public LispExpr invoke(List<LispExpr> es, HashMap<java.lang.String, LispExpr> locals,
+            HashMap<java.lang.String, LispExpr> globals) {
+
         if (es.size() < (minParams + 1))
             // insufficient parameters passed
             throw new Error("insufficient parameters!");
-        
+
         // evaluate parameters as necessary
         LispExpr[] vals = new LispExpr[es.size() - 1];
-        
+
         for (int i = 1; i != es.size(); ++i) {
             LispExpr e = es.get(i);
             if (i < (1 + numEval))
@@ -75,12 +70,11 @@ public abstract class LispFunction implements LispExpr {
             else
                 vals[i - 1] = e;
         }
-        
+
         return internal_invoke(vals, locals, globals);
     }
-    
+
     // subclasses actually do the invoke ...
     protected abstract LispExpr internal_invoke(LispExpr[] es,
-        HashMap<java.lang.String, LispExpr> locals,
-        HashMap<java.lang.String, LispExpr> globals);
+            HashMap<java.lang.String, LispExpr> locals, HashMap<java.lang.String, LispExpr> globals);
 }

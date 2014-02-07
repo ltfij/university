@@ -31,33 +31,33 @@ import com.hjwylde.uni.swen222.lab02.org.simplelisp.error.ParseException;
 import com.hjwylde.uni.swen222.lab02.org.simplelisp.lang.*;
 
 public class Parser {
-    
+
     private final List<Lexer.Token> tokens;
     private int pos;
-    
+
     private Parser(String text) {
         tokens = Lexer.tokenise(text, false);
         pos = 0;
     }
-    
+
     public LispExpr parse() throws ParseException {
         LispExpr t;
         LispList r = new LispList();
         r.add(new LispSymbol("progn"));
-        
+
         while ((t = parseExpr()) != null)
             r.add(t);
-        
+
         return r;
     }
-    
+
     /**
      * Expr ::= list | integer | boolean | string | identifier
      */
     private LispExpr parseExpr() throws ParseException {
         if (pos >= tokens.size())
             return null;
-        
+
         Lexer.Token lookahead = tokens.get(pos);
         if (lookahead instanceof Lexer.Quote) {
             ++pos;
@@ -80,9 +80,9 @@ public class Parser {
                 else if (c.equals("#\\Tab"))
                     return new LispChar('\t');
                 else
-                    throw new ParseException("Unrecognised character: "
-                        + lookahead, lookahead.getLine(), lookahead.getColumn());
-            
+                    throw new ParseException("Unrecognised character: " + lookahead,
+                            lookahead.getLine(), lookahead.getColumn());
+
             return new LispChar(c.charAt(2));
         } else if (lookahead instanceof Lexer.Identifier) {
             // catch the special forms
@@ -90,36 +90,33 @@ public class Parser {
             String sym = lookahead.toString();
             if (sym.equals("nil"))
                 return LispNil.INSTANCE;
-            
+
             return new LispSymbol(sym);
         } else
-            throw new ParseException("Unrecognised token: " + lookahead,
-                lookahead.getLine(), lookahead.getColumn());
+            throw new ParseException("Unrecognised token: " + lookahead, lookahead.getLine(),
+                    lookahead.getColumn());
     }
-    
+
     private LispList parseList() throws ParseException {
         // list ::= '(' Expr* ')' | nil
         Lexer.Token tok = tokens.get(pos++);
-        
+
         if (pos >= tokens.size())
-            throw new ParseException("End of file after '('", tok.getLine(),
-                tok.getColumn());
-        
+            throw new ParseException("End of file after '('", tok.getLine(), tok.getColumn());
+
         LispList l = new LispList();
-        
-        while ((pos < tokens.size())
-            && !(tokens.get(pos) instanceof Lexer.RightBrace))
+
+        while ((pos < tokens.size()) && !(tokens.get(pos) instanceof Lexer.RightBrace))
             l.add(parseExpr());
-        
+
         if (pos >= tokens.size())
-            throw new ParseException("Missing ')'", tok.getLine(),
-                tok.getColumn());
-        
+            throw new ParseException("Missing ')'", tok.getLine(), tok.getColumn());
+
         ++pos;
-        
+
         return l;
     }
-    
+
     private LispString parseString() throws ParseException {
         // a string consists of any sequence of characters
         // terminated by a '"'.
@@ -149,8 +146,8 @@ public class Parser {
                     buf.append('\r');
                 else
                     // don't recognise this escape character
-                    throw new ParseException("Invalid escape sequence: " + c,
-                        tok.getLine(), tok.getColumn());
+                    throw new ParseException("Invalid escape sequence: " + c, tok.getLine(),
+                            tok.getColumn());
                 escaped = false;
                 ++p;
             } else {
@@ -163,7 +160,7 @@ public class Parser {
         }
         return new LispString(buf.toString());
     }
-    
+
     public static LispExpr parse(String s) throws ParseException {
         return new Parser(s).parse();
     }

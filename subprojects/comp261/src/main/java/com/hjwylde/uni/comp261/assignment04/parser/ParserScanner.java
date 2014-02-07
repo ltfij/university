@@ -3,10 +3,7 @@ package com.hjwylde.uni.comp261.assignment04.parser;
 import java.util.NoSuchElementException;
 
 /*
- * Code for Assignment 4, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -16,11 +13,11 @@ import java.util.NoSuchElementException;
  * @author Henry J. Wylde
  */
 public class ParserScanner {
-    
+
     private final CharSequence cs;
-    
+
     private int index = 0;
-    
+
     /**
      * Initialize with the given <code>CharSequence</code>.
      * 
@@ -29,7 +26,7 @@ public class ParserScanner {
     public ParserScanner(CharSequence cs) {
         this.cs = cs;
     }
-    
+
     /**
      * Clears all whitespace up to the next character in the <code>CharSequence</code>.
      */
@@ -37,7 +34,7 @@ public class ParserScanner {
         while (hasNext() && Character.isWhitespace(peek()))
             index++;
     }
-    
+
     /**
      * Expect the given <code>CharSequence</code>, clearing whitespace before and after checking,
      * advancing the index if it is found, throwing a <code>ParseException</code> if the given
@@ -49,13 +46,11 @@ public class ParserScanner {
     public void expect(CharSequence expect) throws ParseException {
         expect(expect, true, true);
     }
-    
+
     /**
      * Expect the given <code>CharSequences</code> clearing whitespace before and after checking
-     * each
-     * expect. Advances the index after each expect, throws a <code>ParseException</code> if an
-     * expect
-     * was not found.
+     * each expect. Advances the index after each expect, throws a <code>ParseException</code> if an
+     * expect was not found.
      * 
      * @param expects an array of all CharSequences to expect.
      * @throws ParseException if any CharSequence was not found.
@@ -64,7 +59,7 @@ public class ParserScanner {
         for (CharSequence expect : expects)
             expect(expect, true, true);
     }
-    
+
     /**
      * Expect the given <code>CharSequence</code>, clearing whitespace before and after checking the
      * expect if <code>clear</code>. Throws a <code>ParseException</code> if the expect was not
@@ -74,11 +69,10 @@ public class ParserScanner {
      * @param clear whether to clear whitespace before and after checking the expect.
      * @throws ParseException if the CharSequence was not found.
      */
-    public void expect(CharSequence expect, boolean clear)
-        throws ParseException {
+    public void expect(CharSequence expect, boolean clear) throws ParseException {
         expect(expect, clear, clear);
     }
-    
+
     /**
      * Expect the given <code>CharSequence</code>, clearing whitespace before and after checking the
      * expect if <code>clearBefore</code> and <code>clearAfter</code> respectively. Throws a
@@ -89,30 +83,29 @@ public class ParserScanner {
      * @param clearAfter whether to clear whitespace after checking the expect.
      * @throws ParseException if the CharSequence was not found.
      */
-    public void expect(CharSequence expect, boolean clearBefore,
-        boolean clearAfter) throws ParseException {
+    public void expect(CharSequence expect, boolean clearBefore, boolean clearAfter)
+            throws ParseException {
         if (clearBefore)
             clearWhitespace();
-        
+
         // Check that there is enough characters for the expect.
         if ((index + expect.length()) > cs.length())
             throw new ParseException("Expected \"" + expect + "\". Received \""
-                + cs.subSequence(index, cs.length()) + "\".");
-        
+                    + cs.subSequence(index, cs.length()) + "\".");
+
         // Check each character to see if it matches the expect.
         for (int i = index; i < (index + expect.length()); i++)
             if (cs.charAt(i) != expect.charAt(i - index))
-                throw new ParseException("Expected \"" + expect
-                    + "\". Received \""
-                    + cs.subSequence(index, index + expect.length()) + "\".");
-        
+                throw new ParseException("Expected \"" + expect + "\". Received \""
+                        + cs.subSequence(index, index + expect.length()) + "\".");
+
         // Advance the iterator.
         index += expect.length();
-        
+
         if (clearAfter)
             clearWhitespace();
     }
-    
+
     /**
      * Expect at least one more token from this <code>ParserScanner</code>. This method does not
      * advance the iterator, it only throws a <code>ParseException</code> if there are no more
@@ -124,7 +117,7 @@ public class ParserScanner {
         if (!hasNext())
             throw new ParseException("Unexpected end of iterator.");
     }
-    
+
     /**
      * Check whether this <code>ParserScanner</code> has any more tokens to iterate through.
      * 
@@ -133,91 +126,84 @@ public class ParserScanner {
     public boolean hasNext() {
         return index < cs.length();
     }
-    
+
     /**
      * Check whether the next token is an <code>double</code>. Returns <code>false</code> if there
-     * are
-     * no more tokens or the next token is not an <code>double</code>.
+     * are no more tokens or the next token is not an <code>double</code>.
      * 
      * @return <code>true</code> if the next token is an double.
      */
     public boolean hasNextDouble() {
         if (!hasNext())
             return false;
-        
+
         int i = index;
         if (cs.charAt(index) == '-')
             i++;
-        
+
         String str = new String();
-        while ((i < cs.length())
-            && (Character.isDigit(cs.charAt(i)) || (cs.charAt(i) == '.'))) {
+        while ((i < cs.length()) && (Character.isDigit(cs.charAt(i)) || (cs.charAt(i) == '.'))) {
             if ((cs.charAt(i) == '.') && str.contains("."))
                 return false;
-            
+
             str += cs.charAt(i);
-            
+
             i++;
         }
-        
+
         return str.contains(".");
     }
-    
+
     /**
      * Check whether the next token is an <code>int</code>. Returns <code>false</code> if there are
-     * no
-     * more tokens or the next token is not an <code>int</code>.
+     * no more tokens or the next token is not an <code>int</code>.
      * 
      * @return <code>true</code> if the next token is an int.
      */
     public boolean hasNextInt() {
         if (!hasNext() || hasNextDouble())
             return false;
-        
+
         // (peek().isDigit) || (if (peek() == '-') && (not end of CharSequence) &&
         // (peek(2).isDigit))
         return Character.isDigit(peek())
-            || ((peek() == '-') && ((index + 1) < cs.length()) && Character
-                .isDigit(cs.charAt(index + 1)));
+                || ((peek() == '-') && ((index + 1) < cs.length()) && Character.isDigit(cs
+                        .charAt(index + 1)));
     }
-    
+
     /**
      * Gets the next character and advances the index. Throws a <code>NoSuchElementException</code>
-     * if
-     * there are no more characters to get.
+     * if there are no more characters to get.
      * 
      * @return the next character.
      */
     public char next() {
         if (!hasNext())
             throw new NoSuchElementException();
-        
+
         return cs.charAt(index++);
     }
-    
+
     /**
      * Gets the next <code>double</code>. Throws a <code>NoSuchElementException</code> if there are
-     * no
-     * more characters to get or the next token is not a <code>double</code>.
+     * no more characters to get or the next token is not a <code>double</code>.
      * 
      * @return the next double.
      */
     public Double nextDouble() {
         if (!hasNextDouble())
             throw new NoSuchElementException();
-        
+
         String str = "";
         if (peek() == '-')
             str += next();
-        
-        while (hasNext()
-            && (Character.isDigit(peek()) || ((peek() == '.') && !str
-                .contains("."))))
+
+        while (hasNext() && (Character.isDigit(peek()) || ((peek() == '.') && !str.contains("."))))
             str += next();
-        
+
         return Double.valueOf(str);
     }
-    
+
     /**
      * Gets the next <code>int</code>. Throws a <code>NoSuchElementException</code> if there are no
      * more characters to get or the next token is not an <code>int</code>.
@@ -227,17 +213,17 @@ public class ParserScanner {
     public int nextInt() {
         if (!hasNextInt())
             throw new NoSuchElementException();
-        
+
         String str = "";
         if (peek() == '-')
             str += next();
-        
+
         while (hasNext() && Character.isDigit(peek()))
             str += next();
-        
+
         return Integer.valueOf(str);
     }
-    
+
     /**
      * Gets the next character without advancing the index. Throws a
      * <code>NoSuchElementException</code> if there are no more characters.
@@ -247,17 +233,17 @@ public class ParserScanner {
     public char peek() {
         if (!hasNext())
             throw new NoSuchElementException();
-        
+
         return cs.charAt(index);
     }
-    
+
     /**
      * Resets the index to 0.
      */
     public void reset() {
         index = 0;
     }
-    
+
     /*
      * @see java.lang.Object#toString()
      */

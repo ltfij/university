@@ -21,10 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -34,63 +31,61 @@ import java.io.IOException;
  * @author djp
  */
 public abstract class Character {
-    
+
     protected int realX; // real x-position
     protected int realY; // real y-position
-    
+
     // Character type constants
     public static final int ENTERING = 0;
-    
+
     public static final int LEAVING = 1;
-    
+
     public static final int HOMERGHOST = 2;
-    
+
     public static final int RANDOMGHOST = 3;
-    
+
     public static final int PACMAN = 4;
-    
+
     public static final int DISAPPEAR = 5;
-    
+
     public Character(int realX, int realY) {
         this.realX = realX;
         this.realY = realY;
     }
-    
+
     /**
      * This method enables characters to draw themselves onto a given canvas.
      */
     public abstract void draw(Graphics g);
-    
+
     public int realX() {
         return realX;
     }
-    
+
     public int realY() {
         return realY;
     }
-    
+
     /**
      * The following method is provided to allow characters to take actions on every clock tick; for
      * example, ghosts may choose new directions to move in.
      */
     public abstract void tick(Board game);
-    
+
     /**
      * The following method is provided to simplify the process of writing a given character to the
      * output stream.
      */
-    public abstract void toOutputStream(DataOutputStream dout)
-        throws IOException;
-    
+    public abstract void toOutputStream(DataOutputStream dout) throws IOException;
+
     /**
      * The following constructs a character given a byte array.
      */
-    public static Character fromInputStream(DataInputStream din)
-        throws IOException {
+    public static Character fromInputStream(DataInputStream din) throws IOException {
         int type = din.readByte();
         int rx = din.readShort();
         int ry = din.readShort();
-        
+
         if (type == Character.PACMAN)
             return Pacman.fromInputStream(rx, ry, din);
         else if (type == Character.HOMERGHOST)
@@ -100,8 +95,7 @@ public abstract class Character {
         else if (type == Character.DISAPPEAR)
             return Disappear.fromInputStream(rx, ry, din);
         else
-            throw new IllegalArgumentException("Unrecognised character type: "
-                + type);
+            throw new IllegalArgumentException("Unrecognised character type: " + type);
     }
-    
+
 }

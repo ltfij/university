@@ -21,12 +21,12 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.error.ParseException;
  * @since 5/08/2013
  */
 public final class Tiles {
-    
+
     /**
      * This class cannot be instantiated.
      */
     private Tiles() {}
-    
+
     /**
      * Attempts to read a board of tiles from the given input stream. This method expects the file
      * to be written in the UTF-8 character set.
@@ -38,17 +38,16 @@ public final class Tiles {
      */
     public static Tile[][] parseTiles(InputStream in) throws IOException {
         List<String> lines = new ArrayList<>();
-        
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-            in))) {
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
             String line = null;
             while ((line = reader.readLine()) != null)
                 lines.add(line);
         }
-        
+
         return parseTiles(lines);
     }
-    
+
     /**
      * Attempts to read a board of tiles from the given file path. This method expects the file to
      * be written in the UTF-8 character set.
@@ -61,7 +60,7 @@ public final class Tiles {
     public static Tile[][] parseTiles(Path path) throws IOException {
         return parseTiles(Files.readAllLines(path, StandardCharsets.UTF_8));
     }
-    
+
     /**
      * Attempts to parse a character as a tile.
      * 
@@ -74,10 +73,10 @@ public final class Tiles {
         for (Tile tile : Tile.values())
             if (tile.getTile() == c)
                 return tile;
-        
+
         throw new ParseException("Unrecognised character: " + c);
     }
-    
+
     /**
      * Attempts to parse a list of lines as a board of tiles.
      * 
@@ -86,28 +85,27 @@ public final class Tiles {
      * 
      * @throws ParseException if the lines cannot be parsed.
      */
-    private static Tile[][] parseTiles(List<String> lines)
-        throws ParseException {
+    private static Tile[][] parseTiles(List<String> lines) throws ParseException {
         if (lines.size() == 0)
             return new Tile[0][0];
-        
+
         Tile[][] board = new Tile[lines.get(0).length()][lines.size()];
-        
+
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            
+
             if (line.length() != board.length)
                 throw new ParseException("Board is not a perfect rectangle");
-            
+
             for (int x = 0; x < line.length(); x++)
                 try {
                     board[x][y] = parseTile(line.charAt(x));
                 } catch (ParseException e) {
-                    throw new ParseException(e.getMessage() + " at line: "
-                        + (y + 1) + " and column: " + (x + 1), e);
+                    throw new ParseException(e.getMessage() + " at line: " + (y + 1)
+                            + " and column: " + (x + 1), e);
                 }
         }
-        
+
         return board;
     }
 }

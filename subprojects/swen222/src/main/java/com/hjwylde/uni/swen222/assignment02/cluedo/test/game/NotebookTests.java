@@ -24,24 +24,24 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.game.items.Weapon;
  */
 @SuppressWarnings("static-method")
 public final class NotebookTests {
-    
+
     /**
      * Tests crossing off every card that is expected to be in the notebook.
      */
     @Test
     public void noCards() {
         Notebook nb = new Notebook();
-        
+
         for (Character character : Character.values())
             nb.cross(new CharacterCard(character));
         for (Weapon weapon : Weapon.values())
             nb.cross(new WeaponCard(weapon));
         for (Room room : Room.values())
             nb.cross(new RoomCard(room));
-        
+
         assertTrue(nb.availableCards().isEmpty());
     }
-    
+
     /**
      * Tests that the notebook does not contain the pool room card.
      */

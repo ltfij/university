@@ -1,10 +1,7 @@
 package com.hjwylde.uni.swen221.assignment05.cards.game;
 
 /*
- * Code for Assignment 5, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 5, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -13,7 +10,7 @@ package com.hjwylde.uni.swen221.assignment05.cards.game;
  * @author Henry J. Wylde, djp
  */
 public enum Suit {
-    
+
     /**
      * Spades.
      */
@@ -30,9 +27,9 @@ public enum Suit {
      * Hearts.
      */
     HEARTS("H");
-    
+
     private final String name;
-    
+
     /**
      * Creates a new suit with the given name.
      * 
@@ -41,7 +38,7 @@ public enum Suit {
     private Suit(String name) {
         this.name = name;
     }
-    
+
     /*
      * @see java.lang.Enum#toString()
      */
@@ -49,5 +46,5 @@ public enum Suit {
     public String toString() {
         return name;
     }
-    
+
 }

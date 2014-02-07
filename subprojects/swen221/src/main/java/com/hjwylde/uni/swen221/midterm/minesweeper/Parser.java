@@ -8,57 +8,54 @@ import com.hjwylde.uni.swen221.midterm.minesweeper.moves.FlagMove;
 import com.hjwylde.uni.swen221.midterm.minesweeper.moves.Move;
 
 /*
- * Code for Mid-term Test, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Mid-term Test, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class Parser {
-    
+
     private String text; // text to be processed
     private int index; // position into text
-    
+
     public Parser(String text) {
         this.text = text;
         index = 0;
     }
-    
+
     public Game parse() throws SyntaxError {
-        
+
         // First, get the width and height
         int width = parseNumber();
         match(',');
         int height = parseNumber();
-        
+
         // Second, get the position of all bombs
         int numberOfBombs = parseNumber();
         Position[] bombs = new Position[numberOfBombs];
         for (int i = 0; i != numberOfBombs; ++i)
             bombs[i] = parsePosition(width, height);
-        
+
         // Third, get all moves and create game.
         int numberOfMoves = parseNumber();
         Move[] moves = new Move[numberOfMoves];
-        
+
         for (int i = 0; i != numberOfMoves; ++i)
             moves[i] = parseMove(width, height);
-        
+
         Game game = new Game(width, height, moves);
-        
+
         // Finally, place all bombs and initialise game.
         for (Position p : bombs)
             game.placeBomb(p);
-        
+
         game.initialise();
-        
+
         // Done
         return game;
     }
-    
+
     /**
-     * This method checks whether the given character is at the current position
-     * in the text. The method will first skip any whitespace at this point.
+     * This method checks whether the given character is at the current position in the text. The
+     * method will first skip any whitespace at this point.
      * 
      * @param text
      */
@@ -67,48 +64,45 @@ public class Parser {
         if ((index < text.length()) && (text.charAt(index) == c))
             index = index + 1;
         else if (index < text.length())
-            syntaxError("expecting '" + c + "', found '" + text.charAt(index)
-                + "'");
+            syntaxError("expecting '" + c + "', found '" + text.charAt(index) + "'");
         else
             syntaxError("unexpected end-of-file");
     }
-    
+
     /**
-     * Parse a move which consists of special character indicating what kind of
-     * move, followed by a position string. The move characters are: 'E' for
-     * expose move; 'F' for a flag move; 'U' for an unflag move; 'W' for a
-     * winning move; 'L' for a losing move which exposes a bomb.
+     * Parse a move which consists of special character indicating what kind of move, followed by a
+     * position string. The move characters are: 'E' for expose move; 'F' for a flag move; 'U' for
+     * an unflag move; 'W' for a winning move; 'L' for a losing move which exposes a bomb.
      * 
      * @return
      * @throws SyntaxError
      */
     private Move parseMove(int width, int height) throws SyntaxError {
         skipWhiteSpace();
-        
+
         char moveCharacter = text.charAt(index++);
         Position p = parsePosition(width, height);
-        
+
         switch (moveCharacter) {
-        case 'E':
-            return new ExposeMove(p);
-        case 'F':
-            return new FlagMove(p, true);
-        case 'U':
-            return new FlagMove(p, false);
-        case 'W':
-            return new EndMove(p, true);
-        case 'L':
-            return new EndMove(p, false);
+            case 'E':
+                return new ExposeMove(p);
+            case 'F':
+                return new FlagMove(p, true);
+            case 'U':
+                return new FlagMove(p, false);
+            case 'W':
+                return new EndMove(p, true);
+            case 'L':
+                return new EndMove(p, false);
         }
-        
+
         // if we get here, then an error has occurred.
         syntaxError("invalid move character: " + moveCharacter);
         return null;
     }
-    
+
     /**
-     * This method parses an integer from a string consisting of one or more
-     * digits.
+     * This method parses an integer from a string consisting of one or more digits.
      * 
      * @return
      */
@@ -118,47 +112,45 @@ public class Parser {
         int start = index;
         while ((index < text.length()) && Character.isDigit(text.charAt(index)))
             index = index + 1;
-        
+
         // second, check that we found at least one digit
         if (index == start)
             syntaxError("expecting a number");
-        
+
         // finally, convert the string into an actual integer.
         return Integer.parseInt(text.substring(start, index));
     }
-    
+
     /**
-     * Parse a position which is a string of the form "(x,y)" where x and y are
-     * integers giving the x and y components.
+     * Parse a position which is a string of the form "(x,y)" where x and y are integers giving the
+     * x and y components.
      * 
      * @return
      * @throws SyntaxError
      */
     private Position parsePosition(int width, int height) throws SyntaxError {
-        
+
         match('(');
         int x = parseNumber();
         match(',');
         int y = parseNumber();
         match(')');
-        
+
         if ((x >= width) || (x < 0) || (y >= height) || (y < 0))
             throw new SyntaxError("x and y co-ordinates must be within bounds.");
-        
+
         return new Position(x, y);
     }
-    
+
     /**
-     * Move the current position past any "white space" characters. White space
-     * characters include spaces (i.e. ' '), tabs (i.e. '\t') and newlines (i.e.
-     * '\n').
+     * Move the current position past any "white space" characters. White space characters include
+     * spaces (i.e. ' '), tabs (i.e. '\t') and newlines (i.e. '\n').
      */
     private void skipWhiteSpace() {
-        while ((index < text.length())
-            && Parser.isWhitespace(text.charAt(index)))
+        while ((index < text.length()) && Parser.isWhitespace(text.charAt(index)))
             index = index + 1;
     }
-    
+
     /**
      * Print out useful debugging output, and throw a SyntaxError exception
      * 
@@ -192,12 +184,11 @@ public class Parser {
         System.err.println("^\n");
         throw new SyntaxError(msg);
     }
-    
+
     /**
      * Check whether a given character is whitespace or not.
      * 
-     * @param c
-     *            --- the character to test.
+     * @param c --- the character to test.
      * @return
      */
     private static boolean isWhitespace(char c) {

@@ -25,32 +25,31 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public final class LispString implements LispSequence {
-    
+
     private final String value;
-    
+
     public LispString(String value) {
         this.value = value;
     }
-    
+
     @Override
     public LispExpr getValue(int i) {
         return new LispChar(value.charAt(i));
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof LispString))
             return false;
-        
+
         return Objects.equals(value, ((LispString) o).value);
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         return this;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -58,23 +57,23 @@ public final class LispString implements LispSequence {
     public int hashCode() {
         return value.hashCode();
     }
-    
+
     @Override
     public LispInteger length() {
         return new LispInteger(value.length());
     }
-    
+
     @Override
     public LispString reverse() {
         StringBuilder sb = new StringBuilder(value).reverse();
         return new LispString(sb.toString());
     }
-    
+
     @Override
     public LispString sublist(int from, int to) {
         return new LispString(value.substring(from, to));
     }
-    
+
     @Override
     public String toString() {
         return value;

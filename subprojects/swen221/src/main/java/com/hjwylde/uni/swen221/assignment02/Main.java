@@ -13,10 +13,7 @@ import com.hjwylde.uni.swen221.assignment02.walker.RandomWalker;
 import com.hjwylde.uni.swen221.assignment02.walker.TremauxWalker;
 
 /*
- * Code for Assignment 2, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 2, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -25,7 +22,7 @@ import com.hjwylde.uni.swen221.assignment02.walker.TremauxWalker;
  * @author ncameron
  */
 public class Main {
-    
+
     /**
      * The main method for this program
      */
@@ -34,11 +31,11 @@ public class Main {
         int width = 25; // default width of board to create
         int height = 25; // default height of board to create
         Mode mode = Mode.RANDOM;
-        
+
         // ======================================================
         // ======== First, parse command-line arguments ========
         // ======================================================
-        
+
         for (int i = 0; i != args.length; ++i)
             if (args[i].startsWith("-")) {
                 String arg = args[i];
@@ -57,11 +54,11 @@ public class Main {
                 else
                     throw new RuntimeException("Unknown option: " + args[i]);
             }
-        
+
         // ======================================================
         // ======= Second, create the board to be searched ======
         // ======================================================
-        
+
         Board board;
         if (fileName != null)
             try (FileReader fr = new FileReader(fileName)) {
@@ -69,11 +66,11 @@ public class Main {
             }
         else
             board = new Board(width, height);
-        
+
         // ======================================================
         // ====== Third, create the walker to walk the maze =====
         // ======================================================
-        
+
         Walker walker = null;
         if (mode == Mode.RANDOM)
             walker = new RandomWalker();
@@ -83,41 +80,36 @@ public class Main {
             walker = new LeftWalker();
         else
             walker = new TremauxWalker();
-        
+
         // ======================================================
         // ============== Fourth, show the GUI ==================
         // ======================================================
-        
+
         // Initialise the GUI and put it on the screen
         MazeWindow.getWindowAndShow(board);
-        
+
         // Now, register the key walker
         if (walker instanceof KeyListener)
             MazeWindow.mainWindow.addKeyListener((KeyListener) walker);
-        
+
         // ======================================================
         // ================== Fifth, solve the maze =============
         // ======================================================
-        
+
         long time = System.currentTimeMillis(); // record start time
-        
+
         // solve the maze!
         walker.solve(board);
-        
+
         time = System.currentTimeMillis() - time; // subtract start time
                                                   // from current time
-        System.out.println("Maze solved by " + walker.getName() + " in " + time
-            + "ms");
-        System.out.println("Solution has " + board.getPath().getSteps()
-            + " steps.");
-        
+        System.out.println("Maze solved by " + walker.getName() + " in " + time + "ms");
+        System.out.println("Solution has " + board.getPath().getSteps() + " steps.");
+
     }
 }
 
 
 enum Mode {
-    RANDOM,
-    KEY,
-    LEFT,
-    TREMAUX
+    RANDOM, KEY, LEFT, TREMAUX
 }

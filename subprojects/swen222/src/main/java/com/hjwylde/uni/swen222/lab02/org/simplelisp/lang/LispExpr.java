@@ -24,8 +24,7 @@ package com.hjwylde.uni.swen222.lab02.org.simplelisp.lang;
 import java.util.HashMap;
 
 public interface LispExpr {
-    
+
     // used to evaluate a Lisp Expression
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals);
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals);
 }

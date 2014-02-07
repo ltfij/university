@@ -19,10 +19,10 @@ import com.google.common.collect.Iterables;
  * @since 6/08/2013
  */
 public final class Path<T> implements Comparable<Path<T>>, Iterable<T> {
-    
+
     private final T node;
     private final Path<T> link;
-    
+
     /**
      * Creates a new <code>Path</code> with the given node.
      * 
@@ -32,7 +32,7 @@ public final class Path<T> implements Comparable<Path<T>>, Iterable<T> {
         this.node = Objects.requireNonNull(node);
         this.link = null;
     }
-    
+
     /**
      * Creates a new <code>Path</code> with the given node and previous link.
      * 
@@ -43,7 +43,7 @@ public final class Path<T> implements Comparable<Path<T>>, Iterable<T> {
         this.node = Objects.requireNonNull(node);
         this.link = Objects.requireNonNull(link);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -51,7 +51,7 @@ public final class Path<T> implements Comparable<Path<T>>, Iterable<T> {
     public int compareTo(Path<T> other) {
         return length() - other.length();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -59,13 +59,12 @@ public final class Path<T> implements Comparable<Path<T>>, Iterable<T> {
     public boolean equals(Object obj) {
         if (!(obj instanceof Path<?>))
             return false;
-        
+
         Path<?> path = (Path<?>) obj;
-        
-        return Objects.equals(node, path.node)
-            && Objects.equals(link, path.link);
+
+        return Objects.equals(node, path.node) && Objects.equals(link, path.link);
     }
-    
+
     /**
      * Attempts to get the previous link for this path if it exists.
      * 
@@ -74,7 +73,7 @@ public final class Path<T> implements Comparable<Path<T>>, Iterable<T> {
     public Optional<Path<T>> getLink() {
         return Optional.fromNullable(link);
     }
-    
+
     /**
      * Gets the node for this path.
      * 
@@ -83,7 +82,7 @@ public final class Path<T> implements Comparable<Path<T>>, Iterable<T> {
     public T getNode() {
         return node;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -91,41 +90,41 @@ public final class Path<T> implements Comparable<Path<T>>, Iterable<T> {
     public int hashCode() {
         return Objects.hash(node, link);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            
+
             private List<T> links = initLinks();
-            
+
             @Override
             public boolean hasNext() {
                 return !links.isEmpty();
             }
-            
+
             @Override
             public T next() {
                 return links.remove(0);
             }
-            
+
             @Override
             public void remove() {
                 throw new UnsupportedOperationException();
             }
-            
+
             private List<T> initLinks() {
                 LinkedList<T> links = new LinkedList<>();
                 for (Path<T> cur = Path.this; cur != null; cur = cur.link)
                     links.addFirst(cur.node);
-                
+
                 return links;
             }
         };
     }
-    
+
     /**
      * Calculates the length of this path. Note that a path may never have a length of 0.
      * 
@@ -134,7 +133,7 @@ public final class Path<T> implements Comparable<Path<T>>, Iterable<T> {
     public int length() {
         return 1 + (link == null ? 0 : link.length());
     }
-    
+
     /**
      * {@inheritDoc}
      */

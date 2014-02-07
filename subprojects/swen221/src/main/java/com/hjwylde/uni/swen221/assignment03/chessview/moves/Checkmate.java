@@ -1,10 +1,7 @@
 package com.hjwylde.uni.swen221.assignment03.chessview.moves;
 
 /*
- * Code for Assignment 3, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 3, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -14,7 +11,7 @@ package com.hjwylde.uni.swen221.assignment03.chessview.moves;
  * @author Henry J. Wylde
  */
 public class Checkmate extends Check {
-    
+
     /**
      * Creates a new Checkmate move that wraps the given move.
      * 
@@ -23,7 +20,7 @@ public class Checkmate extends Check {
     public Checkmate(MultiPieceMove move) {
         super(move);
     }
-    
+
     /*
      * @see assignment3.chessview.moves.Check#toString()
      */

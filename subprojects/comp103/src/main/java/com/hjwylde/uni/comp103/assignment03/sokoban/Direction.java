@@ -1,25 +1,18 @@
 package com.hjwylde.uni.comp103.assignment03.sokoban;
 
 /*
- * Code for Assignment 3, COMP 103
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 3, COMP 103 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
- * An enumerated type for the four directions, along with a method for getting
- * the opposite of a
+ * An enumerated type for the four directions, along with a method for getting the opposite of a
  * direction
  */
 
 public enum Direction {
-    
-    left,
-    right,
-    up,
-    down;
-    
+
+    left, right, up, down;
+
     public Direction opposite() {
         if (this == right)
             return left;
@@ -31,5 +24,5 @@ public enum Direction {
             return up;
         return this;
     }
-    
+
 }

@@ -7,10 +7,7 @@ import com.hjwylde.uni.swen221.lab02.shapes.math.BoundingBox;
 import com.hjwylde.uni.swen221.lab02.shapes.math.Vec2D;
 
 /*
- * Code for Laboratory 2, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 2, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -20,24 +17,22 @@ import com.hjwylde.uni.swen221.lab02.shapes.math.Vec2D;
  * 
  */
 public class Square extends AbstractShape {
-    
+
     private int width;
-    
+
     public Square(int width, Vec2D position, Vec2D velocity, Color color) {
         super(position, velocity, color);
         this.width = width;
     }
-    
+
     @Override
     public BoundingBox getBoundingBox() {
-        return new BoundingBox((int) getPosition().getX(), (int) getPosition()
-            .getY(), width, width);
+        return new BoundingBox((int) getPosition().getX(), (int) getPosition().getY(), width, width);
     }
-    
+
     @Override
     public void paint(Graphics g) {
         g.setColor(getColor());
-        g.fillRect((int) getPosition().getX(), (int) getPosition().getY(),
-            width, width);
+        g.fillRect((int) getPosition().getX(), (int) getPosition().getY(), width, width);
     }
 }

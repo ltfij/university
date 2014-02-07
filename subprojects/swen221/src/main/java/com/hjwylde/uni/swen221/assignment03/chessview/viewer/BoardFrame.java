@@ -18,59 +18,56 @@ import com.hjwylde.uni.swen221.assignment03.chessview.Board;
 import com.hjwylde.uni.swen221.assignment03.chessview.ChessGame;
 
 /*
- * Code for Assignment 3, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 3, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class BoardFrame extends JFrame implements ActionListener, KeyListener {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private JPanel bottomInnerPanel;
     private JPanel leftInnerPanel;
     private JPanel rightInnerPanel;
     private BoardCanvas boardCanvas;
     private RoundCanvas roundCanvas;
-    
+
     public BoardFrame(ChessGame game) {
         super("Chess View");
-        
+
         List<Board> boards = game.boards();
         boardCanvas = new BoardCanvas(boards);
         roundCanvas = new RoundCanvas(game.rounds(), boards);
-        
+
         leftInnerPanel = new JPanel();
         leftInnerPanel.setLayout(new BorderLayout());
-        Border cb = BorderFactory.createCompoundBorder(
-            BorderFactory.createEmptyBorder(3, 3, 3, 3),
-            BorderFactory.createLineBorder(Color.gray));
+        Border cb =
+                BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3),
+                        BorderFactory.createLineBorder(Color.gray));
         leftInnerPanel.setBorder(cb);
         leftInnerPanel.add(boardCanvas, BorderLayout.CENTER);
-        
+
         rightInnerPanel = new JPanel();
         rightInnerPanel.setLayout(new BorderLayout());
-        cb = BorderFactory.createCompoundBorder(
-            BorderFactory.createEmptyBorder(3, 3, 3, 3),
-            BorderFactory.createLineBorder(Color.gray));
+        cb =
+                BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3),
+                        BorderFactory.createLineBorder(Color.gray));
         rightInnerPanel.setBorder(cb);
         rightInnerPanel.add(roundCanvas, BorderLayout.CENTER);
-        
+
         JButton endbk = new JButton("|<<");
         JButton bkbk = new JButton("<<");
         JButton bk = new JButton("<");
         JButton fdend = new JButton(">>|");
         JButton fdfd = new JButton(">>");
         JButton fd = new JButton(">");
-        
+
         endbk.addActionListener(this);
         bkbk.addActionListener(this);
         bk.addActionListener(this);
         fdend.addActionListener(this);
         fdfd.addActionListener(this);
         fd.addActionListener(this);
-        
+
         bottomInnerPanel = new JPanel();
         bottomInnerPanel.add(endbk);
         bottomInnerPanel.add(bkbk);
@@ -78,19 +75,19 @@ public class BoardFrame extends JFrame implements ActionListener, KeyListener {
         bottomInnerPanel.add(fd);
         bottomInnerPanel.add(fdfd);
         bottomInnerPanel.add(fdend);
-        
+
         add(leftInnerPanel, BorderLayout.CENTER);
         add(rightInnerPanel, BorderLayout.EAST);
         add(bottomInnerPanel, BorderLayout.SOUTH);
-        
+
         setFocusable(true);
         addKeyListener(this);
-        
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // When a toolbar button or menu item is
@@ -116,9 +113,9 @@ public class BoardFrame extends JFrame implements ActionListener, KeyListener {
             roundCanvas.bwd(90000);
         }
     }
-    
+
     // METHODS REQUIRED FOR KEY LISTENER
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -136,12 +133,12 @@ public class BoardFrame extends JFrame implements ActionListener, KeyListener {
             roundCanvas.bwd(90000);
         }
     }
-    
+
     @Override
     public void keyReleased(KeyEvent e) {}
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
-        
+
     }
 }

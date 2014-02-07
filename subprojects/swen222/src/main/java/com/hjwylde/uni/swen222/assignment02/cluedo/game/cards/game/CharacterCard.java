@@ -16,9 +16,9 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.game.items.Character;
  * @since 25/07/2013
  */
 public final class CharacterCard implements Card {
-    
+
     private final Character character;
-    
+
     /**
      * Creates a new <code>CharacterCard</code> with the given character.
      * 
@@ -27,7 +27,7 @@ public final class CharacterCard implements Card {
     public CharacterCard(Character character) {
         this.character = Objects.requireNonNull(character);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -35,10 +35,10 @@ public final class CharacterCard implements Card {
     public boolean equals(Object obj) {
         if (!(obj instanceof CharacterCard))
             return false;
-        
+
         return character == ((CharacterCard) obj).character;
     }
-    
+
     /**
      * Gets the character of this card.
      * 
@@ -47,7 +47,7 @@ public final class CharacterCard implements Card {
     public Character getCharacter() {
         return character;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -55,7 +55,7 @@ public final class CharacterCard implements Card {
     public int hashCode() {
         return character.hashCode();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -63,7 +63,7 @@ public final class CharacterCard implements Card {
     public String toString() {
         return character.toString();
     }
-    
+
     /**
      * Gets an array of all possible values for this class. The array is generated using the enum of
      * characters.
@@ -74,7 +74,7 @@ public final class CharacterCard implements Card {
         List<CharacterCard> builder = new ArrayList<>();
         for (Character character : Character.values())
             builder.add(new CharacterCard(character));
-        
+
         return builder.toArray(new CharacterCard[0]);
     }
 }

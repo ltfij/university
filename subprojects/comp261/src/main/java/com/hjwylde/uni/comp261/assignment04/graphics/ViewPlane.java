@@ -1,10 +1,7 @@
 package com.hjwylde.uni.comp261.assignment04.graphics;
 
 /*
- * Code for Assignment 4, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -30,13 +27,13 @@ package com.hjwylde.uni.comp261.assignment04.graphics;
  * @author Henry J. Wylde
  */
 public class ViewPlane {
-    
+
     private double height;
     private double width;
     private double distance;
-    
+
     private double angle = (Math.PI * 2) / 5;
-    
+
     /**
      * Creates a new <code>ViewPlane</code> with <code>width = 0, height = 0, distance = 1</code>.
      */
@@ -45,7 +42,7 @@ public class ViewPlane {
         width = 0;
         distance = 1;
     }
-    
+
     /**
      * Gets the distance from the camera to the <code>ViewPlane</code>.
      * 
@@ -54,7 +51,7 @@ public class ViewPlane {
     public double getDistance() {
         return distance;
     }
-    
+
     /**
      * Gets the height of the <code>ViewPlane</code>.
      * 
@@ -63,7 +60,7 @@ public class ViewPlane {
     public double getHeight() {
         return height;
     }
-    
+
     /**
      * Gets the width of the <code>ViewPlane</code>.
      * 
@@ -72,7 +69,7 @@ public class ViewPlane {
     public double getWidth() {
         return width;
     }
-    
+
     /**
      * Sets the viewing angle of the camera to <code>ViewPlane</code> to the given angle.
      * 
@@ -80,10 +77,10 @@ public class ViewPlane {
      */
     public void setAngle(double angle) {
         this.angle = angle;
-        
+
         calcDistance(); // Re-calculate the distance from camera to the ViewPlane.
     }
-    
+
     /**
      * Sets the height of the <code>ViewPlane</code>
      * 
@@ -92,7 +89,7 @@ public class ViewPlane {
     public void setHeight(int height) {
         this.height = height;
     }
-    
+
     /**
      * Sets the width of the <code>ViewPlane</code>.
      * 
@@ -100,19 +97,19 @@ public class ViewPlane {
      */
     public void setWidth(int width) {
         this.width = width;
-        
+
         calcDistance();
     }
-    
+
     /*
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "ViewPlane [height=" + height + ", width=" + width
-            + ", distance=" + distance + ", angle=" + angle + "]";
+        return "ViewPlane [height=" + height + ", width=" + width + ", distance=" + distance
+                + ", angle=" + angle + "]";
     }
-    
+
     /**
      * Calculates the distance from the camera to the <code>ViewPlane</code> based on the viewing
      * angle and width of the <code>ViewPlane</code>.
@@ -121,7 +118,7 @@ public class ViewPlane {
         double distance = (width / 2) / Math.tan(angle / 2.0);
         if (distance == 0.0)
             distance = 1.0;
-        
+
         this.distance = distance;
     }
 }

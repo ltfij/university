@@ -6,10 +6,9 @@ package com.hjwylde.uni.swen222.lab03.battleships;
  * @author djp
  */
 public class GridSquare {
-    
+
     /**
-     * Construct a new Square with a given graphic, which may or may not be
-     * visible.
+     * Construct a new Square with a given graphic, which may or may not be visible.
      * 
      * @param visible
      */

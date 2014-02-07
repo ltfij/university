@@ -16,9 +16,9 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.game.items.Weapon;
  * @since 25/07/2013
  */
 public final class WeaponCard implements Card {
-    
+
     private final Weapon weapon;
-    
+
     /**
      * Creates a new <code>WeaponCard</code> with the given weapon.
      * 
@@ -27,7 +27,7 @@ public final class WeaponCard implements Card {
     public WeaponCard(Weapon weapon) {
         this.weapon = Objects.requireNonNull(weapon);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -35,10 +35,10 @@ public final class WeaponCard implements Card {
     public boolean equals(Object obj) {
         if (!(obj instanceof WeaponCard))
             return false;
-        
+
         return weapon == ((WeaponCard) obj).weapon;
     }
-    
+
     /**
      * Gets the weapon of this card.
      * 
@@ -47,7 +47,7 @@ public final class WeaponCard implements Card {
     public Weapon getWeapon() {
         return weapon;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -55,7 +55,7 @@ public final class WeaponCard implements Card {
     public int hashCode() {
         return weapon.hashCode();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -63,7 +63,7 @@ public final class WeaponCard implements Card {
     public String toString() {
         return weapon.toString();
     }
-    
+
     /**
      * Gets an array of all possible values for this class. The array is generated using the enum of
      * weapons.
@@ -74,7 +74,7 @@ public final class WeaponCard implements Card {
         List<WeaponCard> builder = new ArrayList<>();
         for (Weapon weapon : Weapon.values())
             builder.add(new WeaponCard(weapon));
-        
+
         return builder.toArray(new WeaponCard[0]);
     }
 }

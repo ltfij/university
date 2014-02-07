@@ -13,7 +13,7 @@ import java.util.Objects;
  * @since 5/12/2012
  */
 public class Pair<F, S> {
-    
+
     /**
      * The first element.
      */
@@ -22,7 +22,7 @@ public class Pair<F, S> {
      * The second element.
      */
     protected final S second;
-    
+
     /**
      * Creates a new ordered pair of the given two elements.
      * 
@@ -33,7 +33,7 @@ public class Pair<F, S> {
         this.first = Objects.requireNonNull(first);
         this.second = Objects.requireNonNull(second);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -41,13 +41,12 @@ public class Pair<F, S> {
     public boolean equals(Object obj) {
         if ((obj == null) || (getClass() != obj.getClass()))
             return false;
-        
+
         Pair<?, ?> pair = (Pair<?, ?>) obj;
-        
-        return Objects.equals(first, pair.first)
-            && Objects.equals(second, pair.second);
+
+        return Objects.equals(first, pair.first) && Objects.equals(second, pair.second);
     }
-    
+
     /**
      * Gets the first element.
      * 
@@ -56,7 +55,7 @@ public class Pair<F, S> {
     public F getFirst() {
         return first;
     }
-    
+
     /**
      * Gets the second element.
      * 
@@ -65,7 +64,7 @@ public class Pair<F, S> {
     public S getSecond() {
         return second;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -73,7 +72,7 @@ public class Pair<F, S> {
     public int hashCode() {
         return Objects.hash(first, second);
     }
-    
+
     /**
      * {@inheritDoc}
      */

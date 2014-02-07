@@ -10,10 +10,7 @@ import javax.swing.JPanel;
 import com.hjwylde.uni.comp261.assignment04.parser.ParseException;
 
 /*
- * Code for Assignment 4, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -28,21 +25,21 @@ import com.hjwylde.uni.comp261.assignment04.parser.ParseException;
  * @see com.hjwylde.uni.comp261.assignment04.modeller.MainFrame
  */
 public class World2d extends JPanel implements Runnable {
-    
+
     private static final long serialVersionUID = -3402167549528875745L;
-    
+
     private World3d world;
     private Color bgColor = Color.black;
-    
+
     boolean isRunning = true;
-    
+
     /**
      * Create a new <code>World2d</code>.
      */
     public World2d() {
         world = new World3d();
     }
-    
+
     /**
      * Adds listener interfaces to this component and the specified component.
      * 
@@ -52,7 +49,7 @@ public class World2d extends JPanel implements Runnable {
         addKeyListener(world);
         comp.addKeyListener(world);
     }
-    
+
     /**
      * Load a <code>Polytope</code> from the given <code>File</code>.
      * 
@@ -64,31 +61,43 @@ public class World2d extends JPanel implements Runnable {
     public void loadPolytope(File f) throws ParseException, IOException {
         world.loadPolytope(f);
     }
-    
+
     /**
      * Renders the <code>World2d</code> with the image generated from the <code>World3d</code>. Sets
      * the backgroudn to be <code>bgColor</code>.
      */
     @Override
     public void paint(Graphics window) {
-        Image bufferedImage = new BufferedImage(getWidth() + 20,
-            getHeight() + 20, BufferedImage.TYPE_INT_RGB); // + 20 because for some reason it missed
-                                                           // out rendering the
-                                                           // sides of the JPanel.
+        Image bufferedImage =
+                new BufferedImage(getWidth() + 20, getHeight() + 20, BufferedImage.TYPE_INT_RGB); // +
+                                                                                                  // 20
+                                                                                                  // because
+                                                                                                  // for
+                                                                                                  // some
+                                                                                                  // reason
+                                                                                                  // it
+                                                                                                  // missed
+                                                                                                  // out
+                                                                                                  // rendering
+                                                                                                  // the
+                                                                                                  // sides
+                                                                                                  // of
+                                                                                                  // the
+                                                                                                  // JPanel.
         Graphics2D g = (Graphics2D) bufferedImage.getGraphics(); // For double buffering.
-        
+
         g.setColor(bgColor);
         g.fillRect(0, 0, getWidth() + 20, getHeight() + 20);
-        
+
         world.render(g); // Render the 3d world onto this 2d world!
-        
+
         g.dispose();
-        
+
         window.drawImage(bufferedImage, 0, 0, this); // Display the image.
-        
+
         Toolkit.getDefaultToolkit().sync();
     }
-    
+
     /**
      * Run method that continually updates this <code>World2d</code>.
      */
@@ -96,15 +105,15 @@ public class World2d extends JPanel implements Runnable {
     public void run() {
         long curTime = System.currentTimeMillis();
         long elapsedTime;
-        
+
         while (isRunning) {
             elapsedTime = System.currentTimeMillis() - curTime;
             curTime = System.currentTimeMillis();
-            
+
             update(elapsedTime);
         }
     }
-    
+
     /**
      * Sets the view angle of the <code>World3d</code> in radians.
      * 
@@ -113,14 +122,14 @@ public class World2d extends JPanel implements Runnable {
     public void setViewAngle(double angle) {
         world.setViewAngle(angle);
     }
-    
+
     /**
      * Stops the world from running.
      */
     public void stop() {
         isRunning = false;
     }
-    
+
     /**
      * Update the <code>World3d</code>s width and height then redraws this world.
      * 
@@ -129,9 +138,9 @@ public class World2d extends JPanel implements Runnable {
     private void update(long elapsedTime) {
         world.setWidth(getWidth() + 20);
         world.setHeight(getHeight() + 20);
-        
+
         world.update(elapsedTime);
-        
+
         repaint();
     }
 }

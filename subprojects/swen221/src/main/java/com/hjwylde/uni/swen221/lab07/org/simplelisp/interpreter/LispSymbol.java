@@ -19,29 +19,25 @@ package com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter;
 import java.util.HashMap;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public final class LispSymbol implements LispExpr {
-    
+
     private final String name;
-    
+
     public LispSymbol(String v) {
         name = v;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         return (o instanceof LispSymbol) && name.equals(((LispSymbol) o).name);
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
-        
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
+
         LispExpr r = locals.get(name);
         if (r == null)
             r = globals.get(name);
@@ -49,16 +45,16 @@ public final class LispSymbol implements LispExpr {
             throw new Error("void variable \"" + name + "\"");
         return r;
     }
-    
+
     @Override
     public int hashCode() {
         return name.hashCode();
     }
-    
+
     public String name() {
         return name;
     }
-    
+
     @Override
     public String toString() {
         return name;

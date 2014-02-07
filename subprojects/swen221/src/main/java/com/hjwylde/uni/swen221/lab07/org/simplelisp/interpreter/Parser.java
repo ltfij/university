@@ -23,28 +23,25 @@ package com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter;
 import java.util.List;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class Parser {
-    
+
     private List<Lexer.Token> _tokens; // tokens being parsed
     private int _pos; // current position in token list
-    
+
     Parser(String text) {
         _pos = 0;
         _tokens = Lexer.tokenise(text, false);
     }
-    
+
     private LispExpr parseExpr() {
         // Expr ::= list | integer | boolean | string | identifier
-        
+
         if (_pos >= _tokens.size())
             return null;
-        
+
         Lexer.Token lookahead = _tokens.get(_pos);
         if (lookahead instanceof Lexer.Quote) {
             ++_pos;
@@ -67,10 +64,9 @@ public class Parser {
                 else if (c.equals("#\\Tab"))
                     return new LispChar('\t');
                 else
-                    throw new SyntaxError(lookahead.getLine(),
-                        lookahead.getColumn(), "unrecognised character \""
-                            + lookahead.toString() + "\"");
-            
+                    throw new SyntaxError(lookahead.getLine(), lookahead.getColumn(),
+                            "unrecognised character \"" + lookahead.toString() + "\"");
+
             return new LispChar(c.charAt(2));
         } else if (lookahead instanceof Lexer.Identifier) {
             // catch the special forms
@@ -78,73 +74,53 @@ public class Parser {
             String sym = lookahead.toString();
             if (sym.equals("nil"))
                 return new LispNil();
-            
+
             return new LispSymbol(sym);
         }
-        
-        throw new SyntaxError(lookahead.getLine(), lookahead.getColumn(),
-            "unrecognised token \"" + lookahead.toString() + "\"");
+
+        throw new SyntaxError(lookahead.getLine(), lookahead.getColumn(), "unrecognised token \""
+                + lookahead.toString() + "\"");
     }
-    
+
     private LispList parseList() {
         // list ::= '(' Expr* ')' | nil
         Lexer.Token tok = _tokens.get(_pos++);
-        
+
         if (_pos >= _tokens.size())
-            throw new SyntaxError(tok.getLine(), tok.getColumn(),
-                " end of file after '('");
-        
+            throw new SyntaxError(tok.getLine(), tok.getColumn(), " end of file after '('");
+
         LispList l = new LispList();
-        
-        while ((_pos < _tokens.size())
-            && !(_tokens.get(_pos) instanceof Lexer.RightBrace))
+
+        while ((_pos < _tokens.size()) && !(_tokens.get(_pos) instanceof Lexer.RightBrace))
             l.add(parseExpr());
-        
+
         if (_pos >= _tokens.size())
-            throw new SyntaxError(tok.getLine(), tok.getColumn(),
-                " missing ')'");
-        
+            throw new SyntaxError(tok.getLine(), tok.getColumn(), " missing ')'");
+
         ++_pos;
-        
+
         return l;
     }
-    
+
     /*
-     * private LispChar parseCharacter() {
-     * match("#\\");
-     * String t = getToken();
-     * if (t.length() == 1) {
-     * _pos++;
-     * LispChar r = new LispChar(t.charAt(0));
-     * return r;
-     * } else {
-     * // this could definitely be improved
-     * if (t.equals("Newline")) {
-     * match("Newline");
-     * LispChar r = new LispChar('\n');
-     * return r;
-     * } else if (t.equals("Tab")) {
-     * match("Tab");
-     * LispChar r = new LispChar('\t');
-     * return r;
-     * }
-     * }
-     * 
-     * throw new Error("unrecognised special character \"" + t + "\"");
-     * }
+     * private LispChar parseCharacter() { match("#\\"); String t = getToken(); if (t.length() == 1)
+     * { _pos++; LispChar r = new LispChar(t.charAt(0)); return r; } else { // this could definitely
+     * be improved if (t.equals("Newline")) { match("Newline"); LispChar r = new LispChar('\n');
+     * return r; } else if (t.equals("Tab")) { match("Tab"); LispChar r = new LispChar('\t'); return
+     * r; } } throw new Error("unrecognised special character \"" + t + "\""); }
      */
-    
+
     private LispExpr parseProgram() {
         LispExpr t;
         LispList r = new LispList();
         r.add(new LispSymbol("progn"));
-        
+
         while ((t = parseExpr()) != null)
             r.add(t);
-        
+
         return r;
     }
-    
+
     private LispString parseString() {
         // a string consists of any sequence of characters
         // terminated by a '"'.
@@ -175,7 +151,7 @@ public class Parser {
                 else
                     // don't recognise this escape character
                     throw new SyntaxError(tok.getLine(), tok.getColumn(),
-                        ": invalid escape sequence \\" + c);
+                            ": invalid escape sequence \\" + c);
                 escaped = false;
                 ++p;
             } else {
@@ -188,7 +164,7 @@ public class Parser {
         }
         return new LispString(buf.toString());
     }
-    
+
     public static LispExpr parse(String s) {
         Parser p = new Parser(s);
         return p.parseProgram();

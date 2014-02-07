@@ -22,42 +22,34 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public final class Disappear extends Character {
-    
+
     private int state;
-    
-    private static final Image[] DISCONNECTS = {
-        BoardCanvas.loadImage("disconnect1.png"),
-        BoardCanvas.loadImage("disconnect1.png"),
-        BoardCanvas.loadImage("disconnect2.png"),
-        BoardCanvas.loadImage("disconnect2.png"),
-        BoardCanvas.loadImage("disconnect3.png"),
-        BoardCanvas.loadImage("disconnect3.png"),
-        BoardCanvas.loadImage("disconnect4.png"),
-        BoardCanvas.loadImage("disconnect4.png")
-    };
-    
+
+    private static final Image[] DISCONNECTS = {BoardCanvas.loadImage("disconnect1.png"),
+            BoardCanvas.loadImage("disconnect1.png"), BoardCanvas.loadImage("disconnect2.png"),
+            BoardCanvas.loadImage("disconnect2.png"), BoardCanvas.loadImage("disconnect3.png"),
+            BoardCanvas.loadImage("disconnect3.png"), BoardCanvas.loadImage("disconnect4.png"),
+            BoardCanvas.loadImage("disconnect4.png")};
+
     public Disappear(int realX, int realY, int state) {
         super(realX, realY);
-        
+
         this.state = state;
     }
-    
+
     @Override
     public void draw(Graphics g) {
         g.drawImage(Disappear.DISCONNECTS[state], realX, realY, null, null);
     }
-    
+
     public int state() {
         return state;
     }
-    
+
     @Override
     public void tick(Board game) {
         if (state >= 7)
@@ -65,7 +57,7 @@ public final class Disappear extends Character {
         else
             state = state + 1;
     }
-    
+
     @Override
     public void toOutputStream(DataOutputStream dout) throws IOException {
         dout.writeByte(Character.DISAPPEAR);
@@ -73,9 +65,8 @@ public final class Disappear extends Character {
         dout.writeShort(realY);
         dout.writeByte(state);
     }
-    
-    public static Disappear fromInputStream(int rx, int ry, DataInputStream din)
-        throws IOException {
+
+    public static Disappear fromInputStream(int rx, int ry, DataInputStream din) throws IOException {
         byte state = din.readByte();
         return new Disappear(rx, ry, state);
     }

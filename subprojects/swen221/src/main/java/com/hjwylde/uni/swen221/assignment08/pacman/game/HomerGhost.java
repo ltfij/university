@@ -23,10 +23,7 @@ import java.io.IOException;
 import java.util.Random;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -36,65 +33,58 @@ import java.util.Random;
  * @author djp
  */
 public final class HomerGhost extends MovingCharacter implements Ghost {
-    
-    protected static final Random random = new Random(
-        System.currentTimeMillis());
-    
-    private static final Image HGHOST_RIGHT = BoardCanvas
-        .loadImage("hghostright.png");
-    
-    private static final Image HGHOST_LEFT = BoardCanvas
-        .loadImage("hghostleft.png");
-    
-    private static final Image HGHOST_UP = BoardCanvas
-        .loadImage("hghostup.png");
-    
-    private static final Image HGHOST_DOWN = BoardCanvas
-        .loadImage("hghostdown.png");
-    
+
+    protected static final Random random = new Random(System.currentTimeMillis());
+
+    private static final Image HGHOST_RIGHT = BoardCanvas.loadImage("hghostright.png");
+
+    private static final Image HGHOST_LEFT = BoardCanvas.loadImage("hghostleft.png");
+
+    private static final Image HGHOST_UP = BoardCanvas.loadImage("hghostup.png");
+
+    private static final Image HGHOST_DOWN = BoardCanvas.loadImage("hghostdown.png");
+
     public HomerGhost(int realX, int realY) {
         super(realX, realY, MovingCharacter.STOPPED);
     }
-    
+
     @Override
     public void draw(Graphics g) {
         switch (direction) {
-        case MovingCharacter.RIGHT:
-            g.drawImage(HomerGhost.HGHOST_RIGHT, realX, realY, null, null);
-            break;
-        case MovingCharacter.UP:
-            g.drawImage(HomerGhost.HGHOST_UP, realX, realY, null, null);
-            break;
-        case MovingCharacter.DOWN:
-            g.drawImage(HomerGhost.HGHOST_DOWN, realX, realY, null, null);
-            break;
-        case MovingCharacter.LEFT:
-            g.drawImage(HomerGhost.HGHOST_LEFT, realX, realY, null, null);
-            break;
+            case MovingCharacter.RIGHT:
+                g.drawImage(HomerGhost.HGHOST_RIGHT, realX, realY, null, null);
+                break;
+            case MovingCharacter.UP:
+                g.drawImage(HomerGhost.HGHOST_UP, realX, realY, null, null);
+                break;
+            case MovingCharacter.DOWN:
+                g.drawImage(HomerGhost.HGHOST_DOWN, realX, realY, null, null);
+                break;
+            case MovingCharacter.LEFT:
+                g.drawImage(HomerGhost.HGHOST_LEFT, realX, realY, null, null);
+                break;
         }
     }
-    
+
     @Override
     public int speed() {
         return 3;
     }
-    
+
     @Override
     public void tick(Board game) {
         super.tick(game);
-        
+
         // check whether we are at an intersection.
-        if ((direction == MovingCharacter.DOWN)
-            || (direction == MovingCharacter.UP)) {
+        if ((direction == MovingCharacter.DOWN) || (direction == MovingCharacter.UP)) {
             // ok, moving in up/down direction
             if (!game.canMoveLeft(this) && !game.canMoveRight(this))
                 return; // no horizontal movement possible
-        } else if ((direction == MovingCharacter.RIGHT)
-            || (direction == MovingCharacter.LEFT))
+        } else if ((direction == MovingCharacter.RIGHT) || (direction == MovingCharacter.LEFT))
             // ok, moving in left/right direction
             if (!game.canMoveUp(this) && !game.canMoveDown(this))
                 return; // no horizontal movement possible
-                
+
         // Yes, we're at an intersection. Now, flip a coin to see if we're really homing or going to
         // move randomly. This is kinda important, as otherwise having multiple homing ghosts just
         // means
@@ -103,26 +93,25 @@ public final class HomerGhost extends MovingCharacter implements Ghost {
             queued = HomerGhost.random.nextInt(4) + 1; // don't stop
             return;
         }
-        
+
         double targetDistance = 10000;
         int targetDeltaX = -1;
         int targetDeltaY = -1;
-        
+
         // home in on target
         for (Character c : game.characters())
             if ((c instanceof Pacman) && !((Pacman) c).isDead()) {
                 // potential target
                 int deltaX = Math.abs(c.realX() - realX);
                 int deltaY = Math.abs(c.realY() - realY);
-                double distance = Math.sqrt((deltaX * deltaX)
-                    + (deltaY * deltaY));
+                double distance = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
                 if (distance < targetDistance) {
                     targetDeltaX = c.realX() - realX;
                     targetDeltaY = c.realY() - realY;
                     targetDistance = distance;
                 }
             }
-        
+
         if (targetDeltaX != -1) {
             int deltaX = Math.abs(targetDeltaX);
             int deltaY = Math.abs(targetDeltaY);
@@ -139,7 +128,7 @@ public final class HomerGhost extends MovingCharacter implements Ghost {
                 tryMoveRight(targetDeltaY < 0, game);
         }
     }
-    
+
     @Override
     public void toOutputStream(DataOutputStream dout) throws IOException {
         dout.writeByte(Character.HOMERGHOST);
@@ -147,7 +136,7 @@ public final class HomerGhost extends MovingCharacter implements Ghost {
         dout.writeShort(realY);
         dout.writeByte(direction);
     }
-    
+
     public void tryMoveDown(boolean preferLeft, Board game) {
         if (game.canMoveDown(this))
             moveDown();
@@ -162,7 +151,7 @@ public final class HomerGhost extends MovingCharacter implements Ghost {
         else
             moveUp(); // last resort
     }
-    
+
     public void tryMoveLeft(boolean preferUp, Board game) {
         if (game.canMoveLeft(this))
             moveLeft();
@@ -177,7 +166,7 @@ public final class HomerGhost extends MovingCharacter implements Ghost {
         else
             moveRight(); // last resort
     }
-    
+
     public void tryMoveRight(boolean preferUp, Board game) {
         if (game.canMoveRight(this))
             moveRight();
@@ -192,7 +181,7 @@ public final class HomerGhost extends MovingCharacter implements Ghost {
         else
             moveLeft(); // last resort
     }
-    
+
     public void tryMoveUp(boolean preferLeft, Board game) {
         if (game.canMoveUp(this))
             moveUp();
@@ -207,12 +196,12 @@ public final class HomerGhost extends MovingCharacter implements Ghost {
         else
             moveDown(); // last resort
     }
-    
+
     /**
      * Read a homing ghost from the input stream.
      */
     public static HomerGhost fromInputStream(int rx, int ry, DataInputStream din)
-        throws IOException {
+            throws IOException {
         int dir = din.readByte();
         HomerGhost r = new HomerGhost(rx, ry);
         r.direction = dir;

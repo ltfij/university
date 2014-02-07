@@ -10,16 +10,16 @@ import java.io.IOException;
  * @since 5/08/2013
  */
 public class ParseException extends IOException {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * Creates a new <code>ParseException</code>.
      */
     public ParseException() {
         super();
     }
-    
+
     /**
      * Creates a new <code>ParseException</code> with the given message.
      * 
@@ -28,7 +28,7 @@ public class ParseException extends IOException {
     public ParseException(String message) {
         super(message);
     }
-    
+
     /**
      * Creates a new <code>ParseException</code> with the given message and cause.
      * 
@@ -38,7 +38,7 @@ public class ParseException extends IOException {
     public ParseException(String message, Throwable cause) {
         super(message, cause);
     }
-    
+
     /**
      * Creates a new <code>ParseException</code> with the given cause.
      * 

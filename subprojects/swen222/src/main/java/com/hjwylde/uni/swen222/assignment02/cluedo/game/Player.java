@@ -19,14 +19,14 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.game.items.Character;
  * @since 25/07/2013
  */
 public final class Player {
-    
+
     private final String name;
     private final Character character;
-    
+
     private final Set<Card> cards = new HashSet<>();
     private final List<KeeperCard> keeperCards = new ArrayList<>();
     private final Notebook notebook = new Notebook();
-    
+
     /**
      * Creates a new <code>Player</code> with the given name and character.
      * 
@@ -37,7 +37,7 @@ public final class Player {
         this.name = checkNotNull(name, "Name cannot be null!");
         this.character = Objects.requireNonNull(character);
     }
-    
+
     /**
      * Adds a card to the player's set and crosses it off the notebook.
      * 
@@ -47,7 +47,7 @@ public final class Player {
         cards.add(Objects.requireNonNull(card));
         notebook.cross(card); // The player knows his own cards!
     }
-    
+
     /**
      * Adds the given keeper card to this player's hand.
      * 
@@ -56,7 +56,7 @@ public final class Player {
     public void addKeeperCard(KeeperCard card) {
         keeperCards.add(card);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -64,10 +64,10 @@ public final class Player {
     public boolean equals(Object obj) {
         if (!(obj instanceof Player))
             return false;
-        
+
         return character == ((Player) obj).character;
     }
-    
+
     /**
      * Gets an immutable set of the player's cards.
      * 
@@ -76,7 +76,7 @@ public final class Player {
     public ImmutableSet<Card> getCards() {
         return ImmutableSet.copyOf(cards);
     }
-    
+
     /**
      * Gets the player's character.
      * 
@@ -85,7 +85,7 @@ public final class Player {
     public Character getCharacter() {
         return character;
     }
-    
+
     /**
      * Gets this player's keeper cards.
      * 
@@ -94,7 +94,7 @@ public final class Player {
     public ImmutableList<KeeperCard> getKeeperCards() {
         return ImmutableList.copyOf(keeperCards);
     }
-    
+
     /**
      * Gets this player's name.
      * 
@@ -103,7 +103,7 @@ public final class Player {
     public String getName() {
         return name;
     }
-    
+
     /**
      * Gets an immutable view of the player's notebook.
      * 
@@ -112,7 +112,7 @@ public final class Player {
     public Notebook getNotebook() {
         return notebook.getView();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -120,7 +120,7 @@ public final class Player {
     public int hashCode() {
         return character.hashCode();
     }
-    
+
     /**
      * Removes a keeper card of the given class from this player's hand.
      * 
@@ -129,14 +129,14 @@ public final class Player {
      */
     public <T extends KeeperCard> void removeKeeperCard(Class<T> clazz) {
         Iterator<KeeperCard> it = keeperCards.iterator();
-        
+
         while (it.hasNext())
             if (clazz.isInstance(it.next())) {
                 it.remove();
                 return;
             }
     }
-    
+
     /**
      * Shows the player the given card, essentially crossing it off in their notebook.
      * 
@@ -145,7 +145,7 @@ public final class Player {
     public void showCard(Card card) {
         notebook.cross(card);
     }
-    
+
     /**
      * {@inheritDoc}
      */

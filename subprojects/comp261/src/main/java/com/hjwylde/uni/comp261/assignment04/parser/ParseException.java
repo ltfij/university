@@ -1,10 +1,7 @@
 package com.hjwylde.uni.comp261.assignment04.parser;
 
 /*
- * Code for Assignment 4, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -14,16 +11,16 @@ package com.hjwylde.uni.comp261.assignment04.parser;
  * @author Henry J. Wylde
  */
 public class ParseException extends Exception {
-    
+
     private static final long serialVersionUID = 8216643967176707177L;
-    
+
     /**
      * A default <code>ParseException</code> with an unhelpful error message.
      */
     public ParseException() {
         this("Incorrect grammar format.");
     }
-    
+
     /**
      * A <code>ParseException</code> with the specified error message.
      * 

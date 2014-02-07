@@ -30,32 +30,32 @@ import com.hjwylde.uni.swen222.lab02.org.simplelisp.lang.LispNil;
 import com.hjwylde.uni.swen222.lab02.org.simplelisp.util.InternalFunctions;
 
 public class Interpreter {
-    
+
     private HashMap<String, LispExpr> globals = new HashMap<>();
-    
+
     public Interpreter() {
         InternalFunctions.setupInternalFunctions(this);
     }
-    
+
     public LispExpr evaluate(LispExpr e) {
         return e.evaluate(new HashMap<String, LispExpr>(), globals);
     }
-    
+
     public LispExpr getGlobalExpr(String name) {
         LispExpr r = globals.get(name);
         if (r == null)
             return LispNil.INSTANCE;
-        
+
         return r;
     }
-    
+
     public void load(String filename) throws FileNotFoundException {
         // attempt to load file.
         File file = new File(filename); // will need to be changes to URLReader thing
         try {
-            BufferedReader input = new BufferedReader(new InputStreamReader(
-                new FileInputStream(file)));
-            
+            BufferedReader input =
+                    new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+
             StringBuffer text = new StringBuffer();
             while (input.ready()) {
                 text.append(input.readLine());
@@ -73,16 +73,15 @@ public class Interpreter {
         } catch (IOException e) {
             // This happens if e.g. file already exists and
             // we do not have write permissions
-            System.err.println("Unable to load file " + file.getName() + ": "
-                + e.getMessage());
+            System.err.println("Unable to load file " + file.getName() + ": " + e.getMessage());
             System.exit(1);
         }
     }
-    
+
     public void setGlobalExpr(String name, LispExpr e) {
         globals.put(name, e);
     }
-    
+
     public void typeCheck(String fn, LispExpr[] es, Class<?>... cs) {
         for (int i = 0; i != cs.length; ++i) {
             if (es.length <= i)

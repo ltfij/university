@@ -1,20 +1,17 @@
 package com.hjwylde.uni.swen221.lab11.simpleweb;
 
 /*
- * Code for Laboratory 11, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 11, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
- * This class simply parses any command-line parameters, then creates a server
- * object and let's it run.
+ * This class simply parses any command-line parameters, then creates a server object and let's it
+ * run.
  * 
  * @author djp
  */
 public class Main {
-    
+
     public static void main(String[] args) {
         int port = 8080; // default
         String root = "src/lab11"; // default
@@ -29,30 +26,25 @@ public class Main {
                 else if (arg.equals("-root"))
                     root = args[++i];
             }
-        
+
         new Server(port, root).run();
     }
-    
+
     private static void usage() {
-        String[][] info = {
-            {
-                "port <n>",
-                "Respond to connections on port <n>; default is 8080."
-            },
-            {
-                "root <dir>",
-                "Set the root of all pages to this directory; default is current directory."
-            }
-        };
+        String[][] info =
+                {
+                        {"port <n>", "Respond to connections on port <n>; default is 8080."},
+                        {"root <dir>",
+                                "Set the root of all pages to this directory; default is current directory."}};
         System.out.println("Usage: simpleweb.Main <options> ");
         System.out.println("Options:");
-        
+
         // first, work out gap information
         int gap = 0;
-        
+
         for (String[] p : info)
             gap = Math.max(gap, p[0].length() + 5);
-        
+
         // now, print the information
         for (String[] p : info) {
             System.out.print("  -" + p[0]);

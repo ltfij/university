@@ -48,9 +48,9 @@ import com.hjwylde.uni.swen222.lab02.org.simplelisp.lang.LispExpr;
 import com.hjwylde.uni.swen222.lab02.org.simplelisp.lang.LispString;
 import com.hjwylde.uni.swen222.lab02.org.simplelisp.util.PrettyPrinter;
 
-public class InterpreterFrame extends JFrame implements ActionListener,
-    CaretListener, DocumentListener, WindowListener {
-    
+public class InterpreterFrame extends JFrame implements ActionListener, CaretListener,
+        DocumentListener, WindowListener {
+
     private JConsoleArea consoleView;
     private JConsoleArea problemsView;
     private JTextPane textView;
@@ -65,71 +65,68 @@ public class InterpreterFrame extends JFrame implements ActionListener,
     private JLabel funnylinething;
     private JButton runButton;
     private DisplayThread highlighter;
-    
+
     private int topProportion = 60;
     private int bottomProportion = 40;
-    
+
     // Actions for copy, cut and paste
-    private Action cutAction = new AbstractAction("Cut",
-        makeImageIcon("stock_cut.png")) {
-        
+    private Action cutAction = new AbstractAction("Cut", makeImageIcon("stock_cut.png")) {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             textView.cut();
         }
     };
-    
-    private Action copyAction = new AbstractAction("Copy",
-        makeImageIcon("stock_copy.png")) {
-        
+
+    private Action copyAction = new AbstractAction("Copy", makeImageIcon("stock_copy.png")) {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             textView.copy();
         }
     };
-    
-    private Action pasteAction = new AbstractAction("Paste",
-        makeImageIcon("stock_paste.png")) {
-        
+
+    private Action pasteAction = new AbstractAction("Paste", makeImageIcon("stock_paste.png")) {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             textView.paste();
         }
     };
-    
+
     // The run thread is used for executing
     // the simple lisp program
     private RunThread runThread = null;
-    
+
     private ImageIcon runImage = makeImageIcon("Play24.gif");
-    
+
     private ImageIcon stopImage = makeImageIcon("stock_stop.png");
-    
+
     // Holds current state of Lisp Interpreter
     private Interpreter interpreter = new Interpreter();
-    
+
     // The dirty bit is used to signal when the source file
     // has been modified. This is useful as it allows us
     // to ask the user if they want to save the file before
     // doing an operation such as "file new" or "file open".
     private boolean dirty = false;
-    
+
     // The dirty bit is used to signal when the source file
     // has been modified. This is useful as it allows us
     // to ask the user if they want to save the file before
     // doing an operation such as "file new" or "file open".
     private File file = null;
-    
+
     // The file chooser is used to open a file browser dialog
     // when opening or saving files.
     private final JFileChooser fileChooser = new JFileChooser(new File("."));
-    
+
     // The serial version is needed for serialization
     private static final long serialVersionUID = 201L;
-    
+
     public InterpreterFrame() {
         super("Simple Lisp Interpreter");
-        
+
         // Create the menu
         menubar = buildMenuBar();
         setJMenuBar(menubar);
@@ -145,7 +142,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         textView = buildEditor();
         textView.getDocument().addDocumentListener(this);
         textView.addCaretListener(this);
-        
+
         // set default key bindings
         try {
             bindKeyToCommand("ctrl C", "(buffer-copy)");
@@ -158,31 +155,30 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         } catch (ParseException e1) {
             e1.printStackTrace();
         }
-        
+
         // Give text view scrolling capability
-        Border border = BorderFactory.createCompoundBorder(
-            BorderFactory.createEmptyBorder(3, 3, 3, 3),
-            BorderFactory.createLineBorder(Color.gray));
+        Border border =
+                BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3),
+                        BorderFactory.createLineBorder(Color.gray));
         JScrollPane topSplit = addScrollers(textView);
         topSplit.setBorder(border);
-        
+
         // Create tabbed pane for console/problems
         consoleView = makeConsoleArea(10, 50, true);
         problemsView = makeConsoleArea(10, 50, false);
         tabbedPane = buildProblemsConsole();
-        
+
         // Plug the editor and problems/console together
         // using a split pane. This allows one to change
         // their relative size using the split-bar in
         // between them.
-        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topSplit,
-            tabbedPane);
-        
+        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topSplit, tabbedPane);
+
         // Create status bar
         statusView = new JLabel(" Status");
         funnylinething = new JLabel("0:0");
         thePub = buildStatusBar();
-        
+
         // Now, create the outer panel which holds
         // everything together
         panelthing = new JPanel();
@@ -191,24 +187,24 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         panelthing.add(splitPane, BorderLayout.CENTER);
         panelthing.add(thePub, BorderLayout.SOUTH);
         getContentPane().add(panelthing);
-        
+
         // tell frame to fire a WindowsListener event
         // but not to close when "x" button clicked.
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(this);
         // set minimised icon to use
         setIconImage(makeImageIcon("spi.png").getImage());
-        
+
         // setup additional internal functions
         InternalFunctions.setup_internals(interpreter, this);
-        
+
         // set default window size
         Component top = splitPane.getTopComponent();
         Component bottom = splitPane.getBottomComponent();
         top.setPreferredSize(new Dimension(100, 400));
         bottom.setPreferredSize(new Dimension(100, 200));
         pack();
-        
+
         // load + run user configuration file (if there is one)
         String homedir = System.getProperty("user.home");
         try {
@@ -217,19 +213,19 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             // do nothing if file does not exist!
             System.out.println("Didn't find \"" + homedir + "/.simplelisp\"");
         }
-        
+
         textView.grabFocus();
         setVisible(true);
-        
+
         // redirect all I/O to problems/console
         redirectIO();
-        
+
         // start highlighter thread
         highlighter = new DisplayThread(250);
         highlighter.setDaemon(true);
         highlighter.start();
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // When a toolbar button or menu item is
@@ -252,7 +248,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         else if (cmd.equals("Pretty"))
             prettyPrint();
     }
-    
+
     public void bindKeyToCommand(String keySequence, LispExpr cmd) {
         // see Java API for info on keySequence format
         KeyStroke ks = KeyStroke.getKeyStroke(keySequence);
@@ -260,14 +256,13 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             throw new Error("Invalid key sequence \"" + keySequence + "\"");
         textView.getKeymap().addActionForKeyStroke(ks, new KeyAction(cmd));
     }
-    
+
     // bindKeyToCommand binds a given key sequence to a Lisp command
     // so that pressing the key sequence executes the command.
-    public void bindKeyToCommand(String keySequence, String cmd)
-        throws ParseException {
+    public void bindKeyToCommand(String keySequence, String cmd) throws ParseException {
         bindKeyToCommand(keySequence, Parser.parse(cmd));
     }
-    
+
     @Override
     public void caretUpdate(CaretEvent e) {
         // when the cursor moves on _textView
@@ -283,12 +278,12 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         boolean isSelection = e.getDot() != e.getMark();
         copyAction.setEnabled(isSelection);
         cutAction.setEnabled(isSelection);
-        
+
     }
-    
+
     @Override
     public void changedUpdate(DocumentEvent e) {}
-    
+
     // Many of the following methods have been added purely
     // so InternalFunctions can work. Originally, the code in
     // that class was inline here, so its functions had direct
@@ -308,15 +303,15 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         splitPane.resetToPreferredSizes();
         pack();
     }
-    
+
     public void copy() {
         textView.copy();
     }
-    
+
     public void cut() {
         textView.cut();
     }
-    
+
     public void evaluate() {
         try {
             // clear problems and console messages
@@ -336,22 +331,22 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             runThread.start();
         } catch (ParseException e) {
             tabbedPane.setSelectedIndex(0);
-            System.err.println("Syntax Error at " + e.getLine() + ", "
-                + e.getColumn() + " : " + e.getMessage());
+            System.err.println("Syntax Error at " + e.getLine() + ", " + e.getColumn() + " : "
+                    + e.getMessage());
         } catch (Error e) {
             // parsing error
             System.err.println(e.getMessage());
             statusView.setText(" Errors.");
         }
     }
-    
+
     public void exit() {
         // user is attempting to exit the interpreter.
         // make sure this is what they want to do
         // and check if changes need to be saved.
-        int r = JOptionPane.showConfirmDialog(this, new JLabel(
-            "Exit Interpreter?"), "Confirm Exit", JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE);
+        int r =
+                JOptionPane.showConfirmDialog(this, new JLabel("Exit Interpreter?"),
+                        "Confirm Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (r == JOptionPane.YES_OPTION)
             // user still wants to go ahead.
             // if file not saved then prompt to check
@@ -359,12 +354,12 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             if (!dirty || checkForSave())
                 System.exit(0);
     }
-    
+
     public int getCaretPosition() {
         Caret c = textView.getCaret();
         return c.getDot();
     }
-    
+
     // convert color name in to Java Color object
     public Color getColour(String name) {
         if (name.equals("red"))
@@ -397,27 +392,28 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             // see if the colour is expressed in
             // 0xAABBCC format for RGB...
             return Color.decode(name);
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
         // no, ok bail then ... but this will certainly
         // through an exception
         return null;
     }
-    
+
     public Document getDocument() {
         return document;
     }
-    
+
     public int getSelectedTab() {
         return tabbedPane.getSelectedIndex();
     }
-    
+
     @Override
     public void insertUpdate(DocumentEvent e) {
         // when text is typed into _textView
         // this will be called
         dirty = true;
     }
-    
+
     public void newFile() {
         if (!dirty || checkForSave()) {
             textView.setText("");
@@ -429,7 +425,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             dirty = false;
         }
     }
-    
+
     public void openFile() {
         if (!dirty || checkForSave()) {
             if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
@@ -445,11 +441,11 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             dirty = false;
         }
     }
-    
+
     public void paste() {
         textView.paste();
     }
-    
+
     public void prettyPrint() {
         try {
             // clear old problem messages
@@ -466,14 +462,14 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             statusView.setText(" Errors.");
         }
     }
-    
+
     @Override
     public void removeUpdate(DocumentEvent e) {
         // when text is deleted from _textView
         // this will be called
         dirty = true;
     }
-    
+
     public void runFinished() {
         // program execution finished so update
         // status and run button accordingly
@@ -487,7 +483,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         runButton.setActionCommand("Run");
         runButton.setIcon(runImage);
     }
-    
+
     public void savefa() {
         // Force user to enter new file name
         if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
@@ -502,7 +498,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         // reset dirty bit
         dirty = false;
     }
-    
+
     public void saveFile() {
         if (file == null)
             // first save file, so prompt for name.
@@ -516,28 +512,28 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             dirty = false;
         }
     }
-    
+
     public void setCaretPosition(int position) {
         Caret c = textView.getCaret();
         // move the caret
         c.setDot(position);
     }
-    
+
     public void setMenuBarMode(boolean enable) {
         if (enable)
             setJMenuBar(menubar);
         else
             setJMenuBar(null);
     }
-    
+
     public void setSelectedTab(int pos) {
         tabbedPane.setSelectedIndex(pos);
     }
-    
+
     // ----------------
     // Helper Functions
     // ----------------
-    
+
     public void setStatusBarMode(boolean enable) {
         if (enable) {
             if (!panelthing.isAncestorOf(thePub))
@@ -547,7 +543,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             pack();
         }
     }
-    
+
     public void setToolBarMode(boolean enable) {
         if (enable) {
             if (!panelthing.isAncestorOf(toolbar))
@@ -555,12 +551,12 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         } else
             panelthing.remove(toolbar);
     }
-    
+
     public void setTopProportion(int top) {
         topProportion = top;
         bottomProportion = 100 - top;
     }
-    
+
     public void stopEvaluate() {
         // user requested run be stopped so tell
         // run thread to stop
@@ -568,20 +564,20 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         runThread = null;
         tmp.interrupt();
     }
-    
+
     public void unbindKey(String keySequence) {
         KeyStroke ks = KeyStroke.getKeyStroke(keySequence);
         if (ks == null)
             throw new Error("Invalid key sequence \"" + keySequence + "\"");
         textView.getKeymap().removeKeyStrokeBinding(ks);
     }
-    
+
     @Override
     public void windowActivated(WindowEvent e) {}
-    
+
     @Override
     public void windowClosed(WindowEvent e) {}
-    
+
     @Override
     public void windowClosing(WindowEvent e) {
         // when the user clicks on 'x' button
@@ -589,25 +585,24 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         // this method is called.
         exit();
     }
-    
+
     @Override
     public void windowDeactivated(WindowEvent e) {}
-    
+
     @Override
     public void windowDeiconified(WindowEvent e) {}
-    
+
     @Override
     public void windowIconified(WindowEvent e) {}
-    
+
     @Override
     public void windowOpened(WindowEvent e) {}
-    
+
     private JScrollPane addScrollers(JComponent c) {
-        return new JScrollPane(c,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        return new JScrollPane(c, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
-    
+
     private String backgroundColour(String type) {
         LispExpr e = interpreter.getGlobalExpr(type);
         if (!(e instanceof LispString)) {
@@ -617,14 +612,14 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         }
         return ((LispString) e).toString();
     }
-    
+
     private JTextPane buildEditor() {
         // build the editor pane
         JTextPane ta = makeTextPane(true);
         ta.setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 5));
         return ta;
     }
-    
+
     // This function builds the menu bar
     private JMenuBar buildMenuBar() {
         JMenuBar menuBar = new JMenuBar();
@@ -654,7 +649,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         menuBar.add(editMenu);
         return menuBar;
     }
-    
+
     private JTabbedPane buildProblemsConsole() {
         // build the problems/console editor
         JTabbedPane tp = new JTabbedPane();
@@ -665,7 +660,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         tp.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
         return tp;
     }
-    
+
     private JPanel buildStatusBar() {
         // build the status bar. this sits at
         // the bottom of the window and indicates
@@ -677,7 +672,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         panel.add(funnylinething, BorderLayout.EAST);
         return panel;
     }
-    
+
     private JToolBar buildToolBar() {
         // build tool bar
         JToolBar toolBar = new JToolBar("Toolbar");
@@ -687,41 +682,38 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         // run button is special
         runButton = makeToolbarButton("Play24.gif", "Run Program", "Run");
         toolBar.add(runButton);
-        toolBar.add(makeToolbarButton("stock_text_left.png", "Pretty Print",
-            "Pretty"));
+        toolBar.add(makeToolbarButton("stock_text_left.png", "Pretty Print", "Pretty"));
         toolBar.addSeparator();
         toolBar.add(new JButton(copyAction));
         toolBar.add(new JButton(cutAction));
         toolBar.add(new JButton(pasteAction));
         return toolBar;
     }
-    
+
     private boolean checkForSave() {
         // build warning message
         String message;
         if (file == null)
             message = "File has been modified.  Save changes?";
         else
-            message = "File \"" + file.getName()
-                + "\" has been modified.  Save changes?";
-        
+            message = "File \"" + file.getName() + "\" has been modified.  Save changes?";
+
         // show confirm dialog
-        int r = JOptionPane.showConfirmDialog(this, new JLabel(message),
-            "Warning!", JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.WARNING_MESSAGE);
-        
+        int r =
+                JOptionPane.showConfirmDialog(this, new JLabel(message), "Warning!",
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+
         if (r == JOptionPane.YES_OPTION)
             // Save File
             if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
                 // write the file
-                physWriteTextFile(fileChooser.getSelectedFile(),
-                    textView.getText());
+                physWriteTextFile(fileChooser.getSelectedFile(), textView.getText());
             else
                 // user cancelled save after all
                 return false;
         return r != JOptionPane.CANCEL_OPTION;
     }
-    
+
     private String foregroundColour(String type) {
         LispExpr e = interpreter.getGlobalExpr(type);
         if (!(e instanceof LispString)) {
@@ -731,83 +723,82 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         }
         return ((LispString) e).toString();
     }
-    
+
     private void highlightArea(int pos, int len, String col) {
         SimpleAttributeSet attrs = new SimpleAttributeSet();
         StyleConstants.setForeground(attrs, getColour(col));
         document.setCharacterAttributes(pos, len, attrs, true);
     }
-    
+
     // ----------------------
     // ActionListener Methods
     // ----------------------
-    
+
     private JConsoleArea makeConsoleArea(int width, int height, boolean editable) {
         JConsoleArea ta = new JConsoleArea();
         ta.setEditable(editable);
         return ta;
     }
-    
+
     // ---------------------
     // CaretListener Methods
     // ---------------------
-    
+
     private ImageIcon makeImageIcon(String name) {
         String fileName = "icons/" + name;
         // using the URL means the image loads when stored
         // in a jar or expanded into individual files.
         java.net.URL imageURL = InterpreterFrame.class.getResource(fileName);
-        
+
         ImageIcon icon = null;
         if (imageURL != null)
             icon = new ImageIcon(imageURL);
         return icon;
     }
-    
+
     // ------------------------
     // DocumentListener Methods
     // ------------------------
-    
+
     private JMenuItem makeMenuItem(Action a) {
         JMenuItem item = new JMenuItem(a);
         item.addActionListener(this);
         return item;
     }
-    
+
     private JMenuItem makeMenuItem(String s) {
         JMenuItem item = new JMenuItem(s);
         item.setActionCommand(s);
         item.addActionListener(this);
         return item;
     }
-    
+
     private JTextPane makeTextPane(boolean editable) {
         document = new DefaultStyledDocument();
         JTextPane ta = new JTextPane(document);
         ta.setEditable(editable);
         return ta;
     }
-    
+
     // ----------------------
     // WindowListener Methods
     // ----------------------
-    
-    private JButton makeToolbarButton(String name, String toolTipText,
-        String action) {
+
+    private JButton makeToolbarButton(String name, String toolTipText, String action) {
         // Create and initialize the button.
         JButton button = new JButton(makeImageIcon(name));
         button.setToolTipText(toolTipText);
         button.setActionCommand(action);
         button.addActionListener(this);
-        
+
         return button;
     }
-    
+
     private String physReadTextFile(File file) {
         // physically read text file
         try {
-            BufferedReader input = new BufferedReader(new InputStreamReader(
-                new FileInputStream(file)));
+            BufferedReader input =
+                    new BufferedReader(new InputStreamReader(new FileInputStream(file)));
             StringBuffer tmp = new StringBuffer();
             while (input.ready()) {
                 tmp.append(input.readLine());
@@ -816,17 +807,15 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             return tmp.toString();
         } catch (FileNotFoundException e) {
             // not sure how this can happen
-            showErrorDialog("Unable to load \"" + file.getName()
-                + "\" (file not found)");
+            showErrorDialog("Unable to load \"" + file.getName() + "\" (file not found)");
         } catch (IOException e) {
             // This happens if e.g. file already exists and
             // we do not have write permissions
-            showErrorDialog("Unable to load \"" + file.getName()
-                + "\" (I/O error)");
+            showErrorDialog("Unable to load \"" + file.getName() + "\" (I/O error)");
         }
         return new String("");
     }
-    
+
     private void physWriteTextFile(File file, String text) {
         // physically write file
         try {
@@ -842,7 +831,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             showErrorDialog("Saving failed due I/O error.");
         }
     }
-    
+
     private void redirectIO() {
         // redirect std I/O to console and problems:
         // > System.out => console
@@ -853,37 +842,27 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         // redirect input from console to System.in
         System.setIn(consoleView.getInputStream());
     }
-    
+
     private void showErrorDialog(String msg) {
         // show a dialog window containing the error message
-        JOptionPane.showMessageDialog(this, new JLabel(msg), "Error!",
-            JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, new JLabel(msg), "Error!", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     private void updateDisplay() {
         // first, set block colours
-        textView
-            .setBackground(getColour(backgroundColour("text-background-colour")));
-        textView
-            .setForeground(getColour(foregroundColour("text-foreground-colour")));
-        textView
-            .setCaretColor(getColour(foregroundColour("text-caret-colour")));
-        problemsView
-            .setBackground(getColour(backgroundColour("problems-background-colour")));
-        problemsView
-            .setForeground(getColour(foregroundColour("problems-foreground-colour")));
-        consoleView
-            .setBackground(getColour(backgroundColour("console-background-colour")));
-        consoleView
-            .setForeground(getColour(foregroundColour("console-foreground-colour")));
+        textView.setBackground(getColour(backgroundColour("text-background-colour")));
+        textView.setForeground(getColour(foregroundColour("text-foreground-colour")));
+        textView.setCaretColor(getColour(foregroundColour("text-caret-colour")));
+        problemsView.setBackground(getColour(backgroundColour("problems-background-colour")));
+        problemsView.setForeground(getColour(foregroundColour("problems-foreground-colour")));
+        consoleView.setBackground(getColour(backgroundColour("console-background-colour")));
+        consoleView.setForeground(getColour(foregroundColour("console-foreground-colour")));
         // second, set colours on the code!
-        java.util.List<Lexer.Token> tokens = Lexer.tokenise(textView.getText(),
-            true);
+        java.util.List<Lexer.Token> tokens = Lexer.tokenise(textView.getText(), true);
         int pos = 0;
         for (Lexer.Token t : tokens) {
             int len = t.toString().length();
-            if ((t instanceof Lexer.RightBrace)
-                || (t instanceof Lexer.LeftBrace))
+            if ((t instanceof Lexer.RightBrace) || (t instanceof Lexer.LeftBrace))
                 highlightArea(pos, len, foregroundColour("text-brace-colour"));
             else if (t instanceof Lexer.Strung)
                 highlightArea(pos, len, foregroundColour("text-string-colour"));
@@ -894,25 +873,24 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             else if (t instanceof Lexer.Comma)
                 highlightArea(pos, len, foregroundColour("text-comma-colour"));
             else if (t instanceof Lexer.Identifier)
-                highlightArea(pos, len,
-                    foregroundColour("text-identifier-colour"));
+                highlightArea(pos, len, foregroundColour("text-identifier-colour"));
             else if (t instanceof Lexer.Integer)
                 highlightArea(pos, len, foregroundColour("text-integer-colour"));
             pos += len;
         }
     }
-    
+
     public static void main(String argv[]) {
         // basically, if a command-line parameter is supplied
         // then assume it is a file name and execute it as
         // a simpular program without using the GUI at all.
         InterpreterFrame f;
-        
+
         if (argv.length == 0)
             f = new InterpreterFrame();
         else if (argv[0].equals("-no-gui")) {
             // run interpreter without GUI!
-            
+
             // setup new argument list for original
             // Main method
             String[] newargv = new String[argv.length - 1];
@@ -922,7 +900,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         } else {
             // run interpreter with GUI, but
             // load requested file.
-            
+
             f = new InterpreterFrame();
             // load file into text view
             f.textView.setText(f.physReadTextFile(new File(argv[0])));
@@ -932,51 +910,52 @@ public class InterpreterFrame extends JFrame implements ActionListener,
             f.dirty = false;
         }
     }
-    
+
     // ---------------
     // private classes
     // ---------------
-    
+
     private class DisplayThread extends Thread {
-        
+
         // the dislpay thread is responsible for
         // syntax highlighting the users code and
         // updating various colours
         private int _period; // in ms
-        
+
         public DisplayThread(int period) {
             _period = period;
         }
-        
+
         @Override
         public void run() { // how to let this terminate gracefully?
             while (1 != 2)
                 try {
                     Thread.sleep(_period);
                     updateDisplay();
-                } catch (InterruptedException e) {}
+                } catch (InterruptedException e) {
+                }
         }
-        
+
     }
-    
+
     // A key action simply runs its command when
     // invoked from the keyboard.
     private class KeyAction extends AbstractAction {
-        
+
         private LispExpr command;
-        
+
         public KeyAction(LispExpr c) {
             command = c;
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             interpreter.evaluate(command);
         }
     }
-    
+
     private class RunThread extends Thread {
-        
+
         // the runthread is responsible for
         // executing the users simpular program.
         // Using a separate thread here means
@@ -984,11 +963,11 @@ public class InterpreterFrame extends JFrame implements ActionListener,
         // respond to events whilst the program
         // is running.
         LispExpr program;
-        
+
         RunThread(LispExpr p) {
             program = p;
         }
-        
+
         @Override
         public void run() {
             try {
@@ -1000,7 +979,7 @@ public class InterpreterFrame extends JFrame implements ActionListener,
                 tabbedPane.setSelectedIndex(0);
                 System.err.println("Runtime Error: " + e.getMessage());
             }
-            
+
             // notify GUI that program execution finished
             runFinished();
         }

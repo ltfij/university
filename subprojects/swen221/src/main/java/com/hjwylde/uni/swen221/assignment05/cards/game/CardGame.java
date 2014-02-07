@@ -3,17 +3,14 @@ package com.hjwylde.uni.swen221.assignment05.cards.game;
 import java.util.*;
 
 /*
- * Code for Assignment 5, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 5, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class CardGame {
-    
+
     private Trick trick;
     private Map<Player, Integer> numTricks = new HashMap<>();
-    
+
     public CardGame() {
         for (Player p : Player.values())
             numTricks.put(p, 0);
@@ -26,26 +23,24 @@ public class CardGame {
         }
         trick = new TrickImpl(Player.getRandom());
     }
-    
+
     public Trick getTrick() {
         return trick;
     }
-    
+
     /**
      * Returns the winner of the game.
      */
     public String getWinner() {
         if (!isFinished())
             throw new IllegalArgumentException("Game not finished!");
-        final int northSouth = numTricks.get(Player.NORTH)
-            + numTricks.get(Player.SOUTH);
-        final int eastWest = numTricks.get(Player.EAST)
-            + numTricks.get(Player.WEST);
+        final int northSouth = numTricks.get(Player.NORTH) + numTricks.get(Player.SOUTH);
+        final int eastWest = numTricks.get(Player.EAST) + numTricks.get(Player.WEST);
         if (northSouth > eastWest)
             return "Partnership NORTH/SOUTH";
         return "Partnership EAST/WEST";
     }
-    
+
     /**
      * Check whether game is finished.
      */
@@ -55,7 +50,7 @@ public class CardGame {
                 return false;
         return true;
     }
-    
+
     /**
      * Signal that it's time for the next round.
      */
@@ -64,7 +59,7 @@ public class CardGame {
         numTricks.put(winner, numTricks.get(winner) + 1);
         trick = new TrickImpl(winner);
     }
-    
+
     @Override
     public String toString() {
         String r = "";
@@ -75,7 +70,7 @@ public class CardGame {
         }
         return r;
     }
-    
+
     public static List<Card> createDeck() {
         ArrayList<Card> deck = new ArrayList<>();
         for (Suit suit : Suit.values())

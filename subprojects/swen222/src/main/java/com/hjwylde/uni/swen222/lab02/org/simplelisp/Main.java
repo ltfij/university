@@ -18,22 +18,21 @@ import com.hjwylde.uni.swen222.lab02.org.simplelisp.lang.LispExpr;
  * @since 5/08/2013
  */
 public class Main {
-    
+
     private Main() {}
-    
+
     // Main method, used to run interpreter without GUI
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
-        
+
         // now either run files on command-line or enter interactive mode...
         if (args.length == 0) {
             // interactive mode
             System.out.println("Simple Lisp Interpreter v1.0");
             System.out.println("Written by David J. Pearce, March 2006");
             System.out.println("");
-            BufferedReader input = new BufferedReader(new InputStreamReader(
-                System.in));
-            
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
             try {
                 while (true) {
                     System.out.print("> ");
@@ -52,8 +51,7 @@ public class Main {
             try {
                 interpreter.load(args[0]);
             } catch (FileNotFoundException e) {
-                System.err.println("Unable to load \"" + args[0] + "\" "
-                    + e.getMessage());
+                System.err.println("Unable to load \"" + args[0] + "\" " + e.getMessage());
             }
     }
 }

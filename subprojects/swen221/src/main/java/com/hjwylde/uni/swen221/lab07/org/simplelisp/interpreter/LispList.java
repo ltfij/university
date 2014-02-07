@@ -22,33 +22,30 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class LispList implements LispSequence, Iterable<LispExpr> {
-    
+
     private LinkedList<LispExpr> elements = new LinkedList<>();
-    
+
     public LispList() {
         elements = new LinkedList<>();
     }
-    
+
     public LispList(LinkedList<LispExpr> es) {
         elements = es;
     }
-    
+
     public void add(LispExpr e) {
         elements.add(e);
     }
-    
+
     @Override
     public LispExpr elt(int i) {
         return elements.get(i);
     }
-    
+
     @Override
     public boolean equals(Object o) {
         // do the easy checks first
@@ -57,7 +54,7 @@ public class LispList implements LispSequence, Iterable<LispExpr> {
         LispList l = (LispList) o;
         if (l.elements.size() != elements.size())
             return false;
-        
+
         // recursively check that elements
         // are equal
         for (int i = 0; i != elements.size(); ++i)
@@ -66,62 +63,60 @@ public class LispList implements LispSequence, Iterable<LispExpr> {
         // if we get this far, it must be true!
         return true;
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         if (elements.size() == 0)
             return new LispNil();
-        
+
         // must evaluate head to determine target function
         LispExpr head = elements.get(0).evaluate(locals, globals);
-        
+
         // sanity check!
         if (head instanceof LispFunction) {
             LispFunction fn = (LispFunction) head;
             return fn.invoke(elements, locals, globals);
         }
-        
-        throw new Error("unable to dispatch on \"" + head
-            + "\" - it's not a function!");
+
+        throw new Error("unable to dispatch on \"" + head + "\" - it's not a function!");
     }
-    
+
     public LispExpr get(int i) {
         return elements.get(i);
     }
-    
+
     @Override
     public int hashCode() {
         return elements == null ? 0 : elements.hashCode();
     }
-    
+
     // --- SEQUENCE METHODS ---
     // (these are required by the LispSequence
     // interface)
-    
+
     @Override
     public Iterator<LispExpr> iterator() {
         return elements.iterator();
     }
-    
+
     @Override
     public LispInteger length() {
         return new LispInteger(elements.size());
     }
-    
+
     @Override
     public LispSequence reverse() {
         LinkedList<LispExpr> l = new LinkedList<>(elements);
         Collections.reverse(l);
         return new LispList(l);
     }
-    
+
     public int size() {
         return elements.size();
     }
-    
+
     // --- EVALUATE METHOD ---
-    
+
     @Override
     public LispList subseq(int l, int u) {
         LispList r = new LispList();
@@ -129,12 +124,12 @@ public class LispList implements LispSequence, Iterable<LispExpr> {
             r.elements.add(elements.get(i));
         return r;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder r = new StringBuilder("(");
         boolean firstTime = true;
-        
+
         // go through each element
         // and add it to the string!
         for (LispExpr e : elements) {

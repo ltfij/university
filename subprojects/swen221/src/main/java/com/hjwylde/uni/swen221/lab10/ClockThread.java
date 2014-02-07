@@ -3,10 +3,7 @@ package com.hjwylde.uni.swen221.lab10;
 import java.awt.Frame;
 
 /*
- * Code for Laboratory 10, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 10, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -18,15 +15,15 @@ import java.awt.Frame;
  * 
  */
 public class ClockThread extends Thread {
-    
+
     private final int delay; // delay between pulses in us
     private final Frame display;
-    
+
     public ClockThread(int delay, Frame display) {
         this.delay = delay;
         this.display = display;
     }
-    
+
     @Override
     public void run() {
         while (true)

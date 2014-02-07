@@ -17,7 +17,5 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.test.game.PlayerTests;
  * @since 10/08/2013
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({
-    BoardTests.class, NotebookTests.class, PlayerTests.class
-})
+@Suite.SuiteClasses({BoardTests.class, NotebookTests.class, PlayerTests.class})
 public class Tests {}

@@ -3,10 +3,7 @@ package com.hjwylde.uni.comp261.assignment04.parser.nodes;
 import com.hjwylde.uni.comp261.assignment04.graphics.lights.PointLight3d;
 
 /*
- * Code for Assignment 4, COMP 261
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 4, COMP 261 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -15,9 +12,9 @@ import com.hjwylde.uni.comp261.assignment04.graphics.lights.PointLight3d;
  * @author Henry J. Wylde
  */
 public class LightSourceNode implements Node {
-    
+
     private PointLight3d src;
-    
+
     /**
      * Constructs a <code>LightSourceNode</code> with the given <code>PointLight3d</code>.
      * 
@@ -28,7 +25,7 @@ public class LightSourceNode implements Node {
     public LightSourceNode(PointLight3d src) {
         this.src = src;
     }
-    
+
     /**
      * Returns an instance of this node, returning a <code>PointLight3d</code>.
      * 
@@ -37,7 +34,7 @@ public class LightSourceNode implements Node {
     public PointLight3d createInstance() {
         return src;
     }
-    
+
     /*
      * @see java.lang.Object#toString()
      */

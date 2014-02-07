@@ -20,9 +20,9 @@ import com.hjwylde.uni.swen222.assignment02.cluedo.game.cards.game.WeaponCard;
  * @since 2/08/2013
  */
 public class Notebook {
-    
+
     private Map<Card, Boolean> book = new LinkedHashMap<>();
-    
+
     /**
      * Creates a new <code>Notebook</code>. The notebook is initialised with all possible card
      * values being available.
@@ -36,7 +36,7 @@ public class Notebook {
         for (RoomCard card : RoomCard.values())
             book.put(card, false);
     }
-    
+
     /**
      * Gets an immutable set of all the cards still available in this notebook. If a card is
      * available, it means the player still considers it a potential suspect for a murder card.
@@ -48,10 +48,10 @@ public class Notebook {
         for (Map.Entry<Card, Boolean> e : book.entrySet())
             if (!e.getValue())
                 builder.add(e.getKey());
-        
+
         return builder.build();
     }
-    
+
     /**
      * Crosses off the given card from the notebook, marking it as being unavailable as the murderer
      * / murder weapon / murder room.
@@ -61,7 +61,7 @@ public class Notebook {
     public void cross(Card card) {
         book.put(card, true);
     }
-    
+
     /**
      * Gets an immutable view of this notebook.
      * 
@@ -70,7 +70,7 @@ public class Notebook {
     public Notebook getView() {
         return new View(this);
     }
-    
+
     /**
      * A "view" into a notebook. This class merely provides a shell to put around the notebook so as
      * to ensure encapsulation when passing around a notebook instance.
@@ -81,9 +81,9 @@ public class Notebook {
      * @since 5/08/2013
      */
     private static final class View extends Notebook {
-        
+
         private final Notebook notebook;
-        
+
         /**
          * Creates a new <code>View</code> for the given notebook.
          * 
@@ -92,7 +92,7 @@ public class Notebook {
         public View(Notebook notebook) {
             this.notebook = Objects.requireNonNull(notebook);
         }
-        
+
         /**
          * {@inheritDoc}
          */
@@ -100,16 +100,15 @@ public class Notebook {
         public ImmutableSet<Card> availableCards() {
             return notebook.availableCards();
         }
-        
+
         /**
          * {@inheritDoc}
          */
         @Override
         public void cross(Card card) {
-            throw new UnsupportedOperationException(
-                "This is an immutable view of the notebook");
+            throw new UnsupportedOperationException("This is an immutable view of the notebook");
         }
-        
+
         /**
          * {@inheritDoc}
          */

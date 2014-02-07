@@ -24,27 +24,26 @@ package com.hjwylde.uni.swen222.lab02.org.simplelisp.lang;
 import java.util.HashMap;
 
 public final class LispInteger implements LispNumber {
-    
+
     private final int value;
-    
+
     public LispInteger(int v) {
         value = v;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof LispInteger))
             return false;
-        
+
         return value == ((LispInteger) o).value;
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         return this;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -52,12 +51,12 @@ public final class LispInteger implements LispNumber {
     public int hashCode() {
         return value;
     }
-    
+
     @Override
     public String toString() {
         return Integer.toString(value);
     }
-    
+
     public int value() {
         return value;
     }

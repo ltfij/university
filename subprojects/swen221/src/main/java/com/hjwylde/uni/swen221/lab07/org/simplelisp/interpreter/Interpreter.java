@@ -20,48 +20,45 @@ import java.io.*;
 import java.util.HashMap;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class Interpreter {
-    
+
     private HashMap<String, LispExpr> globals = new HashMap<>();
-    
+
     public Interpreter() {
         InternalFunctions.setup_internals(this);
     }
-    
+
     public void error(String msg) {
         throw new Error(msg);
     }
-    
+
     public LispExpr evaluate(LispExpr e) {
         return e.evaluate(new HashMap<String, LispExpr>(), globals);
     }
-    
+
     public LispExpr getGlobalExpr(String name) {
         LispExpr r = globals.get(name);
         if (r == null)
             return new LispNil();
-        
+
         return r;
     }
-    
+
     public void load(String filename) throws FileNotFoundException {
         // attempt to load file.
         File file = new File(filename); // will need to be changes to URLReader thing
-        
-        try (BufferedReader input = new BufferedReader(new InputStreamReader(
-            new FileInputStream(file)))) {
+
+        try (BufferedReader input =
+                new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
             StringBuilder text = new StringBuilder();
             while (input.ready()) {
                 text.append(input.readLine());
                 text.append("\n");
             }
-            
+
             // Ok, successful load; run the library code!
             try {
                 LispExpr root = Parser.parse(text.toString());
@@ -76,16 +73,15 @@ public class Interpreter {
         } catch (IOException e) {
             // This happens if e.g. file already exists and
             // we do not have write permissions
-            System.err.println("Unable to load file " + file.getName() + ": "
-                + e.getMessage());
+            System.err.println("Unable to load file " + file.getName() + ": " + e.getMessage());
             System.exit(1);
         }
     }
-    
+
     public void setGlobalExpr(String name, LispExpr e) {
         globals.put(name, e);
     }
-    
+
     public void type_check(String fn, LispExpr[] es, Class<?>... cs) {
         for (int i = 0; i != cs.length; ++i) {
             if (es.length <= i)
@@ -94,20 +90,19 @@ public class Interpreter {
                 throw new Error("type error in \"" + fn + "\"");
         }
     }
-    
+
     // main method, used to run interpreter without GUI
     public static void main(String[] args) {
         Interpreter interpreter = new Interpreter();
-        
+
         // now either run files on command-line or enter interactive mode...
         if (args.length == 0) {
             // interactive mode
             System.out.println("Simple Lisp Interpreter v1.0");
             System.out.println("Written by David J. Pearce, March 2006");
             System.out.println("");
-            BufferedReader input = new BufferedReader(new InputStreamReader(
-                System.in));
-            
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
             try {
                 while (true) {
                     System.out.print("> ");
@@ -126,8 +121,7 @@ public class Interpreter {
             try {
                 interpreter.load(args[0]);
             } catch (FileNotFoundException e) {
-                System.err.println("Unable to load \"" + args[0] + "\" "
-                    + e.getMessage());
+                System.err.println("Unable to load \"" + args[0] + "\" " + e.getMessage());
             }
     }
 }

@@ -11,18 +11,15 @@ import com.hjwylde.uni.swen221.lab10.swen221.concurrent.Job;
 import com.hjwylde.uni.swen221.lab10.swen221.concurrent.ThreadPool;
 
 /*
- * Code for Laboratory 10, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 10, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class ParSort {
-    
+
     // =======================================================================
     // SWEN221: Look at this
     // =======================================================================
-    
+
     public static boolean checkValid(List<Integer> data) {
         for (int i = 1; i != data.size(); ++i) {
             int previous = data.get(i - 1);
@@ -33,19 +30,19 @@ public class ParSort {
         }
         return true;
     }
-    
+
     public static void main(String[] args) {
         boolean displayMode = false;
         boolean parallelMode = false;
         String filename = null;
-        
+
         // First, some rudimentary command-line argument processing.
         if (args.length == 0) {
             System.out.println("Usage: java Main [-gui] input.dat");
             System.exit(1);
         }
         int index = 0;
-        
+
         while (args[index].startsWith("--")) {
             String arg = args[index++];
             if (arg.equals("--gui"))
@@ -58,28 +55,26 @@ public class ParSort {
             }
         }
         filename = args[index];
-        
+
         // Second, read in the data and sort it.
         try {
             int numProcessors = Runtime.getRuntime().availableProcessors();
-            System.out.println("Executing on machine with " + numProcessors
-                + " processor(s).");
-            
+            System.out.println("Executing on machine with " + numProcessors + " processor(s).");
+
             List<Integer> data;
             try (FileReader fr = new FileReader(filename)) {
                 data = ParSort.readInput(fr);
             }
-            
+
             System.out.println("Read " + data.size() + " data items.");
-            
+
             if (displayMode) {
-                System.out
-                    .println("Running in Display Mode (so ignore timings).");
+                System.out.println("Running in Display Mode (so ignore timings).");
                 data = new DisplayList<>(data);
             }
-            
+
             long start = System.currentTimeMillis();
-            
+
             if (parallelMode) {
                 // do a parallel quick sort
                 System.out.println("Performing a PARALLEL quicksort...");
@@ -89,9 +84,9 @@ public class ParSort {
                 System.out.println("Performing a SEQUENTIAL quicksort...");
                 ParSort.sequentialSort(data, 0, data.size());
             }
-            
+
             long time = System.currentTimeMillis() - start;
-            
+
             System.out.println("Sorted data in " + time + "ms");
             if (ParSort.checkValid(data))
                 System.out.println("Data was sorted correctly!");
@@ -101,7 +96,7 @@ public class ParSort {
             System.out.println("I/O error: " + e.getMessage());
         }
     }
-    
+
     /**
      * The following implements a parallel quick sort.
      */
@@ -110,32 +105,32 @@ public class ParSort {
             ParSort.sequentialSort(data, 0, data.size());
             return;
         }
-        
+
         int splitDepth = (int) (Math.log(numProcessors) / Math.log(2));
-        
+
         ThreadPool pool = new ThreadPool(numProcessors);
         List<Job> jobs = new ArrayList<>();
-        
+
         ParSort.parallelSort(data, 0, data.size(), jobs, 0, splitDepth);
-        
+
         for (Job job : jobs)
             pool.submit(job);
-        
+
         for (Job job : jobs)
             job.waitUntilFinished();
     }
-    
-    public static void parallelSort(List<Integer> data, int start, int end,
-        List<Job> jobs, int depth, int splitDepth) {
+
+    public static void parallelSort(List<Integer> data, int start, int end, List<Job> jobs,
+            int depth, int splitDepth) {
         if (start >= end)
             return;
-        
+
         // now sort into two sections so stuff in lower section is less than
         // pivot, and remainder is in upper section.
         int pivot = data.get((start + end) / 2);
         int lower = start;
         int upper = end - 1;
-        
+
         while (lower < upper) {
             int lowerItem = data.get(lower);
             int upperItem = data.get(upper);
@@ -155,34 +150,33 @@ public class ParSort {
                     upper--;
             }
         }
-        
+
         data.set(lower, pivot);
-        
+
         ParSort.pause(data, 100); // to make animation in display mode better
-        
+
         // A this point, lower == upper.
         if (depth == splitDepth) {
             jobs.add(new SortJob(data, start, lower));
             jobs.add(new SortJob(data, lower + 1, end));
         } else {
-            ParSort.parallelSort(data, start, lower, jobs, depth + 1,
-                splitDepth);
-            ParSort.parallelSort(data, lower + 1, end, jobs, depth + 1,
-                splitDepth);
+            ParSort.parallelSort(data, start, lower, jobs, depth + 1, splitDepth);
+            ParSort.parallelSort(data, lower + 1, end, jobs, depth + 1, splitDepth);
         }
     }
-    
+
     // don't worry about what this method does.
     public static void pause(List<Integer> data, int delay) {
         if (data instanceof DisplayList)
             try {
                 Thread.sleep(delay);
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+            }
     }
-    
+
     public static ArrayList<Integer> readInput(Reader input) throws IOException {
         BufferedReader reader = new BufferedReader(input);
-        
+
         String line;
         ArrayList<Integer> data = new ArrayList<>();
         while ((line = reader.readLine()) != null) {
@@ -192,7 +186,7 @@ public class ParSort {
         }
         return data;
     }
-    
+
     /**
      * The following implements a sequential quick sort.
      * 
@@ -204,13 +198,13 @@ public class ParSort {
         if (start >= end)
             return;
         // recursive case
-        
+
         // now sort into two sections so stuff in lower section is less than
         // pivot, and remainder is in upper section.
         int pivot = list.get((start + end) / 2);
         int lower = start;
         int upper = end - 1;
-        
+
         while (lower < upper) {
             int lowerItem = list.get(lower);
             int upperItem = list.get(upper);
@@ -230,28 +224,28 @@ public class ParSort {
                     upper--;
             }
         }
-        
+
         list.set(lower, pivot);
-        
+
         ParSort.pause(list, 100); // to make animation in display mode better
-        
+
         // A this point, lower == upper.
         ParSort.sequentialSort(list, start, lower);
         ParSort.sequentialSort(list, lower + 1, end);
     }
-    
+
     public static class SortJob extends Job {
-        
+
         private final List<Integer> data;
         private final int start;
         private final int end;
-        
+
         public SortJob(List<Integer> data, int start, int end) {
             this.data = data;
             this.start = start;
             this.end = end;
         }
-        
+
         @Override
         public void run() {
             ParSort.sequentialSort(data, start, end);

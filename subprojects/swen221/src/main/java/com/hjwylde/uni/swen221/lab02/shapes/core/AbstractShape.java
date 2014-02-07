@@ -7,46 +7,43 @@ import com.hjwylde.uni.swen221.lab02.shapes.math.BoundingBox;
 import com.hjwylde.uni.swen221.lab02.shapes.math.Vec2D;
 
 /*
- * Code for Laboratory 2, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 2, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public abstract class AbstractShape implements Shape {
-    
+
     /**
      * Position is the current position of the shape.
      */
     private Vec2D position;
-    
+
     /**
      * Current velocity is the current velocity of the shape.
      */
     private Vec2D currentVelocity;
-    
+
     /**
      * Next velocity is the velocity this shape will have in the next tick.
      */
     private Vec2D nextVelocity;
-    
+
     /**
      * Set of current collisions
      */
     private ArrayList<Shape> currentCollisions = new ArrayList<>();
-    
+
     /**
      * The color of this shape.
      */
     private Color color;
-    
+
     public AbstractShape(Vec2D position, Vec2D velocity, Color color) {
         this.position = position;
         currentVelocity = velocity;
         nextVelocity = velocity;
         this.color = color;
     }
-    
+
     @Override
     public void checkShapeCollision(Shape shape) {
         BoundingBox myBox = getBoundingBox();
@@ -54,7 +51,7 @@ public abstract class AbstractShape implements Shape {
         if (myBox.intersect(shapeBox)) {
             // Check if we're already colliding with this shape. If not, then respond ... otherwise
             // ignore.
-            
+
             if (!currentCollisions.contains(shape)) {
                 nextVelocity = nextVelocity.add(shape.getVelocity());
                 nextVelocity = nextVelocity.multiply(0.5);
@@ -63,7 +60,7 @@ public abstract class AbstractShape implements Shape {
         } else
             currentCollisions.remove(shape);
     }
-    
+
     @Override
     public void checkWallCollision(int width, int height) {
         BoundingBox box = getBoundingBox();
@@ -71,7 +68,7 @@ public abstract class AbstractShape implements Shape {
         int rx = lx + box.getWidth();
         int ly = box.getY();
         int ry = ly + box.getHeight();
-        
+
         if ((lx <= 0) && (nextVelocity.getX() < 0)) {
             nextVelocity = nextVelocity.invertX();
             nextVelocity = nextVelocity.multiply(0.95); // friction
@@ -79,7 +76,7 @@ public abstract class AbstractShape implements Shape {
             nextVelocity = nextVelocity.invertX();
             nextVelocity = nextVelocity.multiply(0.95); // friction
         }
-        
+
         if ((ly <= 0) && (nextVelocity.getY() < 0)) {
             nextVelocity = nextVelocity.invertY();
             nextVelocity = nextVelocity.multiply(0.95); // friction
@@ -88,19 +85,19 @@ public abstract class AbstractShape implements Shape {
             nextVelocity = nextVelocity.multiply(0.95); // friction
         }
     }
-    
+
     @Override
     public void clockTick() {
         currentVelocity = nextVelocity;
         position = position.add(currentVelocity);
     }
-    
+
     /**
      * Get the bounding box of this shape
      */
     @Override
     public abstract BoundingBox getBoundingBox();
-    
+
     /**
      * Get the color of this shape
      */
@@ -108,14 +105,14 @@ public abstract class AbstractShape implements Shape {
     public Color getColor() {
         return color;
     }
-    
+
     /**
      * Get the reference position of this shape
      */
     public Vec2D getPosition() {
         return position;
     }
-    
+
     /**
      * Get the velocity of this shape
      */

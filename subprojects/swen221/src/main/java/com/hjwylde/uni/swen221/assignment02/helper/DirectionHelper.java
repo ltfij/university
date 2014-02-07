@@ -3,10 +3,7 @@ package com.hjwylde.uni.swen221.assignment02.helper;
 import maze.Direction;
 
 /*
- * Code for Assignment 2, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 2, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -17,9 +14,9 @@ import maze.Direction;
  * @author Henry J. Wylde
  */
 public class DirectionHelper {
-    
+
     private DirectionHelper() {}
-    
+
     /**
      * Returns the direction that is anti-clockwise to the input direction.
      * 
@@ -28,17 +25,17 @@ public class DirectionHelper {
      */
     public static Direction antiClockwise(Direction dir) {
         switch (dir) {
-        case NORTH:
-            return Direction.WEST;
-        case EAST:
-            return Direction.NORTH;
-        case SOUTH:
-            return Direction.EAST;
-        default: // WEST
-            return Direction.SOUTH;
+            case NORTH:
+                return Direction.WEST;
+            case EAST:
+                return Direction.NORTH;
+            case SOUTH:
+                return Direction.EAST;
+            default: // WEST
+                return Direction.SOUTH;
         }
     }
-    
+
     /**
      * Returns the direction that is clockwise to the input direction.
      * 
@@ -47,17 +44,17 @@ public class DirectionHelper {
      */
     public static Direction clockwise(Direction dir) {
         switch (dir) {
-        case NORTH:
-            return Direction.EAST;
-        case EAST:
-            return Direction.SOUTH;
-        case SOUTH:
-            return Direction.WEST;
-        default: // WEST
-            return Direction.NORTH;
+            case NORTH:
+                return Direction.EAST;
+            case EAST:
+                return Direction.SOUTH;
+            case SOUTH:
+                return Direction.WEST;
+            default: // WEST
+                return Direction.NORTH;
         }
     }
-    
+
     /**
      * Returns the direction that is opposite to the input direction.
      * 
@@ -66,14 +63,14 @@ public class DirectionHelper {
      */
     public static Direction opposite(Direction dir) {
         switch (dir) {
-        case NORTH:
-            return Direction.SOUTH;
-        case EAST:
-            return Direction.WEST;
-        case SOUTH:
-            return Direction.NORTH;
-        default: // WEST
-            return Direction.EAST;
+            case NORTH:
+                return Direction.SOUTH;
+            case EAST:
+                return Direction.WEST;
+            case SOUTH:
+                return Direction.NORTH;
+            default: // WEST
+                return Direction.EAST;
         }
     }
 }

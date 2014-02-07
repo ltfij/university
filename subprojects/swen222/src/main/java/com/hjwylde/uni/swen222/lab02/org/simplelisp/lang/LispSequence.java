@@ -22,12 +22,12 @@
 package com.hjwylde.uni.swen222.lab02.org.simplelisp.lang;
 
 public interface LispSequence extends LispExpr {
-    
+
     public LispExpr getValue(int i);
-    
+
     public LispInteger length();
-    
+
     public LispSequence reverse();
-    
+
     public LispSequence sublist(int from, int to);
 }

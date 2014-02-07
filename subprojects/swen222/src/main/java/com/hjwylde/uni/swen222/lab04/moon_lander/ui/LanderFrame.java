@@ -7,12 +7,12 @@ import javax.swing.JFrame;
 import com.hjwylde.uni.swen222.lab04.moon_lander.concurrency.ClockThread;
 
 public class LanderFrame extends JFrame {
-    
+
     private final LanderCanvas canvas;
-    
+
     public LanderFrame() {
         super("Moon Lander");
-        
+
         canvas = new LanderCanvas();
         addKeyListener(canvas);
         setLayout(new BorderLayout());
@@ -22,7 +22,7 @@ public class LanderFrame extends JFrame {
         setResizable(true);
         setVisible(true);
         canvas.setDoubleBuffered(true);
-        
+
         new ClockThread(canvas).start();
     }
 }

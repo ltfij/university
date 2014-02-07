@@ -31,7 +31,7 @@ subprojects {
     defaultTasks 'build'
 
     checkstyle {
-        configFile new File(rootDir, 'config/checkstyle/checkstyle.xml')
+        configFile new File(rootDir, '/config/checkstyle/checkstyle.xml')
         showViolations false
     }
 }

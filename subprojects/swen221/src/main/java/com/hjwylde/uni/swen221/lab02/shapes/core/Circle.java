@@ -7,10 +7,7 @@ import com.hjwylde.uni.swen221.lab02.shapes.math.BoundingBox;
 import com.hjwylde.uni.swen221.lab02.shapes.math.Vec2D;
 
 /*
- * Code for Laboratory 2, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 2, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -19,9 +16,9 @@ import com.hjwylde.uni.swen221.lab02.shapes.math.Vec2D;
  * @author Henry J. Wylde
  */
 public class Circle extends AbstractShape {
-    
+
     private int radius;
-    
+
     /**
      * Creates a new Circle with the specified parameters.
      * 
@@ -32,26 +29,25 @@ public class Circle extends AbstractShape {
      */
     public Circle(Vec2D pos, int radius, Vec2D velocity, Color color) {
         super(pos, velocity, color);
-        
+
         this.radius = radius;
     }
-    
+
     /*
      * @see lab2.shapes.core.AbstractShape#getBoundingBox()
      */
     @Override
     public BoundingBox getBoundingBox() {
-        return new BoundingBox((int) getPosition().getX(), (int) getPosition()
-            .getY(), radius, radius);
+        return new BoundingBox((int) getPosition().getX(), (int) getPosition().getY(), radius,
+                radius);
     }
-    
+
     /*
      * @see lab2.shapes.core.Shape#paint(java.awt.Graphics)
      */
     @Override
     public void paint(Graphics g) {
         g.setColor(getColor());
-        g.fillOval((int) getPosition().getX(), (int) getPosition().getY(),
-            radius, radius);
+        g.fillOval((int) getPosition().getX(), (int) getPosition().getY(), radius, radius);
     }
 }

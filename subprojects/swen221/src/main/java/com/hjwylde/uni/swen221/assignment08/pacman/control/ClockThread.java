@@ -19,10 +19,7 @@ import com.hjwylde.uni.swen221.assignment08.pacman.game.Board;
 import com.hjwylde.uni.swen221.assignment08.pacman.game.BoardFrame;
 
 /*
- * Code for Assignment 8, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 8, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -33,17 +30,17 @@ import com.hjwylde.uni.swen221.assignment08.pacman.game.BoardFrame;
  * @author djp
  */
 public class ClockThread extends Thread {
-    
+
     private final int delay; // delay between pulses in us
     private final Board game;
     private final BoardFrame display;
-    
+
     public ClockThread(int delay, Board game, BoardFrame display) {
         this.delay = delay;
         this.game = game;
         this.display = display;
     }
-    
+
     @Override
     public void run() {
         while (true)
@@ -53,6 +50,7 @@ public class ClockThread extends Thread {
                 game.clockTick();
                 if (display != null)
                     display.repaint();
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+            }
     }
 }

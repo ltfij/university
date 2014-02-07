@@ -19,59 +19,54 @@ package com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter;
 import java.util.HashMap;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 // this is an incomplete example of the DECORATOR pattern
 public final class LispString implements LispSequence {
-    
+
     private final String value;
-    
+
     public LispString(String v) {
         value = v;
     }
-    
+
     @Override
     public LispExpr elt(int i) {
         return new LispChar(value.charAt(i));
     }
-    
+
     @Override
     public boolean equals(Object o) {
-        return (o instanceof LispString)
-            && value.equals(((LispString) o).value);
+        return (o instanceof LispString) && value.equals(((LispString) o).value);
     }
-    
+
     @Override
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals) {
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals) {
         return this;
     }
-    
+
     @Override
     public int hashCode() {
         return value.hashCode();
     }
-    
+
     @Override
     public LispInteger length() {
         return new LispInteger(value.length());
     }
-    
+
     @Override
     public LispString reverse() {
         StringBuilder sb = new StringBuilder(value).reverse();
         return new LispString(sb.toString());
     }
-    
+
     @Override
     public LispString subseq(int l, int u) {
         return new LispString(value.substring(l, u));
     }
-    
+
     @Override
     public String toString() {
         return value;

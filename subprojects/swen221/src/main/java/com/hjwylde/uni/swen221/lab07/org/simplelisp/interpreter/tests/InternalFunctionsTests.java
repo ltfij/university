@@ -9,10 +9,7 @@ import com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter.LispExpr;
 import com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter.Parser;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -21,12 +18,12 @@ import com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter.Parser;
  * @author Nick
  */
 public class InternalFunctionsTests {
-    
+
     @Test
     public void test() {
         Interpreter i = new Interpreter();
         InternalFunctions.setup_internals(i);
-        
+
         LispExpr e = Parser.parse("(+ 3 3)");
         Assert.assertTrue(i.evaluate(e).toString().equalsIgnoreCase("6"));
         LispExpr e2 = Parser.parse("(- 3 3)");

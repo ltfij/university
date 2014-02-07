@@ -10,53 +10,47 @@ import com.hjwylde.uni.swen221.assignment03.chessview.Position;
 import com.hjwylde.uni.swen221.assignment03.chessview.pieces.*;
 
 /*
- * Code for Assignment 3, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Assignment 3, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public class BoardCanvas extends Canvas {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private ArrayList<Board> boards;
     private int index = 0;
     private static final Color BLACK = new Color(90, 48, 158);
     private static final Color WHITE = new Color(210, 205, 185);
     private Font font;
-    
-    private static String[] preferredFonts = {
-        "Arial", "Times New Roman"
-    };
-    
+
+    private static String[] preferredFonts = {"Arial", "Times New Roman"};
+
     public BoardCanvas(List<Board> boards) {
         this.boards = new ArrayList<>(boards);
         setBounds(0, 0, 400, 400);
-        GraphicsEnvironment env = GraphicsEnvironment
-            .getLocalGraphicsEnvironment();
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         HashSet<String> availableNames = new HashSet<>();
-        
+
         for (String name : env.getAvailableFontFamilyNames())
             availableNames.add(name);
-        
+
         for (String pf : BoardCanvas.preferredFonts)
             if (availableNames.contains(pf)) {
                 font = new Font(pf, Font.PLAIN, 20);
                 break;
             }
     }
-    
+
     public void bwd(int amount) {
         index = Math.max(0, index - amount);
         repaint();
     }
-    
+
     public void fwd(int amount) {
         index = Math.min(boards.size() - 1, index + amount);
         repaint();
     }
-    
+
     @Override
     public void paint(Graphics g) {
         int width = (getWidth() - 4) / 9;
@@ -69,9 +63,8 @@ public class BoardCanvas extends Canvas {
         BoardCanvas.drawCoords(g, 2, 2, width, height);
         drawPieces(g, width + 2, 2, width, height);
     }
-    
-    private void drawPieces(Graphics g, int startx, int starty, int width,
-        int height) {
+
+    private void drawPieces(Graphics g, int startx, int starty, int width, int height) {
         for (int row = 1; row <= 8; ++row) {
             int ypos = starty + ((8 - row) * height);
             for (int col = 1; col <= 8; ++col) {
@@ -82,9 +75,8 @@ public class BoardCanvas extends Canvas {
             }
         }
     }
-    
-    private static void drawBackground(Graphics g, int startx, int starty,
-        int width, int height) {
+
+    private static void drawBackground(Graphics g, int startx, int starty, int width, int height) {
         int endx = startx + (8 * width);
         int endy = starty + (8 * height);
         boolean flag = false;
@@ -100,13 +92,12 @@ public class BoardCanvas extends Canvas {
             flag = !flag;
         }
     }
-    
-    private static void drawCoords(Graphics g, int startx, int starty,
-        int width, int height) {
+
+    private static void drawCoords(Graphics g, int startx, int starty, int width, int height) {
         g.setColor(BoardCanvas.BLACK);
-        
+
         FontMetrics metrics = g.getFontMetrics();
-        
+
         int Aoff = (width - metrics.charWidth('A')) / 2;
         int Boff = (width - metrics.charWidth('B')) / 2;
         int Coff = (width - metrics.charWidth('C')) / 2;
@@ -123,87 +114,50 @@ public class BoardCanvas extends Canvas {
         int Sixoff = (width - metrics.charWidth('6')) / 2;
         int Sevenoff = (width - metrics.charWidth('7')) / 2;
         int Eightoff = (width - metrics.charWidth('8')) / 2;
-        
+
         starty += metrics.getAscent() + ((height - metrics.getHeight()) / 2);
-        
-        g.drawChars(new char[] {
-            '1'
-        }, 0, 1, startx + Oneoff, starty + (height * 7));
-        g.drawChars(new char[] {
-            '2'
-        }, 0, 1, startx + Twooff, starty + (height * 6));
-        g.drawChars(new char[] {
-            '3'
-        }, 0, 1, startx + Threeoff, starty + (height * 5));
-        g.drawChars(new char[] {
-            '4'
-        }, 0, 1, startx + Fouroff, starty + (height * 4));
-        g.drawChars(new char[] {
-            '5'
-        }, 0, 1, startx + Fiveoff, starty + (height * 3));
-        g.drawChars(new char[] {
-            '6'
-        }, 0, 1, startx + Sixoff, starty + (height * 2));
-        g.drawChars(new char[] {
-            '7'
-        }, 0, 1, startx + Sevenoff, starty + (height));
-        g.drawChars(new char[] {
-            '8'
-        }, 0, 1, startx + Eightoff, starty);
-        
+
+        g.drawChars(new char[] {'1'}, 0, 1, startx + Oneoff, starty + (height * 7));
+        g.drawChars(new char[] {'2'}, 0, 1, startx + Twooff, starty + (height * 6));
+        g.drawChars(new char[] {'3'}, 0, 1, startx + Threeoff, starty + (height * 5));
+        g.drawChars(new char[] {'4'}, 0, 1, startx + Fouroff, starty + (height * 4));
+        g.drawChars(new char[] {'5'}, 0, 1, startx + Fiveoff, starty + (height * 3));
+        g.drawChars(new char[] {'6'}, 0, 1, startx + Sixoff, starty + (height * 2));
+        g.drawChars(new char[] {'7'}, 0, 1, startx + Sevenoff, starty + (height));
+        g.drawChars(new char[] {'8'}, 0, 1, startx + Eightoff, starty);
+
         starty += (height * 8);
-        g.drawChars(new char[] {
-            'A'
-        }, 0, 1, startx + Aoff + width, starty);
-        g.drawChars(new char[] {
-            'B'
-        }, 0, 1, startx + Boff + (width * 2), starty);
-        g.drawChars(new char[] {
-            'C'
-        }, 0, 1, startx + Coff + (width * 3), starty);
-        g.drawChars(new char[] {
-            'D'
-        }, 0, 1, startx + Doff + (width * 4), starty);
-        g.drawChars(new char[] {
-            'E'
-        }, 0, 1, startx + Eoff + (width * 5), starty);
-        g.drawChars(new char[] {
-            'F'
-        }, 0, 1, startx + Foff + (width * 6), starty);
-        g.drawChars(new char[] {
-            'G'
-        }, 0, 1, startx + Goff + (width * 7), starty);
-        g.drawChars(new char[] {
-            'H'
-        }, 0, 1, startx + Hoff + (width * 8), starty);
+        g.drawChars(new char[] {'A'}, 0, 1, startx + Aoff + width, starty);
+        g.drawChars(new char[] {'B'}, 0, 1, startx + Boff + (width * 2), starty);
+        g.drawChars(new char[] {'C'}, 0, 1, startx + Coff + (width * 3), starty);
+        g.drawChars(new char[] {'D'}, 0, 1, startx + Doff + (width * 4), starty);
+        g.drawChars(new char[] {'E'}, 0, 1, startx + Eoff + (width * 5), starty);
+        g.drawChars(new char[] {'F'}, 0, 1, startx + Foff + (width * 6), starty);
+        g.drawChars(new char[] {'G'}, 0, 1, startx + Goff + (width * 7), starty);
+        g.drawChars(new char[] {'H'}, 0, 1, startx + Hoff + (width * 8), starty);
     }
-    
-    private static void drawPiece(Piece p, Graphics g, int startx, int starty,
-        int width, int height) {
+
+    private static void drawPiece(Piece p, Graphics g, int startx, int starty, int width, int height) {
         if (p.isWhite())
             g.setColor(Color.WHITE);
         else
             g.setColor(Color.BLACK);
-        
+
         width -= 10;
         height -= 10;
-        
+
         startx += 5;
         starty += 5;
         int endx = startx + width;
         int endy = starty + height;
-        
+
         if (p instanceof Pawn) {
             int lmidx = startx + (width / 3);
             int rmidx = endx - (width / 3);
             int topy = starty + (height / 3);
             int boty = starty + (2 * (height / 3));
-            int[] xpoints = new int[] {
-                lmidx, rmidx, rmidx, endx, startx, lmidx
-            };
-            int[] ypoints = new int[] {
-                topy, topy, boty, endy, endy, boty
-            };
+            int[] xpoints = new int[] {lmidx, rmidx, rmidx, endx, startx, lmidx};
+            int[] ypoints = new int[] {topy, topy, boty, endy, endy, boty};
             g.fillPolygon(xpoints, ypoints, xpoints.length);
             int lx = startx + (width / 5);
             int rx = endx - (width / 5);
@@ -217,12 +171,8 @@ public class BoardCanvas extends Canvas {
             int lmidx = startx + (width / 3);
             int llmidx = startx + ((3 * width) / 12);
             int rmidx = endx - (width / 3);
-            int[] xpoints = new int[] {
-                startx, lmidx, midx, endx, rmidx, lmidx, midx, llmidx
-            };
-            int[] ypoints = new int[] {
-                midy, tmidy, starty, tmidy, endy, endy, midy, bmidy
-            };
+            int[] xpoints = new int[] {startx, lmidx, midx, endx, rmidx, lmidx, midx, llmidx};
+            int[] ypoints = new int[] {midy, tmidy, starty, tmidy, endy, endy, midy, bmidy};
             g.fillPolygon(xpoints, ypoints, xpoints.length);
             g.fillRect(startx, endy - (height / 5), width, height / 5);
         } else if (p instanceof Rook) {
@@ -232,14 +182,12 @@ public class BoardCanvas extends Canvas {
             int rrmidx = endx - ((2 * width) / 6);
             int topy = starty + (height / 5);
             int midy = starty + (height / 3);
-            int[] xpoints = new int[] {
-                startx, lmidx, lmidx, llmidx, llmidx, rrmidx, rrmidx, rmidx,
-                rmidx, endx, endx, rmidx, rmidx, lmidx, lmidx, startx
-            };
-            int[] ypoints = new int[] {
-                starty, starty, topy, topy, starty, starty, topy, topy, starty,
-                starty, midy, midy, endy, endy, midy, midy
-            };
+            int[] xpoints =
+                    new int[] {startx, lmidx, lmidx, llmidx, llmidx, rrmidx, rrmidx, rmidx, rmidx,
+                            endx, endx, rmidx, rmidx, lmidx, lmidx, startx};
+            int[] ypoints =
+                    new int[] {starty, starty, topy, topy, starty, starty, topy, topy, starty,
+                            starty, midy, midy, endy, endy, midy, midy};
             g.fillPolygon(xpoints, ypoints, xpoints.length);
             g.fillRect(startx, endy - (height / 5), width, height / 5);
         } else if (p instanceof Bishop) {
@@ -254,12 +202,8 @@ public class BoardCanvas extends Canvas {
             int rmidx = endx - (width / 3);
             int rrmidx = endx - (width / 5);
             int topy = starty + (height / 2);
-            int[] xpoints = new int[] {
-                startx, lmidx, midx, rmidx, endx, rrmidx, llmidx
-            };
-            int[] ypoints = new int[] {
-                starty, topy, starty, topy, starty, endy, endy
-            };
+            int[] xpoints = new int[] {startx, lmidx, midx, rmidx, endx, rrmidx, llmidx};
+            int[] ypoints = new int[] {starty, topy, starty, topy, starty, endy, endy};
             g.fillPolygon(xpoints, ypoints, xpoints.length);
             g.fillRect(startx, endy - (height / 5), width, height / 5);
         } else {
@@ -268,7 +212,7 @@ public class BoardCanvas extends Canvas {
             int rightx = endx - (width / 5);
             int topy = starty + (height / 5);
             int midy = starty + (height / 2);
-            
+
             g.fillRect(leftx, topy, rightx - leftx, height / 5);
             g.fillRect(midx - (width / 10), starty, width / 5, (2 * height) / 3);
             g.fillOval(leftx, midy, rightx - leftx, endy - midy);

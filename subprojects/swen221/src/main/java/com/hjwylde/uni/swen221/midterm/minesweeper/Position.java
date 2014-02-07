@@ -1,10 +1,7 @@
 package com.hjwylde.uni.swen221.midterm.minesweeper;
 
 /*
- * Code for Mid-term Test, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Mid-term Test, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 /**
@@ -14,15 +11,15 @@ package com.hjwylde.uni.swen221.midterm.minesweeper;
  * 
  */
 public final class Position {
-    
+
     private int x;
     private int y;
-    
+
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
-    
+
     /*
      * @see java.lang.Object#equals(java.lang.Object)
      */
@@ -41,15 +38,15 @@ public final class Position {
             return false;
         return true;
     }
-    
+
     public int getX() {
         return x;
     }
-    
+
     public int getY() {
         return y;
     }
-    
+
     /*
      * @see java.lang.Object#hashCode()
      */
@@ -61,7 +58,7 @@ public final class Position {
         result = (prime * result) + y;
         return result;
     }
-    
+
     @Override
     public String toString() {
         return "(" + x + "," + y + ")";

@@ -19,15 +19,11 @@ package com.hjwylde.uni.swen221.lab07.org.simplelisp.interpreter;
 import java.util.HashMap;
 
 /*
- * Code for Laboratory 7, SWEN 221
- * Name: Henry J. Wylde
- * Usercode: wyldehenr
- * ID: 300224283
+ * Code for Laboratory 7, SWEN 221 Name: Henry J. Wylde Usercode: wyldehenr ID: 300224283
  */
 
 public interface LispExpr {
-    
+
     // used to evaluate a Lisp Expression
-    public LispExpr evaluate(HashMap<String, LispExpr> locals,
-        HashMap<String, LispExpr> globals);
+    public LispExpr evaluate(HashMap<String, LispExpr> locals, HashMap<String, LispExpr> globals);
 }
