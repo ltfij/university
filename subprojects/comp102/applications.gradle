@@ -1,0 +1,14 @@
+ext {
+    applications = [
+            assignment02: group + '.assignment02.converter.Converter',
+            'assignment03-drawer': group + '.assignment03.drawer.Drawer',
+            'assignment03-rps': group + '.assignment03.rps.RPS',
+            'assignment04-screenSaver1': group + '.assignment04.screenSaver1.ScreenSaver1',
+            'assignment04-stockAnalyser': group + '.assignment04.stockAnalyser.StockAnalyser',
+            //assignment05: group,
+            //assignment06: group,
+            //assignment08: group,
+            //assignment10: group,
+    ]
+}
+

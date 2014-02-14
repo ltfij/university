@@ -1,6 +1,6 @@
 dependencies {
-    compile 'com.google.guava:guava:16.0.1'
-    compile 'junit:junit:4.11'
+    compile libraries.guava
+    compile libraries.junit
 
     compile fileTree(dir: 'lib/', include: '*.jar')
 }

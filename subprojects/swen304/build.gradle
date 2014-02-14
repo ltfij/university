@@ -1,6 +1,6 @@
 dependencies {
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.google.guava:guava:16.0.1'
-    compile 'org.postgresql:postgresql:9.2-1003-jdbc4'
+    compile libraries.gson
+    compile libraries.guava
+    compile libraries.postgresql
 }
 
