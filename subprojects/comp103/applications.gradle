@@ -1,0 +1,28 @@
+ext {
+    applications = [
+            assignment01: group + '.assignment01.fightClub.FightClub',
+            assignment02CheckXML01: group + '.assignment02.checkXML.CheckXML',
+            assignment02CheckXML02: group + '.assignment02.checkXML.ListXMLTags',
+            assignment02WordCloud: group + '.assignment02.wordCloud.WordCloud',
+            assignment03RecordSorter: group + '.assignment03.recordSorter.RecordSorter',
+            assignment03Sokoban: group + '.assignment03.sokoban.Sokoban',
+            assignment04ArrayBag01: group + '.assignment04.arrayBag.ArrayBag',
+            assignment04ArrayBag02: group + '.assignment04.arrayBag.MeasureBags',
+            assignment04ArrayBag03: group + '.assignment04.arrayBag.SortedArrayBag',
+            assignment04ArrayQueue: group + '.assignment04.arrayQueue.ArrayQueue',
+            assignment05Forest: group + '.assignment05.forest.Forest',
+            assignment05Permutations: group + '.assignment05.permutations.Permutations',
+            assignment05SortingHat: group + '.assignment05.sortingHat.SortingHat',
+            assignment06Centipede01: group + '.assignment06.centipede.QuadtreeTest',
+            assignment06Centipede02: group + '.assignment06.centipede.Simulation',
+            assignment07: group + '.assignment07.organisationChart.OrganisationChart',
+            assignment08BstBag01: group + '.assignment08.bstBag.ArrayBag',
+            assignment08BstBag02: group + '.assignment08.bstBag.BSTBag',
+            assignment08BstBag03: group + '.assignment08.bstBag.LinkedListBag',
+            assignment08BstBag04: group + '.assignment08.bstBag.MeasureBags',
+            assignment08BstBag05: group + '.assignment08.bstBag.SortedArrayBag',
+            assignment09DeliverySystem01: group + '.assignment09.deliverySystem.MakeJobFile',
+            assignment09DeliverySystem02: group + '.assignment09.deliverySystem.PackageDeliverer',
+    ]
+}
+

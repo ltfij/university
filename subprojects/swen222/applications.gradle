@@ -1,0 +1,10 @@
+ext {
+    applications = [
+            assignment02: group + '.assignment02.cluedo.Main',
+            lab02: group + '.lab02.org.simplelisp.Main',
+            lab03Battleships01: group + '.lab03.battleships.GraphicalInterface',
+            lab03Battleships02: group + '.lab03.battleships.TextInterface',
+            lab04: group + '.lab04.moon_lander.Main',
+    ]
+}
+

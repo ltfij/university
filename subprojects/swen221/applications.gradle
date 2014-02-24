@@ -1,0 +1,21 @@
+ext {
+    applications = [
+            assignment01: group + '.assignment01.Main',
+            assignment02: group + '.assignment02.Main',
+            assignment03: group + '.assignment03.chessview.Main',
+            assignment04: group + '.assignment04.shapes.Main',
+            assignment05: group + '.assignment05.cards.viewer.TableFrame',
+            assignment06: group + '.assignment06.com.bytebach.Main',
+            assignment08: group + '.assignment08.pacman.Main',
+            lab01: group + '.lab01.calculator.Main',
+            lab02Shapes: group + '.lab02.shapes.Main',
+            lab03Polyquiz: group + '.lab03.polyquiz.Main',
+            lab03TextAdventure: group + '.lab03.textAdventure.Main',
+            lab04: group + '.lab04.robotwar.Main',
+            lab07: group + '.lab07.org.simplelisp.interpreter.Interpreter',
+            lab08: group + '.lab08.BiHashMap',
+            lab10: group + '.lab10.ParSort',
+            lab11: group + '.lab11.simpleweb.Main',
+    ]
+}
+

@@ -1,14 +1,15 @@
 ext {
     applications = [
             assignment02: group + '.assignment02.converter.Converter',
-            'assignment03-drawer': group + '.assignment03.drawer.Drawer',
-            'assignment03-rps': group + '.assignment03.rps.RPS',
-            'assignment04-screenSaver1': group + '.assignment04.screenSaver1.ScreenSaver1',
-            'assignment04-stockAnalyser': group + '.assignment04.stockAnalyser.StockAnalyser',
-            //assignment05: group,
-            //assignment06: group,
-            //assignment08: group,
-            //assignment10: group,
+            assignment03Drawer: group + '.assignment03.drawer.Drawer',
+            assignment03Rps: group + '.assignment03.rps.RPS',
+            assignment04ScreenSaver1: group + '.assignment04.screenSaver1.ScreenSaver1',
+            assignment04StockAnalyser: group + '.assignment04.stockAnalyser.StockAnalyser',
+            assignment05CartoonAnimator: group + '.assignment05.cartoonAnimator.CartoonAnimator',
+            assignment05ExamTimes: group + '.assignment05.examTimes.ExamTimes',
+            assignment06: group + '.assignment06.circles.Circles',
+            assignment08: group + '.assignment08.balloonGame.BalloonGame',
+            assignment10: group + '.assignment10.miniDraw.MiniDraw',
     ]
 }
 

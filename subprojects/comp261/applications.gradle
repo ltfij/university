@@ -1,0 +1,10 @@
+ext {
+    applications = [
+            assignment01: group + '.assignment01.geographicalMap.Main',
+            assignment02: group + '.assignment02.stringSearch.Main',
+            assignment03: group + '.assignment03.robotSimulator.JavaRobotSimulator',
+            assignment04: group + '.assignment04.modeller.Main',
+            assignment05: group + '.assignment05.systemSimulator.JavaFileSimulator',
+    ]
+}
+

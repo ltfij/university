@@ -3,7 +3,6 @@ apply from: 'dependencies.gradle'
 buildscript {
     repositories {
         maven { url 'https://github.com/ben-manes/gradle-versions-plugin/raw/mvnrepo' }
-        mavenCentral()
     }
 
     dependencies {
@@ -16,12 +15,6 @@ allprojects {
 }
 
 subprojects {
-    buildscript {
-        repositories {
-            mavenCentral()
-        }
-    }
-
     repositories {
         mavenCentral()
     }
@@ -32,9 +25,15 @@ subprojects {
 
     defaultTasks 'build'
 
+    jar {
+        // Make the jars contain all the dependencies so the lectureres can run them
+        from {
+            configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+    }
+
     checkstyle {
-        configFile new File(rootDir, '/config/checkstyle/checkstyle.xml')
-        showViolations false
+        configFile new File(rootDir, 'config/checkstyle/checkstyle.xml')
     }
 }
 

@@ -1,0 +1,6 @@
+ext {
+    applications = [
+            project02: group + '.project02.ui.LibraryUI',
+    ]
+}
+
