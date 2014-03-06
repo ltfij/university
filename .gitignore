@@ -10,8 +10,10 @@ build/
 .classpath
 .project
 .settings/
-
-# Generated files
 bin/
-gen/
+
+# Intellij
+.idea/
+*.iml
+*.iws
 
