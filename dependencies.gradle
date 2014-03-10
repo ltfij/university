@@ -12,7 +12,7 @@ libraries.gson = 'com.google.code.gson:gson:2.2.4'
 libraries.postgresql = 'org.postgresql:postgresql:9.2-1003-jdbc4'
 
 // SWEN 430 libraries
-libraries.antlr_runtime = 'org.antlr:antlr4-runtime:4.2'
+//libraries.antlr_runtime = 'org.antlr:antlr4-runtime:4.2'
 
 // Common libraries
 libraries.guava = 'com.google.guava:guava:16.0.1'

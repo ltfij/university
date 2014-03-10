@@ -1,0 +1,7 @@
+real g(real x) {
+    return x + 1.0;
+}
+
+real f() {
+    return g(x + 1.0);
+}
