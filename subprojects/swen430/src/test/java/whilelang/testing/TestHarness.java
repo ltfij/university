@@ -52,8 +52,6 @@ public class TestHarness {
     }
 
     protected static String runJava(String path, String... args) {
-        System.out.println("path: " + new File(path).getAbsolutePath());
-
         try {
             // We need to have
             String
