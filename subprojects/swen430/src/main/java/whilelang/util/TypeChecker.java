@@ -71,6 +71,10 @@ public class TypeChecker {
     public void check(Stmt stmt, Map<String, Type> environment) {
         if (stmt instanceof Stmt.Assign) {
             check((Stmt.Assign) stmt, environment);
+        } else if (stmt instanceof Stmt.Break) {
+            // Do nothing
+        } else if (stmt instanceof Stmt.Switch) {
+            check((Stmt.Switch) stmt, environment);
         } else if (stmt instanceof Stmt.Print) {
             check((Stmt.Print) stmt, environment);
         } else if (stmt instanceof Stmt.Return) {
@@ -87,6 +91,29 @@ public class TypeChecker {
             check((Stmt.While) stmt, environment);
         } else {
             internalFailure("unknown statement encountered (" + stmt + ")", file.filename, stmt);
+        }
+    }
+
+    public void check(Stmt.Switch stmt, Map<String, Type> environment) {
+        Type type = check(stmt.getCondition(), environment);
+
+        // Clone the environment so new variables aren't scoped outside of the switch statement
+        Map<String, Type> environmentClone = new HashMap<String, Type>(environment);
+
+        for (Map.Entry<Expr, List<Stmt>> entry : stmt.getCases().entrySet()) {
+            Type caseType = check(entry.getKey(), environmentClone);
+            // Check that each case value is a subtype of the condition type
+            checkSubtype(type, caseType, entry.getKey());
+
+            for (Stmt s : entry.getValue()) {
+                check(s, environmentClone);
+            }
+        }
+
+        if (stmt.getDefault() != null) {
+            for (Stmt s : stmt.getDefault()) {
+                check(s, environmentClone);
+            }
         }
     }
 

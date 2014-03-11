@@ -368,6 +368,10 @@ public class Parser {
             match("!=");
             Expr rhs = parseAppendExpression();
             return new Expr.Binary(Expr.BOp.NEQ, lhs, rhs, sourceAttr(start, index - 1));
+        } else if (index < tokens.size() && tokens.get(index).text.equals("is")) {
+            matchKeyword("is");
+            Type rhs = parseType();
+            return new Expr.Is(lhs, rhs, sourceAttr(start, index - 1));
         } else {
             return lhs;
         }
@@ -470,7 +474,14 @@ public class Parser {
             return parseConstantListVal();
         } else if (token instanceof LeftCurly) {
             return parseConstantRecordVal();
+        } else if (token instanceof Identifier) {
+            Token id = matchIdentifier();
+
+            if (constants.containsKey(id.text)) {
+                return constants.get(id.text);
+            }
         }
+
         syntaxError("unrecognised constant term (\"" + token.text + "\")", token);
         return null;
     }
@@ -645,6 +656,7 @@ public class Parser {
         int start = index;
         Expr lhs = parseIndexTerm();
 
+        // TODO: Fixme, this reads right to left rather than left to right
         if (index < tokens.size() && tokens.get(index) instanceof Star) {
             match("*");
             Expr rhs = parseMulDivExpression();

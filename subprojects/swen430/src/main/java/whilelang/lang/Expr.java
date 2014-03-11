@@ -35,99 +35,6 @@ import whilelang.util.SyntacticElement;
  */
 public interface Expr extends SyntacticElement {
 
-    /**
-     * Captures the expression kinds which are permitted on the left-side of an assignment
-     * statement.
-     *
-     * @author David J. Pearce
-     */
-    public interface LVal extends Expr {
-
-    }
-
-    /**
-     * Represents a single occurrence of a variable within a expression. For example, the expression
-     * <code>x+x+y</code> will contain three instances of <code>Variable</code> --- one for each
-     * variable usage.
-     *
-     * @author David J. Pearce
-     */
-    public static class Variable extends SyntacticElement.Impl implements Expr, LVal {
-
-        private String name;
-
-        /**
-         * Construct a variable expression from a given variable name.
-         *
-         * @param name Must be non-null.
-         */
-        public Variable(String name, Attribute... attributes) {
-            super(attributes);
-            this.setVar(name);
-        }
-
-        public String toString() {
-            return getName();
-        }
-
-        /**
-         * Get the name of the variable in question.
-         *
-         * @return Guaranteed to be non-null.
-         */
-        public String getName() {
-            return name;
-        }
-
-        public void setVar(String var) {
-            this.name = var;
-        }
-    }
-
-    /**
-     * Represents the occurrence of a constant value within an expression. For example, in the
-     * expression <code>1+x</code>, an instance of <code>Constant</code> is used to represent the
-     * value <code>1</code>.
-     *
-     * @author David J. Pearce
-     */
-    public static class Constant extends SyntacticElement.Impl implements Expr {
-
-        private Object value;
-
-        /**
-         * Construct a constant expression from a given (primitive) value. The value must be either
-         * a boolean, character, integer, real, or string constant; alternative, it can be null (to
-         * signal the null constant).
-         *
-         * @param value Must be an instance of <code>java.lang.Boolean</code>,
-         * <code>java.lang.Character</code>, <code>java.lang.Integer</code>,
-         * <code>java.lang.Double</code>, <code>java.lang.String</code> or <code>null</code>.
-         */
-        public Constant(Object value, Attribute... attributes) {
-            super(attributes);
-            this.value = value;
-        }
-
-        public String toString() {
-            if (value == null) {
-                return "null";
-            } else {
-                return value.toString();
-            }
-        }
-
-        /**
-         * Get the value represented by this constant, which must be an instance of
-         * <code>java.lang.Boolean</code>, <code>java.lang.Character</code>,
-         * <code>java.lang.Integer</code>, <code>java.lang.Double</code>,
-         * <code>java.lang.String</code> or <code>null</code>.
-         */
-        public Object getValue() {
-            return value;
-        }
-    }
-
     public enum BOp {
         AND {
             public String toString() {
@@ -201,7 +108,19 @@ public interface Expr extends SyntacticElement {
         }
     }
 
-    ;
+    public enum UOp {
+        NOT, NEG, LENGTHOF,
+    }
+
+    /**
+     * Captures the expression kinds which are permitted on the left-side of an assignment
+     * statement.
+     *
+     * @author David J. Pearce
+     */
+    public interface LVal extends Expr {
+
+    }
 
     /**
      * Represents a binary expression, composed recursively from a left-hand side and right-hand
@@ -247,10 +166,6 @@ public interface Expr extends SyntacticElement {
             this.rhs = rhs;
         }
 
-        public String toString() {
-            return "(" + getOp() + " " + getLhs() + " " + getRhs() + ")";
-        }
-
         /**
          * Get the left-hand side of this binary expression.
          *
@@ -258,6 +173,15 @@ public interface Expr extends SyntacticElement {
          */
         public Expr getLhs() {
             return lhs;
+        }
+
+        /**
+         * Get the operation that this binary expression represents.
+         *
+         * @return Guaranteed to be non-null.
+         */
+        public BOp getOp() {
+            return op;
         }
 
         /**
@@ -269,124 +193,8 @@ public interface Expr extends SyntacticElement {
             return rhs;
         }
 
-        /**
-         * Get the operation that this binary expression represents.
-         *
-         * @return Guaranteed to be non-null.
-         */
-        public BOp getOp() {
-            return op;
-        }
-    }
-
-    /**
-     * <p> Represents a list or string access expression, which may also form the left-hand side of
-     * an assignment. For example, <code>return 1 + xs[i]</code> and <code>ls[i] = 1</code> are
-     * valid uses of a list access expression. <p> <p> List or string access expressions can give
-     * rise to index-out-of-bounds exceptions, in the case that the index is negative or larger or
-     * equal to the size of the source list. </p>
-     *
-     * @author David J. Pearce
-     */
-    public static class IndexOf extends SyntacticElement.Impl implements Expr, LVal {
-
-        private final Expr source;
-        private final Expr index;
-
-        /**
-         * Create a list access expression from a given source expression (which must evaluate to a
-         * list value) and index expression (which must evaluate to an integer value).
-         *
-         * @param source The source expression which generates a list value; may not be null.
-         * @param index The index expression which determines the list element to return; may not be
-         * null.
-         */
-        public IndexOf(Expr source, Expr index, Attribute... attributes) {
-            super(attributes);
-            this.source = source;
-            this.index = index;
-        }
-        /**
-         * Create a list access expression from a given source expression (which must evaluate to a
-         * list value) and index expression (which must evaluate to an integer value).
-         *
-         * @param index The index expression which determines the list element to return; may not be
-         * null.
-         */
-        public IndexOf(Expr src, Expr index, Collection<Attribute> attributes) {
-            super(attributes);
-            this.source = src;
-            this.index = index;
-        }
-
         public String toString() {
-            return source + "[" + index + "]";
-        }
-
-        /**
-         * Get the source expression for this list access.
-         *
-         * @return Guaranteed to be non-null.
-         */
-        public Expr getSource() {
-            return source;
-        }
-
-        /**
-         * Get the index expression for this list access.
-         *
-         * @return Guaranteed to be non-null.
-         */
-        public Expr getIndex() {
-            return index;
-        }
-    }
-
-    public enum UOp {
-        NOT, NEG, LENGTHOF,
-    }
-
-    /**
-     * Represents a unary expression, composed recursively from a single expression. For example, in
-     * the expression <code>!x</code> which have a <code>Unary</code> instance representing the
-     * logical inversion whose sub-expression is a <code>Variable</code> instance.
-     *
-     * @author David J. Pearce
-     */
-    public static class Unary extends SyntacticElement.Impl implements Expr {
-
-        private final UOp op;
-        private final Expr expr;
-
-        /**
-         * Construct a unary expression from a given unary operation, and sub-expression.
-         *
-         * @param op The unary operation this expression represents; may not be null.
-         * @param expr The sub-expression whose value will be manipulated by the unary operation;
-         * may not be null.
-         */
-        public Unary(UOp op, Expr expr, Attribute... attributes) {
-            super(attributes);
-            this.op = op;
-            this.expr = expr;
-        }
-
-        public String toString() {
-            return op + expr.toString();
-        }
-
-        /**
-         * Get the operation this unary expression represents; guaranteed to be non-null.
-         */
-        public UOp getOp() {
-            return op;
-        }
-
-        /**
-         * Get the sub-expression this unary expression operates over; guaranteed to be non-null.
-         */
-        public Expr getExpr() {
-            return expr;
+            return "(" + getOp() + " " + getLhs() + " " + getRhs() + ")";
         }
     }
 
@@ -419,6 +227,196 @@ public interface Expr extends SyntacticElement {
 
         public Type getType() {
             return type;
+        }
+    }
+
+    ;
+
+    /**
+     * Represents the occurrence of a constant value within an expression. For example, in the
+     * expression <code>1+x</code>, an instance of <code>Constant</code> is used to represent the
+     * value <code>1</code>.
+     *
+     * @author David J. Pearce
+     */
+    public static class Constant extends SyntacticElement.Impl implements Expr {
+
+        private Object value;
+
+        /**
+         * Construct a constant expression from a given (primitive) value. The value must be either
+         * a boolean, character, integer, real, or string constant; alternative, it can be null (to
+         * signal the null constant).
+         *
+         * @param value Must be an instance of <code>java.lang.Boolean</code>,
+         * <code>java.lang.Character</code>, <code>java.lang.Integer</code>,
+         * <code>java.lang.Double</code>, <code>java.lang.String</code> or <code>null</code>.
+         */
+        public Constant(Object value, Attribute... attributes) {
+            super(attributes);
+            this.value = value;
+        }
+
+        /**
+         * Get the value represented by this constant, which must be an instance of
+         * <code>java.lang.Boolean</code>, <code>java.lang.Character</code>,
+         * <code>java.lang.Integer</code>, <code>java.lang.Double</code>,
+         * <code>java.lang.String</code> or <code>null</code>.
+         */
+        public Object getValue() {
+            return value;
+        }
+
+        public String toString() {
+            if (value == null) {
+                return "null";
+            } else {
+                return value.toString();
+            }
+        }
+    }
+
+    /**
+     * <p> Represents a list or string access expression, which may also form the left-hand side of
+     * an assignment. For example, <code>return 1 + xs[i]</code> and <code>ls[i] = 1</code> are
+     * valid uses of a list access expression. <p> <p> List or string access expressions can give
+     * rise to index-out-of-bounds exceptions, in the case that the index is negative or larger or
+     * equal to the size of the source list. </p>
+     *
+     * @author David J. Pearce
+     */
+    public static class IndexOf extends SyntacticElement.Impl implements Expr, LVal {
+
+        private final Expr source;
+        private final Expr index;
+
+        /**
+         * Create a list access expression from a given source expression (which must evaluate to a
+         * list value) and index expression (which must evaluate to an integer value).
+         *
+         * @param source The source expression which generates a list value; may not be null.
+         * @param index The index expression which determines the list element to return; may not be
+         * null.
+         */
+        public IndexOf(Expr source, Expr index, Attribute... attributes) {
+            super(attributes);
+            this.source = source;
+            this.index = index;
+        }
+
+        /**
+         * Create a list access expression from a given source expression (which must evaluate to a
+         * list value) and index expression (which must evaluate to an integer value).
+         *
+         * @param index The index expression which determines the list element to return; may not be
+         * null.
+         */
+        public IndexOf(Expr src, Expr index, Collection<Attribute> attributes) {
+            super(attributes);
+            this.source = src;
+            this.index = index;
+        }
+
+        /**
+         * Get the index expression for this list access.
+         *
+         * @return Guaranteed to be non-null.
+         */
+        public Expr getIndex() {
+            return index;
+        }
+
+        /**
+         * Get the source expression for this list access.
+         *
+         * @return Guaranteed to be non-null.
+         */
+        public Expr getSource() {
+            return source;
+        }
+
+        public String toString() {
+            return source + "[" + index + "]";
+        }
+    }
+
+    /**
+     * Represents a function invocation, which is composed of a <i>function name</i> and zero or
+     * more <i>argument expressions</i>. For example, <code>f(1)</code> is an invocation expression
+     * for the function named <code>f</code> which accepts a single argument.
+     *
+     * @author David J. Pearce
+     */
+    public static class Invoke extends SyntacticElement.Impl implements Expr, Stmt {
+
+        private final String name;
+        private final ArrayList<Expr> arguments;
+
+        /**
+         * Construct a function invocation expression from a given function name and list of zero or
+         * more argument expressions.
+         *
+         * @param name The function name that this invocation will call; may not be null.
+         * @param arguments The list of zero or more argument expressions; may not be null.
+         */
+        public Invoke(String name, List<Expr> arguments, Attribute... attributes) {
+            super(attributes);
+            this.name = name;
+            this.arguments = new ArrayList<Expr>(arguments);
+        }
+
+        /**
+         * Get the list of zero or more argument expression being pass to the function being invoked
+         * in this expression; guaranteed to be non-null.
+         */
+        public List<Expr> getArguments() {
+            return arguments;
+        }
+
+        /**
+         * Get the function name being invoked in this expression; guaranteed to be non-null.
+         */
+        public String getName() {
+            return name;
+        }
+    }
+
+    /**
+     * Represents an {@code is} operation. An {@code is} operation is like Javas <i>instanceof</i>
+     * operator, it checks whether an expression is an instance of some type and returns true if it
+     * is.
+     *
+     * @author Henry J. Wylde
+     */
+    public static class Is extends SyntacticElement.Impl implements Expr {
+
+        private final Expr lhs;
+        private final Type rhs;
+
+        public Is(Expr lhs, Type rhs, Collection<Attribute> attributes) {
+            super(attributes);
+
+            this.lhs = lhs;
+            this.rhs = rhs;
+        }
+
+        public Is(Expr lhs, Type rhs, Attribute... attributes) {
+            super(attributes);
+
+            this.lhs = lhs;
+            this.rhs = rhs;
+        }
+
+        public Expr getLhs() {
+            return lhs;
+        }
+
+        public Type getRhs() {
+            return rhs;
+        }
+
+        public String toString() {
+            return "(" + lhs + " is " + rhs + ")";
         }
     }
 
@@ -492,8 +490,11 @@ public interface Expr extends SyntacticElement {
             this.name = name;
         }
 
-        public String toString() {
-            return getSource() + "." + getName();
+        /**
+         * Get the field name for this record access.
+         */
+        public String getName() {
+            return name;
         }
 
         /**
@@ -503,11 +504,8 @@ public interface Expr extends SyntacticElement {
             return source;
         }
 
-        /**
-         * Get the field name for this record access.
-         */
-        public String getName() {
-            return name;
+        public String toString() {
+            return getSource() + "." + getName();
         }
     }
 
@@ -544,43 +542,85 @@ public interface Expr extends SyntacticElement {
     }
 
     /**
-     * Represents a function invocation, which is composed of a <i>function name</i> and zero or
-     * more <i>argument expressions</i>. For example, <code>f(1)</code> is an invocation expression
-     * for the function named <code>f</code> which accepts a single argument.
+     * Represents a unary expression, composed recursively from a single expression. For example, in
+     * the expression <code>!x</code> which have a <code>Unary</code> instance representing the
+     * logical inversion whose sub-expression is a <code>Variable</code> instance.
      *
      * @author David J. Pearce
      */
-    public static class Invoke extends SyntacticElement.Impl implements Expr, Stmt {
+    public static class Unary extends SyntacticElement.Impl implements Expr {
 
-        private final String name;
-        private final ArrayList<Expr> arguments;
+        private final UOp op;
+        private final Expr expr;
 
         /**
-         * Construct a function invocation expression from a given function name and list of zero or
-         * more argument expressions.
+         * Construct a unary expression from a given unary operation, and sub-expression.
          *
-         * @param name The function name that this invocation will call; may not be null.
-         * @param arguments The list of zero or more argument expressions; may not be null.
+         * @param op The unary operation this expression represents; may not be null.
+         * @param expr The sub-expression whose value will be manipulated by the unary operation;
+         * may not be null.
          */
-        public Invoke(String name, List<Expr> arguments, Attribute... attributes) {
+        public Unary(UOp op, Expr expr, Attribute... attributes) {
             super(attributes);
-            this.name = name;
-            this.arguments = new ArrayList<Expr>(arguments);
+            this.op = op;
+            this.expr = expr;
         }
 
         /**
-         * Get the function name being invoked in this expression; guaranteed to be non-null.
+         * Get the sub-expression this unary expression operates over; guaranteed to be non-null.
+         */
+        public Expr getExpr() {
+            return expr;
+        }
+
+        /**
+         * Get the operation this unary expression represents; guaranteed to be non-null.
+         */
+        public UOp getOp() {
+            return op;
+        }
+
+        public String toString() {
+            return op + expr.toString();
+        }
+    }
+
+    /**
+     * Represents a single occurrence of a variable within a expression. For example, the expression
+     * <code>x+x+y</code> will contain three instances of <code>Variable</code> --- one for each
+     * variable usage.
+     *
+     * @author David J. Pearce
+     */
+    public static class Variable extends SyntacticElement.Impl implements Expr, LVal {
+
+        private String name;
+
+        /**
+         * Construct a variable expression from a given variable name.
+         *
+         * @param name Must be non-null.
+         */
+        public Variable(String name, Attribute... attributes) {
+            super(attributes);
+            this.setVar(name);
+        }
+
+        /**
+         * Get the name of the variable in question.
+         *
+         * @return Guaranteed to be non-null.
          */
         public String getName() {
             return name;
         }
 
-        /**
-         * Get the list of zero or more argument expression being pass to the function being invoked
-         * in this expression; guaranteed to be non-null.
-         */
-        public List<Expr> getArguments() {
-            return arguments;
+        public void setVar(String var) {
+            this.name = var;
+        }
+
+        public String toString() {
+            return getName();
         }
     }
 }

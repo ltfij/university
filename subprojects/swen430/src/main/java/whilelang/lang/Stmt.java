@@ -460,10 +460,7 @@ public interface Stmt extends SyntacticElement {
 
             this.condition = condition;
 
-            this.cases = new HashMap<Expr, List<Stmt>>();
-            for (Map.Entry<Expr, List<Stmt>> entry : cases.entrySet()) {
-                cases.put(entry.getKey(), new ArrayList<Stmt>(entry.getValue()));
-            }
+            this.cases = new HashMap<Expr, List<Stmt>>(cases);
             this.defaultBody = defaultBody == null ? null : new ArrayList<Stmt>(defaultBody);
         }
 

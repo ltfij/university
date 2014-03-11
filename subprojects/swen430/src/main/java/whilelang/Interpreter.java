@@ -29,6 +29,7 @@ import java.util.Map;
 
 import whilelang.lang.Expr;
 import whilelang.lang.Stmt;
+import whilelang.lang.Types;
 import whilelang.lang.WhileFile;
 import whilelang.util.Pair;
 
@@ -40,6 +41,12 @@ import whilelang.util.Pair;
  * @author David J. Pearce
  */
 public class Interpreter {
+
+    /**
+     * A reference to be returned when a break statement is executed. Flow control that accepts a
+     * break statement should check for this return value.
+     */
+    private static final Object BREAK = new Object();
 
     private HashMap<String, WhileFile.Decl> declarations;
     private WhileFile file;
@@ -56,7 +63,12 @@ public class Interpreter {
         WhileFile.Decl main = declarations.get("main");
         if (main instanceof WhileFile.FunDecl) {
             WhileFile.FunDecl fd = (WhileFile.FunDecl) main;
-            execute(fd);
+
+            // If a break statement comes all the way up here, then it was added in an illegal
+            // location
+            Object obj = execute(fd);
+            if (obj == BREAK)
+                syntaxError("break statement in illegal location", file.filename, new Stmt.Break());
         } else {
             System.out.println("Cannot find a main() function");
         }
@@ -162,8 +174,7 @@ public class Interpreter {
     }
 
     private Object execute(Stmt.Break stmt, HashMap<String, Object> frame) {
-        throw new InternalError(
-                "execute(Stmt.Break, HashMap<String, Object> frame) not implemented");
+        return BREAK;
     }
 
     private Object execute(Stmt.Switch stmt, HashMap<String, Object> frame) {
@@ -172,13 +183,15 @@ public class Interpreter {
         // Try find a matching case statement
         for (Map.Entry<Expr, List<Stmt>> entry : stmt.getCases().entrySet()) {
             if (condition.equals(execute(entry.getKey(), frame))) {
-                return execute(entry.getValue(), frame);
+                Object ret = execute(entry.getValue(), frame);
+                return ret == BREAK ? null : ret;
             }
         }
 
         // None were found, execute the default if it exists
         if (stmt.getDefault() != null) {
-            return execute(stmt.getDefault(), frame);
+            Object ret = execute(stmt.getDefault(), frame);
+            return ret == BREAK ? null : ret;
         }
 
         return null;
@@ -203,8 +216,12 @@ public class Interpreter {
             Expr.IndexOf io = (Expr.IndexOf) lhs;
             Object src = execute(io.getSource(), frame);
 
+            // TODO: Fixme, tihs doesn't work because the frame is pushed / popped for different
+            // control flow
+
             if (src instanceof String) {
                 // Only makes sense to use indexof with a string variable, not a string constant
+                // TODO: Move this to typechecker
                 if (!(io.getSource() instanceof Expr.Variable)) {
                     syntaxError("cannot perform indexof on a string constant", file.filename, stmt);
                 }
@@ -214,7 +231,8 @@ public class Interpreter {
 
                 String str = (String) src;
 
-                frame.put(((Expr.Variable) io.getSource()).getName(), str.substring(0, index) + rhs + str.substring(index + 1));
+                frame.put(((Expr.Variable) io.getSource()).getName(), str.substring(0, index) + rhs
+                        + str.substring(index + 1));
             } else {
                 ArrayList<Object> al = (ArrayList) execute(io.getSource(), frame);
                 Integer idx = (Integer) execute(io.getIndex(), frame);
@@ -235,7 +253,7 @@ public class Interpreter {
         while ((Boolean) execute(stmt.getCondition(), frame)) {
             Object ret = execute(stmt.getBody(), frame);
             if (ret != null) {
-                return ret;
+                return ret == BREAK ? null : ret;
             }
             execute(stmt.getIncrement(), frame);
         }
@@ -246,7 +264,7 @@ public class Interpreter {
         while ((Boolean) execute(stmt.getCondition(), frame)) {
             Object ret = execute(stmt.getBody(), frame);
             if (ret != null) {
-                return ret;
+                return ret == BREAK ? null : ret;
             }
         }
         return null;
@@ -308,6 +326,8 @@ public class Interpreter {
             return execute((Expr.Invoke) expr, frame);
         } else if (expr instanceof Expr.IndexOf) {
             return execute((Expr.IndexOf) expr, frame);
+        } else if (expr instanceof Expr.Is) {
+            return execute((Expr.Is) expr, frame);
         } else if (expr instanceof Expr.ListConstructor) {
             return execute((Expr.ListConstructor) expr, frame);
         } else if (expr instanceof Expr.RecordAccess) {
@@ -319,9 +339,17 @@ public class Interpreter {
         } else if (expr instanceof Expr.Variable) {
             return execute((Expr.Variable) expr, frame);
         } else {
-            internalFailure("unknown expression encountered (" + expr + ")", file.filename, expr);
+            internalFailure(
+                    "unknown expression encountered (" + expr + ") class (" + expr.getClass() + ")",
+                    file.filename, expr);
             return null;
         }
+    }
+
+    private Object execute(Expr.Is expr, HashMap<String, Object> frame) {
+        Object lhs = execute(expr.getLhs(), frame);
+
+        return Types.isInstance(lhs, expr.getRhs());
     }
 
     private Object execute(Expr.Binary expr, HashMap<String, Object> frame) {
