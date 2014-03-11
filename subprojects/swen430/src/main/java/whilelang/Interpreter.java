@@ -19,6 +19,7 @@
 package whilelang;
 
 import static whilelang.util.SyntaxError.internalFailure;
+import static whilelang.util.SyntaxError.syntaxError;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -154,13 +155,15 @@ public class Interpreter {
         } else if (stmt instanceof Expr.Invoke) {
             return execute((Expr.Invoke) stmt, frame);
         } else {
-            internalFailure("unknown statement encountered (" + stmt.getClass() + ")", file.filename, stmt);
+            internalFailure("unknown statement encountered (" + stmt.getClass() + ")",
+                    file.filename, stmt);
             return null;
         }
     }
 
     private Object execute(Stmt.Break stmt, HashMap<String, Object> frame) {
-        throw new InternalError("execute(Stmt.Break, HashMap<String, Object> frame) not implemented");
+        throw new InternalError(
+                "execute(Stmt.Break, HashMap<String, Object> frame) not implemented");
     }
 
     private Object execute(Stmt.Switch stmt, HashMap<String, Object> frame) {
@@ -198,12 +201,28 @@ public class Interpreter {
             src.put(ra.getName(), deepClone(rhs));
         } else if (lhs instanceof Expr.IndexOf) {
             Expr.IndexOf io = (Expr.IndexOf) lhs;
-            ArrayList<Object> src = (ArrayList) execute(io.getSource(), frame);
-            Integer idx = (Integer) execute(io.getIndex(), frame);
-            Object rhs = execute(stmt.getRhs(), frame);
-            // We need to perform a deep clone here to ensure the value
-            // semantics used in While are preserved.
-            src.set(idx, deepClone(rhs));
+            Object src = execute(io.getSource(), frame);
+
+            if (src instanceof String) {
+                // Only makes sense to use indexof with a string variable, not a string constant
+                if (!(io.getSource() instanceof Expr.Variable)) {
+                    syntaxError("cannot perform indexof on a string constant", file.filename, stmt);
+                }
+
+                Integer index = (Integer) execute(io.getIndex(), frame);
+                Object rhs = execute(stmt.getRhs(), frame);
+
+                String str = (String) src;
+
+                frame.put(((Expr.Variable) io.getSource()).getName(), str.substring(0, index) + rhs + str.substring(index + 1));
+            } else {
+                ArrayList<Object> al = (ArrayList) execute(io.getSource(), frame);
+                Integer idx = (Integer) execute(io.getIndex(), frame);
+                Object rhs = execute(stmt.getRhs(), frame);
+                // We need to perform a deep clone here to ensure the value
+                // semantics used in While are preserved.
+                al.set(idx, deepClone(rhs));
+            }
         } else {
             internalFailure("unknown lval encountered (" + lhs + ")", file.filename, stmt);
         }
@@ -399,7 +418,8 @@ public class Interpreter {
 
     private Object execute(Expr.Cast expr, HashMap<String, Object> frame) {
         Object rhs = execute(expr.getSource(), frame);
-        // TODO: we need to actually implement casting here!
+        // TODO
+
         return rhs;
     }
 

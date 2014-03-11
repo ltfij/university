@@ -35,6 +35,10 @@ public class InvalidTests extends TestHarness {
 	 @Test public void DefiniteAssign_Invalid_24() { runInterpreterTest("DefiniteAssign_Invalid_24"); }
 	 @Test public void DefiniteAssign_Invalid_25() { runInterpreterTest("DefiniteAssign_Invalid_25"); }
 
+     @Test public void StringAssign_Invalid_1() { runInterpreterTest("StringAssign_Invalid_1"); }
+     @Test public void StringAssign_Invalid_2() { runInterpreterTest("StringAssign_Invalid_2"); }
+     @Test public void StringAssign_Invalid_3() { runInterpreterTest("StringAssign_Invalid_3"); }
+
 	 @Test public void Typing_Invalid_1() { runInterpreterTest("Typing_Invalid_1"); }
 	 @Test public void Typing_Invalid_2() { runInterpreterTest("Typing_Invalid_2"); }
 	 @Test public void Typing_Invalid_3() { runInterpreterTest("Typing_Invalid_3"); }
