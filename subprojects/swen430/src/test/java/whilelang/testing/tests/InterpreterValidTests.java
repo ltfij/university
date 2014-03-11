@@ -44,6 +44,8 @@ public class InterpreterValidTests extends TestHarness {
  @Test public void Define_Valid_1() { runInterpreterTest("Define_Valid_1"); }
  @Test public void Define_Valid_2() { runInterpreterTest("Define_Valid_2"); }
 
+ @Test public void For_Valid_1() { runInterpreterTest("For_Valid_1"); }
+
  @Test public void Function_Valid_1() { runInterpreterTest("Function_Valid_1"); }
  @Test public void Function_Valid_2() { runInterpreterTest("Function_Valid_2"); }
  @Test public void Function_Valid_4() { runInterpreterTest("Function_Valid_4"); }
@@ -147,6 +149,7 @@ public class InterpreterValidTests extends TestHarness {
  @Test public void Switch_Valid_6() { runInterpreterTest("Switch_Valid_6"); }
  @Test public void Switch_Valid_7() { runInterpreterTest("Switch_Valid_7"); }
  @Test public void Switch_Valid_8() { runInterpreterTest("Switch_Valid_8"); }
+ @Test public void Switch_Valid_9() { runInterpreterTest("Switch_Valid_9"); }
 
  @Test public void TypeEquals_Valid_1_RuntimeTest() { runInterpreterTest("TypeEquals_Valid_1"); }
  @Test public void TypeEquals_Valid_2_RuntimeTest() { runInterpreterTest("TypeEquals_Valid_2"); }
@@ -172,4 +175,5 @@ public class InterpreterValidTests extends TestHarness {
  @Test public void While_Valid_2() { runInterpreterTest("While_Valid_2"); }
  @Test public void While_Valid_4() { runInterpreterTest("While_Valid_4"); }
  @Test public void While_Valid_6() { runInterpreterTest("While_Valid_6"); }
+ @Test public void While_Valid_7() { runInterpreterTest("While_Valid_7"); }
 }

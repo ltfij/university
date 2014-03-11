@@ -9,6 +9,9 @@ public class InvalidTests extends TestHarness {
 		super("tests/invalid","tests/invalid","sysout");
 	}
 
+     @Test public void Break_Invalid_1() { runInterpreterTest("Break_Invalid_1"); }
+     @Test public void Break_Invalid_2() { runInterpreterTest("Break_Invalid_2"); }
+
 	 @Test public void DefiniteAssign_Invalid_1() { runInterpreterTest("DefiniteAssign_Invalid_1"); }
 	 @Test public void DefiniteAssign_Invalid_2() { runInterpreterTest("DefiniteAssign_Invalid_2"); }
 	 @Test public void DefiniteAssign_Invalid_3() { runInterpreterTest("DefiniteAssign_Invalid_3"); }
