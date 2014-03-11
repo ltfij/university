@@ -34,14 +34,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public interface SyntacticElement {
 
     /**
-     * Get the list of attributes associated with this syntactice element.
-     */
-    public List<Attribute> attributes();
-
-    /**
      * Get the first attribute of the given class type. This is useful short-hand.
      */
     public <T extends Attribute> T attribute(Class<T> c);
+
+    /**
+     * Get the list of attributes associated with this syntactice element.
+     */
+    public List<Attribute> attributes();
 
     public class Impl implements SyntacticElement {
 
@@ -67,10 +67,6 @@ public interface SyntacticElement {
             this.attributes = new ArrayList<Attribute>(Arrays.asList(attributes));
         }
 
-        public List<Attribute> attributes() {
-            return attributes;
-        }
-
         @SuppressWarnings("unchecked")
         public <T extends Attribute> T attribute(Class<T> c) {
             for (Attribute a : attributes) {
@@ -79,6 +75,10 @@ public interface SyntacticElement {
                 }
             }
             return null;
+        }
+
+        public List<Attribute> attributes() {
+            return attributes;
         }
     }
 }

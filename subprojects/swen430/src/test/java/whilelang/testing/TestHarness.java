@@ -60,7 +60,8 @@ public class TestHarness {
                             + File.pathSeparator + JX86_JAR;
             classpath = classpath.replace('/', File.separatorChar);
             // TEMP: For running it in gradle
-            classpath = classpath + File.pathSeparator + "../../../../../build/classes/main".replace('/', File.separatorChar);
+            classpath = File.pathSeparator + "../../../../../build/classes/main".replace('/', File.separatorChar);
+            //classpath = classpath + File.pathSeparator + "../../../../../build/classes/main".replace('/', File.separatorChar);
 
             String tmp = "java -cp " + classpath;
             for (String arg : args) {

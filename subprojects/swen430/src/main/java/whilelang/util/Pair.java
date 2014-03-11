@@ -35,20 +35,6 @@ public class Pair<FIRST, SECOND> {
         second = s;
     }
 
-    public FIRST first() {
-        return first;
-    }
-
-    public SECOND second() {
-        return second;
-    }
-
-    public int hashCode() {
-        int fhc = first == null ? 0 : first.hashCode();
-        int shc = second == null ? 0 : second.hashCode();
-        return fhc ^ shc;
-    }
-
     public boolean equals(Object o) {
         if (o instanceof Pair<?, ?>) {
             Pair<?, ?> p = (Pair<?, ?>) o;
@@ -66,6 +52,20 @@ public class Pair<FIRST, SECOND> {
             return r;
         }
         return false;
+    }
+
+    public FIRST first() {
+        return first;
+    }
+
+    public int hashCode() {
+        int fhc = first == null ? 0 : first.hashCode();
+        int shc = second == null ? 0 : second.hashCode();
+        return fhc ^ shc;
+    }
+
+    public SECOND second() {
+        return second;
     }
 
     public String toString() {

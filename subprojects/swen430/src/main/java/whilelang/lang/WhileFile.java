@@ -35,6 +35,31 @@ public class WhileFile {
         this.declarations = new ArrayList<Decl>(decls);
     }
 
+    public ConstDecl constant(String name) {
+        for (Decl d : declarations) {
+            if (d instanceof ConstDecl) {
+                ConstDecl cd = (ConstDecl) d;
+                if (cd.name().equals(name)) {
+                    return cd;
+                }
+            }
+        }
+        return null;
+    }
+
+    public List<FunDecl> functions(String name) {
+        ArrayList<FunDecl> matches = new ArrayList<FunDecl>();
+        for (Decl d : declarations) {
+            if (d instanceof FunDecl) {
+                FunDecl cd = (FunDecl) d;
+                if (cd.name().equals(name)) {
+                    matches.add(cd);
+                }
+            }
+        }
+        return matches;
+    }
+
     public boolean hasName(String name) {
         for (Decl d : declarations) {
             if (d instanceof ConstDecl) {
@@ -57,18 +82,6 @@ public class WhileFile {
         return false;
     }
 
-    public ConstDecl constant(String name) {
-        for (Decl d : declarations) {
-            if (d instanceof ConstDecl) {
-                ConstDecl cd = (ConstDecl) d;
-                if (cd.name().equals(name)) {
-                    return cd;
-                }
-            }
-        }
-        return null;
-    }
-
     public TypeDecl type(String name) {
         for (Decl d : declarations) {
             if (d instanceof TypeDecl) {
@@ -79,19 +92,6 @@ public class WhileFile {
             }
         }
         return null;
-    }
-
-    public List<FunDecl> functions(String name) {
-        ArrayList<FunDecl> matches = new ArrayList<FunDecl>();
-        for (Decl d : declarations) {
-            if (d instanceof FunDecl) {
-                FunDecl cd = (FunDecl) d;
-                if (cd.name().equals(name)) {
-                    matches.add(cd);
-                }
-            }
-        }
-        return matches;
     }
 
     public interface Decl extends SyntacticElement {
@@ -116,26 +116,6 @@ public class WhileFile {
 
         public String toString() {
             return "const " + constant + " is " + name;
-        }
-    }
-
-    public static class TypeDecl extends SyntacticElement.Impl implements Decl {
-
-        public final Type type;
-        public final String name;
-
-        public TypeDecl(Type type, String name, Attribute... attributes) {
-            super(attributes);
-            this.type = type;
-            this.name = name;
-        }
-
-        public String name() {
-            return name;
-        }
-
-        public String toString() {
-            return "type " + type + " is " + name;
         }
     }
 
@@ -181,6 +161,26 @@ public class WhileFile {
 
         public String name() {
             return name;
+        }
+    }
+
+    public static class TypeDecl extends SyntacticElement.Impl implements Decl {
+
+        public final Type type;
+        public final String name;
+
+        public TypeDecl(Type type, String name, Attribute... attributes) {
+            super(attributes);
+            this.type = type;
+            this.name = name;
+        }
+
+        public String name() {
+            return name;
+        }
+
+        public String toString() {
+            return "type " + type + " is " + name;
         }
     }
 }

@@ -31,6 +31,7 @@ import java.io.PrintStream;
  */
 public class SyntaxError extends RuntimeException {
 
+    public static final long serialVersionUID = 1l;
     private String msg;
     private String filename;
     private int start;
@@ -63,19 +64,11 @@ public class SyntaxError extends RuntimeException {
         this.end = end;
     }
 
-    public String getMessage() {
-        if (msg != null) {
-            return msg;
-        } else {
-            return "";
-        }
-    }
-
     /**
-     * Error message
+     * Get index of last character of offending location.
      */
-    public String msg() {
-        return msg;
+    public int end() {
+        return end;
     }
 
     /**
@@ -85,18 +78,46 @@ public class SyntaxError extends RuntimeException {
         return filename;
     }
 
-    /**
-     * Get index of first character of offending location.
-     */
-    public int start() {
-        return start;
+    public String getMessage() {
+        if (msg != null) {
+            return msg;
+        } else {
+            return "";
+        }
+    }
+
+    public static void internalFailure(String msg, String filename, SyntacticElement elem) {
+        int start = -1;
+        int end = -1;
+
+        Attribute.Source attr = (Attribute.Source) elem.attribute(Attribute.Source.class);
+        if (attr != null) {
+            start = attr.start;
+            end = attr.end;
+        }
+
+        throw new InternalFailure(msg, filename, start, end);
+    }
+
+    public static void internalFailure(String msg, String filename, SyntacticElement elem,
+            Throwable ex) {
+        int start = -1;
+        int end = -1;
+
+        Attribute.Source attr = (Attribute.Source) elem.attribute(Attribute.Source.class);
+        if (attr != null) {
+            start = attr.start;
+            end = attr.end;
+        }
+
+        throw new InternalFailure(msg, filename, start, end, ex);
     }
 
     /**
-     * Get index of last character of offending location.
+     * Error message
      */
-    public int end() {
-        return end;
+    public String msg() {
+        return msg;
     }
 
     /**
@@ -163,14 +184,12 @@ public class SyntaxError extends RuntimeException {
         }
     }
 
-    private static int parseLine(StringBuilder text, int index) {
-        while (index < text.length() && text.charAt(index) != '\n') {
-            index++;
-        }
-        return index + 1;
+    /**
+     * Get index of first character of offending location.
+     */
+    public int start() {
+        return start;
     }
-
-    public static final long serialVersionUID = 1l;
 
     public static void syntaxError(String msg, String filename, SyntacticElement elem) {
         int start = -1;
@@ -199,6 +218,13 @@ public class SyntaxError extends RuntimeException {
         throw new SyntaxError(msg, filename, start, end, ex);
     }
 
+    private static int parseLine(StringBuilder text, int index) {
+        while (index < text.length() && text.charAt(index) != '\n') {
+            index++;
+        }
+        return index + 1;
+    }
+
     /**
      * An internal failure is a special form of syntax error which indicates something went wrong
      * whilst processing some piece of syntax. In other words, is an internal error in the compiler,
@@ -224,32 +250,5 @@ public class SyntaxError extends RuntimeException {
                 return "internal failure, " + msg;
             }
         }
-    }
-
-    public static void internalFailure(String msg, String filename, SyntacticElement elem) {
-        int start = -1;
-        int end = -1;
-
-        Attribute.Source attr = (Attribute.Source) elem.attribute(Attribute.Source.class);
-        if (attr != null) {
-            start = attr.start;
-            end = attr.end;
-        }
-
-        throw new InternalFailure(msg, filename, start, end);
-    }
-
-    public static void internalFailure(String msg, String filename, SyntacticElement elem,
-            Throwable ex) {
-        int start = -1;
-        int end = -1;
-
-        Attribute.Source attr = (Attribute.Source) elem.attribute(Attribute.Source.class);
-        if (attr != null) {
-            start = attr.start;
-            end = attr.end;
-        }
-
-        throw new InternalFailure(msg, filename, start, end, ex);
     }
 }

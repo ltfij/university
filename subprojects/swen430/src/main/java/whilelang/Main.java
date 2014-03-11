@@ -39,7 +39,9 @@ public class Main {
         }
     }
 
-    private static enum Mode {interpret, jvm, x86}
+    public static void main(String[] args) throws Exception {
+        run(args);
+    }
 
     public static boolean run(String[] args) {
         boolean verbose = false;
@@ -138,10 +140,6 @@ public class Main {
         return true;
     }
 
-    public static void main(String[] args) throws Exception {
-        run(args);
-    }
-
     /**
      * Print out information regarding command-line arguments
      */
@@ -173,4 +171,6 @@ public class Main {
             System.out.println(p[1]);
         }
     }
+
+    private static enum Mode {interpret, jvm, x86}
 }

@@ -360,6 +360,66 @@ public class TypeChecker {
     }
 
     /**
+     * Check that a given type t2 is a castable to another type t1.
+     *
+     * @param t1 Supertype to check
+     * @param t2 Subtype to check
+     * @param element Used for determining where to report syntax errors.
+     */
+    public void checkCast(Type t1, Type t2, SyntacticElement element) {
+        if (t1 instanceof Type.Null && t2 instanceof Type.Null) {
+            // OK
+        } else if (t1 instanceof Type.Bool && t2 instanceof Type.Bool) {
+            // OK
+        } else if (t1 instanceof Type.Char && t2 instanceof Type.Char) {
+            // OK
+        } else if (t1 instanceof Type.Int && t2 instanceof Type.Int) {
+            // OK
+        } else if (t1 instanceof Type.Real && (t2 instanceof Type.Real || t2 instanceof Type.Int)) {
+            // OK
+        } else if (t1 instanceof Type.Strung && t2 instanceof Type.Strung) {
+            // OK
+        } else if (t1 instanceof Type.List && t2 instanceof Type.List) {
+            Type.List l1 = (Type.List) t1;
+            Type.List l2 = (Type.List) t2;
+            // The following is safe because While has value semantics. In a
+            // conventional language, like Java, this is not safe because of
+            // references.
+            checkCast(l1.getElement(), l2.getElement(), element);
+        } else if (t1 instanceof Type.Record && t2 instanceof Type.Record) {
+            Type.Record l1 = (Type.Record) t1;
+            Type.Record l2 = (Type.Record) t2;
+            Map<String, Type> l1Fields = l1.getFields();
+            Map<String, Type> l2Fields = l2.getFields();
+            if (l1Fields.keySet().equals(l2Fields.keySet())) {
+                for (Map.Entry<String, Type> p : l1Fields.entrySet()) {
+                    checkCast(p.getValue(), l2Fields.get(p.getKey()), element);
+                }
+            } else {
+                syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
+            }
+        } else if (t1 instanceof Type.Named) {
+            Type.Named tn = (Type.Named) t1;
+            if (types.containsKey(tn.getName())) {
+                Type body = types.get(tn.getName()).type;
+                checkCast(body, t2, element);
+            } else {
+                syntaxError("unknown type encountered: " + t1, file.filename, element);
+            }
+        } else if (t2 instanceof Type.Named) {
+            Type.Named tn = (Type.Named) t2;
+            if (types.containsKey(tn.getName())) {
+                Type body = types.get(tn.getName()).type;
+                checkCast(t1, body, element);
+            } else {
+                syntaxError("unknown type encountered: " + t2, file.filename, element);
+            }
+        } else {
+            syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
+        }
+    }
+
+    /**
      * Check that a given type t2 is an instance of of another type t1. This method is useful for
      * checking that a type is, for example, a List type.
      *
@@ -431,6 +491,17 @@ public class TypeChecker {
         if (!isSubtype(t1, t2, element)) {
             syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
         }
+    }
+
+    /**
+     * Determine whether two given types are euivalent. Identical types are always equivalent.
+     * Furthermore, e.g. "int|null" is equivalent to "null|int".
+     *
+     * @param t1 first type to compare
+     * @param t2 second type to compare
+     */
+    public boolean equivalent(Type t1, Type t2, SyntacticElement element) {
+        return isSubtype(t1, t2, element) && isSubtype(t2, t1, element);
     }
 
     /**
@@ -511,76 +582,5 @@ public class TypeChecker {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Determine whether two given types are euivalent. Identical types are always equivalent.
-     * Furthermore, e.g. "int|null" is equivalent to "null|int".
-     *
-     * @param t1 first type to compare
-     * @param t2 second type to compare
-     */
-    public boolean equivalent(Type t1, Type t2, SyntacticElement element) {
-        return isSubtype(t1, t2, element) && isSubtype(t2, t1, element);
-    }
-
-    /**
-     * Check that a given type t2 is a castable to another type t1.
-     *
-     * @param t1 Supertype to check
-     * @param t2 Subtype to check
-     * @param element Used for determining where to report syntax errors.
-     */
-    public void checkCast(Type t1, Type t2, SyntacticElement element) {
-        if (t1 instanceof Type.Null && t2 instanceof Type.Null) {
-            // OK
-        } else if (t1 instanceof Type.Bool && t2 instanceof Type.Bool) {
-            // OK
-        } else if (t1 instanceof Type.Char && t2 instanceof Type.Char) {
-            // OK
-        } else if (t1 instanceof Type.Int && t2 instanceof Type.Int) {
-            // OK
-        } else if (t1 instanceof Type.Real && (t2 instanceof Type.Real || t2 instanceof Type.Int)) {
-            // OK
-        } else if (t1 instanceof Type.Strung && t2 instanceof Type.Strung) {
-            // OK
-        } else if (t1 instanceof Type.List && t2 instanceof Type.List) {
-            Type.List l1 = (Type.List) t1;
-            Type.List l2 = (Type.List) t2;
-            // The following is safe because While has value semantics. In a
-            // conventional language, like Java, this is not safe because of
-            // references.
-            checkCast(l1.getElement(), l2.getElement(), element);
-        } else if (t1 instanceof Type.Record && t2 instanceof Type.Record) {
-            Type.Record l1 = (Type.Record) t1;
-            Type.Record l2 = (Type.Record) t2;
-            Map<String, Type> l1Fields = l1.getFields();
-            Map<String, Type> l2Fields = l2.getFields();
-            if (l1Fields.keySet().equals(l2Fields.keySet())) {
-                for (Map.Entry<String, Type> p : l1Fields.entrySet()) {
-                    checkCast(p.getValue(), l2Fields.get(p.getKey()), element);
-                }
-            } else {
-                syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
-            }
-        } else if (t1 instanceof Type.Named) {
-            Type.Named tn = (Type.Named) t1;
-            if (types.containsKey(tn.getName())) {
-                Type body = types.get(tn.getName()).type;
-                checkCast(body, t2, element);
-            } else {
-                syntaxError("unknown type encountered: " + t1, file.filename, element);
-            }
-        } else if (t2 instanceof Type.Named) {
-            Type.Named tn = (Type.Named) t2;
-            if (types.containsKey(tn.getName())) {
-                Type body = types.get(tn.getName()).type;
-                checkCast(t1, body, element);
-            } else {
-                syntaxError("unknown type encountered: " + t2, file.filename, element);
-            }
-        } else {
-            syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
-        }
     }
 }

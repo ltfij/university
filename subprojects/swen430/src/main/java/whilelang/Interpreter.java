@@ -62,6 +62,33 @@ public class Interpreter {
     }
 
     /**
+     * Perform a deep clone of the given object value. This is either a <code>Boolean</code>,
+     * <code>Integer</code>, <code>Double</code>, <code>Character</code>, <code>String</code>,
+     * <code>ArrayList</code> (for lists) or <code>HaspMap</code> (for records). Only the latter two
+     * need to be cloned, since the others are immutable.
+     */
+    private Object deepClone(Object o) {
+        if (o instanceof ArrayList) {
+            ArrayList<Object> l = (ArrayList) o;
+            ArrayList<Object> n = new ArrayList<Object>();
+            for (int i = 0; i != l.size(); ++i) {
+                n.add(deepClone(l.get(i)));
+            }
+            return n;
+        } else if (o instanceof HashMap) {
+            HashMap<String, Object> m = (HashMap) o;
+            HashMap<String, Object> n = new HashMap<String, Object>();
+            for (String field : m.keySet()) {
+                n.put(field, deepClone(m.get(field)));
+            }
+            return n;
+        } else {
+            // other cases can be ignored
+            return o;
+        }
+    }
+
+    /**
      * Execute a given function with the given argument values. If the number of arguments is
      * incorrect, then an exception is thrown.
      *
@@ -108,6 +135,8 @@ public class Interpreter {
     private Object execute(Stmt stmt, HashMap<String, Object> frame) {
         if (stmt instanceof Stmt.Assign) {
             return execute((Stmt.Assign) stmt, frame);
+        } else if (stmt instanceof Stmt.Break) {
+            return execute((Stmt.Break) stmt, frame);
         } else if (stmt instanceof Stmt.For) {
             return execute((Stmt.For) stmt, frame);
         } else if (stmt instanceof Stmt.While) {
@@ -116,6 +145,8 @@ public class Interpreter {
             return execute((Stmt.IfElse) stmt, frame);
         } else if (stmt instanceof Stmt.Return) {
             return execute((Stmt.Return) stmt, frame);
+        } else if (stmt instanceof Stmt.Switch) {
+            return execute((Stmt.Switch) stmt, frame);
         } else if (stmt instanceof Stmt.VariableDeclaration) {
             return execute((Stmt.VariableDeclaration) stmt, frame);
         } else if (stmt instanceof Stmt.Print) {
@@ -123,9 +154,31 @@ public class Interpreter {
         } else if (stmt instanceof Expr.Invoke) {
             return execute((Expr.Invoke) stmt, frame);
         } else {
-            internalFailure("unknown statement encountered (" + stmt + ")", file.filename, stmt);
+            internalFailure("unknown statement encountered (" + stmt.getClass() + ")", file.filename, stmt);
             return null;
         }
+    }
+
+    private Object execute(Stmt.Break stmt, HashMap<String, Object> frame) {
+        throw new InternalError("execute(Stmt.Break, HashMap<String, Object> frame) not implemented");
+    }
+
+    private Object execute(Stmt.Switch stmt, HashMap<String, Object> frame) {
+        Object condition = execute(stmt.getCondition(), frame);
+
+        // Try find a matching case statement
+        for (Map.Entry<Expr, List<Stmt>> entry : stmt.getCases().entrySet()) {
+            if (condition.equals(execute(entry.getKey(), frame))) {
+                return execute(entry.getValue(), frame);
+            }
+        }
+
+        // None were found, execute the default if it exists
+        if (stmt.getDefault() != null) {
+            return execute(stmt.getDefault(), frame);
+        }
+
+        return null;
     }
 
     private Object execute(Stmt.Assign stmt, HashMap<String, Object> frame) {
@@ -428,33 +481,6 @@ public class Interpreter {
 
     private Object execute(Expr.Variable expr, HashMap<String, Object> frame) {
         return frame.get(expr.getName());
-    }
-
-    /**
-     * Perform a deep clone of the given object value. This is either a <code>Boolean</code>,
-     * <code>Integer</code>, <code>Double</code>, <code>Character</code>, <code>String</code>,
-     * <code>ArrayList</code> (for lists) or <code>HaspMap</code> (for records). Only the latter two
-     * need to be cloned, since the others are immutable.
-     */
-    private Object deepClone(Object o) {
-        if (o instanceof ArrayList) {
-            ArrayList<Object> l = (ArrayList) o;
-            ArrayList<Object> n = new ArrayList<Object>();
-            for (int i = 0; i != l.size(); ++i) {
-                n.add(deepClone(l.get(i)));
-            }
-            return n;
-        } else if (o instanceof HashMap) {
-            HashMap<String, Object> m = (HashMap) o;
-            HashMap<String, Object> n = new HashMap<String, Object>();
-            for (String field : m.keySet()) {
-                n.put(field, deepClone(m.get(field)));
-            }
-            return n;
-        } else {
-            // other cases can be ignored
-            return o;
-        }
     }
 
     /**

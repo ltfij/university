@@ -74,7 +74,7 @@ public class DefiniteAssignment {
      * update the set of definitely assigned variables to include any which are definitely assigned
      * after this statement.
      *
-     * @param statement The statement to check.
+     * @param stmt The statement to check.
      * @param environment The set of variables which are definitely assigned.
      */
     public void check(Stmt stmt, Set<String> environment) {
