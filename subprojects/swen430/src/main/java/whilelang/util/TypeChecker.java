@@ -4,6 +4,7 @@ import static whilelang.util.SyntaxError.internalFailure;
 import static whilelang.util.SyntaxError.syntaxError;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,12 @@ import whilelang.lang.WhileFile;
  * @author David J. Pearce
  */
 public class TypeChecker {
+
+    /**
+     * A constant that is used to store the current methods return type in the environment so that
+     * type checking may occur on return statements.
+     */
+    private static final String METHOD = "~CURRENT_METHOD";
 
     private WhileFile file;
     private WhileFile.FunDecl function;
@@ -58,6 +65,8 @@ public class TypeChecker {
         for (WhileFile.Parameter p : fd.parameters) {
             environment.put(p.name(), p.type);
         }
+
+        environment.put(METHOD, fd.ret);
 
         // Second, check all statements in the function body
         check(fd.statements, environment);
@@ -129,8 +138,10 @@ public class TypeChecker {
     }
 
     public void check(Stmt.Assign stmt, Map<String, Type> environment) {
-        check(stmt.getLhs(), environment);
-        check(stmt.getRhs(), environment);
+        Type var = check(stmt.getLhs(), environment);
+        Type expr = check(stmt.getRhs(), environment);
+
+        checkAssignable(var, expr, stmt.getRhs());
     }
 
     public void check(Stmt.Print stmt, Map<String, Type> environment) {
@@ -139,18 +150,26 @@ public class TypeChecker {
 
     public void check(Stmt.Return stmt, Map<String, Type> environment) {
         if (stmt.getExpr() != null) {
-            check(stmt.getExpr(), environment);
+            Type ret = check(stmt.getExpr(), environment);
+
+            checkAssignable(environment.get(METHOD), ret, stmt.getExpr());
+        } else if (!(environment.get(METHOD) instanceof Type.Void)) {
+            // Got to take this as a separate account because we're using Type.Void as a special
+            // marker as the "any" type for lists
+            syntaxError("expected type " + environment.get(METHOD) + ", found " + new Type.Void(),
+                    file.filename, stmt);
         }
     }
 
     public void check(Stmt.IfElse stmt, Map<String, Type> environment) {
-        check(stmt.getCondition(), environment);
+        Type condition = check(stmt.getCondition(), environment);
+        checkSubtype(new Type.Bool(), condition, stmt.getCondition());
+
         check(stmt.getTrueBranch(), environment);
         check(stmt.getFalseBranch(), environment);
     }
 
     public void check(Stmt.For stmt, Map<String, Type> environment) {
-
         Stmt.VariableDeclaration vd = stmt.getDeclaration();
         check(vd, environment);
 
@@ -159,13 +178,17 @@ public class TypeChecker {
         environment = new HashMap<String, Type>(environment);
         environment.put(vd.getName(), vd.getType());
 
-        check(stmt.getCondition(), environment);
+        Type condition = check(stmt.getCondition(), environment);
+        checkSubtype(new Type.Bool(), condition, stmt.getCondition());
+
         check(stmt.getIncrement(), environment);
         check(stmt.getBody(), environment);
     }
 
     public void check(Stmt.While stmt, Map<String, Type> environment) {
-        check(stmt.getCondition(), environment);
+        Type condition = check(stmt.getCondition(), environment);
+        checkSubtype(new Type.Bool(), condition, stmt.getCondition());
+
         check(stmt.getBody(), environment);
     }
 
@@ -248,12 +271,17 @@ public class TypeChecker {
                 leftType = checkInstanceOf(leftType, expr.getLhs(), Type.List.class,
                         Type.Strung.class);
                 if (leftType instanceof Type.Strung) {
-
-                } else if (!equivalent(leftType, rightType, expr)) {
-                    syntaxError("operands must have identical types, found " + leftType + " and "
-                            + rightType, file.filename, expr);
+                    return leftType;
                 }
-                return leftType;
+
+                rightType = checkInstanceOf(rightType, expr.getRhs(), Type.List.class,
+                        Type.Strung.class);
+
+                if (equivalent(leftType, rightType, expr)) {
+                    return leftType;
+                }
+
+                return new Type.Union(Arrays.asList(leftType, rightType));
             default:
                 internalFailure("unknown unary expression encountered (" + expr + ")",
                         file.filename, expr);
@@ -264,6 +292,7 @@ public class TypeChecker {
     public Type check(Expr.Cast expr, Map<String, Type> environment) {
         Type srcType = check(expr.getSource(), environment);
         checkCast(expr.getType(), srcType, expr.getSource());
+
         return expr.getType();
     }
 
@@ -396,6 +425,20 @@ public class TypeChecker {
     }
 
     /**
+     * Determines whether the given type {@code t2} is able to be assigned to the former type,
+     * {@code t1}. An acceptable assignable type is either: <ul> <li>an equivalent type</li> <li>an
+     * equivalent type of one of the union bounds of the former type</li> </ul>
+     * <p/>
+     * This is because the language does not support implicit conversions, so we only take into
+     * account equivalent types and unions.
+     */
+    public void checkAssignable(Type t1, Type t2, SyntacticElement element) {
+        if (!assignable(t1, t2, element)) {
+            syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
+        }
+    }
+
+    /**
      * Check that a given type t2 is a castable to another type t1.
      *
      * @param t1 Supertype to check
@@ -407,6 +450,19 @@ public class TypeChecker {
         // E.g., casting an int to a real is casting to a supertype (int subtypes real)
         // but casting a int|string to a string is casting to a subtype (string subtypes int|string)
         if (!isSubtype(t1, t2, element) && !isSubtype(t2, t1, element)) {
+            syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
+        }
+    }
+
+    /**
+     * Determine whether two given types are euivalent. Identical types are always equivalent.
+     * Furthermore, e.g. "int|null" is equivalent to "null|int".
+     *
+     * @param t1 first type to compare
+     * @param t2 second type to compare
+     */
+    public void checkEquivalent(Type t1, Type t2, SyntacticElement element) {
+        if (!equivalent(t1, t2, element)) {
             syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
         }
     }
@@ -485,17 +541,6 @@ public class TypeChecker {
     }
 
     /**
-     * Determine whether two given types are euivalent. Identical types are always equivalent.
-     * Furthermore, e.g. "int|null" is equivalent to "null|int".
-     *
-     * @param t1 first type to compare
-     * @param t2 second type to compare
-     */
-    public boolean equivalent(Type t1, Type t2, SyntacticElement element) {
-        return isSubtype(t1, t2, element) && isSubtype(t2, t1, element);
-    }
-
-    /**
      * Check that a given type t2 is a subtype of another type t1.
      *
      * @param t1 Supertype to check
@@ -504,5 +549,28 @@ public class TypeChecker {
      */
     public boolean isSubtype(Type t1, Type t2, SyntacticElement element) {
         return Types.isSubtype(t2, t1, file);
+    }
+
+    /**
+     * Determines whether the given type {@code t2} is able to be assigned to the former type,
+     * {@code t1}. An acceptable assignable type is either: <ul> <li>an equivalent type</li> <li>an
+     * equivalent type of one of the union bounds of the former type</li> </ul>
+     * <p/>
+     * This is because the language does not support implicit conversions, so we only take into
+     * account equivalent types and unions.
+     */
+    private boolean assignable(Type t1, Type t2, SyntacticElement element) {
+        return Types.isInstance(t2, t1, file);
+    }
+
+    /**
+     * Determine whether two given types are euivalent. Identical types are always equivalent.
+     * Furthermore, e.g. "int|null" is equivalent to "null|int".
+     *
+     * @param t1 first type to compare
+     * @param t2 second type to compare
+     */
+    private boolean equivalent(Type t1, Type t2, SyntacticElement element) {
+        return isSubtype(t1, t2, element) && isSubtype(t2, t1, element);
     }
 }

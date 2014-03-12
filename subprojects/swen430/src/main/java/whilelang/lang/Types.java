@@ -1,7 +1,5 @@
 package whilelang.lang;
 
-import static whilelang.util.SyntaxError.syntaxError;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +16,41 @@ public final class Types {
      * This class cannot be instantiated.
      */
     private Types() {
+    }
+
+    public static Object cast(Object obj, Type type, WhileFile file) {
+        if (type instanceof Type.Named) {
+            return cast(obj, file.type(((Type.Named) type).getName()).type, file);
+        } else if (obj instanceof Integer) {
+            if (type instanceof Type.Real) {
+                return ((Integer) obj).doubleValue();
+            }
+
+            return obj;
+        } else if (obj instanceof List) {
+            List<?> list = (List<?>) obj;
+            List<Object> nlist = new ArrayList<Object>();
+
+            for (Object item : list) {
+                nlist.add(cast(item, ((Type.List) type).getElement(), file));
+            }
+
+            return nlist;
+        } else if (obj instanceof Map) {
+            Map<String, Object> map = (Map<String, Object>) obj;
+            Map<String, Type> fields = ((Type.Record) type).getFields();
+
+            Map<String, Object> nmap = new HashMap<String, Object>();
+
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                nmap.put(entry.getKey(), cast(entry.getValue(), fields.get(entry.getKey()), file));
+            }
+
+            return nmap;
+        }
+
+        // No other cast available, assume the type checker validated this cast
+        return obj;
     }
 
     public static Type getType(Object obj) {
@@ -62,24 +95,55 @@ public final class Types {
         return isSubtype(getType(obj), type, file);
     }
 
+    public static boolean isInstance(Type lhs, Type rhs, WhileFile file) {
+        lhs = normalise(lhs, file);
+        rhs = normalise(rhs, file);
+
+        // Check the lhs instanceof Type.Union case first
+        // In this case, all bounds need to be an instance of the rhs
+        if (lhs instanceof Type.Union) {
+            for (Type bound : ((Type.Union) lhs).getBounds()) {
+                if (!(isInstance(bound, rhs, file))) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Check for equivalence
+        if (isSubtype(lhs, rhs, file) && isSubtype(rhs, lhs, file)) {
+            return true;
+        }
+
+        if (rhs instanceof Type.Union) {
+            for (Type bound : ((Type.Union) rhs).getBounds()) {
+                if (isInstance(lhs, bound, file)) {
+                    return true;
+                }
+            }
+        } else if (rhs instanceof Type.Record) {
+            if (!(lhs instanceof Type.Record)) {
+                return false;
+            }
+
+            return isInstance((Type.Record) lhs, (Type.Record) rhs, file);
+        } else if (rhs instanceof Type.List) {
+            if (!(lhs instanceof Type.List)) {
+                return false;
+            }
+
+            return isInstance(((Type.List) lhs).getElement(), ((Type.List) rhs).getElement(), file);
+        }
+
+        return false;
+    }
+
     public static boolean isSubtype(Type lhs, Type rhs, WhileFile file) {
-        if (lhs instanceof Type.Named) {
-            WhileFile.TypeDecl type = file.type(((Type.Named) lhs).getName());
-            if (type == null) {
-                syntaxError("type name not declared '" + ((Type.Named) lhs).getName() + "'",
-                        file.filename, lhs);
-            }
+        lhs = normalise(lhs, file);
+        rhs = normalise(rhs, file);
 
-            return isSubtype(type.type, rhs, file);
-        } else if (rhs instanceof Type.Named) {
-            WhileFile.TypeDecl type = file.type(((Type.Named) rhs).getName());
-            if (type == null) {
-                syntaxError("type name not declared '" + ((Type.Named) rhs).getName() + "'",
-                        file.filename, rhs);
-            }
-
-            return isSubtype(lhs, type.type, file);
-        } else if (lhs instanceof Type.Union) {
+        if (lhs instanceof Type.Union) {
             for (Type type : ((Type.Union) lhs).getBounds()) {
                 if (!isSubtype(type, rhs, file)) {
                     return false;
@@ -124,41 +188,31 @@ public final class Types {
         }
     }
 
-    public static Object cast(Object obj, Type type, WhileFile file) {
+    public static Type normalise(Type type, WhileFile file) {
         if (type instanceof Type.Named) {
-            return cast(obj, file.type(((Type.Named) type).getName()).type, file);
-        }  else if (obj instanceof Integer) {
-            if (type instanceof Type.Real) {
-                return ((Integer)obj).doubleValue();
-            }
-
-            return obj;
-        } else if (obj instanceof List) {
-            List<?> list = (List<?>) obj;
-            List<Object> nlist = new ArrayList<Object>();
-
-            for (Object item : list) {
-                nlist.add(cast(item, ((Type.List) type).getElement(), file));
-            }
-
-            return nlist;
-        } else if (obj instanceof Map) {
-            Map<String, Object> map = (Map<String, Object>) obj;
-            Map<String, Type> fields = ((Type.Record)type).getFields();
-
-            Map<String, Object> nmap = new HashMap<String, Object>();
-
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                nmap.put(entry.getKey(), cast(entry.getValue(), fields.get(entry.getKey()),file));
-            }
-
-            return nmap;
+            return normalise(file.type(((Type.Named) type).getName()).type, file);
         }
 
-        // No other cast available, assume the type checker validated this cast
-        return obj;
+        return type;
     }
 
+    private static boolean isInstance(Type.Record lhs, Type.Record rhs, WhileFile file) {
+        Map<String, Type> lhsFields = lhs.getFields();
+        Map<String, Type> rhsFields = rhs.getFields();
+
+        // Has to at least have all of the fields names
+        if (!lhsFields.keySet().equals(rhsFields.keySet())) {
+            return false;
+        }
+
+        for (Map.Entry<String, Type> field : lhsFields.entrySet()) {
+            if (!isInstance(field.getValue(), rhsFields.get(field.getKey()), file)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     private static boolean isSubtype(Type.Record lhs, Type.Record rhs, WhileFile file) {
         // Support depth subtyping but not width subtyping

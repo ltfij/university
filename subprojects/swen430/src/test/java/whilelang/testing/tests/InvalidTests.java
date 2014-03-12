@@ -41,6 +41,11 @@ public class InvalidTests extends TestHarness {
      @Test public void StringAssign_Invalid_1() { runInterpreterTest("StringAssign_Invalid_1"); }
      @Test public void StringAssign_Invalid_2() { runInterpreterTest("StringAssign_Invalid_2"); }
      @Test public void StringAssign_Invalid_3() { runInterpreterTest("StringAssign_Invalid_3"); }
+     @Test public void StringAssign_Invalid_4() { runInterpreterTest("StringAssign_Invalid_4"); }
+
+     @Test public void Switch_Invalid_1() { runInterpreterTest("Switch_Invalid_1"); }
+     @Test public void Switch_Invalid_2() { runInterpreterTest("Switch_Invalid_2"); }
+     @Test public void Switch_Invalid_3() { runInterpreterTest("Switch_Invalid_3"); }
 
 	 @Test public void Typing_Invalid_1() { runInterpreterTest("Typing_Invalid_1"); }
 	 @Test public void Typing_Invalid_2() { runInterpreterTest("Typing_Invalid_2"); }
@@ -72,4 +77,5 @@ public class InvalidTests extends TestHarness {
 	 @Test public void Typing_Invalid_28() { runInterpreterTest("Typing_Invalid_28"); }
 	 @Test public void Typing_Invalid_29() { runInterpreterTest("Typing_Invalid_29"); }
 	 @Test public void Typing_Invalid_30() { runInterpreterTest("Typing_Invalid_30"); }
+     @Test public void Typing_Invalid_31() { runInterpreterTest("Typing_Invalid_31"); }
 }

@@ -50,8 +50,7 @@ public class InterpreterValidTests extends TestHarness {
  @Test public void Function_Valid_2() { runInterpreterTest("Function_Valid_2"); }
  @Test public void Function_Valid_4() { runInterpreterTest("Function_Valid_4"); }
 
- @Test public void IfElse_Valid_1() { runInterpreterTest("IfElse_Valid_1"); }
- @Test public void IfElse_Valid_2() { runInterpreterTest("IfElse_Valid_2"); }
+ @Test public void IfElse_Valid_1() { runInterpreterTest("IfElse_Valid_1"); } @Test public void IfElse_Valid_2() { runInterpreterTest("IfElse_Valid_2"); }
  @Test public void IfElse_Valid_3() { runInterpreterTest("IfElse_Valid_3"); }
  @Test public void IfElse_Valid_4() { runInterpreterTest("IfElse_Valid_4"); }
 
@@ -139,7 +138,6 @@ public class InterpreterValidTests extends TestHarness {
 
  @Test public void StringAssign_Valid_1() { runInterpreterTest("StringAssign_Valid_1"); }
  @Test public void StringAssign_Valid_2() { runInterpreterTest("StringAssign_Valid_2"); }
- @Test public void StringAssign_Valid_3() { runInterpreterTest("StringAssign_Valid_3"); }
  @Test public void StringAssign_Valid_4() { runInterpreterTest("StringAssign_Valid_4"); }
 
  @Test public void Switch_Valid_1() { runInterpreterTest("Switch_Valid_1"); }
