@@ -11,6 +11,7 @@ import java.util.Map;
 import whilelang.lang.Expr;
 import whilelang.lang.Stmt;
 import whilelang.lang.Type;
+import whilelang.lang.Types;
 import whilelang.lang.WhileFile;
 
 /**
@@ -181,6 +182,8 @@ public class TypeChecker {
             type = check((Expr.IndexOf) expr, environment);
         } else if (expr instanceof Expr.Invoke) {
             type = check((Expr.Invoke) expr, environment);
+        } else if (expr instanceof Expr.Is) {
+            type = check((Expr.Is) expr, environment);
         } else if (expr instanceof Expr.ListConstructor) {
             type = check((Expr.ListConstructor) expr, environment);
         } else if (expr instanceof Expr.RecordAccess) {
@@ -201,6 +204,12 @@ public class TypeChecker {
         expr.attributes().add(new Attribute.Type(type));
 
         return type;
+    }
+
+    public Type check(Expr.Is expr, Map<String, Type> environment) {
+        check(expr.getLhs(), environment);
+
+        return new Type.Bool();
     }
 
     public Type check(Expr.Binary expr, Map<String, Type> environment) {
@@ -394,54 +403,10 @@ public class TypeChecker {
      * @param element Used for determining where to report syntax errors.
      */
     public void checkCast(Type t1, Type t2, SyntacticElement element) {
-        if (t1 instanceof Type.Null && t2 instanceof Type.Null) {
-            // OK
-        } else if (t1 instanceof Type.Bool && t2 instanceof Type.Bool) {
-            // OK
-        } else if (t1 instanceof Type.Char && t2 instanceof Type.Char) {
-            // OK
-        } else if (t1 instanceof Type.Int && t2 instanceof Type.Int) {
-            // OK
-        } else if (t1 instanceof Type.Real && (t2 instanceof Type.Real || t2 instanceof Type.Int)) {
-            // OK
-        } else if (t1 instanceof Type.Strung && t2 instanceof Type.Strung) {
-            // OK
-        } else if (t1 instanceof Type.List && t2 instanceof Type.List) {
-            Type.List l1 = (Type.List) t1;
-            Type.List l2 = (Type.List) t2;
-            // The following is safe because While has value semantics. In a
-            // conventional language, like Java, this is not safe because of
-            // references.
-            checkCast(l1.getElement(), l2.getElement(), element);
-        } else if (t1 instanceof Type.Record && t2 instanceof Type.Record) {
-            Type.Record l1 = (Type.Record) t1;
-            Type.Record l2 = (Type.Record) t2;
-            Map<String, Type> l1Fields = l1.getFields();
-            Map<String, Type> l2Fields = l2.getFields();
-            if (l1Fields.keySet().equals(l2Fields.keySet())) {
-                for (Map.Entry<String, Type> p : l1Fields.entrySet()) {
-                    checkCast(p.getValue(), l2Fields.get(p.getKey()), element);
-                }
-            } else {
-                syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
-            }
-        } else if (t1 instanceof Type.Named) {
-            Type.Named tn = (Type.Named) t1;
-            if (types.containsKey(tn.getName())) {
-                Type body = types.get(tn.getName()).type;
-                checkCast(body, t2, element);
-            } else {
-                syntaxError("unknown type encountered: " + t1, file.filename, element);
-            }
-        } else if (t2 instanceof Type.Named) {
-            Type.Named tn = (Type.Named) t2;
-            if (types.containsKey(tn.getName())) {
-                Type body = types.get(tn.getName()).type;
-                checkCast(t1, body, element);
-            } else {
-                syntaxError("unknown type encountered: " + t2, file.filename, element);
-            }
-        } else {
+        // A subtype should be checked both ways, you can technically cast to a supertype
+        // E.g., casting an int to a real is casting to a supertype (int subtypes real)
+        // but casting a int|string to a string is casting to a subtype (string subtypes int|string)
+        if (!isSubtype(t1, t2, element) && !isSubtype(t2, t1, element)) {
             syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
         }
     }
@@ -453,7 +418,6 @@ public class TypeChecker {
      * @param element Used for determining where to report syntax errors.
      */
     public Type checkInstanceOf(Type type, SyntacticElement element, Class<?>... instances) {
-
         if (type instanceof Type.Named) {
             Type.Named tn = (Type.Named) type;
             if (types.containsKey(tn.getName())) {
@@ -539,75 +503,6 @@ public class TypeChecker {
      * @param element Used for determining where to report syntax errors.
      */
     public boolean isSubtype(Type t1, Type t2, SyntacticElement element) {
-        if (t2 instanceof Type.Void) {
-            // OK
-        } else if (t1 instanceof Type.Null && t2 instanceof Type.Null) {
-            // OK
-        } else if (t1 instanceof Type.Bool && t2 instanceof Type.Bool) {
-            // OK
-        } else if (t1 instanceof Type.Char && t2 instanceof Type.Char) {
-            // OK
-        } else if (t1 instanceof Type.Int && t2 instanceof Type.Int) {
-            // OK
-        } else if (t1 instanceof Type.Real && t2 instanceof Type.Real) {
-            // OK
-        } else if (t1 instanceof Type.Strung && t2 instanceof Type.Strung) {
-            // OK
-        } else if (t1 instanceof Type.List && t2 instanceof Type.List) {
-            Type.List l1 = (Type.List) t1;
-            Type.List l2 = (Type.List) t2;
-            // The following is safe because While has value semantics. In a
-            // conventional language, like Java, this is not safe because of
-            // references.
-            return isSubtype(l1.getElement(), l2.getElement(), element);
-        } else if (t1 instanceof Type.Record && t2 instanceof Type.Record) {
-            Type.Record l1 = (Type.Record) t1;
-            Type.Record l2 = (Type.Record) t2;
-            Map<String, Type> l1Fields = l1.getFields();
-            Map<String, Type> l2Fields = l2.getFields();
-            if (l1Fields.keySet().equals(l2Fields.keySet())) {
-                for (Map.Entry<String, Type> p : l1Fields.entrySet()) {
-                    if (!isSubtype(p.getValue(), l2Fields.get(p.getKey()), element)) {
-                        return false;
-                    }
-                }
-            } else {
-                return false;
-            }
-        } else if (t1 instanceof Type.Named) {
-            Type.Named tn = (Type.Named) t1;
-            if (types.containsKey(tn.getName())) {
-                Type body = types.get(tn.getName()).type;
-                return isSubtype(body, t2, element);
-            } else {
-                syntaxError("unknown type encountered: " + t1, file.filename, element);
-            }
-        } else if (t2 instanceof Type.Named) {
-            Type.Named tn = (Type.Named) t2;
-            if (types.containsKey(tn.getName())) {
-                Type body = types.get(tn.getName()).type;
-                return isSubtype(t1, body, element);
-            } else {
-                syntaxError("unknown type encountered: " + t2, file.filename, element);
-            }
-        } else if (t1 instanceof Type.Union) {
-            Type.Union u1 = (Type.Union) t1;
-            for (Type b1 : u1.getBounds()) {
-                if (isSubtype(b1, t2, element)) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (t2 instanceof Type.Union) {
-            Type.Union u2 = (Type.Union) t2;
-            for (Type b2 : u2.getBounds()) {
-                if (!isSubtype(t1, b2, element)) {
-                    return false;
-                }
-            }
-        } else {
-            return false;
-        }
-        return true;
+        return Types.isSubtype(t2, t1, file);
     }
 }

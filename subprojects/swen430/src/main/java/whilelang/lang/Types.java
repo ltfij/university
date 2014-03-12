@@ -1,6 +1,10 @@
 package whilelang.lang;
 
+import static whilelang.util.SyntaxError.syntaxError;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,13 +27,13 @@ public final class Types {
             return new Type.Char();
         } else if (obj instanceof Integer) {
             return new Type.Int();
-        } else if (obj instanceof java.util.List) {
-            java.util.List<?> list = (java.util.List<?>) obj;
+        } else if (obj instanceof List) {
+            List<?> list = (List<?>) obj;
 
             // Empty lists can be used for any type of lists, there is no inner type
+            // Type.Void here is used to indicate any type
             if (list.isEmpty()) {
-                // TODO: Fixme, need an "any" or "object" type that we can return
-                throw new InternalError("unable to determine list objects inner type");
+                return new Type.List(new Type.Void());
             }
 
             return new Type.List(getType(list.get(0)));
@@ -54,110 +58,126 @@ public final class Types {
         }
     }
 
-    public static boolean isInstance(Object obj, Type type) {
-        return isSubtype(getType(obj), type);
+    public static boolean isInstance(Object obj, Type type, WhileFile file) {
+        return isSubtype(getType(obj), type, file);
     }
 
-    public static boolean isSubtype(Type lhs, Type rhs) {
-        if (lhs instanceof Type.Bool) {
-            if (lhs.getClass() == rhs.getClass()) {
-                return true;
+    public static boolean isSubtype(Type lhs, Type rhs, WhileFile file) {
+        if (lhs instanceof Type.Named) {
+            WhileFile.TypeDecl type = file.type(((Type.Named) lhs).getName());
+            if (type == null) {
+                syntaxError("type name not declared '" + ((Type.Named) lhs).getName() + "'",
+                        file.filename, lhs);
             }
 
-            return rhs instanceof Type.Union && isSubtype(lhs, (Type.Union) rhs);
-        } else if (lhs instanceof Type.Char) {
-            if (lhs.getClass() == rhs.getClass()) {
-                return true;
+            return isSubtype(type.type, rhs, file);
+        } else if (rhs instanceof Type.Named) {
+            WhileFile.TypeDecl type = file.type(((Type.Named) rhs).getName());
+            if (type == null) {
+                syntaxError("type name not declared '" + ((Type.Named) rhs).getName() + "'",
+                        file.filename, rhs);
             }
 
-            return rhs instanceof Type.Union && isSubtype(lhs, (Type.Union) rhs);
-        } else if (lhs instanceof Type.Void) {
-            return lhs.getClass() == rhs.getClass();
+            return isSubtype(lhs, type.type, file);
         } else if (lhs instanceof Type.Union) {
             for (Type type : ((Type.Union) lhs).getBounds()) {
-                if (!isSubtype(type, rhs)) {
+                if (!isSubtype(type, rhs, file)) {
                     return false;
                 }
             }
 
             return true;
-        } else if (lhs instanceof Type.Strung) {
-            if (lhs.getClass() == rhs.getClass()) {
-                return true;
+        } else if (rhs instanceof Type.Union) {
+            for (Type type : ((Type.Union) rhs).getBounds()) {
+                if (isSubtype(lhs, type, file)) {
+                    return true;
+                }
             }
 
-            return rhs instanceof Type.Union && isSubtype(lhs, (Type.Union) rhs);
+            return false;
+        } else if (lhs instanceof Type.Void) {
+            return true;
         } else if (lhs instanceof Type.Int) {
-            if (lhs.getClass() == rhs.getClass()) {
-                return true;
-            }
-
-            if (rhs instanceof Type.Real) {
-                return true;
-            }
-
-            return rhs instanceof Type.Union && isSubtype(lhs, (Type.Union) rhs);
+            return rhs instanceof Type.Int || rhs instanceof Type.Real;
         } else if (lhs instanceof Type.List) {
-            // Going to go with the subtyping semantics of Javas Generics, i.e. a list is only
-            // subtypes a list of the same inner type
-            if (lhs.getClass() == rhs.getClass()) {
-                return ((Type.List) lhs).getElement().getClass() == ((Type.List) rhs).getElement()
-                        .getClass();
+            // Subtyping checks that the elements are subtypes
+            // This is allowed because While has pass-by-value semantics
+            // In Java it would not work
+            if (rhs instanceof Type.List) {
+                return isSubtype(((Type.List) lhs).getElement(), ((Type.List) rhs).getElement(),
+                        file);
             }
 
-            return rhs instanceof Type.Union && isSubtype(lhs, (Type.Union) rhs);
-        } else if (lhs instanceof Type.Null) {
-            if (lhs.getClass() == rhs.getClass()) {
-                return true;
-            }
-
-            return rhs instanceof Type.Union && isSubtype(lhs, (Type.Union) rhs);
-        } else if (lhs instanceof Type.Real) {
-            if (lhs.getClass() == rhs.getClass()) {
-                return true;
-            }
-
-            return rhs instanceof Type.Union && isSubtype(lhs, (Type.Union) rhs);
+            return false;
         } else if (lhs instanceof Type.Record) {
             // Support depth subtyping but not width subtyping
             // I.e. {int a, B b} subtypes {real a, B b} but not {int a, B b, C c}
 
-            if (rhs instanceof Type.Union) {
-                return isSubtype(lhs, (Type.Union) rhs);
+            if (rhs instanceof Type.Record) {
+                return isSubtype((Type.Record) lhs, (Type.Record) rhs, file);
             }
 
-            if (!(rhs instanceof Type.Record)) {
-                return false;
-            }
-
-            Map<String, Type> lhsFields = ((Type.Record) lhs).getFields();
-            Map<String, Type> rhsFields = ((Type.Record) rhs).getFields();
-
-            // Has to at least have all of the fields names
-            if (!lhsFields.keySet().equals(rhsFields.keySet())) {
-                return false;
-            }
-
-            for (Map.Entry<String, Type> field : lhsFields.entrySet()) {
-                if (!isSubtype(field.getValue(), rhsFields.get(field.getKey()))) {
-                    return false;
-                }
-            }
-
-            return true;
+            return false;
         } else {
-            // Ignore Type.Named as it should be resolved before here
-            throw new InternalError("lhs instanceof not fully implemented: " + lhs.getClass());
+            // Type.Null | Type.Real | Type.Bool | Type.Char | Type.Void | Type.Strung
+            return lhs.getClass() == rhs.getClass();
         }
     }
 
-    private static boolean isSubtype(Type lhs, Type.Union union) {
-        for (Type type : union.getBounds()) {
-            if (isSubtype(lhs, type)) {
-                return true;
+    public static Object cast(Object obj, Type type, WhileFile file) {
+        if (type instanceof Type.Named) {
+            return cast(obj, file.type(((Type.Named) type).getName()).type, file);
+        }  else if (obj instanceof Integer) {
+            if (type instanceof Type.Real) {
+                return ((Integer)obj).doubleValue();
+            }
+
+            return obj;
+        } else if (obj instanceof List) {
+            List<?> list = (List<?>) obj;
+            List<Object> nlist = new ArrayList<Object>();
+
+            for (Object item : list) {
+                nlist.add(cast(item, ((Type.List) type).getElement(), file));
+            }
+
+            return nlist;
+        } else if (obj instanceof Map) {
+            Map<String, Object> map = (Map<String, Object>) obj;
+            Map<String, Type> fields = ((Type.Record)type).getFields();
+
+            Map<String, Object> nmap = new HashMap<String, Object>();
+
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                nmap.put(entry.getKey(), cast(entry.getValue(), fields.get(entry.getKey()),file));
+            }
+
+            return nmap;
+        }
+
+        // No other cast available, assume the type checker validated this cast
+        return obj;
+    }
+
+
+    private static boolean isSubtype(Type.Record lhs, Type.Record rhs, WhileFile file) {
+        // Support depth subtyping but not width subtyping
+        // I.e. {int a, B b} subtypes {real a, B b} but not {int a, B b, C c}
+
+        Map<String, Type> lhsFields = lhs.getFields();
+        Map<String, Type> rhsFields = rhs.getFields();
+
+        // Has to at least have all of the fields names
+        if (!lhsFields.keySet().equals(rhsFields.keySet())) {
+            return false;
+        }
+
+        for (Map.Entry<String, Type> field : lhsFields.entrySet()) {
+            if (!isSubtype(field.getValue(), rhsFields.get(field.getKey()), file)) {
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 }

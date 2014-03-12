@@ -349,7 +349,7 @@ public class Interpreter {
     private Object execute(Expr.Is expr, HashMap<String, Object> frame) {
         Object lhs = execute(expr.getLhs(), frame);
 
-        return Types.isInstance(lhs, expr.getRhs());
+        return Types.isInstance(lhs, expr.getRhs(), file);
     }
 
     private Object execute(Expr.Binary expr, HashMap<String, Object> frame) {
@@ -433,7 +433,7 @@ public class Interpreter {
                 } else if (rhs instanceof String) {
                     return toString(lhs) + ((String) rhs);
                 } else if (lhs instanceof ArrayList && rhs instanceof ArrayList) {
-                    ArrayList l = (ArrayList) lhs;
+                    ArrayList l = new ArrayList((ArrayList) lhs);
                     l.addAll((ArrayList) rhs);
                     return l;
                 }
@@ -446,9 +446,8 @@ public class Interpreter {
 
     private Object execute(Expr.Cast expr, HashMap<String, Object> frame) {
         Object rhs = execute(expr.getSource(), frame);
-        // TODO
 
-        return rhs;
+        return Types.cast(rhs, expr.getType(), file);
     }
 
     private Object execute(Expr.Constant expr, HashMap<String, Object> frame) {

@@ -656,7 +656,6 @@ public class Parser {
         int start = index;
         Expr lhs = parseIndexTerm();
 
-        // TODO: Fixme, this reads right to left rather than left to right
         if (index < tokens.size() && tokens.get(index) instanceof Star) {
             match("*");
             Expr rhs = parseMulDivExpression();
