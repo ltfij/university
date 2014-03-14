@@ -835,8 +835,9 @@ public class Parser {
         match(")");
         match("{");
 
-        Map<Expr, List<Stmt>> cases = new HashMap<Expr, List<Stmt>>();
-        List<Stmt> defaultBody = null;
+        List<Stmt> stmts = new ArrayList<Stmt>();
+        Map<Expr, Integer> cases = new HashMap<Expr, Integer>();
+        int defaultCase = -1;
 
         // For easy checks of what the next token may be
         List<String> switchKeywords = Arrays.asList("case", "default", "}");
@@ -848,34 +849,27 @@ public class Parser {
                 Expr caseCondition = parseConstantTerm();
                 match(":");
 
-                List<Stmt> body = new ArrayList<Stmt>();
+                cases.put(caseCondition, stmts.size());
+
                 // While there are more tokens and the next token isn't a 'case' or 'default'
                 while (index < tokens.size() && !(switchKeywords.contains(tokens.get(
                         index).text))) {
-                    body.add(parseStatement(true));
+                    stmts.add(parseStatement(true));
                 }
-
-                // Check that this constant isn't already contained
-                // TODO: This doesn't work, Expr does not overwrite equals(Object)
-                //if (cases.containsKey(caseValue)) {
-                //    syntaxError("switch statement already contains case value", caseValue);
-                //}
-
-                cases.put(caseCondition, body);
             } else {
                 // Check that we haven't already got a default statement
-                if (defaultBody != null) {
-                    syntaxError("switch statement contains two default labels", tokens.get(index));
+                if (defaultCase >= 0) {
+                    syntaxError("switch statement already contains a default label", tokens.get(index));
                 }
 
                 matchKeyword("default");
                 match(":");
 
-                defaultBody = new ArrayList<Stmt>();
+                defaultCase = stmts.size();
 
                 // While there are more tokens and the next token isn't a 'case' or 'default'
                 while (index < tokens.size() && !switchKeywords.contains(tokens.get(index).text)) {
-                    defaultBody.add(parseStatement(true));
+                    stmts.add(parseStatement(true));
                 }
             }
         }
@@ -883,12 +877,12 @@ public class Parser {
         match("}");
 
         // Check that there is at least one case or default statement
-        if (cases.isEmpty() && defaultBody == null) {
+        if (cases.isEmpty() && defaultCase < 0) {
             Token token = index < tokens.size() ? tokens.get(index) : null;
             syntaxError("switch statement does not contain any cases or default", token);
         }
 
-        return new Stmt.Switch(condition, cases, defaultBody, sourceAttr(start, index - 1));
+        return new Stmt.Switch(condition, stmts, cases, defaultCase, sourceAttr(start, index - 1));
     }
 
     private Expr parseTerm() {

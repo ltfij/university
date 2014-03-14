@@ -67,8 +67,9 @@ public class Interpreter {
             // If a break statement comes all the way up here, then it was added in an illegal
             // location
             Object obj = execute(fd);
-            if (obj == BREAK)
+            if (obj == BREAK) {
                 syntaxError("break statement in illegal location", file.filename, new Stmt.Break());
+            }
         } else {
             System.out.println("Cannot find a main() function");
         }
@@ -180,17 +181,31 @@ public class Interpreter {
     private Object execute(Stmt.Switch stmt, HashMap<String, Object> frame) {
         Object condition = execute(stmt.getCondition(), frame);
 
+        List<Stmt> stmts = stmt.getStmts();
+
         // Try find a matching case statement
-        for (Map.Entry<Expr, List<Stmt>> entry : stmt.getCases().entrySet()) {
+        for (Map.Entry<Expr, Integer> entry : stmt.getCases().entrySet()) {
             if (condition.equals(execute(entry.getKey(), frame))) {
-                Object ret = execute(entry.getValue(), frame);
+                int index = entry.getValue();
+
+                // If an end case has no statements after it, then there is nothing to be done
+                if (index == stmts.size()) {
+                    return null;
+                }
+
+                Object ret = execute(stmts.subList(index, stmts.size()), frame);
                 return ret == BREAK ? null : ret;
             }
         }
 
         // None were found, execute the default if it exists
-        if (stmt.getDefault() != null) {
-            Object ret = execute(stmt.getDefault(), frame);
+        if (stmt.getDefaultCase() >= 0) {
+            // If an end case has no statements after it, then there is nothing to be done
+            if (stmt.getDefaultCase() == stmts.size()) {
+                return null;
+            }
+
+            Object ret = execute(stmts.subList(stmt.getDefaultCase(), stmts.size()), frame);
             return ret == BREAK ? null : ret;
         }
 
@@ -231,6 +246,9 @@ public class Interpreter {
 
                 String str = (String) src;
 
+                // This works because of While's value semantics
+                // There is no global scope, only local so we know that frame variables aren't
+                // copied elsewhere
                 frame.put(((Expr.Variable) io.getSource()).getName(), str.substring(0, index) + rhs
                         + str.substring(index + 1));
             } else {

@@ -430,6 +430,12 @@ public interface Stmt extends SyntacticElement {
      * any number of case statements. A case statement is a mapping of an expression to a list of
      * statements for that case. A body statement may ahppear anywhere inside a switch statement,
      * but may only appear once.
+     * <p/>
+     * The switch statement is modelled using a single list of all the statements contained within.
+     * Case statements point to an index in the list for where to start. This allows for proper
+     * modelling of "fall-through" cases where code from more than one case may be executed. The
+     * default case acts in this way as well, but may optionally be {@code -1}, indicating it does
+     * not exist.
      *
      * @author Henry J. Wylde
      */
@@ -437,34 +443,28 @@ public interface Stmt extends SyntacticElement {
 
         private final Expr condition;
 
-        private final Map<Expr, List<Stmt>> cases;
-        private final List<Stmt> defaultBody;
+        // A list of all statements
+        private final List<Stmt> stmts;
+        private final Map<Expr, Integer> cases;
+        private final int defaultCase;
 
-        public Switch(Expr condition, Map<Expr, List<Stmt>> cases, Attribute... attributes) {
-            this(condition, cases, null, attributes);
-        }
-
-        public Switch(Expr condition, Map<Expr, List<Stmt>> cases,
-                Collection<Attribute> attributes) {
-            this(condition, cases, null, attributes);
-        }
-
-        public Switch(Expr condition, Map<Expr, List<Stmt>> cases, List<Stmt> defaultBody,
+        public Switch(Expr condition, List<Stmt> stmts, Map<Expr, Integer> cases, int defaultCase,
                 Attribute... attributes) {
-            this(condition, cases, defaultBody, Arrays.asList(attributes));
+            this(condition, stmts, cases, defaultCase, Arrays.asList(attributes));
         }
 
-        public Switch(Expr condition, Map<Expr, List<Stmt>> cases, List<Stmt> defaultBody,
+        public Switch(Expr condition, List<Stmt> stmts, Map<Expr, Integer> cases, int defaultCase,
                 Collection<Attribute> attributes) {
             super(attributes);
 
             this.condition = condition;
 
-            this.cases = new HashMap<Expr, List<Stmt>>(cases);
-            this.defaultBody = defaultBody == null ? null : new ArrayList<Stmt>(defaultBody);
+            this.stmts = new ArrayList<Stmt>(stmts);
+            this.cases = new HashMap<Expr, Integer>(cases);
+            this.defaultCase = defaultCase;
         }
 
-        public Map<Expr, List<Stmt>> getCases() {
+        public Map<Expr, Integer> getCases() {
             return cases;
         }
 
@@ -472,8 +472,12 @@ public interface Stmt extends SyntacticElement {
             return condition;
         }
 
-        public List<Stmt> getDefault() {
-            return defaultBody;
+        public int getDefaultCase() {
+            return defaultCase;
+        }
+
+        public List<Stmt> getStmts() {
+            return stmts;
         }
     }
 

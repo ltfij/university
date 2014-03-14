@@ -110,20 +110,14 @@ public class TypeChecker {
         // Clone the environment so new variables aren't scoped outside of the switch statement
         Map<String, Type> environmentClone = new HashMap<String, Type>(environment);
 
-        for (Map.Entry<Expr, List<Stmt>> entry : stmt.getCases().entrySet()) {
+        for (Map.Entry<Expr, Integer> entry : stmt.getCases().entrySet()) {
             Type caseType = check(entry.getKey(), environmentClone);
             // Check that each case value is a subtype of the condition type
             checkSubtype(type, caseType, entry.getKey());
-
-            for (Stmt s : entry.getValue()) {
-                check(s, environmentClone);
-            }
         }
 
-        if (stmt.getDefault() != null) {
-            for (Stmt s : stmt.getDefault()) {
-                check(s, environmentClone);
-            }
+        for (Stmt s : stmt.getStmts()) {
+            check(s, environmentClone);
         }
     }
 

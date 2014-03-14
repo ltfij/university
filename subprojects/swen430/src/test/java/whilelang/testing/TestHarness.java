@@ -32,7 +32,7 @@ public class TestHarness {
         this.outputPath = outputPath.replace('/', File.separatorChar);
         this.outputExtension = outputExtension;
 
-        // TEMP: Just for while the tests are beign run in gradle...
+        // TEMP: Just for while the tests are being run in Gradle...
         this.srcPath = "src/test/resources/".replace('/', File.separatorChar) + srcPath;
         this.outputPath = "src/test/resources/".replace('/', File.separatorChar) + outputPath;
     }
@@ -59,7 +59,7 @@ public class TestHarness {
                     "." + File.pathSeparator + "../../src/" + File.pathSeparator + JASM_JAR
                             + File.pathSeparator + JX86_JAR;
             classpath = classpath.replace('/', File.separatorChar);
-            // TEMP: For running it in gradle
+            // TEMP: For running it in Gradle
             classpath = File.pathSeparator + "../../../../../build/classes/main".replace('/', File.separatorChar);
             //classpath = classpath + File.pathSeparator + "../../../../../build/classes/main".replace('/', File.separatorChar);
 
