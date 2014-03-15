@@ -13,55 +13,30 @@ public class InvalidTests extends TestHarness {
     @Test public void Break_Invalid_1() { runInterpreterTest("Break_Invalid_1"); }
     @Test public void Break_Invalid_2() { runInterpreterTest("Break_Invalid_2"); }
 
-    @Ignore("not implemented")
 	@Test public void DefiniteAssign_Invalid_1() { runInterpreterTest("DefiniteAssign_Invalid_1"); }
-    @Ignore("not implemented")
 	@Test public void DefiniteAssign_Invalid_2() { runInterpreterTest("DefiniteAssign_Invalid_2"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_3() { runInterpreterTest("DefiniteAssign_Invalid_3"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_4() { runInterpreterTest("DefiniteAssign_Invalid_4"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_5() { runInterpreterTest("DefiniteAssign_Invalid_5"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_6() { runInterpreterTest("DefiniteAssign_Invalid_6"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_7() { runInterpreterTest("DefiniteAssign_Invalid_7"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_8() { runInterpreterTest("DefiniteAssign_Invalid_8"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_9() { runInterpreterTest("DefiniteAssign_Invalid_9"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_10() { runInterpreterTest("DefiniteAssign_Invalid_10"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_11() { runInterpreterTest("DefiniteAssign_Invalid_11"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_12() { runInterpreterTest("DefiniteAssign_Invalid_12"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_13() { runInterpreterTest("DefiniteAssign_Invalid_13"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_14() { runInterpreterTest("DefiniteAssign_Invalid_14"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_15() { runInterpreterTest("DefiniteAssign_Invalid_15"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_16() { runInterpreterTest("DefiniteAssign_Invalid_16"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_17() { runInterpreterTest("DefiniteAssign_Invalid_17"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_18() { runInterpreterTest("DefiniteAssign_Invalid_18"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_19() { runInterpreterTest("DefiniteAssign_Invalid_19"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_20() { runInterpreterTest("DefiniteAssign_Invalid_20"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_21() { runInterpreterTest("DefiniteAssign_Invalid_21"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_22() { runInterpreterTest("DefiniteAssign_Invalid_22"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_23() { runInterpreterTest("DefiniteAssign_Invalid_23"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_24() { runInterpreterTest("DefiniteAssign_Invalid_24"); }
-    @Ignore("not implemented")
     @Test public void DefiniteAssign_Invalid_25() { runInterpreterTest("DefiniteAssign_Invalid_25"); }
 
     @Test public void StringAssign_Invalid_1() { runInterpreterTest("StringAssign_Invalid_1"); }

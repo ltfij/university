@@ -127,7 +127,12 @@ public class Interpreter {
         }
 
         // Third, execute the function body!
-        return execute(function.statements, frame);
+        Object ret = execute(function.statements, frame);
+        if (ret == BREAK) {
+            syntaxError("break statement outside of (for | switch | while) statement", file.filename, new Stmt.Break());
+        }
+
+        return ret;
     }
 
     private Object execute(List<Stmt> block, HashMap<String, Object> frame) {
@@ -245,6 +250,11 @@ public class Interpreter {
                 Object rhs = execute(stmt.getRhs(), frame);
 
                 String str = (String) src;
+
+                if (index < 0 || index >= str.length()) {
+                    // TODO: Change this error type
+                    internalFailure("index out of range " + index, file.filename, io.getIndex());
+                }
 
                 // This works because of While's value semantics
                 // There is no global scope, only local so we know that frame variables aren't
@@ -486,13 +496,25 @@ public class Interpreter {
 
     private Object execute(Expr.IndexOf expr, HashMap<String, Object> frame) {
         Object _src = execute(expr.getSource(), frame);
-        int idx = (Integer) execute(expr.getIndex(), frame);
+        int index = (Integer) execute(expr.getIndex(), frame);
         if (_src instanceof String) {
             String src = (String) _src;
-            return src.charAt(idx);
+
+            if (index < 0 || index >= src.length()) {
+                // TODO: Change this error type
+                internalFailure("index out of range " + index, file.filename, expr.getIndex());
+            }
+
+            return src.charAt(index);
         } else {
             ArrayList<Object> src = (ArrayList<Object>) _src;
-            return src.get(idx);
+
+            if (index < 0 || index >= src.size()) {
+                // TODO: Change this error type
+                internalFailure("index out of range " + index, file.filename, expr.getIndex());
+            }
+
+            return src.get(index);
         }
     }
 

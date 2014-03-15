@@ -80,6 +80,8 @@ public class DefiniteAssignment {
     public void check(Stmt stmt, Set<String> environment) {
         if (stmt instanceof Stmt.Assign) {
             check((Stmt.Assign) stmt, environment);
+        } else if (stmt instanceof Stmt.Break) {
+            check((Stmt.Break) stmt, environment);
         } else if (stmt instanceof Stmt.Print) {
             check((Stmt.Print) stmt, environment);
         } else if (stmt instanceof Stmt.Return) {
@@ -92,6 +94,8 @@ public class DefiniteAssignment {
             check((Stmt.IfElse) stmt, environment);
         } else if (stmt instanceof Stmt.For) {
             check((Stmt.For) stmt, environment);
+        } else if (stmt instanceof Stmt.Switch) {
+            check((Stmt.Switch) stmt, environment);
         } else if (stmt instanceof Stmt.While) {
             check((Stmt.While) stmt, environment);
         } else {
@@ -108,6 +112,10 @@ public class DefiniteAssignment {
         }
 
         check(stmt.getRhs(), environment);
+    }
+
+    public void check(Stmt.Break stmt, Set<String> environment) {
+        // Don't need to do anything
     }
 
     public void check(Stmt.Print stmt, Set<String> environment) {
@@ -149,6 +157,18 @@ public class DefiniteAssignment {
         check(stmt.getBody(), new HashSet<String>(environment));
     }
 
+    public void check(Stmt.Switch stmt, Set<String> environment) {
+        check(stmt.getCondition(), environment);
+
+        for (Expr expr : stmt.getCases().keySet()) {
+            check(expr, environment);
+        }
+
+        for (Stmt s : stmt.getStmts()) {
+            check(s, environment);
+        }
+    }
+
     public void check(Stmt.While stmt, Set<String> environment) {
         check(stmt.getCondition(), environment);
         check(stmt.getBody(), new HashSet<String>(environment));
@@ -171,6 +191,8 @@ public class DefiniteAssignment {
             check((Expr.IndexOf) expr, environment);
         } else if (expr instanceof Expr.Invoke) {
             check((Expr.Invoke) expr, environment);
+        } else if (expr instanceof Expr.Is) {
+            check((Expr.Is) expr, environment);
         } else if (expr instanceof Expr.ListConstructor) {
             check((Expr.ListConstructor) expr, environment);
         } else if (expr instanceof Expr.RecordAccess) {
@@ -187,11 +209,12 @@ public class DefiniteAssignment {
     }
 
     public void check(Expr.Binary expr, Set<String> environment) {
-        // TODO: implement me!
+        check(expr.getLhs(), environment);
+        check(expr.getRhs(), environment);
     }
 
     public void check(Expr.Cast expr, Set<String> environment) {
-        // TODO: implement me!
+        check(expr.getSource(), environment);
     }
 
     public void check(Expr.Constant expr, Set<String> environment) {
@@ -199,27 +222,38 @@ public class DefiniteAssignment {
     }
 
     public void check(Expr.IndexOf expr, Set<String> environment) {
-        // TODO: implement me!
+        check(expr.getIndex(), environment);
+        check(expr.getSource(), environment);
     }
 
     public void check(Expr.Invoke expr, Set<String> environment) {
-        // TODO: implement me!
+        for (Expr arg : expr.getArguments()) {
+            check(arg, environment);
+        }
+    }
+
+    public void check(Expr.Is expr, Set<String> environment) {
+        check(expr.getLhs(), environment);
     }
 
     public void check(Expr.ListConstructor expr, Set<String> environment) {
-        // TODO: implement me!
+        for (Expr arg : expr.getArguments()) {
+            check(arg, environment);
+        }
     }
 
     public void check(Expr.RecordAccess expr, Set<String> environment) {
-        // TODO: implement me!
+        check(expr.getSource(), environment);
     }
 
     public void check(Expr.RecordConstructor expr, Set<String> environment) {
-        // TODO: implement me!
+        for (Pair<String, Expr> field : expr.getFields()) {
+            check(field.second(), environment);
+        }
     }
 
     public void check(Expr.Unary expr, Set<String> environment) {
-        // TODO: implement me!
+        check(expr.getExpr(), environment);
     }
 
     public void check(Expr.Variable expr, Set<String> environment) {
