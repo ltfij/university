@@ -1,6 +1,4 @@
 dependencies {
-    compile libraries.guava
-
     testCompile libraries.junit
 }
 
