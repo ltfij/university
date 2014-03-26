@@ -1,0 +1,5 @@
+int f(int x) {
+    {int f} rs;
+    rs.f = 1;
+    return rs.f;
+}

@@ -1,0 +1,5 @@
+type rael is real
+
+int f(rael x) {
+    return x;
+}

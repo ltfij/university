@@ -1,0 +1,13 @@
+[real] f([int|real] xs) {
+    if(xs is [real]) {
+        return ([real]) xs;
+    } else {
+        return [];
+    }
+}
+
+void main() {
+    print f([1.0,2.0,3.0]);
+    print f([1.0,2,3.0]);
+    print f([1,2,3]);
+}

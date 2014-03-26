@@ -1,0 +1,3 @@
+real f([int] x) {
+    return |x|;
+}

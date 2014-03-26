@@ -1,0 +1,3 @@
+real f() {
+    return (real) i;
+}

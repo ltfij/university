@@ -1,0 +1,7 @@
+int f(int x) {
+    bool c = y > 0;
+    if(c) {
+        x = x + 1;
+    }
+    return x;
+}

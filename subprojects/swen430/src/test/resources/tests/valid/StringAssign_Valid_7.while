@@ -1,0 +1,5 @@
+int main() {
+    [string] s = ["Hello","World"];
+    s[0][0] = 'h';
+    print s;
+}

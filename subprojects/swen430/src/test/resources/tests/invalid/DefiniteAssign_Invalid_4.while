@@ -1,0 +1,6 @@
+int f(int x) {
+    while(y > 0) {
+        x = x + 1;
+    }
+    return x;
+}
