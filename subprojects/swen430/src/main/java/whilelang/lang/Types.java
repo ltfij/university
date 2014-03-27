@@ -1,7 +1,7 @@
 package whilelang.lang;
 
-import whilelang.util.Attribute;
-import whilelang.util.Pair;
+import static whilelang.util.RuntimeError.castError;
+import static whilelang.util.SyntaxError.internalFailure;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +9,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import whilelang.util.Attribute;
+import whilelang.util.Pair;
+import whilelang.util.RuntimeError;
 
 /**
  * A utility class for providing methods relating to types.
@@ -23,29 +27,41 @@ public final class Types {
     private Types() {}
 
     /**
-     * Attempts to cast this object to the given type. It is assumed that the cast is valid, as if
-     * it is not possible to perform a case the provided {@code obj} is returned as is.
+     * Attempts to cast this object to the given type. If the cast is invalid, an error is thrown.
      *
      * @param obj the object to cast.
      * @param type the type to cast it to.
      * @param file the while file to perform name resolution.
      * @return a casted version of the object or the object itself.
+     * @throws whilelang.util.RuntimeError if the cast is invalid.
      */
-    public static Object cast(Object obj, Type type, WhileFile file) {
-        // Normalise named types. Because a cast type should not contain any union types, we can
-        // assume that this is safe to do
+    public static Object cast(Object obj, Type type, WhileFile file) throws RuntimeError {
+        // Normalise named types.
         type = normalise(type, file);
 
-        // TODO: Does not support casting to a union type
+        // Check if the object is already a subtype, if it is, return it
+        if (isSubtype(obj, type, file)) {
+            return obj;
+        }
+
+        // Check if the type is a union, now we need to cast the obj to any one of the inner types
+        if (type instanceof Type.Union) {
+            // Little hacky, it would be nicer not to have the performance hit by throwing / catching exceptions here
+
+            for (Type inner : ((Type.Union) type).getBounds()) {
+                try {
+                    return cast(obj, inner, file);
+                } catch (RuntimeError e) {
+                    // Couldn't cast it to that inner type, let's try the next
+                }
+            }
+        }
 
         if (obj instanceof Integer) {
             // We can cast an int to a real
             if (type instanceof Type.Real) {
                 return ((Integer) obj).doubleValue();
             }
-
-            // Assume we're just casting to an int then
-            return obj;
         } else if (obj instanceof List) {
             List<?> list = (List<?>) obj;
 
@@ -72,8 +88,8 @@ public final class Types {
             return nmap;
         }
 
-        // No other cast available, assume the type checker validated this cast
-        return obj;
+        // No other cast available, cast must be invalid
+        throw castError(obj, type);
     }
 
     /**
@@ -95,26 +111,18 @@ public final class Types {
             List<?> list = (List<?>) obj;
 
             // Empty lists can be used for any type of lists, there is no inner type
-            // Type.Void here is used to indicate any type
             if (list.isEmpty()) {
-                return new Type.List(new Type.Void());
+                return new Type.List(new Type.Any());
             }
 
-            // Very hacky using the toString method for equality, but one of the easiest options for
-            // now
             Map<String, Type> inners = new HashMap<String, Type>();
-
             for (Object o : list) {
                 Type inner = getType(o);
 
                 inners.put(inner.toString(), inner);
             }
 
-            if (inners.size() == 1) {
-                return new Type.List(inners.values().iterator().next());
-            }
-
-            return new Type.List(new Type.Union(inners.values()));
+            return normalise(new Type.List(new Type.Union(inners.values())), null);
         } else if (obj == null) {
             return new Type.Null();
         } else if (obj instanceof Double) {
@@ -127,11 +135,10 @@ public final class Types {
                 fields.put(entry.getKey(), getType(entry.getValue()));
             }
 
-            return new Type.Record(fields);
+            return normalise(new Type.Record(fields), null);
         } else if (obj instanceof String) {
             return new Type.Strung();
         } else {
-            // Type.Named, Type.Void and Type.Union should never occur
             throw new InternalError("obj instanceof not fully implemented: " + obj.getClass());
         }
     }
@@ -146,61 +153,6 @@ public final class Types {
      */
     public static boolean isEquivalent(Type t1, Type t2, WhileFile file) {
         return isSubtype(t1, t2, file) && isSubtype(t2, t1, file);
-    }
-
-    /**
-     * Determines whether the given type {@code lhs} is an instance of the former type, Another way
-     * of saying this is whether an object of type {@code lhs} can by assigned to a type of {@code
-     * rhs}. An acceptable assignable type is either: <ul> <li>an equivalent type</li> <li>an
-     * equivalent type of one of the union bounds of the former type</li> </ul>
-     * <p/>
-     * This is because the language does not support implicit conversions, so we only take into
-     * account equivalent types and unions.
-     */
-    public static boolean isInstance(Type lhs, Type rhs, WhileFile file) {
-        lhs = normalise(lhs, file);
-        rhs = normalise(rhs, file);
-
-        // Check the lhs instanceof Type.Union case first
-        // In this case, all bounds need to be an instance of the rhs
-        if (lhs instanceof Type.Union) {
-            for (Type bound : ((Type.Union) lhs).getBounds()) {
-                if (!(isInstance(bound, rhs, file))) {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        // Check for equivalence
-        if (isEquivalent(lhs, rhs, file)) {
-            return true;
-        }
-
-        // Check special cases
-        // TODO: Verify is the isEquivalent already takes these into account
-        if (rhs instanceof Type.Union) {
-            for (Type bound : ((Type.Union) rhs).getBounds()) {
-                if (isInstance(lhs, bound, file)) {
-                    return true;
-                }
-            }
-        } else if (rhs instanceof Type.Record) {
-            if (!(lhs instanceof Type.Record)) {
-                return false;
-            }
-
-            return isInstance((Type.Record) lhs, (Type.Record) rhs, file);
-        } else if (rhs instanceof Type.List) {
-            if (!(lhs instanceof Type.List)) {
-                return false;
-            }
-
-            return isInstance(((Type.List) lhs).getElement(), ((Type.List) rhs).getElement(), file);
-        }
-
-        return false;
     }
 
     /**
@@ -237,12 +189,8 @@ public final class Types {
             }
 
             return false;
-        } else if (lhs instanceof Type.Void) {
-            // Treat void as any (to account for empty lists)
+        } else if (lhs instanceof Type.Any) {
             return true;
-        } else if (lhs instanceof Type.Int) {
-            // Int subtypes real and int
-            return rhs instanceof Type.Int || rhs instanceof Type.Real;
         } else if (lhs instanceof Type.List) {
             // Subtyping checks that the elements are subtypes
             // This is allowed because While has pass-by-value semantics
@@ -263,7 +211,7 @@ public final class Types {
 
             return false;
         } else {
-            // Type.Null | Type.Real | Type.Bool | Type.Char | Type.Void | Type.Strung
+            // Type.Null | Type.Real | Type.Bool | Type.Char | Type.Void | Type.Strung | Type.Int
             return lhs.getClass() == rhs.getClass();
         }
     }
@@ -349,24 +297,6 @@ public final class Types {
         return ret;
     }
 
-    private static boolean isInstance(Type.Record lhs, Type.Record rhs, WhileFile file) {
-        Map<String, Type> lhsFields = lhs.getFields();
-        Map<String, Type> rhsFields = rhs.getFields();
-
-        // Has to at least have all of the fields names
-        if (!lhsFields.keySet().equals(rhsFields.keySet())) {
-            return false;
-        }
-
-        for (Map.Entry<String, Type> field : lhsFields.entrySet()) {
-            if (!isInstance(field.getValue(), rhsFields.get(field.getKey()), file)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     /**
      * Checks whether the given record ({@code lhs}) is a subtype of the second record ({@code rhs})
      * . A record is considered to be a subtype if it contains all the fields of the other one and
@@ -409,24 +339,53 @@ public final class Types {
      * @return the normalised union type.
      */
     private static Type normalise(Type.Union type, WhileFile file) {
-        List<Type> ntypes = new ArrayList<Type>();
+        List<Type> normalisedTypes = new ArrayList<Type>();
 
-        // TODO: Not taking into account type equivalency here
+        // Normalise each inner type and if it is a union, add all of the inner types to this one
         for (Type inner : type.getBounds()) {
             Type normalised = normalise(inner, file);
 
             if (normalised instanceof Type.Union) {
-                ntypes.addAll(((Type.Union) normalised).getBounds());
+                normalisedTypes.addAll(((Type.Union) normalised).getBounds());
             } else {
-                ntypes.add(normalised);
+                normalisedTypes.add(normalised);
             }
         }
 
-        if (ntypes.size() == 1) {
-            return ntypes.get(0);
+        // Go through all of the normalised types and remove equivalent ones
+        List<Type> union = new ArrayList<Type>();
+        UNION:
+        while (normalisedTypes.size() > 0) {
+            Type normalised = normalisedTypes.remove(0);
+
+            // If it contains a "any" type, then just return that
+            if (normalised instanceof Type.Any) {
+                return new Type.Any(type.attributes().toArray(new Attribute[0]));
+            } else if (normalised instanceof Type.Void) {
+                throw new InternalError("Type.Void apparent in union type: " + type);
+            }
+
+            for (Type inner : normalisedTypes) {
+                // If this type is equivalent to another, skip it and let the other be added when it gets round to it
+                if (isEquivalent(normalised, inner, file)) {
+                    continue UNION;
+                }
+            }
+
+            union.add(normalised);
         }
 
-        return new Type.Union(ntypes);
+        // Check for only 1 type
+        if (union.size() == 1) {
+            return union.get(0);
+        }
+
+        // Uh oh...
+        if (union.size() == 0) {
+            internalFailure("attempt to normalise union resulted in a 0 elements: ", null, type);
+        }
+
+        return new Type.Union(union, type.attributes().toArray(new Attribute[0]));
     }
 
     /**
@@ -449,17 +408,18 @@ public final class Types {
         // record types
         // The final result will be: {int a, real b}|{null a, real b}
 
+        // Split up the record as per the example above
         List<Set<Pair<String, Type>>> split = new ArrayList<Set<Pair<String, Type>>>();
         for (Map.Entry<String, Type> entry : type.getFields().entrySet()) {
             Set<Pair<String, Type>> pairs = new HashSet<Pair<String, Type>>();
-            Type normalisedType = normalise(entry.getValue(), file);
+            Type normalised = normalise(entry.getValue(), file);
 
-            if (normalisedType instanceof Type.Union) {
+            if (normalised instanceof Type.Union) {
                 for (Type inner : ((Type.Union) entry.getValue()).getBounds()) {
                     pairs.add(new Pair<String, Type>(entry.getKey(), normalise(inner, file)));
                 }
             } else {
-                pairs.add(new Pair<String, Type>(entry.getKey(), normalisedType));
+                pairs.add(new Pair<String, Type>(entry.getKey(), normalised));
             }
 
             split.add(pairs);
@@ -468,13 +428,14 @@ public final class Types {
         // Cartesian product time!
         Set<List<Pair<String, Type>>> product = cartesianProduct(split);
 
-        // Recreate the union or records now, so we'll have {int a, real b}|{null a, real b}
+        // Recreate the union of records now, so we'll have {int a, real b}|{null a, real b}
         List<Type> union = new ArrayList<Type>();
         for (List<Pair<String, Type>> inner : product) {
             Map<String, Type> record = new HashMap<String, Type>();
             for (Pair<String, Type> pair : inner) {
                 record.put(pair.first(), pair.second());
             }
+
             union.add(new Type.Record(record));
         }
 
@@ -482,6 +443,6 @@ public final class Types {
             return union.get(0);
         }
 
-        return new Type.Union(union);
+        return new Type.Union(union, type.attributes().toArray(new Attribute[0]));
     }
 }

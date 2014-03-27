@@ -3,17 +3,17 @@ package whilelang.util;
 import static whilelang.util.SyntaxError.internalFailure;
 import static whilelang.util.SyntaxError.syntaxError;
 
-import whilelang.lang.Expr;
-import whilelang.lang.Stmt;
-import whilelang.lang.Type;
-import whilelang.lang.Types;
-import whilelang.lang.WhileFile;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import whilelang.lang.Expr;
+import whilelang.lang.Stmt;
+import whilelang.lang.Type;
+import whilelang.lang.Types;
+import whilelang.lang.WhileFile;
 
 /**
  * <p> Responsible for ensuring that all types are used appropriately. For example, that we only
@@ -135,7 +135,7 @@ public class TypeChecker {
         Type var = check(stmt.getLhs(), environment);
         Type expr = check(stmt.getRhs(), environment);
 
-        checkInstance(var, expr, stmt.getRhs());
+        checkSubtype(var, expr, stmt.getRhs());
     }
 
     public void check(Stmt.Print stmt, Map<String, Type> environment) {
@@ -143,16 +143,12 @@ public class TypeChecker {
     }
 
     public void check(Stmt.Return stmt, Map<String, Type> environment) {
+        Type ret = new Type.Void();
         if (stmt.getExpr() != null) {
-            Type ret = check(stmt.getExpr(), environment);
-
-            checkInstance(environment.get(METHOD), ret, stmt.getExpr());
-        } else if (!(environment.get(METHOD) instanceof Type.Void)) {
-            // Got to take this as a separate account because we're using Type.Void as a special
-            // marker as the "any" type for lists
-            syntaxError("expected type " + environment.get(METHOD) + ", found " + new Type.Void(),
-                    file.filename, stmt);
+            ret = check(stmt.getExpr(), environment);
         }
+
+        checkSubtype(environment.get(METHOD), ret, stmt.getExpr());
     }
 
     public void check(Stmt.IfElse stmt, Map<String, Type> environment) {
@@ -284,8 +280,7 @@ public class TypeChecker {
     }
 
     public Type check(Expr.Cast expr, Map<String, Type> environment) {
-        Type srcType = check(expr.getSource(), environment);
-        checkCast(expr.getType(), srcType, expr.getSource());
+        check(expr.getSource(), environment);
 
         return expr.getType();
     }
@@ -366,7 +361,7 @@ public class TypeChecker {
         } else if (ntypes.size() == 1) {
             return new Type.List(ntypes.get(0));
         } else {
-            return new Type.List(new Type.Void());
+            return new Type.List(new Type.Any());
         }
     }
 
@@ -419,22 +414,6 @@ public class TypeChecker {
     }
 
     /**
-     * Check that a given type t2 is a castable to another type t1.
-     *
-     * @param t1 Supertype to check
-     * @param t2 Subtype to check
-     * @param element Used for determining where to report syntax errors.
-     */
-    public void checkCast(Type t1, Type t2, SyntacticElement element) {
-        // A subtype should be checked both ways, you can technically cast to a supertype
-        // E.g., casting an int to a real is casting to a supertype (int subtypes real)
-        // but casting a int|string to a string is casting to a subtype (string subtypes int|string)
-        if (!isSubtype(t1, t2) && !isSubtype(t2, t1)) {
-            syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
-        }
-    }
-
-    /**
      * Determine whether two given types are euivalent. Identical types are always equivalent.
      * Furthermore, e.g. "int|null" is equivalent to "null|int".
      *
@@ -443,20 +422,6 @@ public class TypeChecker {
      */
     public void checkEquivalent(Type t1, Type t2, SyntacticElement element) {
         if (!isEquivalent(t1, t2)) {
-            syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
-        }
-    }
-
-    /**
-     * Determines whether the given type {@code t2} is able to be assigned to the former type,
-     * {@code t1}. An acceptable assignable type is either: <ul> <li>an equivalent type</li> <li>an
-     * equivalent type of one of the union bounds of the former type</li> </ul>
-     * <p/>
-     * This is because the language does not support implicit conversions, so we only take into
-     * account equivalent types and unions.
-     */
-    public void checkInstance(Type t1, Type t2, SyntacticElement element) {
-        if (!isInstance(t1, t2)) {
             syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
         }
     }
@@ -555,18 +520,5 @@ public class TypeChecker {
      */
     private boolean isEquivalent(Type t1, Type t2) {
         return Types.isEquivalent(t1, t2, file);
-    }
-
-    /**
-     * Determines whether the given type {@code t2} is an instance of the former type, Another way
-     * of saying this is whether an object of type {@code t2} can by assigned to a type of {@code
-     * t1}. An acceptable assignable type is either: <ul> <li>an equivalent type</li> <li>an
-     * equivalent type of one of the union bounds of the former type</li> </ul>
-     * <p/>
-     * This is because the language does not support implicit conversions, so we only take into
-     * account equivalent types and unions.
-     */
-    private boolean isInstance(Type t1, Type t2) {
-        return Types.isInstance(t2, t1, file);
     }
 }

@@ -18,14 +18,14 @@
 
 package whilelang.lang;
 
-import whilelang.util.Attribute;
-import whilelang.util.SyntacticElement;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import whilelang.util.Attribute;
+import whilelang.util.SyntacticElement;
 
 /**
  * <p> Represents a type as denoted in a source file (a.k.a a <i>syntactic type</i>). As such types
@@ -41,37 +41,16 @@ import java.util.Map;
 public interface Type extends SyntacticElement {
 
     /**
-     * Represents the special <code>void</code> type which can only be used in special circumstance
-     * (e.g. for a function return).
-     *
-     * @author David J. Pearce
+     * Represents the {@code any} type. The {@code any} type is a supertype of all types.
      */
-    public static final class Void extends SyntacticElement.Impl implements Type {
+    public static final class Any extends SyntacticElement.Impl implements Type {
 
-        public Void(Attribute... attributes) {
+        public Any(Attribute... attributes) {
             super(attributes);
         }
 
         public String toString() {
-            return "void";
-        }
-    }
-
-    /**
-     * Represents the special <code>null</code> type which can be thought of as describing a set of
-     * size one that contains the value <code>null</code>.
-     *
-     * @author David J. Pearce
-     */
-    public static final class Null extends SyntacticElement.Impl implements Type {
-
-        public Null(Attribute... attributes) {
-
-            super(attributes);
-        }
-
-        public String toString() {
-            return "null";
+            return "any";
         }
     }
 
@@ -89,40 +68,6 @@ public interface Type extends SyntacticElement {
 
         public String toString() {
             return "bool";
-        }
-    }
-
-    /**
-     * Represents the <code>int</code> type which describes the set of all integers described in
-     * 32bit twos compliment form. For example, this is identical to a Java <code>int</code>.
-     *
-     * @author David J. Pearce
-     */
-    public static final class Int extends SyntacticElement.Impl implements Type {
-
-        public Int(Attribute... attributes) {
-            super(attributes);
-        }
-
-        public String toString() {
-            return "int";
-        }
-    }
-
-    /**
-     * Represents the <code>real</code> type which describess the set of all 64bit IEEE754 floating
-     * point numbers. For example, this is identical to a Java <code>double</code>.
-     *
-     * @author David J. Pearce
-     */
-    public static final class Real extends SyntacticElement.Impl implements Type {
-
-        public Real(Attribute... attributes) {
-            super(attributes);
-        }
-
-        public String toString() {
-            return "real";
         }
     }
 
@@ -145,45 +90,19 @@ public interface Type extends SyntacticElement {
     }
 
     /**
-     * Represents the <code>string</code> type which describes any sequence of <code>char</code>
-     * values.
+     * Represents the <code>int</code> type which describes the set of all integers described in
+     * 32bit twos compliment form. For example, this is identical to a Java <code>int</code>.
      *
      * @author David J. Pearce
      */
-    public static final class Strung extends SyntacticElement.Impl implements Type {
+    public static final class Int extends SyntacticElement.Impl implements Type {
 
-        public Strung(Attribute... attributes) {
+        public Int(Attribute... attributes) {
             super(attributes);
         }
 
         public String toString() {
-            return "string";
-        }
-    }
-
-    /**
-     * Represents a named type which has yet to be expanded in the given context.
-     *
-     * @author David J. Pearce
-     */
-    public static final class Named extends SyntacticElement.Impl implements Type {
-
-        private final String name;
-
-        public Named(String name, Attribute... attributes) {
-            super(attributes);
-            this.name = name;
-        }
-
-        public String toString() {
-            return getName();
-        }
-
-        /**
-         * Get the name used by this type.
-         */
-        public String getName() {
-            return name;
+            return "int";
         }
     }
 
@@ -211,6 +130,67 @@ public interface Type extends SyntacticElement {
 
         public String toString() {
             return "[" + element + "]";
+        }
+    }
+
+    /**
+     * Represents a named type which has yet to be expanded in the given context.
+     *
+     * @author David J. Pearce
+     */
+    public static final class Named extends SyntacticElement.Impl implements Type {
+
+        private final String name;
+
+        public Named(String name, Attribute... attributes) {
+            super(attributes);
+            this.name = name;
+        }
+
+        /**
+         * Get the name used by this type.
+         */
+        public String getName() {
+            return name;
+        }
+
+        public String toString() {
+            return getName();
+        }
+    }
+
+    /**
+     * Represents the special <code>null</code> type which can be thought of as describing a set of
+     * size one that contains the value <code>null</code>.
+     *
+     * @author David J. Pearce
+     */
+    public static final class Null extends SyntacticElement.Impl implements Type {
+
+        public Null(Attribute... attributes) {
+
+            super(attributes);
+        }
+
+        public String toString() {
+            return "null";
+        }
+    }
+
+    /**
+     * Represents the <code>real</code> type which describess the set of all 64bit IEEE754 floating
+     * point numbers. For example, this is identical to a Java <code>double</code>.
+     *
+     * @author David J. Pearce
+     */
+    public static final class Real extends SyntacticElement.Impl implements Type {
+
+        public Real(Attribute... attributes) {
+            super(attributes);
+        }
+
+        public String toString() {
+            return "real";
         }
     }
 
@@ -258,6 +238,23 @@ public interface Type extends SyntacticElement {
     }
 
     /**
+     * Represents the <code>string</code> type which describes any sequence of <code>char</code>
+     * values.
+     *
+     * @author David J. Pearce
+     */
+    public static final class Strung extends SyntacticElement.Impl implements Type {
+
+        public Strung(Attribute... attributes) {
+            super(attributes);
+        }
+
+        public String toString() {
+            return "string";
+        }
+    }
+
+    /**
      * Represents a union type, such as <code>T1|T2</code>, which describes the set union of two (or
      * more) types. For example, the type <code>bool|null</code> describes the set
      * <code>{true,false,null}</code>.
@@ -292,6 +289,23 @@ public interface Type extends SyntacticElement {
                 r = r + bounds.get(i);
             }
             return r;
+        }
+    }
+
+    /**
+     * Represents the special <code>void</code> type which can only be used in special circumstance
+     * (e.g. for a function return).
+     *
+     * @author David J. Pearce
+     */
+    public static final class Void extends SyntacticElement.Impl implements Type {
+
+        public Void(Attribute... attributes) {
+            super(attributes);
+        }
+
+        public String toString() {
+            return "void";
         }
     }
 }

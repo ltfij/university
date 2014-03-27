@@ -1,0 +1,6 @@
+void main() {
+    {{string f} f} foo = {f: {f: "hello"}};
+    foo.f.f[0] = 'z';
+    print foo;
+}
+

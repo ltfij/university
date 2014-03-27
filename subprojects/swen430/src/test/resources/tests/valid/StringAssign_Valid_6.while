@@ -1,4 +1,4 @@
-int main() {
+void main() {
     string s1 = "Hello";
     [string] s2 = ["Blah","World"];
     s2[0] = s1;

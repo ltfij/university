@@ -21,17 +21,17 @@ package whilelang;
 import static whilelang.util.SyntaxError.internalFailure;
 import static whilelang.util.SyntaxError.syntaxError;
 
-import whilelang.lang.Expr;
-import whilelang.lang.Stmt;
-import whilelang.lang.Types;
-import whilelang.lang.WhileFile;
-import whilelang.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import whilelang.lang.Expr;
+import whilelang.lang.Stmt;
+import whilelang.lang.Types;
+import whilelang.lang.WhileFile;
+import whilelang.util.Pair;
 
 /**
  * A simple interpreter for WhileLang programs, which executes them in their Abstract Syntax Tree
@@ -234,30 +234,35 @@ public class Interpreter {
             src.put(ra.getName(), deepClone(rhs));
         } else if (lhs instanceof Expr.IndexOf) {
             Expr.IndexOf io = (Expr.IndexOf) lhs;
+
             Object src = execute(io.getSource(), frame);
+            Object result = null;
 
             if (src instanceof String) {
-                // Only makes sense to use indexof with a string variable, not a string constant
-                // TODO: Move this to typechecker
-                if (!(io.getSource() instanceof Expr.Variable)) {
-                    syntaxError("cannot perform indexof on a string constant", file.filename, stmt);
-                }
-
                 Integer index = (Integer) execute(io.getIndex(), frame);
                 Object rhs = execute(stmt.getRhs(), frame);
 
                 String str = (String) src;
 
                 if (index < 0 || index >= str.length()) {
-                    // TODO: Change this error type
-                    internalFailure("index out of range " + index, file.filename, io.getIndex());
+                    syntaxError("index out of range " + index, file.filename, io.getIndex());
                 }
 
-                // This works because of Whiles value semantics
-                // There is no global scope, only local so we know that frame variables aren't
-                // copied elsewhere
-                frame.put(((Expr.Variable) io.getSource()).getName(), str.substring(0, index) + rhs
-                        + str.substring(index + 1));
+                result = str.substring(0, index) + rhs + str.substring(index + 1);
+
+                if (io.getSource() instanceof Expr.Variable) {
+                    frame.put(((Expr.Variable) io.getSource()).getName(), result);
+                } else if (io.getSource() instanceof Expr.IndexOf) {
+                    Stmt.Assign nstmt = new Stmt.Assign((Expr.IndexOf) io.getSource(), new Expr.Constant(result), stmt.attributes());
+
+                    return execute(nstmt, frame);
+                } else if (io.getSource() instanceof Expr.RecordAccess) {
+                    Stmt.Assign nstmt = new Stmt.Assign((Expr.RecordAccess) io.getSource(), new Expr.Constant(result), stmt.attributes());
+
+                    return execute(nstmt, frame);
+                } else {
+                    syntaxError("cannot perform indexof on a " + io.getSource().getClass(), file.filename, stmt);
+                }
             } else {
                 ArrayList<Object> al = (ArrayList) execute(io.getSource(), frame);
                 Integer idx = (Integer) execute(io.getIndex(), frame);
@@ -498,8 +503,7 @@ public class Interpreter {
             String src = (String) _src;
 
             if (index < 0 || index >= src.length()) {
-                // TODO: Change this error type
-                internalFailure("index out of range " + index, file.filename, expr.getIndex());
+                syntaxError("index out of range " + index, file.filename, expr.getIndex());
             }
 
             return src.charAt(index);
@@ -507,8 +511,7 @@ public class Interpreter {
             ArrayList<Object> src = (ArrayList<Object>) _src;
 
             if (index < 0 || index >= src.size()) {
-                // TODO: Change this error type
-                internalFailure("index out of range " + index, file.filename, expr.getIndex());
+                syntaxError("index out of range " + index, file.filename, expr.getIndex());
             }
 
             return src.get(index);

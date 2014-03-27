@@ -90,18 +90,15 @@ public class InterpreterValidTests extends TestHarness {
     @Test public void ListAppend_Valid_7() { runInterpreterTest("ListAppend_Valid_7"); }
 
     @Test public void ListAssign_Valid_1() { runInterpreterTest("ListAssign_Valid_1"); }
-
-    @Test public void ListAssign_Valid_10() { runInterpreterTest("ListAssign_Valid_10"); }
-
     @Test public void ListAssign_Valid_2() { runInterpreterTest("ListAssign_Valid_2"); }
-
     @Test public void ListAssign_Valid_3() { runInterpreterTest("ListAssign_Valid_3"); }
-
     @Test public void ListAssign_Valid_4() { runInterpreterTest("ListAssign_Valid_4"); }
-
     @Test public void ListAssign_Valid_5() { runInterpreterTest("ListAssign_Valid_5"); }
-
     @Test public void ListAssign_Valid_6() { runInterpreterTest("ListAssign_Valid_6"); }
+    @Test public void ListAssign_Valid_10() { runInterpreterTest("ListAssign_Valid_10"); }
+    @Test public void ListAssign_Valid_11() { runInterpreterTest("ListAssign_Valid_11"); }
+    @Test public void ListAssign_Valid_12() { runInterpreterTest("ListAssign_Valid_12"); }
+    @Test public void ListAssign_Valid_13() { runInterpreterTest("ListAssign_Valid_13"); }
 
     @Test public void ListConversion_Valid_1() { runInterpreterTest("ListConversion_Valid_1"); }
 
@@ -154,6 +151,10 @@ public class InterpreterValidTests extends TestHarness {
     @Test public void StringAssign_Valid_5() { runInterpreterTest("StringAssign_Valid_5"); }
     @Test public void StringAssign_Valid_6() { runInterpreterTest("StringAssign_Valid_6"); }
     @Test public void StringAssign_Valid_7() { runInterpreterTest("StringAssign_Valid_7"); }
+    @Test public void StringAssign_Valid_8() { runInterpreterTest("StringAssign_Valid_8"); }
+    @Test public void StringAssign_Valid_9() { runInterpreterTest("StringAssign_Valid_9"); }
+    @Test public void StringAssign_Valid_10() { runInterpreterTest("StringAssign_Valid_10"); }
+    @Test public void StringAssign_Valid_11() { runInterpreterTest("StringAssign_Valid_11"); }
 
     @Test public void String_Valid_1() { runInterpreterTest("String_Valid_1"); }
     @Test public void String_Valid_2() { runInterpreterTest("String_Valid_2"); }
