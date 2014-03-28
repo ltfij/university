@@ -67,6 +67,13 @@ public interface Stmt extends SyntacticElement {
          */
         public Assign(Expr.LVal lhs, Expr rhs, Attribute... attributes) {
             super(attributes);
+            if (lhs == null) {
+                throw new NullPointerException("lhs cannot be null");
+            }
+            if (rhs == null) {
+                throw new NullPointerException("rhs cannot be null");
+            }
+
             this.lhs = lhs;
             this.rhs = rhs;
         }
@@ -79,6 +86,13 @@ public interface Stmt extends SyntacticElement {
          */
         public Assign(Expr.LVal lhs, Expr rhs, Collection<Attribute> attributes) {
             super(attributes);
+            if (lhs == null) {
+                throw new NullPointerException("lhs cannot be null");
+            }
+            if (rhs == null) {
+                throw new NullPointerException("rhs cannot be null");
+            }
+
             this.lhs = lhs;
             this.rhs = rhs;
         }
@@ -183,6 +197,19 @@ public interface Stmt extends SyntacticElement {
         public For(VariableDeclaration declaration, Expr condition, Stmt increment,
                 Collection<Stmt> body, Attribute... attributes) {
             super(attributes);
+            if (declaration == null) {
+                throw new NullPointerException("declaration cannot be null");
+            }
+            if (condition == null) {
+                throw new NullPointerException("condition cannot be null");
+            }
+            if (increment == null) {
+                throw new NullPointerException("increment cannot be null");
+            }
+            if (body.contains(null)) {
+                throw new NullPointerException("body cannot contain null");
+            }
+
             this.declaration = declaration;
             this.condition = condition;
             this.increment = increment;
@@ -201,6 +228,19 @@ public interface Stmt extends SyntacticElement {
         public For(VariableDeclaration declaration, Expr condition, Stmt increment,
                 Collection<Stmt> body, Collection<Attribute> attributes) {
             super(attributes);
+            if (declaration == null) {
+                throw new NullPointerException("declaration cannot be null");
+            }
+            if (condition == null) {
+                throw new NullPointerException("condition cannot be null");
+            }
+            if (increment == null) {
+                throw new NullPointerException("increment cannot be null");
+            }
+            if (body.contains(null)) {
+                throw new NullPointerException("body cannot contain null");
+            }
+
             this.declaration = declaration;
             this.condition = condition;
             this.increment = increment;
@@ -277,6 +317,16 @@ public interface Stmt extends SyntacticElement {
         public IfElse(Expr condition, List<Stmt> trueBranch, List<Stmt> falseBranch,
                 Attribute... attributes) {
             super(attributes);
+            if (condition == null) {
+                throw new NullPointerException("condition cannot be null");
+            }
+            if (trueBranch.contains(null)) {
+                throw new NullPointerException("trueBranch cannot contain null");
+            }
+            if (falseBranch.contains(null)) {
+                throw new NullPointerException("falseBranch cannot contain null");
+            }
+
             this.condition = condition;
             this.trueBranch = new ArrayList<Stmt>(trueBranch);
             this.falseBranch = new ArrayList<Stmt>(falseBranch);
@@ -294,6 +344,16 @@ public interface Stmt extends SyntacticElement {
         public IfElse(Expr condition, List<Stmt> trueBranch, List<Stmt> falseBranch,
                 Collection<Attribute> attributes) {
             super(attributes);
+            if (condition == null) {
+                throw new NullPointerException("condition cannot be null");
+            }
+            if (trueBranch.contains(null)) {
+                throw new NullPointerException("trueBranch cannot contain null");
+            }
+            if (falseBranch.contains(null)) {
+                throw new NullPointerException("falseBranch cannot contain null");
+            }
+
             this.condition = condition;
             this.trueBranch = new ArrayList<Stmt>(trueBranch);
             this.falseBranch = new ArrayList<Stmt>(falseBranch);
@@ -353,6 +413,10 @@ public interface Stmt extends SyntacticElement {
          */
         public Print(Expr expr, Attribute... attributes) {
             super(attributes);
+            if (expr == null) {
+                throw new NullPointerException("expr cannot be null");
+            }
+
             this.expr = expr;
         }
 
@@ -363,6 +427,10 @@ public interface Stmt extends SyntacticElement {
          */
         public Print(Expr expr, Collection<Attribute> attributes) {
             super(attributes);
+            if (expr == null) {
+                throw new NullPointerException("expr cannot be null");
+            }
+
             this.expr = expr;
         }
 
@@ -497,6 +565,18 @@ public interface Stmt extends SyntacticElement {
         public Switch(Expr condition, List<Stmt> stmts, Map<Expr, Integer> cases, int defaultCase,
                 Collection<Attribute> attributes) {
             super(attributes);
+            if (condition == null) {
+                throw new NullPointerException("condition cannot be null");
+            }
+            if (stmts.contains(null)) {
+                throw new NullPointerException("stmts cannot contain null");
+            }
+            if (cases.keySet().contains(null)) {
+                throw new NullPointerException("cases.keySet cannot contain null");
+            }
+            if (cases.values().contains(null)) {
+                throw new NullPointerException("cases.values cannot contain null");
+            }
 
             this.condition = condition;
 
@@ -574,6 +654,13 @@ public interface Stmt extends SyntacticElement {
          */
         public VariableDeclaration(Type type, String name, Expr expr, Attribute... attributes) {
             super(attributes);
+            if (type == null) {
+                throw new NullPointerException("type cannot be null");
+            }
+            if (name == null) {
+                throw new NullPointerException("name cannot be null");
+            }
+
             this.type = type;
             this.name = name;
             this.expr = expr;
@@ -590,6 +677,13 @@ public interface Stmt extends SyntacticElement {
         public VariableDeclaration(Type type, String name, Expr expr,
                 Collection<Attribute> attributes) {
             super(attributes);
+            if (type == null) {
+                throw new NullPointerException("type cannot be null");
+            }
+            if (name == null) {
+                throw new NullPointerException("name cannot be null");
+            }
+
             this.type = type;
             this.name = name;
             this.expr = expr;
@@ -663,6 +757,13 @@ public interface Stmt extends SyntacticElement {
          */
         public While(Expr condition, Collection<Stmt> body, Attribute... attributes) {
             super(attributes);
+            if (condition == null) {
+                throw new NullPointerException("condition cannot be null");
+            }
+            if (body.contains(null)) {
+                throw new NullPointerException("body cannot contain null");
+            }
+
             this.condition = condition;
             this.body = new ArrayList<Stmt>(body);
         }
@@ -676,6 +777,13 @@ public interface Stmt extends SyntacticElement {
         public While(Expr condition, Expr invariant, Collection<Stmt> body,
                 Collection<Attribute> attributes) {
             super(attributes);
+            if (condition == null) {
+                throw new NullPointerException("condition cannot be null");
+            }
+            if (body.contains(null)) {
+                throw new NullPointerException("body cannot contain null");
+            }
+
             this.condition = condition;
             this.body = new ArrayList<Stmt>(body);
         }

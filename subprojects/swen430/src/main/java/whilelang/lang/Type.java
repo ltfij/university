@@ -118,6 +118,10 @@ public interface Type extends SyntacticElement {
 
         public List(Type element, Attribute... attributes) {
             super(attributes);
+            if (element == null) {
+                throw new NullPointerException("element cannot be null");
+            }
+
             this.element = element;
         }
 
@@ -144,6 +148,10 @@ public interface Type extends SyntacticElement {
 
         public Named(String name, Attribute... attributes) {
             super(attributes);
+            if (name == null) {
+                throw new NullPointerException("name cannot be null");
+            }
+
             this.name = name;
         }
 
@@ -210,6 +218,13 @@ public interface Type extends SyntacticElement {
             if (fields.size() == 0) {
                 throw new IllegalArgumentException("Cannot create type tuple with no fields");
             }
+            if (fields.keySet().contains(null)) {
+                throw new NullPointerException("fields.keySet cannot contain null");
+            }
+            if (fields.values().contains(null)) {
+                throw new NullPointerException("fields.values cannot contain null");
+            }
+
             this.fields = new HashMap<String, Type>(fields);
         }
 
@@ -270,6 +285,10 @@ public interface Type extends SyntacticElement {
                 new IllegalArgumentException(
                         "Cannot construct a type union with fewer than two bounds");
             }
+            if (bounds.contains(null)) {
+                throw new NullPointerException("bounds cannot contain null");
+            }
+
             this.bounds = new ArrayList<Type>(bounds);
         }
 

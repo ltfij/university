@@ -47,7 +47,11 @@ public class InterpreterValidTests extends TestHarness {
     @Test public void Define_Valid_1() { runInterpreterTest("Define_Valid_1"); }
     @Test public void Define_Valid_2() { runInterpreterTest("Define_Valid_2"); }
 
-    @Test public void For_Valid_1() { runInterpreterTest("For_Valid_1"); }
+    @Test public void DefiniteAssign_Valid_1() { runInterpreterTest("DefiniteAssign_Valid_1"); }
+    @Test public void DefiniteAssign_Valid_2() { runInterpreterTest("DefiniteAssign_Valid_2"); }
+    @Test public void DefiniteAssign_Valid_3() { runInterpreterTest("DefiniteAssign_Valid_3"); }
+
+    @Ignore @Test public void For_Valid_1() { runInterpreterTest("For_Valid_1"); }
 
     @Test public void Function_Valid_1() { runInterpreterTest("Function_Valid_1"); }
     @Test public void Function_Valid_2() { runInterpreterTest("Function_Valid_2"); }

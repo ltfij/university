@@ -138,6 +138,7 @@ public class Interpreter {
                 return r;
             }
         }
+
         return null;
     }
 
@@ -171,6 +172,7 @@ public class Interpreter {
         } else {
             internalFailure("unknown statement encountered (" + stmt.getClass() + ")",
                     file.filename, stmt);
+
             return null;
         }
     }
@@ -205,6 +207,7 @@ public class Interpreter {
         if (stmt.getDefaultCase() >= 0) {
             // If an end case has no statements after it, then there is nothing to be done
             if (stmt.getDefaultCase() == stmts.size()) {
+                System.err.println("defaultCase == stmts.size()");
                 return null;
             }
 

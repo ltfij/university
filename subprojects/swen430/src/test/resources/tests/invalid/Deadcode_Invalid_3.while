@@ -1,0 +1,10 @@
+int foo(int x) {
+    switch (x) {
+        case 1:
+        case 2:
+        default:
+            return x;
+    }
+
+    return 1;
+}

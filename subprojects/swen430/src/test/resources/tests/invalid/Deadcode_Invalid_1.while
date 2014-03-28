@@ -1,0 +1,11 @@
+void foo() {
+    if (true) {
+        return;
+    } else if (false) {
+        return;
+    } else {
+        return;
+    }
+
+    return;
+}

@@ -23,6 +23,7 @@ import whilelang.util.Pair;
 import whilelang.util.SyntacticElement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -146,6 +147,16 @@ public interface Expr extends SyntacticElement {
          */
         public Binary(BOp op, Expr lhs, Expr rhs, Attribute... attributes) {
             super(attributes);
+            if (op == null) {
+                throw new NullPointerException("op cannot be null");
+            }
+            if (lhs == null) {
+                throw new NullPointerException("lhs cannot be null");
+            }
+            if (rhs == null) {
+                throw new NullPointerException("rhs cannot be null");
+            }
+
             this.op = op;
             this.lhs = lhs;
             this.rhs = rhs;
@@ -161,6 +172,16 @@ public interface Expr extends SyntacticElement {
          */
         public Binary(BOp op, Expr lhs, Expr rhs, Collection<Attribute> attributes) {
             super(attributes);
+            if (op == null) {
+                throw new NullPointerException("op cannot be null");
+            }
+            if (lhs == null) {
+                throw new NullPointerException("lhs cannot be null");
+            }
+            if (rhs == null) {
+                throw new NullPointerException("rhs cannot be null");
+            }
+
             this.op = op;
             this.lhs = lhs;
             this.rhs = rhs;
@@ -211,12 +232,26 @@ public interface Expr extends SyntacticElement {
 
         public Cast(Type type, Expr src, Attribute... attributes) {
             super(attributes);
+            if (type == null) {
+                throw new NullPointerException("type cannot be null");
+            }
+            if (src == null) {
+                throw new NullPointerException("src cannot be null");
+            }
+
             this.type = type;
             this.source = src;
         }
 
         public Cast(Type type, Expr src, Collection<Attribute> attributes) {
             super(attributes);
+            if (type == null) {
+                throw new NullPointerException("type cannot be null");
+            }
+            if (src == null) {
+                throw new NullPointerException("src cannot be null");
+            }
+
             this.type = type;
             this.source = src;
         }
@@ -254,6 +289,7 @@ public interface Expr extends SyntacticElement {
          */
         public Constant(Object value, Attribute... attributes) {
             super(attributes);
+
             this.value = value;
         }
 
@@ -300,6 +336,13 @@ public interface Expr extends SyntacticElement {
          */
         public IndexOf(Expr source, Expr index, Attribute... attributes) {
             super(attributes);
+            if (source == null) {
+                throw new NullPointerException("source cannot be null");
+            }
+            if (index == null) {
+                throw new NullPointerException("index cannot be null");
+            }
+
             this.source = source;
             this.index = index;
         }
@@ -313,6 +356,13 @@ public interface Expr extends SyntacticElement {
          */
         public IndexOf(Expr src, Expr index, Collection<Attribute> attributes) {
             super(attributes);
+            if (src == null) {
+                throw new NullPointerException("source cannot be null");
+            }
+            if (index == null) {
+                throw new NullPointerException("index cannot be null");
+            }
+
             this.source = src;
             this.index = index;
         }
@@ -361,6 +411,13 @@ public interface Expr extends SyntacticElement {
          */
         public Invoke(String name, List<Expr> arguments, Attribute... attributes) {
             super(attributes);
+            if (name == null) {
+                throw new NullPointerException("name cannot be null");
+            }
+            if (arguments.contains(null)) {
+                throw new NullPointerException("arguments cannot contain null");
+            }
+
             this.name = name;
             this.arguments = new ArrayList<Expr>(arguments);
         }
@@ -402,6 +459,12 @@ public interface Expr extends SyntacticElement {
          */
         public Is(Expr lhs, Type rhs, Collection<Attribute> attributes) {
             super(attributes);
+            if (lhs == null) {
+                throw new NullPointerException("lhs cannot be null");
+            }
+            if (rhs == null) {
+                throw new NullPointerException("rhs cannot be null");
+            }
 
             this.lhs = lhs;
             this.rhs = rhs;
@@ -416,6 +479,12 @@ public interface Expr extends SyntacticElement {
          */
         public Is(Expr lhs, Type rhs, Attribute... attributes) {
             super(attributes);
+            if (lhs == null) {
+                throw new NullPointerException("lhs cannot be null");
+            }
+            if (rhs == null) {
+                throw new NullPointerException("rhs cannot be null");
+            }
 
             this.lhs = lhs;
             this.rhs = rhs;
@@ -466,6 +535,10 @@ public interface Expr extends SyntacticElement {
          */
         public ListConstructor(Collection<Expr> arguments, Attribute... attributes) {
             super(attributes);
+            if (arguments.contains(null)) {
+                throw new NullPointerException("arguments cannot contain null");
+            }
+
             this.arguments = new ArrayList<Expr>(arguments);
         }
 
@@ -475,11 +548,7 @@ public interface Expr extends SyntacticElement {
          * @param arguments A list of zero or more element expressions; may not be null.
          */
         public ListConstructor(Attribute attribute, Expr... arguments) {
-            super(attribute);
-            this.arguments = new ArrayList<Expr>();
-            for (Expr a : arguments) {
-                this.getArguments().add(a);
-            }
+            this(Arrays.asList(arguments), attribute);
         }
 
         /**
@@ -514,6 +583,13 @@ public interface Expr extends SyntacticElement {
          */
         public RecordAccess(Expr source, String name, Attribute... attributes) {
             super(attributes);
+            if (source == null) {
+                throw new NullPointerException("source cannot be null");
+            }
+            if (name == null) {
+                throw new NullPointerException("name cannot be null");
+            }
+
             this.source = source;
             this.name = name;
         }
@@ -558,6 +634,10 @@ public interface Expr extends SyntacticElement {
          */
         public RecordConstructor(List<Pair<String, Expr>> fields, Attribute... attributes) {
             super(attributes);
+            if (fields.contains(null)) {
+                throw new NullPointerException("fields cannot contain null");
+            }
+
             this.fields = new ArrayList<Pair<String, Expr>>(fields);
         }
 
@@ -590,6 +670,13 @@ public interface Expr extends SyntacticElement {
          */
         public Unary(UOp op, Expr expr, Attribute... attributes) {
             super(attributes);
+            if (op == null) {
+                throw new NullPointerException("op cannot be null");
+            }
+            if (op ==null) {
+                throw new NullPointerException("expr cannot be null");
+            }
+
             this.op = op;
             this.expr = expr;
         }
@@ -631,6 +718,10 @@ public interface Expr extends SyntacticElement {
          */
         public Variable(String name, Attribute... attributes) {
             super(attributes);
+            if (name == null) {
+                throw new NullPointerException("name cannot be null");
+            }
+
             this.setVar(name);
         }
 

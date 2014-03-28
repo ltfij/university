@@ -12,6 +12,16 @@ public class InvalidTests extends TestHarness {
 
     @Test public void Break_Invalid_1() { runInterpreterTest("Break_Invalid_1"); }
     @Test public void Break_Invalid_2() { runInterpreterTest("Break_Invalid_2"); }
+    @Test public void Break_Invalid_3() { runInterpreterTest("Break_Invalid_3"); }
+    @Test public void Break_Invalid_4() { runInterpreterTest("Break_Invalid_4"); }
+    @Test public void Break_Invalid_5() { runInterpreterTest("Break_Invalid_5"); }
+    @Test public void Break_Invalid_6() { runInterpreterTest("Break_Invalid_6"); }
+    @Test public void Break_Invalid_7() { runInterpreterTest("Break_Invalid_7"); }
+
+    @Test public void Deadcode_Invalid_1() { runInterpreterTest("Deadcode_Invalid_1"); }
+    @Test public void Deadcode_Invalid_2() { runInterpreterTest("Deadcode_Invalid_2"); }
+    @Test public void Deadcode_Invalid_3() { runInterpreterTest("Deadcode_Invalid_3"); }
+    @Test public void Deadcode_Invalid_4() { runInterpreterTest("Deadcode_Invalid_4"); }
 
 	@Test public void DefiniteAssign_Invalid_1() { runInterpreterTest("DefiniteAssign_Invalid_1"); }
 	@Test public void DefiniteAssign_Invalid_2() { runInterpreterTest("DefiniteAssign_Invalid_2"); }
@@ -38,6 +48,7 @@ public class InvalidTests extends TestHarness {
     @Test public void DefiniteAssign_Invalid_23() { runInterpreterTest("DefiniteAssign_Invalid_23"); }
     @Test public void DefiniteAssign_Invalid_24() { runInterpreterTest("DefiniteAssign_Invalid_24"); }
     @Test public void DefiniteAssign_Invalid_25() { runInterpreterTest("DefiniteAssign_Invalid_25"); }
+    @Test public void DefiniteAssign_Invalid_30() { runInterpreterTest("DefiniteAssign_Invalid_30"); }
 
     @Test public void StringAssign_Invalid_1() { runInterpreterTest("StringAssign_Invalid_1"); }
     @Test public void StringAssign_Invalid_2() { runInterpreterTest("StringAssign_Invalid_2"); }
