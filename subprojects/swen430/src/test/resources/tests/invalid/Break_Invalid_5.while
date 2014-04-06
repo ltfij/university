@@ -1,0 +1,12 @@
+string foo(int x) {
+    if (true) {
+        break;
+    } else {
+        return "bar";
+    }
+}
+
+void main() {
+    print foo(1);
+}
+

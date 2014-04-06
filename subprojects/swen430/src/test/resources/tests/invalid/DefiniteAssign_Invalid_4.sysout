@@ -1,0 +1,3 @@
+DefiniteAssign_Invalid_4.while:2: variable y is not definitely assigned
+    while(y > 0) {
+          ^

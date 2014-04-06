@@ -1,0 +1,8 @@
+void main() {
+    string foo = "hello";
+    foo[0] = 'z';
+    foo[1] = 'e';
+    foo[2] = 'b';
+    print foo;
+}
+

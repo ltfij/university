@@ -1,0 +1,3 @@
+DefiniteAssign_Invalid_11.while:2: variable y is not definitely assigned
+    {int f} rs = {f:y};
+                    ^
