@@ -1,4 +1,4 @@
-package whilelang.testing;
+package com.hjwylde.uni.swen430.assignment02.whilelang.testing;
 
 import static org.junit.Assert.fail;
 
@@ -33,13 +33,13 @@ public class TestHarness {
     }
 
     protected void runInterpreterTest(String name) {
-        String output = runJava(srcPath, "whilelang.Main", name + ".while");
+        String output = runJava(srcPath, "com.hjwylde.uni.swen430.assignment02.whilelang.Main", name + ".while");
         compare(output, outputPath + File.separatorChar + name + "." + outputExtension);
     }
 
     protected void runClassFileTest(String name) {
         // First, we need to compiler the class
-        runJava(srcPath, "whilelang.Main", "-jvm", name + ".while");
+        runJava(srcPath, "com.hjwylde.uni.swen430.assignment02.whilelang.Main", "-jvm", name + ".while");
 
         // Second, we need to run it on the JVM
         String output = runJava(srcPath, name);

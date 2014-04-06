@@ -16,10 +16,10 @@
 //
 // Copyright 2013, David James Pearce.
 
-package whilelang;
+package com.hjwylde.uni.swen430.assignment02.whilelang;
 
-import static whilelang.util.SyntaxError.internalFailure;
-import static whilelang.util.SyntaxError.syntaxError;
+import static com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntaxError.internalFailure;
+import static com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntaxError.syntaxError;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,11 +27,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import whilelang.lang.Expr;
-import whilelang.lang.Stmt;
-import whilelang.lang.Types;
-import whilelang.lang.WhileFile;
-import whilelang.util.Pair;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Expr;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Stmt;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Types;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.WhileFile;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.Pair;
 
 /**
  * A simple interpreter for WhileLang programs, which executes them in their Abstract Syntax Tree

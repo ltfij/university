@@ -16,7 +16,7 @@
 //
 // Copyright 2013, David James Pearce.
 
-package whilelang.util;
+package com.hjwylde.uni.swen430.assignment02.whilelang.util;
 
 public interface Attribute {
 
@@ -37,9 +37,9 @@ public interface Attribute {
 
     public static class Type implements Attribute {
 
-        public final whilelang.lang.Type type;
+        public final com.hjwylde.uni.swen430.assignment02.whilelang.lang.Type type;
 
-        public Type(whilelang.lang.Type type) {
+        public Type(com.hjwylde.uni.swen430.assignment02.whilelang.lang.Type type) {
             this.type = type;
         }
     }

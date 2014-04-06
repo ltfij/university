@@ -1,6 +1,6 @@
-package whilelang.testing.tests;
+package com.hjwylde.uni.swen430.assignment02.whilelang.testing.tests;
 
-import whilelang.testing.TestHarness;
+import com.hjwylde.uni.swen430.assignment02.whilelang.testing.TestHarness;
 
 import org.junit.*;
 

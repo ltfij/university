@@ -16,14 +16,14 @@
 //
 // Copyright 2013, David James Pearce.
 
-package whilelang;
+package com.hjwylde.uni.swen430.assignment02.whilelang;
 
-import whilelang.io.Lexer;
-import whilelang.io.Parser;
-import whilelang.lang.WhileFile;
-import whilelang.util.DefiniteAssignment;
-import whilelang.util.SyntaxError;
-import whilelang.util.TypeChecker;
+import com.hjwylde.uni.swen430.assignment02.whilelang.io.Lexer;
+import com.hjwylde.uni.swen430.assignment02.whilelang.io.Parser;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.WhileFile;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.DefiniteAssignment;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntaxError;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.TypeChecker;
 
 import java.io.File;
 import java.io.PrintStream;

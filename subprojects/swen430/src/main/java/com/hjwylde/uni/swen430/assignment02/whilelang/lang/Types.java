@@ -1,7 +1,7 @@
-package whilelang.lang;
+package com.hjwylde.uni.swen430.assignment02.whilelang.lang;
 
-import static whilelang.util.RuntimeError.castError;
-import static whilelang.util.SyntaxError.internalFailure;
+import static com.hjwylde.uni.swen430.assignment02.whilelang.util.RuntimeError.castError;
+import static com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntaxError.internalFailure;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import whilelang.util.Attribute;
-import whilelang.util.Pair;
-import whilelang.util.RuntimeError;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.Attribute;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.Pair;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.RuntimeError;
 
 /**
  * A utility class for providing methods relating to types.
@@ -33,7 +33,7 @@ public final class Types {
      * @param type the type to cast it to.
      * @param file the while file to perform name resolution.
      * @return a casted version of the object or the object itself.
-     * @throws whilelang.util.RuntimeError if the cast is invalid.
+     * @throws com.hjwylde.uni.swen430.assignment02.whilelang.util.RuntimeError if the cast is invalid.
      */
     public static Object cast(Object obj, Type type, WhileFile file) throws RuntimeError {
         // Normalise named types.

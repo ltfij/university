@@ -16,9 +16,9 @@
 //
 // Copyright 2013, David James Pearce.
 
-package whilelang.util;
+package com.hjwylde.uni.swen430.assignment02.whilelang.util;
 
-import whilelang.lang.Type;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Type;
 
 /**
  * This exception is thrown when an error occurs during the interpretation of a {@code While} file.

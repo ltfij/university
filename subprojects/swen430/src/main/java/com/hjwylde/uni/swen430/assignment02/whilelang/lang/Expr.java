@@ -16,11 +16,11 @@
 //
 // Copyright 2013, David James Pearce.
 
-package whilelang.lang;
+package com.hjwylde.uni.swen430.assignment02.whilelang.lang;
 
-import whilelang.util.Attribute;
-import whilelang.util.Pair;
-import whilelang.util.SyntacticElement;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.Attribute;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.Pair;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntacticElement;
 
 import java.util.ArrayList;
 import java.util.Arrays;

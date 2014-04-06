@@ -16,9 +16,9 @@
 //
 // Copyright 2013, David James Pearce.
 
-package whilelang.io;
+package com.hjwylde.uni.swen430.assignment02.whilelang.io;
 
-import whilelang.util.SyntaxError;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntaxError;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

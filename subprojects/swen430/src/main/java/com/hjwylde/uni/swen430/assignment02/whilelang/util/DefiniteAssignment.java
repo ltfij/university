@@ -1,7 +1,7 @@
-package whilelang.util;
+package com.hjwylde.uni.swen430.assignment02.whilelang.util;
 
-import static whilelang.util.SyntaxError.internalFailure;
-import static whilelang.util.SyntaxError.syntaxError;
+import static com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntaxError.internalFailure;
+import static com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntaxError.syntaxError;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import whilelang.lang.Expr;
-import whilelang.lang.Stmt;
-import whilelang.lang.WhileFile;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Expr;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Stmt;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.WhileFile;
 
 /**
  * Responsible for checking that all variables are defined before they are used. The algorithm for

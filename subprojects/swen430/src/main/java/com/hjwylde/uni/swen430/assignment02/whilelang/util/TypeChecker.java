@@ -1,7 +1,7 @@
-package whilelang.util;
+package com.hjwylde.uni.swen430.assignment02.whilelang.util;
 
-import static whilelang.util.SyntaxError.internalFailure;
-import static whilelang.util.SyntaxError.syntaxError;
+import static com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntaxError.internalFailure;
+import static com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntaxError.syntaxError;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import whilelang.lang.Expr;
-import whilelang.lang.Stmt;
-import whilelang.lang.Type;
-import whilelang.lang.Types;
-import whilelang.lang.WhileFile;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Expr;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Stmt;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Type;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.Types;
+import com.hjwylde.uni.swen430.assignment02.whilelang.lang.WhileFile;
 
 /**
  * <p> Responsible for ensuring that all types are used appropriately. For example, that we only

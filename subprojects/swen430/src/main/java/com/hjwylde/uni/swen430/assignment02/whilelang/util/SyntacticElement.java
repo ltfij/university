@@ -16,7 +16,7 @@
 //
 // Copyright 2013, David James Pearce.
 
-package whilelang.util;
+package com.hjwylde.uni.swen430.assignment02.whilelang.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;

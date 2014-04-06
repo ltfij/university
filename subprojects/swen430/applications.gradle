@@ -1,6 +1,7 @@
 ext {
     applications = [
-            assignment01: group + '.whilelang.Main',
+            assignment01: group + '.assignment01.whilelang.Main',
+            assignment02: group + '.assignment02.whilelang.Main',
     ]
 }
 

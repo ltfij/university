@@ -16,7 +16,7 @@
 //
 // Copyright 2013, David James Pearce.
 
-package whilelang.lang;
+package com.hjwylde.uni.swen430.assignment02.whilelang.lang;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,8 +24,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import whilelang.util.Attribute;
-import whilelang.util.SyntacticElement;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.Attribute;
+import com.hjwylde.uni.swen430.assignment02.whilelang.util.SyntacticElement;
 
 /**
  * <p> Represents a type as denoted in a source file (a.k.a a <i>syntactic type</i>). As such types
