@@ -1,0 +1,3 @@
+DefiniteAssign_Invalid_10.while:2: variable y is not definitely assigned
+    [int] rs = [1,2,y];
+                    ^

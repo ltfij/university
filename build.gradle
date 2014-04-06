@@ -32,6 +32,22 @@ subprojects {
         }
     }
 
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task testSourcesJar(type: Jar, dependsOn: classes) {
+        appendix = 'test'
+        classifier = 'sources'
+        from sourceSets.test.allSource
+    }
+
+    artifacts {
+        archives sourcesJar
+        archives testSourcesJar
+    }
+
     checkstyle {
         configFile new File(rootDir, 'config/checkstyle/checkstyle.xml')
     }

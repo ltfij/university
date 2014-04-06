@@ -1,0 +1,6 @@
+void main() {
+    string foo = "hello";
+    foo[5] = 'z';
+    print foo;
+}
+

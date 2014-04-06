@@ -1,0 +1,14 @@
+void foo(real x) {
+    switch (x) {
+        case 4:
+            break;
+        case 2.3:
+            break;
+        default:
+    }
+}
+
+void main() {
+    foo(1.0);
+}
+

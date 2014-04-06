@@ -1,0 +1,3 @@
+Typing_Invalid_20.while:2: operands must have identical types, found [int] and [real]
+    return x ++ y;
+           ^^^^^^
