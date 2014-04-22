@@ -1,0 +1,15 @@
+int foo() {
+    for (int i = 0; i < 5; i = i + 1) {
+        if (i == 2) {
+            break;
+        }
+
+        return 5;
+    }
+
+    return 1;
+}
+
+void main() {
+    print(foo());
+}

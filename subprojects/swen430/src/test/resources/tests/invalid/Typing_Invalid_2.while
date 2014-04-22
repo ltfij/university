@@ -1,0 +1,3 @@
+null f(bool x) {
+    return x;
+}

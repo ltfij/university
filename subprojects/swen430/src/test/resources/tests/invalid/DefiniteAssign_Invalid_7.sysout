@@ -1,0 +1,3 @@
+DefiniteAssign_Invalid_7.while:2: variable y is not definitely assigned
+    for(int i=0; i < x; i=y+1) {
+                          ^

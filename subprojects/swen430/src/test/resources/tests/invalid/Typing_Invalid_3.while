@@ -1,0 +1,3 @@
+int f(real x) {
+    return x;
+}

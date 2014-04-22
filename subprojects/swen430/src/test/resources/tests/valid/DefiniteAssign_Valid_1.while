@@ -1,0 +1,13 @@
+int foo(int y) {
+    int x;
+    switch (y) {
+        default:
+            x = 5;
+    }
+
+    return x;
+}
+
+void main() {
+    print(foo(5));
+}

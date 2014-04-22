@@ -25,15 +25,17 @@ subprojects {
 
     defaultTasks 'build'
 
+    sourceCompatibility = '1.7'
+
     jar {
-        // Make the jars contain all the dependencies so the lectureres can run them
+        // Make the jars contain all the dependencies so the lecturers can run them
         from {
             configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
         }
     }
 
     checkstyle {
-        configFile new File(rootDir, 'config/checkstyle/checkstyle.xml')
+        configFile new File(rootDir, '/config/checkstyle/checkstyle.xml')
     }
 }
 

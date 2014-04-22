@@ -1,0 +1,3 @@
+Switch_Invalid_1.while:5: expected type int, found string
+        case "foo":
+             ^^^^^

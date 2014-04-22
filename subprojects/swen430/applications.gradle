@@ -1,0 +1,6 @@
+ext {
+    applications = [
+            assignment03: group + '.whilelang.Main',
+    ]
+}
+

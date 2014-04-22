@@ -1,0 +1,3 @@
+real f([int] xs) {
+    return xs[0];
+}

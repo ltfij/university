@@ -1,0 +1,17 @@
+int f([[int|real]] x) {
+    if(x is [[int]]) {
+        return 0;
+    } else if(x is [[real]]) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
+void main() {
+    print f([[1,2,3],[2,2,3]]);
+    print f([[1,2.0,3],[2,2,3]]);
+    print f([[1,2,3],[2,2.0,3]]);
+    print f([[1.0,2.0,3.0],[2.0,2.0,3.0]]);
+    print f([[1.0,2.0,3.0],[2,2,3]]);
+}

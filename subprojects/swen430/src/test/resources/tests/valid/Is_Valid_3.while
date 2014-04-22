@@ -1,0 +1,12 @@
+int f(real|int x) {
+    if(x is real) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+void main() {
+    print f(1);
+    print f(2.0);
+}

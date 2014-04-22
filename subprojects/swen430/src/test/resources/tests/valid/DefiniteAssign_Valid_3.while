@@ -1,0 +1,14 @@
+int foo(int x) {
+    int y;
+
+    if (x == 5) {
+        y = 1;
+        return y;
+    } else {
+        return 2;
+    }
+}
+
+void main() {
+    print(foo(5));
+}

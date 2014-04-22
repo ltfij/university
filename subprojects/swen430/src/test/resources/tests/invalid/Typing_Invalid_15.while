@@ -1,0 +1,4 @@
+int f([int] xs) {
+    xs[0] = 1.0;
+    return xs[0];
+}
