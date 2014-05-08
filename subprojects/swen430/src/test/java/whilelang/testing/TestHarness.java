@@ -7,9 +7,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 
-public class TestHarness {
+public abstract class TestHarness {
+
+    private static final String C_RUNTIME_LIBRARY =
+            "../../../../../src/main/java/whilelang/runtime/runtime.c";
 
     protected String srcPath; // path to source files
     protected String outputPath; // path to output files
@@ -22,7 +26,7 @@ public class TestHarness {
      * @param outputPath The path to the sample output files to compare against.
      * @param outputExtension The extension of output files
      */
-    public TestHarness(String srcPath, String outputPath, String outputExtension) {
+    protected TestHarness(String srcPath, String outputPath, String outputExtension) {
         this.srcPath = srcPath.replace('/', File.separatorChar);
         this.outputPath = outputPath.replace('/', File.separatorChar);
         this.outputExtension = outputExtension;
@@ -32,24 +36,117 @@ public class TestHarness {
         this.outputPath = "src/test/resources/".replace('/', File.separatorChar) + outputPath;
     }
 
-    protected void runInterpreterTest(String name) {
-        String output = runJava(srcPath, "whilelang.Main", name + ".while");
-        compare(output, outputPath + File.separatorChar + name + "." + outputExtension);
-    }
-
     protected void runClassFileTest(String name) {
-        // First, we need to compiler the class
-        runJava(srcPath, "whilelang.Main", "-jvm", name + ".while");
+        // First, we need to compile the class
+        runJava(srcPath, "whilelang.Main", "-jvm", "-verbose", name + ".while");
 
         // Second, we need to run it on the JVM
         String output = runJava(srcPath, name);
         compare(output, outputPath + File.separatorChar + name + "." + outputExtension);
     }
 
-    protected static String runJava(String path, String... args) {
+    protected void runInterpreterTest(String name) {
+        String output = runJava(srcPath, "whilelang.Main", "-verbose", name + ".while");
+        compare(output, outputPath + File.separatorChar + name + "." + outputExtension);
+    }
+
+    protected void runX86Test(String name) {
         try {
+            // First, we need to generate the assembly file
+            runJava(srcPath, "whilelang.Main", "-verbose", "-x86", name + ".while");
+
+            // Second, we need to compile the assembly file with gcc
+            compileWithGcc(srcPath, name, name + ".s", C_RUNTIME_LIBRARY);
+
+            // Third, execute the compiled file
+            String output = runNative(srcPath, name);
+            compare(output, outputPath + File.separatorChar + name + "." + outputExtension);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail("Problem running compiled test");
+        }
+    }
+
+    /**
+     * Compare the output of executing java on the test case with a reference file.
+     *
+     * @param output This provides the output from executing java on the test case.
+     * @param referenceFile The full path to the reference file. This should use the appropriate
+     * separator char for the host operating system.
+     */
+    private static void compare(String output, String referenceFile) {
+        try {
+            BufferedReader outReader = new BufferedReader(new StringReader(output));
+            BufferedReader refReader = new BufferedReader(new FileReader(new File(referenceFile)));
+
+            String line;
+
+            StringBuilder outSb = new StringBuilder();
+            while ((line = outReader.readLine()) != null) {
+                outSb.append(line);
+                outSb.append("\n");
+            }
+            StringBuilder refSb = new StringBuilder();
+            while ((line = refReader.readLine()) != null) {
+                refSb.append(line);
+                refSb.append("\n");
+            }
+
+            if (!outSb.toString().equals(refSb.toString())) {
+                for (String a : refSb.toString().split("\n")) {
+                    System.err.println(" > " + a);
+                }
+                for (String b : outSb.toString().split("\n")) {
+                    System.err.println(" < " + b);
+                }
+
+                throw new Error("Output doesn't match reference");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail();
+        }
+    }
+
+    private void compileWithGcc(String dir, String target, String... files) {
+        try {
+            String tmp = "gcc -g -Wno-format -o " + dir + File.separatorChar + target;
+            for (String f : files) {
+                tmp += " " + dir + File.separatorChar + f;
+            }
+            Process p = Runtime.getRuntime().exec(tmp);
+            StringBuffer syserr = new StringBuffer();
+            StringBuffer sysout = new StringBuffer();
+            new StreamGrabber(p.getErrorStream(), syserr);
+            new StreamGrabber(p.getInputStream(), sysout);
+            int exitCode = p.waitFor();
+            System.err.println(syserr); // propagate anything from the error
+            // stream
+            if (exitCode != 0) {
+                System.err.println("============================================================");
+                System.err.println(tmp);
+                System.err.println("============================================================");
+                fail("Problem running gcc to compile test");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail("Problem running gcc to compile test");
+        }
+    }
+
+    private String runJava(String path, String... args) {
+        try {
+            // Compiled project files
             String classpath = "build/classes/main".replace('/', File.separatorChar);
             classpath += File.pathSeparator + "../../../../../build/classes/main";
+            // JASM library
+            classpath += File.pathSeparator + "lib/jasm-0.1.4.jar";
+            classpath += File.pathSeparator + "../../../../../lib/jasm-0.1.4.jar";
+            // JX86 library
+            classpath += File.pathSeparator + "lib/jx86-0.1.2.jar";
+            classpath += File.pathSeparator + "../../../../../lib/jx86-0.1.2.jar";
+            // Current directory (for finding the compiled .class files)
+            classpath += File.pathSeparator + ".";
 
             String tmp = "java -cp " + classpath;
             for (String arg : args) {
@@ -81,54 +178,48 @@ public class TestHarness {
         return null;
     }
 
-    /**
-     * Compare the output of executing java on the test case with a reference file.
-     *
-     * @param output This provides the output from executing java on the test case.
-     * @param referenceFile The full path to the reference file. This should use the appropriate
-     * separator char for the host operating system.
-     */
-    protected static void compare(String output, String referenceFile) {
+    private String runNative(String dir, String executable) {
+/*        Process p = Runtime.getRuntime().exec(dir + File.separatorChar + executable);
+        StringBuffer syserr = new StringBuffer();
+        StringBuffer sysout = new StringBuffer();
+        new StreamGrabber(p.getErrorStream(), syserr);
+        new StreamGrabber(p.getInputStream(), sysout);
+        int exitCode = p.waitFor();*/
         try {
-            BufferedReader outReader = new BufferedReader(new StringReader(output));
-            BufferedReader refReader = new BufferedReader(new FileReader(new File(referenceFile)));
+            Process p = Runtime.getRuntime().exec(dir + File.separatorChar + executable);
 
-            while (refReader.ready() && outReader.ready()) {
-                String a = refReader.readLine();
-                String b = outReader.readLine();
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-                if (a.equals(b)) {
-                    continue;
-                } else {
-                    System.err.println(" > " + a);
-                    System.err.println(" < " + b);
-                    throw new Error("Output doesn't match reference");
-                }
+            String input = "";
+            String error = "";
+
+            String temp = null;
+
+            while ((temp = stdInput.readLine()) != null) {
+                input += temp += "\n";
             }
 
-            String l1 = outReader.readLine();
-            String l2 = refReader.readLine();
-            if (l1 == null && l2 == null) {
-                return;
+            while ((temp = stdError.readLine()) != null) {
+                error += temp += "\n";
             }
-            do {
-                l1 = outReader.readLine();
-                l2 = refReader.readLine();
-                if (l1 != null) {
-                    System.err.println(" < " + l1);
-                } else if (l2 != null) {
-                    System.err.println(" > " + l2);
-                }
-            } while (l1 != null && l2 != null);
 
-            fail("Files do not match");
+            p.waitFor();
+
+            System.err.println("============================================================");
+            System.err.println(dir + File.separatorChar + executable);
+            System.err.println("============================================================");
+            System.err.println(error); // propagate anything from the error
+            // stream
+            return input.toString();
         } catch (Exception ex) {
             ex.printStackTrace();
-            fail();
+            fail("Problem running native executable");
+            return null;
         }
     }
 
-    static public class StreamGrabber extends Thread {
+    private static class StreamGrabber extends Thread {
 
         private InputStream input;
         private StringBuffer buffer;

@@ -1,4 +1,4 @@
-package whilelang.util;
+package whilelang.pipelines;
 
 import static whilelang.util.SyntaxError.internalFailure;
 import static whilelang.util.SyntaxError.syntaxError;
@@ -14,6 +14,9 @@ import whilelang.lang.Stmt;
 import whilelang.lang.Type;
 import whilelang.lang.Types;
 import whilelang.lang.WhileFile;
+import whilelang.util.Attribute;
+import whilelang.util.Pair;
+import whilelang.util.SyntacticElement;
 
 /**
  * <p> Responsible for ensuring that all types are used appropriately. For example, that we only
@@ -57,7 +60,7 @@ public class TypeChecker {
         }
     }
 
-    public void check(WhileFile.FunDecl fd) {
+    private void check(WhileFile.FunDecl fd) {
         this.function = fd;
 
         // First, initialise the typing environment
@@ -72,13 +75,13 @@ public class TypeChecker {
         check(fd.statements, environment);
     }
 
-    public void check(List<Stmt> statements, Map<String, Type> environment) {
+    private void check(List<Stmt> statements, Map<String, Type> environment) {
         for (Stmt s : statements) {
             check(s, environment);
         }
     }
 
-    public void check(Stmt stmt, Map<String, Type> environment) {
+    private void check(Stmt stmt, Map<String, Type> environment) {
         if (stmt instanceof Stmt.Assign) {
             check((Stmt.Assign) stmt, environment);
         } else if (stmt instanceof Stmt.Break) {
@@ -92,7 +95,7 @@ public class TypeChecker {
         } else if (stmt instanceof Stmt.VariableDeclaration) {
             check((Stmt.VariableDeclaration) stmt, environment);
         } else if (stmt instanceof Expr.Invoke) {
-            check((Expr.Invoke) stmt, environment);
+            check((Expr) stmt, environment);
         } else if (stmt instanceof Stmt.IfElse) {
             check((Stmt.IfElse) stmt, environment);
         } else if (stmt instanceof Stmt.For) {
@@ -104,24 +107,33 @@ public class TypeChecker {
         }
     }
 
-    public void check(Stmt.Switch stmt, Map<String, Type> environment) {
+    private void check(Stmt.Switch stmt, Map<String, Type> environment) {
         Type type = check(stmt.getCondition(), environment);
 
         // Clone the environment so new variables aren't scoped outside of the switch statement
         Map<String, Type> environmentClone = new HashMap<String, Type>(environment);
 
+        // Create a list of all the case types
+        List<Type> union = new ArrayList<>();
+        union.add(type);
+
         for (Map.Entry<Expr, Integer> entry : stmt.getCases().entrySet()) {
             Type caseType = check(entry.getKey(), environmentClone);
             // Check that each case value is a subtype of the condition type
             checkSubtype(type, caseType, entry.getKey());
+
+            union.add(caseType);
         }
 
         for (Stmt s : stmt.getStmts()) {
             check(s, environmentClone);
         }
+
+        // Add a type attribute that tells us what type the condition and case statements are
+        stmt.attributes().add(new Attribute.Type(Types.normalise(new Type.Union(union), file)));
     }
 
-    public void check(Stmt.VariableDeclaration stmt, Map<String, Type> environment) {
+    private void check(Stmt.VariableDeclaration stmt, Map<String, Type> environment) {
         if (environment.containsKey(stmt.getName())) {
             syntaxError("variable already declared: " + stmt.getName(), file.filename, stmt);
         } else if (stmt.getExpr() != null) {
@@ -131,18 +143,18 @@ public class TypeChecker {
         environment.put(stmt.getName(), stmt.getType());
     }
 
-    public void check(Stmt.Assign stmt, Map<String, Type> environment) {
+    private void check(Stmt.Assign stmt, Map<String, Type> environment) {
         Type var = check(stmt.getLhs(), environment);
         Type expr = check(stmt.getRhs(), environment);
 
         checkSubtype(var, expr, stmt.getRhs());
     }
 
-    public void check(Stmt.Print stmt, Map<String, Type> environment) {
+    private void check(Stmt.Print stmt, Map<String, Type> environment) {
         check(stmt.getExpr(), environment);
     }
 
-    public void check(Stmt.Return stmt, Map<String, Type> environment) {
+    private void check(Stmt.Return stmt, Map<String, Type> environment) {
         Type ret = new Type.Void();
         if (stmt.getExpr() != null) {
             ret = check(stmt.getExpr(), environment);
@@ -151,7 +163,7 @@ public class TypeChecker {
         checkSubtype(environment.get(METHOD), ret, stmt.getExpr());
     }
 
-    public void check(Stmt.IfElse stmt, Map<String, Type> environment) {
+    private void check(Stmt.IfElse stmt, Map<String, Type> environment) {
         Type condition = check(stmt.getCondition(), environment);
         checkSubtype(new Type.Bool(), condition, stmt.getCondition());
 
@@ -159,7 +171,7 @@ public class TypeChecker {
         check(stmt.getFalseBranch(), environment);
     }
 
-    public void check(Stmt.For stmt, Map<String, Type> environment) {
+    private void check(Stmt.For stmt, Map<String, Type> environment) {
         Stmt.VariableDeclaration vd = stmt.getDeclaration();
         check(vd, environment);
 
@@ -175,14 +187,14 @@ public class TypeChecker {
         check(stmt.getBody(), environment);
     }
 
-    public void check(Stmt.While stmt, Map<String, Type> environment) {
+    private void check(Stmt.While stmt, Map<String, Type> environment) {
         Type condition = check(stmt.getCondition(), environment);
         checkSubtype(new Type.Bool(), condition, stmt.getCondition());
 
         check(stmt.getBody(), environment);
     }
 
-    public Type check(Expr expr, Map<String, Type> environment) {
+    private Type check(Expr expr, Map<String, Type> environment) {
         Type type;
 
         if (expr instanceof Expr.Binary) {
@@ -219,13 +231,13 @@ public class TypeChecker {
         return type;
     }
 
-    public Type check(Expr.Is expr, Map<String, Type> environment) {
+    private Type check(Expr.Is expr, Map<String, Type> environment) {
         check(expr.getLhs(), environment);
 
         return new Type.Bool();
     }
 
-    public Type check(Expr.Binary expr, Map<String, Type> environment) {
+    private Type check(Expr.Binary expr, Map<String, Type> environment) {
         Type leftType = check(expr.getLhs(), environment);
         Type rightType = check(expr.getRhs(), environment);
 
@@ -279,13 +291,13 @@ public class TypeChecker {
         }
     }
 
-    public Type check(Expr.Cast expr, Map<String, Type> environment) {
+    private Type check(Expr.Cast expr, Map<String, Type> environment) {
         check(expr.getSource(), environment);
 
         return expr.getType();
     }
 
-    public Type check(Expr.Constant expr, Map<String, Type> environment) {
+    private Type check(Expr.Constant expr, Map<String, Type> environment) {
         Object constant = expr.getValue();
 
         if (constant instanceof Boolean) {
@@ -306,7 +318,7 @@ public class TypeChecker {
         }
     }
 
-    public Type check(Expr.IndexOf expr, Map<String, Type> environment) {
+    private Type check(Expr.IndexOf expr, Map<String, Type> environment) {
         Type srcType = check(expr.getSource(), environment);
         Type indexType = check(expr.getIndex(), environment);
         checkSubtype(new Type.Int(), indexType, expr.getIndex());
@@ -318,7 +330,7 @@ public class TypeChecker {
         }
     }
 
-    public Type check(Expr.Invoke expr, Map<String, Type> environment) {
+    private Type check(Expr.Invoke expr, Map<String, Type> environment) {
         WhileFile.FunDecl fn = functions.get(expr.getName());
         List<Expr> arguments = expr.getArguments();
         List<WhileFile.Parameter> parameters = fn.parameters;
@@ -333,7 +345,7 @@ public class TypeChecker {
         return fn.ret;
     }
 
-    public Type check(Expr.ListConstructor expr, Map<String, Type> environment) {
+    private Type check(Expr.ListConstructor expr, Map<String, Type> environment) {
         ArrayList<Type> types = new ArrayList<Type>();
         List<Expr> arguments = expr.getArguments();
         for (Expr argument : arguments) {
@@ -365,7 +377,7 @@ public class TypeChecker {
         }
     }
 
-    public Type check(Expr.RecordAccess expr, Map<String, Type> environment) {
+    private Type check(Expr.RecordAccess expr, Map<String, Type> environment) {
         Type srcType = check(expr.getSource(), environment);
         Type.Record recordType = (Type.Record) checkInstanceOf(srcType, expr.getSource(),
                 Type.Record.class);
@@ -375,7 +387,7 @@ public class TypeChecker {
         return recordType.getFields().get(expr.getName());
     }
 
-    public Type check(Expr.RecordConstructor expr, Map<String, Type> environment) {
+    private Type check(Expr.RecordConstructor expr, Map<String, Type> environment) {
         HashMap<String, Type> types = new HashMap<String, Type>();
         List<Pair<String, Expr>> arguments = expr.getFields();
 
@@ -386,7 +398,7 @@ public class TypeChecker {
         return new Type.Record(types);
     }
 
-    public Type check(Expr.Unary expr, Map<String, Type> environment) {
+    private Type check(Expr.Unary expr, Map<String, Type> environment) {
         Type type = check(expr.getExpr(), environment);
         switch (expr.getOp()) {
             case NEG:
@@ -405,7 +417,7 @@ public class TypeChecker {
         }
     }
 
-    public Type check(Expr.Variable expr, Map<String, Type> environment) {
+    private Type check(Expr.Variable expr, Map<String, Type> environment) {
         Type type = environment.get(expr.getName());
         if (type == null) {
             syntaxError("unknown variable encountered: " + expr.getName(), file.filename, expr);
@@ -420,7 +432,7 @@ public class TypeChecker {
      * @param t1 first type to compare
      * @param t2 second type to compare
      */
-    public void checkEquivalent(Type t1, Type t2, SyntacticElement element) {
+    private void checkEquivalent(Type t1, Type t2, SyntacticElement element) {
         if (!isEquivalent(t1, t2)) {
             syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
         }
@@ -432,7 +444,7 @@ public class TypeChecker {
      *
      * @param element Used for determining where to report syntax errors.
      */
-    public Type checkInstanceOf(Type type, SyntacticElement element, Class<?>... instances) {
+    private Type checkInstanceOf(Type type, SyntacticElement element, Class<?>... instances) {
         if (type instanceof Type.Named) {
             Type.Named tn = (Type.Named) type;
             if (types.containsKey(tn.getName())) {
@@ -493,21 +505,10 @@ public class TypeChecker {
      * @param t2 Subtype to check
      * @param element Used for determining where to report syntax errors.
      */
-    public void checkSubtype(Type t1, Type t2, SyntacticElement element) {
+    private void checkSubtype(Type t1, Type t2, SyntacticElement element) {
         if (!isSubtype(t1, t2)) {
             syntaxError("expected type " + t1 + ", found " + t2, file.filename, element);
         }
-    }
-
-    /**
-     * Check that a given type t2 is a subtype of another type t1.
-     *
-     * @param t1 Supertype to check
-     * @param t2 Subtype to check
-     * @return true if {@code t2} is a subtype of {@code t1}.
-     */
-    public boolean isSubtype(Type t1, Type t2) {
-        return Types.isSubtype(t2, t1, file);
     }
 
     /**
@@ -520,5 +521,16 @@ public class TypeChecker {
      */
     private boolean isEquivalent(Type t1, Type t2) {
         return Types.isEquivalent(t1, t2, file);
+    }
+
+    /**
+     * Check that a given type t2 is a subtype of another type t1.
+     *
+     * @param t1 Supertype to check
+     * @param t2 Subtype to check
+     * @return true if {@code t2} is a subtype of {@code t1}.
+     */
+    private boolean isSubtype(Type t1, Type t2) {
+        return Types.isSubtype(t2, t1, file);
     }
 }

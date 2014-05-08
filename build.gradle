@@ -20,7 +20,6 @@ subprojects {
     }
 
     apply plugin: 'java'
-    apply plugin: 'eclipse'
     apply plugin: 'checkstyle'
 
     defaultTasks 'build'
@@ -34,8 +33,31 @@ subprojects {
         }
     }
 
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task testSourcesJar(type: Jar, dependsOn: classes) {
+        appendix = 'test'
+        classifier = 'sources'
+        from sourceSets.test.allSource
+    }
+
+    artifacts {
+        archives sourcesJar
+        archives testSourcesJar
+    }
+
     checkstyle {
         configFile new File(rootDir, '/config/checkstyle/checkstyle.xml')
     }
+}
+
+task wrapper(type: Wrapper) {
+    group 'Help'
+    description 'Generates the Gradle wrapper files'
+
+    gradleVersion = '1.11'
 }
 

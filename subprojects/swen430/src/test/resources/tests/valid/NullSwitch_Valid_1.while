@@ -1,0 +1,15 @@
+int f(int|null x) {
+    switch (x) {
+        default:
+        case null:
+            return 0;
+        case 1:
+            return 1;
+    }
+}
+
+void main() {
+    print f(5);
+    print f(null);
+    print f(1);
+}

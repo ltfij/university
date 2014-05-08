@@ -1,6 +1,6 @@
 ext {
     applications = [
-            assignment03: group + '.whilelang.Main',
+            whilelang: 'whilelang.Main',
     ]
 }
 

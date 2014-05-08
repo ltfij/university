@@ -95,7 +95,7 @@ public final class Types {
     /**
      * Attempts to get the type of the given object. There are some cases where the type cannot be
      * determined, these are when the object is an empty list. In this scenario, a list of type
-     * {@code void} is returned. The subtype checks use the {@code void} type to mean {@code any}.
+     * {@code any} is returned.
      *
      * @param obj the object to get the type of.
      * @return the type of the object.
@@ -160,7 +160,7 @@ public final class Types {
      * definition varies between types, but in general the following applies: <ul> <li>each type
      * subtypes itself</li> <li>a type subtypes a union type if it subtypes one of its bounds</li>
      * <li>a record or list type subtypes another if all of its inner types subtype the equivalent
-     * inner types</li> <li>the void type is treated as an any type</li> </ul>
+     * inner types</li></ul>
      *
      * @param lhs the left hand side (or subtype) to check.
      * @param rhs the right hand side (or supertype) to check.
@@ -397,8 +397,8 @@ public final class Types {
      * records.
      *
      * @param type the record type to normalise.
+     * @param file the while file for name resolution.
      * @return the normalised record type.
-     * @file the while file for name resolution.
      */
     private static Type normalise(Type.Record type, WhileFile file) {
         // We're going to split up all the inner unions of the record
@@ -415,7 +415,7 @@ public final class Types {
             Type normalised = normalise(entry.getValue(), file);
 
             if (normalised instanceof Type.Union) {
-                for (Type inner : ((Type.Union) entry.getValue()).getBounds()) {
+                for (Type inner : ((Type.Union) normalised).getBounds()) {
                     pairs.add(new Pair<String, Type>(entry.getKey(), normalise(inner, file)));
                 }
             } else {

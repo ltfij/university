@@ -188,7 +188,8 @@ public class Interpreter {
 
         // Try find a matching case statement
         for (Map.Entry<Expr, Integer> entry : stmt.getCases().entrySet()) {
-            if (condition.equals(execute(entry.getKey(), frame))) {
+            Object value = execute(entry.getKey(), frame);
+            if (condition == value || (condition != null && condition.equals(value))) {
                 int index = entry.getValue();
 
                 // If an end case has no statements after it, then there is nothing to be done
@@ -255,16 +256,15 @@ public class Interpreter {
 
                 if (io.getSource() instanceof Expr.Variable) {
                     frame.put(((Expr.Variable) io.getSource()).getName(), result);
-                } else if (io.getSource() instanceof Expr.IndexOf) {
-                    Stmt.Assign nstmt = new Stmt.Assign((Expr.IndexOf) io.getSource(), new Expr.Constant(result), stmt.attributes());
-
-                    return execute(nstmt, frame);
-                } else if (io.getSource() instanceof Expr.RecordAccess) {
-                    Stmt.Assign nstmt = new Stmt.Assign((Expr.RecordAccess) io.getSource(), new Expr.Constant(result), stmt.attributes());
+                } else if (io.getSource() instanceof Expr.IndexOf || io
+                        .getSource() instanceof Expr.RecordAccess) {
+                    Stmt.Assign nstmt = new Stmt.Assign((Expr.LVal) io.getSource(),
+                            new Expr.Constant(result), stmt.attributes());
 
                     return execute(nstmt, frame);
                 } else {
-                    syntaxError("cannot perform indexof on a " + io.getSource().getClass(), file.filename, stmt);
+                    syntaxError("cannot perform indexof on a " + io.getSource().getClass(),
+                            file.filename, stmt);
                 }
             } else {
                 ArrayList<Object> al = (ArrayList) execute(io.getSource(), frame);
@@ -431,9 +431,9 @@ public class Interpreter {
                     return ((Double) lhs) % ((Double) rhs);
                 }
             case EQ:
-                return lhs.equals(rhs);
+                return (lhs == rhs) || (lhs != null && lhs.equals(rhs));
             case NEQ:
-                return !lhs.equals(rhs);
+                return (lhs == null && rhs != null) || (lhs != null && !lhs.equals(rhs));
             case LT:
                 if (lhs instanceof Integer) {
                     return ((Integer) lhs) < ((Integer) rhs);

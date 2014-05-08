@@ -18,15 +18,24 @@
 
 package whilelang;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
+import jasm.io.ClassFileWriter;
+import jasm.lang.ClassFile;
+import jasm.util.DeadCodeElimination;
+import jx86.io.AsmFileWriter;
+import jx86.lang.Target;
+import jx86.lang.X86File;
 import whilelang.io.Lexer;
 import whilelang.io.Parser;
+import whilelang.io.While2ClassTranslator;
+import whilelang.io.X86FileWriter;
 import whilelang.lang.WhileFile;
-import whilelang.util.DefiniteAssignment;
+import whilelang.pipelines.DefiniteAssignment;
+import whilelang.pipelines.TypeChecker;
 import whilelang.util.SyntaxError;
-import whilelang.util.TypeChecker;
-
-import java.io.File;
-import java.io.PrintStream;
 
 public class Main {
 
@@ -98,24 +107,35 @@ public class Main {
                 case jvm:
                     File classFile = new File(filename.substring(0, filename.lastIndexOf('.'))
                             + ".class");
+                    FileOutputStream fos = new FileOutputStream(classFile);
+
                     System.out.println("Compiling to JVM Bytecode...");
-                    System.out.println("NOT SUPPORTED (YET)");
-                    System.exit(1);
-                    // ClassFileWriter cfw = new ClassFileWriter(classFile);
-                    // cfw.write(ast);
+
+                    ClassFile cf = new While2ClassTranslator().translate(ast);
+
+                    new DeadCodeElimination().apply(cf);
+
+                    ClassFileWriter cfw = new ClassFileWriter(fos);
+                    cfw.write(cf);
+
+                    fos.close();
+
                     break;
                 case x86:
                     System.out.println("Compiling to X86 Assembly Language...");
-                    System.out.println("NOT SUPPORTED (YET)");
-                    System.exit(1);
+
                     // First, determine output filename
-                    // File asFile = new File(filename.substring(0,filename.lastIndexOf('.')) + ".s");
+                    File asFile = new File(filename.substring(0, filename.lastIndexOf('.')) + ".s");
+
                     // Second, build the x86 file
-                    // X86File xf = new X86FileWriter(target).build(ast);
+                    Target target = Target.LINUX_X86_64;
+                    X86File xf = new X86FileWriter(target).build(ast);
+
                     // Third, write that file in GAS compatible assembly language
-                    // AsmFileWriter afw = new AsmFileWriter(asFile);
-                    // afw.write(xf);
-                    // afw.close();
+                    AsmFileWriter afw = new AsmFileWriter(asFile);
+                    afw.write(xf);
+                    afw.close();
+
                     break;
             }
         } catch (SyntaxError e) {
@@ -145,12 +165,9 @@ public class Main {
      * Print out information regarding command-line arguments
      */
     public static void usage() {
-        String[][]
-                info =
-                {{"version", "Print version information"},
-                        {"verbose", "Print detailed information on what the compiler is doing"},
-                        {"jvm", "Generate JVM Bytecode"},
-                        {"x86", "Generate x86 Assembly Language"}};
+        String[][] info = {{"version", "Print version information"},
+                {"verbose", "Print detailed information on what the compiler is doing"},
+                {"jvm", "Generate JVM Bytecode"}, {"x86", "Generate x86 Assembly Language"}};
 
         System.out.println("usage: wlc <options> <source-files>");
         System.out.println("Options:");

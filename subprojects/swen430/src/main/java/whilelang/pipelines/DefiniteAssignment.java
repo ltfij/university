@@ -1,4 +1,4 @@
-package whilelang.util;
+package whilelang.pipelines;
 
 import static whilelang.util.SyntaxError.internalFailure;
 import static whilelang.util.SyntaxError.syntaxError;
@@ -16,6 +16,7 @@ import java.util.Set;
 import whilelang.lang.Expr;
 import whilelang.lang.Stmt;
 import whilelang.lang.WhileFile;
+import whilelang.util.Pair;
 
 /**
  * Responsible for checking that all variables are defined before they are used. The algorithm for
