@@ -15,15 +15,16 @@ import java.nio.file.Paths;
 
 /**
  * Main class.
- * 
+ *
  * @author Henry J. Wylde
  * @author Moss Cantwell
- * 
+ *
  * @since 25/07/2013
  */
 public final class Main {
 
-    private static final String DEFAULT_BOARD_PATH = "/assignment02/board.txt";
+    private static final String DEFAULT_BOARD_PATH =
+            "/com/hjwylde/uni/swen222/assignment02/cluedo/board.txt";
 
     /**
      * This class cannot be instantiated.
@@ -33,7 +34,7 @@ public final class Main {
     /**
      * Attempts to load the board. This method will continually ask the user for a path to the board
      * until a valid one is given. First though, the default board path is attempted to be used.
-     * 
+     *
      * @return the tiles for the board.
      */
     private static Tile[][] loadBoard() {
@@ -69,7 +70,7 @@ public final class Main {
 
     /**
      * Main.
-     * 
+     *
      * @param args the program arguments.
      */
     public static void main(String[] args) {
