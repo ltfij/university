@@ -1,0 +1,16 @@
+int f({[int|real] f}|{[int] g} x) {
+    if(x is {[int] g}) {
+        return 0;
+    } else if(x is {[real] f}) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
+void main() {
+    print f({f:[1]});
+    print f({g:[1]});
+    print f({f:[1.0,2.0]});
+    print f({f:[1.0,2.0,1]});
+}

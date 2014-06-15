@@ -1,0 +1,3 @@
+DefiniteAssign_Invalid_30.while:3: variable x is not definitely assigned
+    x = x + 1;
+        ^

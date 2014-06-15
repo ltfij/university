@@ -1,0 +1,3 @@
+Typing_Invalid_10.while:2: expected type int, found int|real
+    return x;
+           ^

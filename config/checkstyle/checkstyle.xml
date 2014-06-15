@@ -153,10 +153,9 @@
         <module name="RedundantImport">
             <property name="severity" value="info"/>
         </module>
-        <!-- Bug where javadoc @link tag references an import is ignored -->
-        <!-- <module name="UnusedImports">
+        <module name="UnusedImports">
             <property name="severity" value="info"/>
-        </module> -->
+        </module>
         <!--<module name="ImportOrder">
             <property name="severity" value="info"/>
             <property name="option" value="top"/>

@@ -1,0 +1,7 @@
+# Binary files
+src/test/resources/tests/valid/*
+!src/test/resources/tests/valid/*.*
+
+# Assembler files
+*.s
+

@@ -1,0 +1,5 @@
+int f(int x) {
+    [[int]] rs;
+    rs[0][0] = 1;
+    return |rs|;
+}

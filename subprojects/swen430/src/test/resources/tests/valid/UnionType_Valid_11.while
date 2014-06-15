@@ -1,0 +1,15 @@
+type nint is int|null
+type nintbool is int|null|bool
+
+type rec1 is {nint f}
+type rec2 is {nintbool f}
+
+rec2 f(rec1 x) {
+    return x;
+}
+
+void main() {
+    print f({f:null});
+    print f({f:0});
+}
+

@@ -1,0 +1,4 @@
+void main() {
+    print [1, 5];
+    print |[5, 4, 3]|;
+}

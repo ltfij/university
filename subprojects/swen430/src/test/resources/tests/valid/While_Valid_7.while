@@ -1,0 +1,16 @@
+int getFive() {
+    int i = 0;
+    while (true) {
+        if (i == 5) {
+            break;
+        }
+
+        i = i + 1;
+    }
+
+    return i;
+}
+
+void main() {
+    print getFive();
+}

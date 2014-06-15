@@ -1,0 +1,13 @@
+int f(int|null x) {
+    if (!(x is null)) {
+        return ((int) x) + 1;
+    }
+
+    return 0;
+}
+
+void main() {
+    print f(5);
+    print f(null);
+    print f(1);
+}

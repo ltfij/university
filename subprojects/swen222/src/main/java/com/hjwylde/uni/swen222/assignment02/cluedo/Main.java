@@ -88,3 +88,4 @@ public final class Main {
         new GameEngine(ui, board).run();
     }
 }
+

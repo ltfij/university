@@ -1,0 +1,3 @@
+Typing_Invalid_12.while:4: expected type int, found rael
+    return x;
+           ^

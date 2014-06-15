@@ -1,0 +1,3 @@
+DefiniteAssign_Invalid_17.while:2: variable i is not definitely assigned
+    return (real) i;
+                  ^

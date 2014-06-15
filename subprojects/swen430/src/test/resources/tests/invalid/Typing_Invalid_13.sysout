@@ -1,0 +1,3 @@
+Typing_Invalid_13.while:2: expected type int, found real
+    int x = 1.0;
+            ^^^

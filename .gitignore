@@ -6,6 +6,9 @@ build/
 *.class
 *.war
 
+# Assembler files
+*.s
+
 # Eclipse files
 .classpath
 .project
