@@ -1,0 +1,3 @@
+Typing_Invalid_9.while:2: expected type {int g}, found {int f}
+    return x;
+           ^

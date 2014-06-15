@@ -1,0 +1,3 @@
+{real f} f({int f} x) {
+    return x;
+}

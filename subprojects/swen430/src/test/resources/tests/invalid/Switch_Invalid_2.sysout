@@ -1,0 +1,3 @@
+Switch_Invalid_2.while:5: expected type int, found real
+        case 2.3:
+             ^^^

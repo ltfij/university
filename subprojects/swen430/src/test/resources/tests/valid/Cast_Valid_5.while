@@ -1,0 +1,11 @@
+[int] f([int|null] x) {
+    if (x is [int]) {
+        return ([int]) x;
+    } else {
+        return [];
+    }
+}
+
+void main() {
+    print f([5, null]);
+}

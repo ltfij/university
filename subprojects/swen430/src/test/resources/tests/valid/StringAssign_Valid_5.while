@@ -1,0 +1,10 @@
+void bar(string baz) {
+    baz[0] = 'z';
+}
+
+void main() {
+    string foo = "hello";
+    bar(foo);
+    print foo;
+}
+

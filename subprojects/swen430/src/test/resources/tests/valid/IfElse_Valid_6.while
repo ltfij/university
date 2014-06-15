@@ -1,0 +1,7 @@
+void main() {
+    if (5.0 > 10.5) {
+        print "hi";
+    } else {
+        print "bye";
+    }
+}

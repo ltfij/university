@@ -1,0 +1,5 @@
+void main() {
+    [[{int f}]] r = [[{f: 5}]];
+    r[0][0].f = 1;
+    print r;
+}
