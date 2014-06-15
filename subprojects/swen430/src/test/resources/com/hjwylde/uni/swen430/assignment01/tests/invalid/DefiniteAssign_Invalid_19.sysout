@@ -1,3 +1,0 @@
-DefiniteAssign_Invalid_19.while:6: variable x is not definitely assigned
-    return g(x + 1.0);
-             ^

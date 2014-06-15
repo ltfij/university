@@ -1,3 +1,0 @@
-DefiniteAssign_Invalid_12.while:3: variable rs is not definitely assigned
-    rs.f = 1;
-    ^^

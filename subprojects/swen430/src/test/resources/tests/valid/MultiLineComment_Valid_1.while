@@ -1,4 +1,0 @@
-/*  Single Line Comment Test */
-void main() {
-     print 5;
-}

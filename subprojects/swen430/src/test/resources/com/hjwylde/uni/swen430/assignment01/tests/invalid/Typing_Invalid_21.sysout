@@ -1,3 +1,0 @@
-Typing_Invalid_21.while:2: expected type bool, found int
-    while(x) {
-          ^

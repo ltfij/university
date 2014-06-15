@@ -1,3 +1,0 @@
-Break_Invalid_6.while:9: dead code detected
-        return "deadcode";
-        ^^^^^^^^^^^^^^^^^

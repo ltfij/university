@@ -1,3 +1,0 @@
-Deadcode_Invalid_3.while:9: dead code detected
-    return 1;
-    ^^^^^^^^

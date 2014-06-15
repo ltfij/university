@@ -1,3 +1,0 @@
-{int g} f({int f} x) {
-    return x;
-}

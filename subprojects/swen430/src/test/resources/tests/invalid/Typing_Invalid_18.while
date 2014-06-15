@@ -1,7 +1,0 @@
-int f(int x) {
-    if(x) {
-      return x;
-    } else {
-      return -1;
-    }
-}

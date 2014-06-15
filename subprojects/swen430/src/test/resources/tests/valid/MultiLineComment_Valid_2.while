@@ -1,7 +1,0 @@
-
-/*  Single Line Comment Test
-	Multiple Lines Here
- */
-void main() {
-     print 5;
-}

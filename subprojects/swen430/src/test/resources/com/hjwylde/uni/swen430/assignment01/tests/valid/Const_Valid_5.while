@@ -1,5 +1,0 @@
-const SUM is 2 + 1
-
-void main() {
-  print SUM;
-}

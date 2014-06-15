@@ -1,3 +1,0 @@
-Typing_Invalid_2.while:2: expected type null, found bool
-    return x;
-           ^

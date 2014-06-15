@@ -1,9 +1,0 @@
-string foo() {
-    break;
-    return "hello";
-}
-
-void main() {
-    print foo();
-}
-

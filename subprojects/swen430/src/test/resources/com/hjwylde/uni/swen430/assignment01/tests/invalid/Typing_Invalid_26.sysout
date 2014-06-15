@@ -1,3 +1,0 @@
-Typing_Invalid_26.while:2: expected instance of int or real, found bool
-    return -x;
-            ^

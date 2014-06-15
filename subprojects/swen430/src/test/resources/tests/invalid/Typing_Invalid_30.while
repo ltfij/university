@@ -1,3 +1,0 @@
-real f({int f} xs) {
-    return xs.f;
-}

@@ -1,7 +1,0 @@
-int|null f([int|null] l) {
-    return l[0];
-}
-
-void main() {
-    print f([5, null]);
-}
