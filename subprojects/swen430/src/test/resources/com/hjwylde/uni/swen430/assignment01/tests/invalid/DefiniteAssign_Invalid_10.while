@@ -1,4 +1,0 @@
-int f(int x) {
-    [int] rs = [1,2,y];
-    return |rs|;
-}

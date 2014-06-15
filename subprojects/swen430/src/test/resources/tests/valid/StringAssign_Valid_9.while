@@ -1,6 +1,0 @@
-void main() {
-    [{string f}] foo = [{f: "hello"}];
-    foo[0].f[0] = 'z';
-    print foo;
-}
-

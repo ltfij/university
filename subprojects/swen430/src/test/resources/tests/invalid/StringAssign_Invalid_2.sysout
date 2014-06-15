@@ -1,3 +1,0 @@
-StringAssign_Invalid_2.while:3: index out of range 5
-    foo[5] = 'z';
-        ^

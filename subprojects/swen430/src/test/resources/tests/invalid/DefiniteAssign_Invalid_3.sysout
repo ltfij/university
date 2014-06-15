@@ -1,3 +1,0 @@
-DefiniteAssign_Invalid_3.while:2: variable y is not definitely assigned
-    if(y > 0) {
-       ^

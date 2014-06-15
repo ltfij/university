@@ -1,3 +1,0 @@
-Typing_Invalid_14.while:3: expected type int, found real
-    x = 1.0;
-        ^^^

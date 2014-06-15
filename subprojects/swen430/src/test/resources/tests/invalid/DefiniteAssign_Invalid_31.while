@@ -1,9 +1,0 @@
-int foo() {
-    if (true) {
-        int x = 2;
-    } else {
-        int x = 3;
-    }
-
-    return x;
-}

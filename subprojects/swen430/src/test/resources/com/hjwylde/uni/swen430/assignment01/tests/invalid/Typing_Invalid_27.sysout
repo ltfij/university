@@ -1,3 +1,0 @@
-Typing_Invalid_27.while:2: expected instance of list or string, found int
-    return |x|;
-            ^

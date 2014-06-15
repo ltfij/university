@@ -1,3 +1,0 @@
-DefiniteAssign_Invalid_22.while:7: variable y is not definitely assigned
-    return y;
-           ^

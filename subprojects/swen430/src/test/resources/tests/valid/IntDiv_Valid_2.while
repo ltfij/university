@@ -1,7 +1,0 @@
-int f(int x) {
-    return x / 3;
-}
-
-void main() {
-    print f(10);
-}

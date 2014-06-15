@@ -1,3 +1,0 @@
-StringAssign_Invalid_1.while:3: expected type char, found string
-    foo[0] = "z";
-             ^^^

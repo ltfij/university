@@ -1,3 +1,0 @@
-DefiniteAssign_Invalid_8.while:2: variable y is not definitely assigned
-    bool c = y > 0;
-             ^

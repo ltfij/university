@@ -1,3 +1,0 @@
-DefiniteAssign_Invalid_15.while:2: variable i is not definitely assigned
-    return xs[i];
-              ^

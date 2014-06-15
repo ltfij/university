@@ -1,3 +1,0 @@
-Typing_Invalid_31.while:6: expected type int, found real
-    print f(1.2);
-            ^^^

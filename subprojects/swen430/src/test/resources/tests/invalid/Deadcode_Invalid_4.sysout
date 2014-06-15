@@ -1,3 +1,0 @@
-Deadcode_Invalid_4.while:10: dead code detected
-        x = x + 1;
-        ^^^^^^^^^
