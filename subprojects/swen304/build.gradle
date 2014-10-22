@@ -6,13 +6,3 @@ dependencies {
 
 apply from: 'applications.gradle'
 
-applications.each { name, value ->
-
-    task "run${name.capitalize()}" (type: JavaExec, dependsOn: [classes]) {
-        group = 'Application'
-
-        main = value
-        classpath = sourceSets.main.runtimeClasspath
-    }
-}
-
