@@ -1,0 +1,17 @@
+dependencies {
+    compile libraries.guava
+    compile libraries.vecmath
+
+    compile fileTree(dir: 'lib/', include: '*.jar')
+}
+
+apply from: 'applications.gradle'
+
+task cleanOut(type: Delete) {
+    description "Deletes the 'out/' output folder."
+
+    delete 'out/'
+}
+
+clean.dependsOn 'cleanOut'
+
