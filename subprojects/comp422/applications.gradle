@@ -1,0 +1,26 @@
+ext {
+    applications = [
+            project01Question01_1: group + '.project01.question01_1.Main',
+            project01Question01_2: group + '.project01.question01_2.Main',
+            project01Question01_3: group + '.project01.question01_3.Main',
+            project01Question02_1: group + '.project01.question02_1.Main',
+            project01Question02_2: group + '.project01.question02_2.Main',
+            project02Question01_1: group + '.project02.question01_1.Main',
+            project02Question03_1: group + '.project02.question03_1.Main',
+            project02Question04_1: group + '.project02.question04_1.Main',
+            project02Question04_2: group + '.project02.question04_2.Main',
+            project02Question05_1: group + '.project02.question05_1.Main',
+            project02Question05_2: group + '.project02.question05_2.Main',
+    ]
+}
+
+applications.each { name, value ->
+
+    task "run${name.capitalize()}" (type: JavaExec, dependsOn: [classes]) {
+        group = 'Application'
+
+        main = value
+        classpath = sourceSets.main.runtimeClasspath
+    }
+}
+
